@@ -6,6 +6,8 @@ package com.gopawpaw.java.awt;
 import java.awt.HeadlessException;
 import java.awt.TextField;
 
+import com.gopawpaw.dev.GppKeyListener;
+
 /**
  * @version 2009-10-31
  * @author 李锦华
@@ -21,6 +23,7 @@ public class GppTextField extends TextField {
 	 * @throws HeadlessException
 	 */
 	public GppTextField() throws HeadlessException {
+		initialize();
 	}
 
 	/**
@@ -29,6 +32,7 @@ public class GppTextField extends TextField {
 	 */
 	public GppTextField(String text) throws HeadlessException {
 		super(text);
+		initialize();
 	}
 
 	/**
@@ -37,6 +41,7 @@ public class GppTextField extends TextField {
 	 */
 	public GppTextField(int columns) throws HeadlessException {
 		super(columns);
+		initialize();
 	}
 
 	/**
@@ -46,6 +51,13 @@ public class GppTextField extends TextField {
 	 */
 	public GppTextField(String text, int columns) throws HeadlessException {
 		super(text, columns);
+		initialize();
 	}
 
+	/**
+	 * 初始化
+	 */
+	private void initialize() {
+		this.addKeyListener(new GppKeyListener(this));
+	}
 }

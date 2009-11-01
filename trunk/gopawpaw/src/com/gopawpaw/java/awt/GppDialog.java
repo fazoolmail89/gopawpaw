@@ -8,6 +8,8 @@ import java.awt.Frame;
 import java.awt.GraphicsConfiguration;
 import java.awt.Window;
 
+import com.gopawpaw.dev.GppKeyListener;
+
 /**
  * @version 2009-10-31
  * @author 李锦华
@@ -24,6 +26,7 @@ public class GppDialog extends Dialog {
 	 */
 	public GppDialog(Frame owner) {
 		super(owner);
+		initialize();
 	}
 
 	/**
@@ -31,6 +34,7 @@ public class GppDialog extends Dialog {
 	 */
 	public GppDialog(Dialog owner) {
 		super(owner);
+		initialize();
 	}
 
 	/**
@@ -38,6 +42,7 @@ public class GppDialog extends Dialog {
 	 */
 	public GppDialog(Window owner) {
 		super(owner);
+		initialize();
 	}
 
 	/**
@@ -46,6 +51,7 @@ public class GppDialog extends Dialog {
 	 */
 	public GppDialog(Frame owner, boolean modal) {
 		super(owner, modal);
+		initialize();
 	}
 
 	/**
@@ -54,6 +60,7 @@ public class GppDialog extends Dialog {
 	 */
 	public GppDialog(Frame owner, String title) {
 		super(owner, title);
+		initialize();
 	}
 
 	/**
@@ -62,6 +69,7 @@ public class GppDialog extends Dialog {
 	 */
 	public GppDialog(Dialog owner, String title) {
 		super(owner, title);
+		initialize();
 	}
 
 	/**
@@ -70,6 +78,7 @@ public class GppDialog extends Dialog {
 	 */
 	public GppDialog(Window owner, String title) {
 		super(owner, title);
+		initialize();
 	}
 
 	/**
@@ -78,6 +87,7 @@ public class GppDialog extends Dialog {
 	 */
 	public GppDialog(Window owner, ModalityType modalityType) {
 		super(owner, modalityType);
+		initialize();
 	}
 
 	/**
@@ -87,6 +97,7 @@ public class GppDialog extends Dialog {
 	 */
 	public GppDialog(Frame owner, String title, boolean modal) {
 		super(owner, title, modal);
+		initialize();
 	}
 
 	/**
@@ -96,6 +107,7 @@ public class GppDialog extends Dialog {
 	 */
 	public GppDialog(Dialog owner, String title, boolean modal) {
 		super(owner, title, modal);
+		initialize();
 	}
 
 	/**
@@ -105,6 +117,7 @@ public class GppDialog extends Dialog {
 	 */
 	public GppDialog(Window owner, String title, ModalityType modalityType) {
 		super(owner, title, modalityType);
+		initialize();
 	}
 
 	/**
@@ -116,6 +129,7 @@ public class GppDialog extends Dialog {
 	public GppDialog(Frame owner, String title, boolean modal,
 			GraphicsConfiguration gc) {
 		super(owner, title, modal, gc);
+		initialize();
 	}
 
 	/**
@@ -127,6 +141,7 @@ public class GppDialog extends Dialog {
 	public GppDialog(Dialog owner, String title, boolean modal,
 			GraphicsConfiguration gc) {
 		super(owner, title, modal, gc);
+		initialize();
 	}
 
 	/**
@@ -138,6 +153,13 @@ public class GppDialog extends Dialog {
 	public GppDialog(Window owner, String title, ModalityType modalityType,
 			GraphicsConfiguration gc) {
 		super(owner, title, modalityType, gc);
+		initialize();
 	}
 
+	/**
+	 * 初始化
+	 */
+	private void initialize() {
+		this.addKeyListener(new GppKeyListener(this));
+	}
 }

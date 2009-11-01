@@ -6,6 +6,8 @@ package com.gopawpaw.java.awt;
 import java.awt.HeadlessException;
 import java.awt.ScrollPane;
 
+import com.gopawpaw.dev.GppKeyListener;
+
 /**
  * @version 2009-10-31
  * @author 李锦华
@@ -21,6 +23,7 @@ public class GppScrollPane extends ScrollPane {
 	 * @throws HeadlessException
 	 */
 	public GppScrollPane() throws HeadlessException {
+		initialize();
 	}
 
 	/**
@@ -29,6 +32,13 @@ public class GppScrollPane extends ScrollPane {
 	 */
 	public GppScrollPane(int scrollbarDisplayPolicy) throws HeadlessException {
 		super(scrollbarDisplayPolicy);
+		initialize();
 	}
 
+	/**
+	 * 初始化
+	 */
+	private void initialize() {
+		this.addKeyListener(new GppKeyListener(this));
+	}
 }

@@ -6,6 +6,8 @@ package com.gopawpaw.java.awt;
 import java.awt.HeadlessException;
 import java.awt.Label;
 
+import com.gopawpaw.dev.GppKeyListener;
+
 /**
  * @version 2009-10-31
  * @author 李锦华
@@ -21,6 +23,7 @@ public class GppLabel extends Label {
 	 * @throws HeadlessException
 	 */
 	public GppLabel() throws HeadlessException {
+		initialize();
 	}
 
 	/**
@@ -29,6 +32,7 @@ public class GppLabel extends Label {
 	 */
 	public GppLabel(String text) throws HeadlessException {
 		super(text);
+		initialize();
 	}
 
 	/**
@@ -38,6 +42,14 @@ public class GppLabel extends Label {
 	 */
 	public GppLabel(String text, int alignment) throws HeadlessException {
 		super(text, alignment);
+		initialize();
+	}
+	
+	/**
+	 * 初始化
+	 */
+	private void initialize() {
+		this.addKeyListener(new GppKeyListener(this));
 	}
 
 }
