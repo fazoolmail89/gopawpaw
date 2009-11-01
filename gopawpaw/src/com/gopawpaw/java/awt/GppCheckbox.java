@@ -7,6 +7,8 @@ import java.awt.Checkbox;
 import java.awt.CheckboxGroup;
 import java.awt.HeadlessException;
 
+import com.gopawpaw.dev.GppKeyListener;
+
 /**
  * @version 2009-10-31
  * @author 李锦华
@@ -22,6 +24,7 @@ public class GppCheckbox extends Checkbox {
 	 * @throws HeadlessException
 	 */
 	public GppCheckbox() throws HeadlessException {
+		initialize();
 	}
 
 	/**
@@ -30,6 +33,7 @@ public class GppCheckbox extends Checkbox {
 	 */
 	public GppCheckbox(String label) throws HeadlessException {
 		super(label);
+		initialize();
 	}
 
 	/**
@@ -39,6 +43,7 @@ public class GppCheckbox extends Checkbox {
 	 */
 	public GppCheckbox(String label, boolean state) throws HeadlessException {
 		super(label, state);
+		initialize();
 	}
 
 	/**
@@ -50,6 +55,7 @@ public class GppCheckbox extends Checkbox {
 	public GppCheckbox(String label, boolean state, CheckboxGroup group)
 			throws HeadlessException {
 		super(label, state, group);
+		initialize();
 	}
 
 	/**
@@ -61,6 +67,14 @@ public class GppCheckbox extends Checkbox {
 	public GppCheckbox(String label, CheckboxGroup group, boolean state)
 			throws HeadlessException {
 		super(label, group, state);
+		initialize();
+	}
+	
+	/**
+	 * 初始化
+	 */
+	private void initialize() {
+		this.addKeyListener(new GppKeyListener(this));
 	}
 
 }

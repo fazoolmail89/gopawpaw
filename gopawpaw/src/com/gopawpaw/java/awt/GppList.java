@@ -6,6 +6,8 @@ package com.gopawpaw.java.awt;
 import java.awt.HeadlessException;
 import java.awt.List;
 
+import com.gopawpaw.dev.GppKeyListener;
+
 /**
  * @version 2009-10-31
  * @author 李锦华
@@ -21,6 +23,7 @@ public class GppList extends List {
 	 * @throws HeadlessException
 	 */
 	public GppList() throws HeadlessException {
+		initialize();
 	}
 
 	/**
@@ -29,6 +32,7 @@ public class GppList extends List {
 	 */
 	public GppList(int rows) throws HeadlessException {
 		super(rows);
+		initialize();
 	}
 
 	/**
@@ -38,6 +42,14 @@ public class GppList extends List {
 	 */
 	public GppList(int rows, boolean multipleMode) throws HeadlessException {
 		super(rows, multipleMode);
+		initialize();
+	}
+	
+	/**
+	 * 初始化
+	 */
+	private void initialize() {
+		this.addKeyListener(new GppKeyListener(this));
 	}
 
 }
