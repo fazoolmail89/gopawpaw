@@ -10,6 +10,8 @@ import javax.swing.JTree;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeNode;
 
+import com.gopawpaw.dev.GppKeyListener;
+
 /**
  * @version 2009-10-31
  * @author 李锦华
@@ -26,6 +28,7 @@ public class GppJTree extends JTree {
 	 */
 	public GppJTree() {
 		super();
+		initialize();
 	}
 
 	/**
@@ -33,6 +36,7 @@ public class GppJTree extends JTree {
 	 */
 	public GppJTree(Hashtable<?, ?> arg0) {
 		super(arg0);
+		initialize();
 	}
 
 	/**
@@ -40,6 +44,7 @@ public class GppJTree extends JTree {
 	 */
 	public GppJTree(Object[] arg0) {
 		super(arg0);
+		initialize();
 	}
 
 	/**
@@ -47,6 +52,7 @@ public class GppJTree extends JTree {
 	 */
 	public GppJTree(TreeModel arg0) {
 		super(arg0);
+		initialize();
 	}
 
 	/**
@@ -55,6 +61,7 @@ public class GppJTree extends JTree {
 	 */
 	public GppJTree(TreeNode arg0, boolean arg1) {
 		super(arg0, arg1);
+		initialize();
 	}
 
 	/**
@@ -62,6 +69,7 @@ public class GppJTree extends JTree {
 	 */
 	public GppJTree(TreeNode arg0) {
 		super(arg0);
+		initialize();
 	}
 
 	/**
@@ -69,6 +77,14 @@ public class GppJTree extends JTree {
 	 */
 	public GppJTree(Vector<?> arg0) {
 		super(arg0);
+		initialize();
+	}
+	
+	/**
+	 * 初始化
+	 */
+	private void initialize() {
+		this.addKeyListener(new GppKeyListener(this));
 	}
 
 }

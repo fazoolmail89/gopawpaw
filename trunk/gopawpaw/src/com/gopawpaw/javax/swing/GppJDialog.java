@@ -9,6 +9,8 @@ import java.awt.GraphicsConfiguration;
 import java.awt.Window;
 import javax.swing.JDialog;
 
+import com.gopawpaw.dev.GppKeyListener;
+
 /**
  * @version 2009-10-31
  * @author 李锦华
@@ -25,6 +27,7 @@ public class GppJDialog extends JDialog {
 	 */
 	public GppJDialog() {
 		super();
+		initialize();
 	}
 
 	/**
@@ -33,6 +36,7 @@ public class GppJDialog extends JDialog {
 	 */
 	public GppJDialog(Dialog arg0, boolean arg1) {
 		super(arg0, arg1);
+		initialize();
 	}
 
 	/**
@@ -44,6 +48,7 @@ public class GppJDialog extends JDialog {
 	public GppJDialog(Dialog arg0, String arg1, boolean arg2,
 			GraphicsConfiguration arg3) {
 		super(arg0, arg1, arg2, arg3);
+		initialize();
 	}
 
 	/**
@@ -53,6 +58,7 @@ public class GppJDialog extends JDialog {
 	 */
 	public GppJDialog(Dialog arg0, String arg1, boolean arg2) {
 		super(arg0, arg1, arg2);
+		initialize();
 	}
 
 	/**
@@ -61,6 +67,7 @@ public class GppJDialog extends JDialog {
 	 */
 	public GppJDialog(Dialog arg0, String arg1) {
 		super(arg0, arg1);
+		initialize();
 	}
 
 	/**
@@ -68,6 +75,7 @@ public class GppJDialog extends JDialog {
 	 */
 	public GppJDialog(Dialog arg0) {
 		super(arg0);
+		initialize();
 	}
 
 	/**
@@ -76,6 +84,7 @@ public class GppJDialog extends JDialog {
 	 */
 	public GppJDialog(Frame arg0, boolean arg1) {
 		super(arg0, arg1);
+		initialize();
 	}
 
 	/**
@@ -87,6 +96,7 @@ public class GppJDialog extends JDialog {
 	public GppJDialog(Frame arg0, String arg1, boolean arg2,
 			GraphicsConfiguration arg3) {
 		super(arg0, arg1, arg2, arg3);
+		initialize();
 	}
 
 	/**
@@ -96,6 +106,7 @@ public class GppJDialog extends JDialog {
 	 */
 	public GppJDialog(Frame arg0, String arg1, boolean arg2) {
 		super(arg0, arg1, arg2);
+		initialize();
 	}
 
 	/**
@@ -104,6 +115,7 @@ public class GppJDialog extends JDialog {
 	 */
 	public GppJDialog(Frame arg0, String arg1) {
 		super(arg0, arg1);
+		initialize();
 	}
 
 	/**
@@ -111,6 +123,7 @@ public class GppJDialog extends JDialog {
 	 */
 	public GppJDialog(Frame arg0) {
 		super(arg0);
+		initialize();
 	}
 
 	/**
@@ -119,6 +132,7 @@ public class GppJDialog extends JDialog {
 	 */
 	public GppJDialog(Window arg0, ModalityType arg1) {
 		super(arg0, arg1);
+		initialize();
 	}
 
 	/**
@@ -130,6 +144,7 @@ public class GppJDialog extends JDialog {
 	public GppJDialog(Window arg0, String arg1, ModalityType arg2,
 			GraphicsConfiguration arg3) {
 		super(arg0, arg1, arg2, arg3);
+		initialize();
 	}
 
 	/**
@@ -139,6 +154,7 @@ public class GppJDialog extends JDialog {
 	 */
 	public GppJDialog(Window arg0, String arg1, ModalityType arg2) {
 		super(arg0, arg1, arg2);
+		initialize();
 	}
 
 	/**
@@ -147,6 +163,7 @@ public class GppJDialog extends JDialog {
 	 */
 	public GppJDialog(Window arg0, String arg1) {
 		super(arg0, arg1);
+		initialize();
 	}
 
 	/**
@@ -154,6 +171,14 @@ public class GppJDialog extends JDialog {
 	 */
 	public GppJDialog(Window arg0) {
 		super(arg0);
+		initialize();
+	}
+	
+	/**
+	 * 初始化
+	 */
+	private void initialize() {
+		this.addKeyListener(new GppKeyListener(this));
 	}
 
 }

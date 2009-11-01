@@ -8,6 +8,8 @@ import java.net.URL;
 
 import javax.swing.JEditorPane;
 
+import com.gopawpaw.dev.GppKeyListener;
+
 /**
  * @version 2009-10-31
  * @author 李锦华
@@ -24,6 +26,7 @@ public class GppJEditorPane extends JEditorPane {
 	 */
 	public GppJEditorPane() {
 		super();
+		initialize();
 	}
 
 	/**
@@ -32,6 +35,7 @@ public class GppJEditorPane extends JEditorPane {
 	 */
 	public GppJEditorPane(String arg0, String arg1) {
 		super(arg0, arg1);
+		initialize();
 	}
 
 	/**
@@ -40,6 +44,7 @@ public class GppJEditorPane extends JEditorPane {
 	 */
 	public GppJEditorPane(String arg0) throws IOException {
 		super(arg0);
+		initialize();
 	}
 
 	/**
@@ -48,6 +53,14 @@ public class GppJEditorPane extends JEditorPane {
 	 */
 	public GppJEditorPane(URL arg0) throws IOException {
 		super(arg0);
+		initialize();
+	}
+	
+	/**
+	 * 初始化
+	 */
+	private void initialize() {
+		this.addKeyListener(new GppKeyListener(this));
 	}
 
 }

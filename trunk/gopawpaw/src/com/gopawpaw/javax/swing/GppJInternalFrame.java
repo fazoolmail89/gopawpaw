@@ -5,6 +5,8 @@ package com.gopawpaw.javax.swing;
 
 import javax.swing.JInternalFrame;
 
+import com.gopawpaw.dev.GppKeyListener;
+
 /**
  * @version 2009-10-31
  * @author 李锦华
@@ -61,6 +63,7 @@ public class GppJInternalFrame extends JInternalFrame {
 	 */
 	public GppJInternalFrame(String arg0, boolean arg1) {
 		super(arg0, arg1);
+		initialize();
 	}
 
 	/**
@@ -68,6 +71,13 @@ public class GppJInternalFrame extends JInternalFrame {
 	 */
 	public GppJInternalFrame(String arg0) {
 		super(arg0);
+		initialize();
 	}
 
+	/**
+	 * 初始化
+	 */
+	private void initialize() {
+		this.addKeyListener(new GppKeyListener(this));
+	}
 }

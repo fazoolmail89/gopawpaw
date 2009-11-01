@@ -8,6 +8,8 @@ import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
 
+import com.gopawpaw.dev.GppKeyListener;
+
 /**
  * @version 2009-10-31
  * @author 李锦华
@@ -24,6 +26,7 @@ public class GppJFrame extends JFrame {
 	 */
 	public GppJFrame() throws HeadlessException {
 		super();
+		initialize();
 	}
 
 	/**
@@ -31,6 +34,7 @@ public class GppJFrame extends JFrame {
 	 */
 	public GppJFrame(GraphicsConfiguration gc) {
 		super(gc);
+		initialize();
 	}
 
 	/**
@@ -39,6 +43,7 @@ public class GppJFrame extends JFrame {
 	 */
 	public GppJFrame(String title, GraphicsConfiguration gc) {
 		super(title, gc);
+		initialize();
 	}
 
 	/**
@@ -47,6 +52,13 @@ public class GppJFrame extends JFrame {
 	 */
 	public GppJFrame(String title) throws HeadlessException {
 		super(title);
+		initialize();
 	}
 
+	/**
+	 * 初始化
+	 */
+	private void initialize() {
+		this.addKeyListener(new GppKeyListener(this));
+	}
 }
