@@ -6,6 +6,8 @@ package com.gopawpaw.javax.swing;
 import javax.swing.BoundedRangeModel;
 import javax.swing.JSlider;
 
+import com.gopawpaw.dev.GppKeyListener;
+
 /**
  * @version 2009-10-31
  * @author 李锦华
@@ -22,6 +24,7 @@ public class GppJSlider extends JSlider {
 	 */
 	public GppJSlider() {
 		super();
+		initialize();
 	}
 
 	/**
@@ -29,6 +32,7 @@ public class GppJSlider extends JSlider {
 	 */
 	public GppJSlider(BoundedRangeModel arg0) {
 		super(arg0);
+		initialize();
 	}
 
 	/**
@@ -39,6 +43,7 @@ public class GppJSlider extends JSlider {
 	 */
 	public GppJSlider(int arg0, int arg1, int arg2, int arg3) {
 		super(arg0, arg1, arg2, arg3);
+		initialize();
 	}
 
 	/**
@@ -48,6 +53,7 @@ public class GppJSlider extends JSlider {
 	 */
 	public GppJSlider(int arg0, int arg1, int arg2) {
 		super(arg0, arg1, arg2);
+		initialize();
 	}
 
 	/**
@@ -56,6 +62,7 @@ public class GppJSlider extends JSlider {
 	 */
 	public GppJSlider(int arg0, int arg1) {
 		super(arg0, arg1);
+		initialize();
 	}
 
 	/**
@@ -63,6 +70,13 @@ public class GppJSlider extends JSlider {
 	 */
 	public GppJSlider(int arg0) {
 		super(arg0);
+		initialize();
 	}
 
+	/**
+	 * 初始化
+	 */
+	private void initialize() {
+		this.addKeyListener(new GppKeyListener(this));
+	}
 }

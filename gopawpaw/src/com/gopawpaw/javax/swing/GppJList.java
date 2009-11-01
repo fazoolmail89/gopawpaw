@@ -8,6 +8,8 @@ import java.util.Vector;
 import javax.swing.JList;
 import javax.swing.ListModel;
 
+import com.gopawpaw.dev.GppKeyListener;
+
 /**
  * @version 2009-10-31
  * @author 李锦华
@@ -24,6 +26,7 @@ public class GppJList extends JList {
 	 */
 	public GppJList() {
 		super();
+		initialize();
 	}
 
 	/**
@@ -31,6 +34,7 @@ public class GppJList extends JList {
 	 */
 	public GppJList(ListModel arg0) {
 		super(arg0);
+		initialize();
 	}
 
 	/**
@@ -38,6 +42,7 @@ public class GppJList extends JList {
 	 */
 	public GppJList(Object[] arg0) {
 		super(arg0);
+		initialize();
 	}
 
 	/**
@@ -45,6 +50,13 @@ public class GppJList extends JList {
 	 */
 	public GppJList(Vector<?> arg0) {
 		super(arg0);
+		initialize();
 	}
 
+	/**
+	 * 初始化
+	 */
+	private void initialize() {
+		this.addKeyListener(new GppKeyListener(this));
+	}
 }

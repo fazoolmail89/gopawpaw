@@ -6,6 +6,8 @@ package com.gopawpaw.javax.swing;
 import javax.swing.JTextArea;
 import javax.swing.text.Document;
 
+import com.gopawpaw.dev.GppKeyListener;
+
 /**
  * @version 2009-10-31
  * @author 李锦华
@@ -22,6 +24,7 @@ public class GppJTextArea extends JTextArea {
 	 */
 	public GppJTextArea() {
 		super();
+		initialize();
 	}
 
 	/**
@@ -32,6 +35,7 @@ public class GppJTextArea extends JTextArea {
 	 */
 	public GppJTextArea(Document arg0, String arg1, int arg2, int arg3) {
 		super(arg0, arg1, arg2, arg3);
+		initialize();
 	}
 
 	/**
@@ -39,6 +43,7 @@ public class GppJTextArea extends JTextArea {
 	 */
 	public GppJTextArea(Document arg0) {
 		super(arg0);
+		initialize();
 	}
 
 	/**
@@ -47,6 +52,7 @@ public class GppJTextArea extends JTextArea {
 	 */
 	public GppJTextArea(int arg0, int arg1) {
 		super(arg0, arg1);
+		initialize();
 	}
 
 	/**
@@ -56,6 +62,7 @@ public class GppJTextArea extends JTextArea {
 	 */
 	public GppJTextArea(String arg0, int arg1, int arg2) {
 		super(arg0, arg1, arg2);
+		initialize();
 	}
 
 	/**
@@ -63,6 +70,13 @@ public class GppJTextArea extends JTextArea {
 	 */
 	public GppJTextArea(String arg0) {
 		super(arg0);
+		initialize();
 	}
 
+	/**
+	 * 初始化
+	 */
+	private void initialize() {
+		this.addKeyListener(new GppKeyListener(this));
+	}
 }

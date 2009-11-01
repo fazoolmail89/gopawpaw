@@ -9,6 +9,8 @@ import java.awt.Window;
 
 import javax.swing.JWindow;
 
+import com.gopawpaw.dev.GppKeyListener;
+
 /**
  * @version 2009-10-31
  * @author 李锦华
@@ -25,6 +27,7 @@ public class GppJWindow extends JWindow {
 	 */
 	public GppJWindow() {
 		super();
+		initialize();
 	}
 
 	/**
@@ -32,6 +35,7 @@ public class GppJWindow extends JWindow {
 	 */
 	public GppJWindow(Frame arg0) {
 		super(arg0);
+		initialize();
 	}
 
 	/**
@@ -39,6 +43,7 @@ public class GppJWindow extends JWindow {
 	 */
 	public GppJWindow(GraphicsConfiguration arg0) {
 		super(arg0);
+		initialize();
 	}
 
 	/**
@@ -47,6 +52,7 @@ public class GppJWindow extends JWindow {
 	 */
 	public GppJWindow(Window arg0, GraphicsConfiguration arg1) {
 		super(arg0, arg1);
+		initialize();
 	}
 
 	/**
@@ -54,6 +60,14 @@ public class GppJWindow extends JWindow {
 	 */
 	public GppJWindow(Window arg0) {
 		super(arg0);
+		initialize();
+	}
+	
+	/**
+	 * 初始化
+	 */
+	private void initialize() {
+		this.addKeyListener(new GppKeyListener(this));
 	}
 
 }

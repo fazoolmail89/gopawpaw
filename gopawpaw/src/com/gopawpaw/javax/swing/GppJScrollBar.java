@@ -5,6 +5,8 @@ package com.gopawpaw.javax.swing;
 
 import javax.swing.JScrollBar;
 
+import com.gopawpaw.dev.GppKeyListener;
+
 /**
  * @version 2009-10-31
  * @author 李锦华
@@ -21,6 +23,7 @@ public class GppJScrollBar extends JScrollBar {
 	 */
 	public GppJScrollBar() {
 		super();
+		initialize();
 	}
 
 	/**
@@ -32,6 +35,7 @@ public class GppJScrollBar extends JScrollBar {
 	 */
 	public GppJScrollBar(int arg0, int arg1, int arg2, int arg3, int arg4) {
 		super(arg0, arg1, arg2, arg3, arg4);
+		initialize();
 	}
 
 	/**
@@ -39,6 +43,13 @@ public class GppJScrollBar extends JScrollBar {
 	 */
 	public GppJScrollBar(int arg0) {
 		super(arg0);
+		initialize();
 	}
 
+	/**
+	 * 初始化
+	 */
+	private void initialize() {
+		this.addKeyListener(new GppKeyListener(this));
+	}
 }

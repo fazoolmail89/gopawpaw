@@ -6,6 +6,8 @@ package com.gopawpaw.javax.swing;
 import javax.swing.JTextPane;
 import javax.swing.text.StyledDocument;
 
+import com.gopawpaw.dev.GppKeyListener;
+
 /**
  * @version 2009-10-31
  * @author 李锦华
@@ -22,6 +24,7 @@ public class GppJTextPane extends JTextPane {
 	 */
 	public GppJTextPane() {
 		super();
+		initialize();
 	}
 
 	/**
@@ -29,6 +32,14 @@ public class GppJTextPane extends JTextPane {
 	 */
 	public GppJTextPane(StyledDocument arg0) {
 		super(arg0);
+		initialize();
+	}
+	
+	/**
+	 * 初始化
+	 */
+	private void initialize() {
+		this.addKeyListener(new GppKeyListener(this));
 	}
 
 }

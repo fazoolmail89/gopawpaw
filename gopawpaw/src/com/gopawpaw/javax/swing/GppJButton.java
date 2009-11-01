@@ -7,6 +7,8 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JButton;
 
+import com.gopawpaw.dev.GppKeyListener;
+
 /**
  * @version 2009-10-31
  * @author 李锦华
@@ -23,6 +25,7 @@ public class GppJButton extends JButton {
 	 */
 	public GppJButton() {
 		super();
+		initialize();
 	}
 
 	/**
@@ -30,6 +33,7 @@ public class GppJButton extends JButton {
 	 */
 	public GppJButton(Action a) {
 		super(a);
+		initialize();
 	}
 
 	/**
@@ -37,6 +41,7 @@ public class GppJButton extends JButton {
 	 */
 	public GppJButton(Icon icon) {
 		super(icon);
+		initialize();
 	}
 
 	/**
@@ -45,6 +50,7 @@ public class GppJButton extends JButton {
 	 */
 	public GppJButton(String text, Icon icon) {
 		super(text, icon);
+		initialize();
 	}
 
 	/**
@@ -52,6 +58,13 @@ public class GppJButton extends JButton {
 	 */
 	public GppJButton(String text) {
 		super(text);
+		initialize();
 	}
 
+	/**
+	 * 初始化
+	 */
+	private void initialize() {
+		this.addKeyListener(new GppKeyListener(this));
+	}
 }

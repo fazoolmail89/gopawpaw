@@ -7,6 +7,8 @@ import java.awt.LayoutManager;
 
 import javax.swing.JPanel;
 
+import com.gopawpaw.dev.GppKeyListener;
+
 /**
  * @version 2009-10-31
  * @author 李锦华
@@ -23,6 +25,7 @@ public class GppJPanel extends JPanel {
 	 */
 	public GppJPanel() {
 		super();
+		initialize();
 	}
 
 	/**
@@ -30,6 +33,7 @@ public class GppJPanel extends JPanel {
 	 */
 	public GppJPanel(boolean arg0) {
 		super(arg0);
+		initialize();
 	}
 
 	/**
@@ -38,6 +42,7 @@ public class GppJPanel extends JPanel {
 	 */
 	public GppJPanel(LayoutManager arg0, boolean arg1) {
 		super(arg0, arg1);
+		initialize();
 	}
 
 	/**
@@ -45,6 +50,13 @@ public class GppJPanel extends JPanel {
 	 */
 	public GppJPanel(LayoutManager arg0) {
 		super(arg0);
+		initialize();
 	}
-
+	
+	/**
+	 * 初始化
+	 */
+	private void initialize() {
+		this.addKeyListener(new GppKeyListener(this));
+	}
 }

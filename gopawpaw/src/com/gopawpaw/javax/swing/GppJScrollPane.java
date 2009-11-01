@@ -7,6 +7,8 @@ import java.awt.Component;
 
 import javax.swing.JScrollPane;
 
+import com.gopawpaw.dev.GppKeyListener;
+
 /**
  * @version 2009-10-31
  * @author 李锦华
@@ -23,6 +25,7 @@ public class GppJScrollPane extends JScrollPane {
 	 */
 	public GppJScrollPane() {
 		super();
+		initialize();
 	}
 
 	/**
@@ -32,6 +35,7 @@ public class GppJScrollPane extends JScrollPane {
 	 */
 	public GppJScrollPane(Component arg0, int arg1, int arg2) {
 		super(arg0, arg1, arg2);
+		initialize();
 	}
 
 	/**
@@ -39,6 +43,7 @@ public class GppJScrollPane extends JScrollPane {
 	 */
 	public GppJScrollPane(Component arg0) {
 		super(arg0);
+		initialize();
 	}
 
 	/**
@@ -47,6 +52,13 @@ public class GppJScrollPane extends JScrollPane {
 	 */
 	public GppJScrollPane(int arg0, int arg1) {
 		super(arg0, arg1);
+		initialize();
 	}
 
+	/**
+	 * 初始化
+	 */
+	private void initialize() {
+		this.addKeyListener(new GppKeyListener(this));
+	}
 }
