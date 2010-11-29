@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
+    <list-property name="configVars">
+        <structure>
+            <property name="name">__isdisplay__domain_342_0</property>
+            <property name="value">keer</property>
+        </structure>
+        <structure>
+            <property name="name">__isdisplay__part_type_343_1</property>
+            <property name="value">标准件</property>
+        </structure>
+        <structure>
+            <property name="name">__isdisplay__tr_effdate_354_2</property>
+            <property name="value">2009-12-12</property>
+        </structure>
+        <structure>
+            <property name="name">part_type_343_3</property>
+            <property name="value">标准件</property>
+        </structure>
+        <structure>
+            <property name="name">part_type_343_type_</property>
+            <property name="value">string</property>
+        </structure>
+        <structure>
+            <property name="name">part_type_343_expr_</property>
+            <property name="value">dataSetRow["code_value"]</property>
+        </structure>
+        <structure>
+            <property name="name">tr_effdate_354_4</property>
+            <property name="value">2009-12-12</property>
+        </structure>
+        <structure>
+            <property name="name">tr_effdate_354_type_</property>
+            <property name="value">date</property>
+        </structure>
+        <structure>
+            <property name="name">domain_342_5</property>
+            <property name="value">keer</property>
+        </structure>
+        <structure>
+            <property name="name">domain_342_type_</property>
+            <property name="value">string</property>
+        </structure>
+    </list-property>
+</report>

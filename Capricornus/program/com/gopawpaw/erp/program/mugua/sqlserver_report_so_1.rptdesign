@@ -1,0 +1,2227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100208 Build &lt;2.5.2.v20100210-0630></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/chart_listing.gif</property>
+    <property name="cheatSheet">org.eclipse.birt.report.designer.ui.cheatsheet.chartlisting</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">conf/gpp_library.rptlibrary</property>
+            <property name="namespace">gpp_library</property>
+        </structure>
+    </list-property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="mfgprod" id="39"
+ extends="gpp_library.mfgprod"/>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="so_analyse" id="41">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">sod_nbr</property>
+                    <text-property name="displayName">sod_nbr</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">sod_part</property>
+                    <text-property name="displayName">sod_part</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">sum_price</property>
+                    <text-property name="displayName">sum_price</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">sod_per_date2</property>
+                    <text-property name="displayName">sod_per_date2</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">sod_nbr</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">sod_part</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">sum_price</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">sod_per_date2</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">mfgprod</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">sod_nbr</property>
+                    <property name="nativeName">sod_nbr</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">sod_part</property>
+                    <property name="nativeName">sod_part</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">sum_price</property>
+                    <property name="nativeName">sum_price</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">sod_per_date2</property>
+                    <property name="nativeName">sod_per_date2</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[
+select sod_nbr,sod_part, sum ( sod_price ) as sum_price , min (sod_per_date) as sod_per_date2
+from sod_det group by sod_nbr,sod_part]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="33">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="37">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="38">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="4">
+            <property name="height">0.322in</property>
+            <property name="width">5.968in</property>
+            <column id="5"/>
+            <row id="6">
+                <property name="height">0.322in</property>
+                <property name="verticalAlign">text-bottom</property>
+                <cell id="7">
+                    <property name="verticalAlign">top</property>
+                    <label id="8">
+                        <property name="fontWeight">bold</property>
+                        <property name="textUnderline">underline</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Report Header</text-property>
+                    </label>
+                </cell>
+            </row>
+        </grid>
+        <table name="table1" id="9">
+            <property name="width">100%</property>
+            <property name="dataSet">so_analyse</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">sod_nbr</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_nbr"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_due_date</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_due_date"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_per_date</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_per_date"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_req_date</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_req_date"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_line</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_line"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_part</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_part"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_qty_ord</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_qty_ord"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_qty_all</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_qty_all"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_qty_pick</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_qty_pick"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_qty_ship</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_qty_ship"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_qty_inv</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_qty_inv"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_loc</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_loc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_type</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_type"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_price</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_price"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_std_cost</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_std_cost"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_qty_chg</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_qty_chg"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_bo_chg</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_bo_chg"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_acct</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_acct"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_abnormal</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_abnormal"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_taxable</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_taxable"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_serial</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_serial"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_desc</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_desc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_um</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_um"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_cc</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_cc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_comment</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_comment"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_lot</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_lot"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_um_conv</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_um_conv"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_fa_nbr</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_fa_nbr"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_disc_pct</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_disc_pct"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_project</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_project"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_cmtindx</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_cmtindx"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_custpart</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_custpart"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__qad01</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__qad01"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_status</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_status"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_xslspsn</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_xslspsn"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_xcomm_pct</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_xcomm_pct"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_dsc_acct</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_dsc_acct"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_dsc_cc</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_dsc_cc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_list_pr</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_list_pr"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_user1</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_user1"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_user2</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_user2"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_sob_rev</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_sob_rev"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_sob_std</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_sob_std"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_qty_qote</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_qty_qote"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_consume</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_consume"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_expire</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_expire"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__qad02</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__qad02"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_taxc</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_taxc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_inv_nbr</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_inv_nbr"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_partial</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_partial"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_site</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_site"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_prodline</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_prodline"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_tax_in</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_tax_in"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_fst_list</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_fst_list"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_pst</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_pst"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__chr01</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__chr01"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__chr02</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__chr02"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__chr03</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__chr03"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__chr04</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__chr04"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__chr05</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__chr05"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__chr06</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__chr06"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__chr07</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__chr07"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__chr08</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__chr08"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__chr09</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__chr09"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__chr10</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__chr10"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__dte01</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__dte01"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__dte02</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__dte02"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__dec01</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__dec01"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__dec02</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__dec02"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__log01</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__log01"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_tax_max</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_tax_max"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_curr_rlse_id</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_curr_rlse_id"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_sched</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_sched"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_contr_id</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_contr_id"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_pickdate</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_pickdate"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_confirm</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_confirm"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_cum_qty</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_cum_qty"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_cum_date</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_cum_date"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_for</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_for"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_ref</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_ref"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_qty_per</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_qty_per"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_qty_item</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_qty_item"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_rma_type</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_rma_type"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_owner</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_owner"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_calc_isb</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_calc_isb"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_fr_rate</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_fr_rate"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_slspsn</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_slspsn"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_comm_pct</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_comm_pct"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_ord_mult</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_ord_mult"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_pkg_code</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_pkg_code"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_translt_days</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_translt_days"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_fsm_type</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_fsm_type"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_conrep</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_conrep"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_sch_data</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_sch_data"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_sch_mrp</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_sch_mrp"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_rlse_nbr</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_rlse_nbr"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_start_eff</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_start_eff"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_end_eff</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_end_eff"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_dock</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_dock"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_pr_list</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_pr_list"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_translt_hrs</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_translt_hrs"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_out_po</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_out_po"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_raw_days</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_raw_days"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_fab_days</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_fab_days"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_tax_usage</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_tax_usage"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_rbkt_days</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_rbkt_days"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_rbkt_weeks</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_rbkt_weeks"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_rbkt_mths</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_rbkt_mths"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_sched_chgd</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_sched_chgd"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_pastdue</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_pastdue"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_fix_pr</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_fix_pr"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_fr_wt</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_fr_wt"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_fr_wt_um</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_fr_wt_um"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_fr_class</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_fr_class"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_fr_chg</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_fr_chg"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_ship</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_ship"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_sa_nbr</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_sa_nbr"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_enduser</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_enduser"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_isb_loc</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_isb_loc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_upd_isb</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_upd_isb"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_isb_ref</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_isb_ref"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_auto_ins</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_auto_ins"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_drp_ref</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_drp_ref"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_tax_env</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_tax_env"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_crt_int</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_crt_int"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_fr_list</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_fr_list"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_pricing_dt</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_pricing_dt"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_act_price</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_act_price"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_covered_amt</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_covered_amt"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_fixed_price</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_fixed_price"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_inv_cost</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_inv_cost"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_car_load</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_car_load"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_ca_line</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_ca_line"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_qty_cons</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_qty_cons"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_qty_ret</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_qty_ret"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_ca_nbr</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_ca_nbr"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_qty_pend</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_qty_pend"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_to_loc</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_to_loc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_to_site</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_to_site"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_to_ref</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_to_ref"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_ln_ref</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_ln_ref"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_qty_exch</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_qty_exch"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_sad_line</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_sad_line"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_warr_start</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_warr_start"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_mod_userid</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_mod_userid"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_mod_date</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_mod_date"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_sv_code</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_sv_code"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_alt_pkg</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_alt_pkg"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_for_serial</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_for_serial"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_override_lmt</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_override_lmt"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__qadc01</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__qadc01"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__qadc02</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__qadc02"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__qadc03</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__qadc03"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__qadc04</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__qadc04"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__qadt01</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__qadt01"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__qadt02</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__qadt02"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__qadt03</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__qadt03"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__qadt04</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__qadt04"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__qadd01</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__qadd01"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__qadd02</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__qadd02"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__qadd03</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__qadd03"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__qadl01</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__qadl01"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__qadl02</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__qadl02"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__qadl03</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__qadl03"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__qadi01</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__qadi01"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__qadi02</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__qadi02"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_bonus</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_bonus"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_btb_type</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_btb_type"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_btb_po</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_btb_po"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_btb_pod_line</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_btb_pod_line"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_btb_vend</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_btb_vend"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_exp_del</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_exp_del"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_dir_all</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_dir_all"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_cfg_type</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_cfg_type"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_div</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_div"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_pl_priority</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_pl_priority"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_prig1</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_prig1"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_prig2</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_prig2"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod__qadd04</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod__qadd04"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_sub</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_sub"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_dsc_sub</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_dsc_sub"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_dsc_project</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_dsc_project"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_qty_ivcd</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_qty_ivcd"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_cum_time</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_cum_time"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_ship_part</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_ship_part"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_promise_date</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_promise_date"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_charge_type</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_charge_type"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_order_category</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_order_category"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_modelyr</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_modelyr"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_custref</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_custref"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_consignment</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_consignment"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_max_aging_days</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_max_aging_days"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_consign_loc</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_consign_loc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_intrans_loc</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_intrans_loc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_auto_replenish</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_auto_replenish"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_manual_fr_list</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_manual_fr_list"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">sod_domain</property>
+                    <expression name="expression" type="javascript">dataSetRow["sod_domain"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">oid_sod_det</property>
+                    <expression name="expression" type="javascript">dataSetRow["oid_sod_det"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">聚合</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["sod_price"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="30">
+                <property name="width">33.3%</property>
+            </column>
+            <column id="31">
+                <property name="width">33.3%</property>
+            </column>
+            <column id="32">
+                <property name="width">33.4%</property>
+            </column>
+            <header>
+                <row id="10">
+                    <cell id="11"/>
+                    <cell id="12"/>
+                    <cell id="13"/>
+                </row>
+            </header>
+            <group id="14">
+                <property name="groupName">NewTableGroup1</property>
+                <property name="interval">none</property>
+                <property name="sortDirection">asc</property>
+                <expression name="keyExpr" type="javascript">row["sod_nbr"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue" type="javascript">row["sod_nbr"]</expression>
+                </structure>
+                <property name="repeatHeader">true</property>
+                <property name="hideDetail">false</property>
+                <property name="pageBreakAfter">auto</property>
+                <property name="pageBreakBefore">auto</property>
+                <property name="pageBreakInside">auto</property>
+                <header>
+                    <row id="15">
+                        <cell id="16">
+                            <property name="colSpan">3</property>
+                            <property name="rowSpan">1</property>
+                            <property name="textAlign">center</property>
+                            <extended-item extensionName="Chart" id="42">
+                                <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:data="http://www.birt.eclipse.org/ChartModelData" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
+  <Version>2.5.1</Version>
+  <Type>Bar Chart</Type>
+  <SubType>Side-by-side</SubType>
+  <Block>
+    <Children xsi:type="layout:TitleBlock">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Visible>true</Visible>
+      <Label>
+        <Caption>
+          <Value>Bar Chart Title</Value>
+          <Font>
+            <Size>16.0</Size>
+            <Bold>true</Bold>
+            <Alignment>
+              <horizontalAlignment>Center</horizontalAlignment>
+              <verticalAlignment>Center</verticalAlignment>
+            </Alignment>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>true</Visible>
+      </Label>
+    </Children>
+    <Children xsi:type="layout:Plot">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Visible>true</Visible>
+      <HorizontalSpacing>5</HorizontalSpacing>
+      <VerticalSpacing>5</VerticalSpacing>
+      <ClientArea>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>0</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>0.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>0.0</Right>
+        </Insets>
+      </ClientArea>
+    </Children>
+    <Children xsi:type="layout:Legend">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Visible>true</Visible>
+      <ClientArea>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>0</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>2.0</Top>
+          <Left>2.0</Left>
+          <Bottom>2.0</Bottom>
+          <Right>2.0</Right>
+        </Insets>
+      </ClientArea>
+      <Text>
+        <Value>&lt;undefined></Value>
+        <Font>
+          <Alignment/>
+        </Font>
+      </Text>
+      <Orientation>Vertical</Orientation>
+      <Direction>Top_Bottom</Direction>
+      <Separator>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>true</Visible>
+      </Separator>
+      <Position>Right</Position>
+      <ItemType>Series</ItemType>
+      <Title>
+        <Caption>
+          <Value>&lt;undefined></Value>
+          <Font>
+            <Alignment/>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>false</Visible>
+      </Title>
+      <TitlePosition>Above</TitlePosition>
+    </Children>
+    <Bounds>
+      <Left>0.0</Left>
+      <Top>0.0</Top>
+      <Width>320.184</Width>
+      <Height>108.72</Height>
+    </Bounds>
+    <Insets>
+      <Top>3.0</Top>
+      <Left>3.0</Left>
+      <Bottom>3.0</Bottom>
+      <Right>3.0</Right>
+    </Insets>
+    <Row>-1</Row>
+    <Column>-1</Column>
+    <Rowspan>-1</Rowspan>
+    <Columnspan>-1</Columnspan>
+    <Outline>
+      <Style>Solid</Style>
+      <Thickness>1</Thickness>
+      <Color>
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>0</Green>
+        <Blue>0</Blue>
+      </Color>
+      <Visible>false</Visible>
+    </Outline>
+    <Background xsi:type="attribute:ColorDefinition">
+      <Transparency>255</Transparency>
+      <Red>255</Red>
+      <Green>255</Green>
+      <Blue>255</Blue>
+    </Background>
+    <Visible>true</Visible>
+  </Block>
+  <Dimension>Two_Dimensional</Dimension>
+  <Units>Points</Units>
+  <SeriesThickness>10.0</SeriesThickness>
+  <ExtendedProperties>
+    <Name>enable.area.alt</Name>
+    <Value>false</Value>
+  </ExtendedProperties>
+  <SampleData>
+    <BaseSampleData>
+      <DataSetRepresentation>A, B, C</DataSetRepresentation>
+    </BaseSampleData>
+    <OrthogonalSampleData>
+      <DataSetRepresentation>5,4,12</DataSetRepresentation>
+      <SeriesDefinitionIndex>0</SeriesDefinitionIndex>
+    </OrthogonalSampleData>
+  </SampleData>
+  <Interactivity/>
+  <EmptyMessage>
+    <Caption>
+      <Value></Value>
+      <Font>
+        <Alignment/>
+      </Font>
+    </Caption>
+    <Background xsi:type="attribute:ColorDefinition">
+      <Transparency>0</Transparency>
+      <Red>255</Red>
+      <Green>255</Green>
+      <Blue>255</Blue>
+    </Background>
+    <Outline>
+      <Style>Solid</Style>
+      <Thickness>1</Thickness>
+      <Color>
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>0</Green>
+        <Blue>0</Blue>
+      </Color>
+    </Outline>
+    <Insets>
+      <Top>0.0</Top>
+      <Left>2.0</Left>
+      <Bottom>0.0</Bottom>
+      <Right>3.0</Right>
+    </Insets>
+    <Visible>false</Visible>
+  </EmptyMessage>
+  <Axes>
+    <Type>Text</Type>
+    <Title>
+      <Caption>
+        <Value>X-Axis Title</Value>
+        <Font>
+          <Size>14.0</Size>
+          <Bold>true</Bold>
+          <Alignment>
+            <horizontalAlignment>Center</horizontalAlignment>
+            <verticalAlignment>Center</verticalAlignment>
+          </Alignment>
+        </Font>
+      </Caption>
+      <Background xsi:type="attribute:ColorDefinition">
+        <Transparency>0</Transparency>
+        <Red>255</Red>
+        <Green>255</Green>
+        <Blue>255</Blue>
+      </Background>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+      </Outline>
+      <Insets>
+        <Top>0.0</Top>
+        <Left>2.0</Left>
+        <Bottom>0.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Visible>false</Visible>
+    </Title>
+    <TitlePosition>Below</TitlePosition>
+    <AssociatedAxes>
+      <Type>Linear</Type>
+      <Title>
+        <Caption>
+          <Value>Y-Axis Title</Value>
+          <Font>
+            <Size>14.0</Size>
+            <Bold>true</Bold>
+            <Alignment>
+              <horizontalAlignment>Center</horizontalAlignment>
+              <verticalAlignment>Center</verticalAlignment>
+            </Alignment>
+            <Rotation>90.0</Rotation>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>false</Visible>
+      </Title>
+      <TitlePosition>Left</TitlePosition>
+      <SeriesDefinitions>
+        <Query>
+          <Definition></Definition>
+        </Query>
+        <SeriesPalette>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>80</Red>
+            <Green>166</Green>
+            <Blue>218</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>242</Red>
+            <Green>88</Green>
+            <Blue>106</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>232</Red>
+            <Green>172</Green>
+            <Blue>57</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>255</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>64</Red>
+            <Green>128</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>170</Red>
+            <Green>85</Green>
+            <Blue>85</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>192</Red>
+            <Green>192</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>192</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>7</Red>
+            <Green>146</Green>
+            <Blue>94</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>128</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>0</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>64</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>80</Red>
+            <Green>240</Green>
+            <Blue>120</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>64</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>0</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>0</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>64</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>0</Blue>
+          </Entries>
+        </SeriesPalette>
+        <Series xsi:type="type:BarSeries">
+          <Visible>true</Visible>
+          <Label>
+            <Caption>
+              <Value>&lt;undefined></Value>
+              <Font>
+                <Alignment/>
+              </Font>
+            </Caption>
+            <Background xsi:type="attribute:ColorDefinition">
+              <Transparency>0</Transparency>
+              <Red>255</Red>
+              <Green>255</Green>
+              <Blue>255</Blue>
+            </Background>
+            <Outline>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>0</Red>
+                <Green>0</Green>
+                <Blue>0</Blue>
+              </Color>
+              <Visible>false</Visible>
+            </Outline>
+            <Insets>
+              <Top>0.0</Top>
+              <Left>2.0</Left>
+              <Bottom>0.0</Bottom>
+              <Right>3.0</Right>
+            </Insets>
+            <Visible>true</Visible>
+          </Label>
+          <DataDefinition>
+            <Definition>row[&quot;sum_price&quot;]</Definition>
+            <Grouping>
+              <Enabled>false</Enabled>
+              <GroupType>Text</GroupType>
+              <AggregateExpression xsi:nil="true"/>
+            </Grouping>
+          </DataDefinition>
+          <SeriesIdentifier>&lt;undefined></SeriesIdentifier>
+          <DataPoint>
+            <Components>
+              <Type>Orthogonal_Value</Type>
+            </Components>
+            <Separator>, </Separator>
+          </DataPoint>
+          <LabelPosition>Outside</LabelPosition>
+          <Stacked>false</Stacked>
+          <Riser>Rectangle</Riser>
+        </Series>
+        <Grouping>
+          <Enabled>false</Enabled>
+          <GroupingInterval>2.0</GroupingInterval>
+          <GroupType>Text</GroupType>
+          <AggregateExpression>Sum</AggregateExpression>
+        </Grouping>
+      </SeriesDefinitions>
+      <Orientation>Vertical</Orientation>
+      <LineAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>true</Visible>
+      </LineAttributes>
+      <Label>
+        <Caption>
+          <Value>&lt;undefined></Value>
+          <Font>
+            <Alignment/>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>true</Visible>
+      </Label>
+      <LabelPosition>Left</LabelPosition>
+      <MajorGrid>
+        <LineAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>196</Red>
+            <Green>196</Green>
+            <Blue>196</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </LineAttributes>
+        <TickStyle>Across</TickStyle>
+        <TickAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>196</Red>
+            <Green>196</Green>
+            <Blue>196</Blue>
+          </Color>
+          <Visible>true</Visible>
+        </TickAttributes>
+      </MajorGrid>
+      <MinorGrid>
+        <LineAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>225</Red>
+            <Green>225</Green>
+            <Blue>225</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </LineAttributes>
+        <TickStyle>Across</TickStyle>
+        <TickAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>225</Red>
+            <Green>225</Green>
+            <Blue>225</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </TickAttributes>
+      </MinorGrid>
+      <Scale>
+        <MinorGridsPerUnit>5</MinorGridsPerUnit>
+      </Scale>
+      <Origin>
+        <Type>Min</Type>
+        <Value xsi:type="data:NumberDataElement">
+          <Value>0.0</Value>
+        </Value>
+      </Origin>
+      <PrimaryAxis>true</PrimaryAxis>
+      <Percent>false</Percent>
+    </AssociatedAxes>
+    <SeriesDefinitions>
+      <Query>
+        <Definition></Definition>
+      </Query>
+      <SeriesPalette>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>80</Red>
+          <Green>166</Green>
+          <Blue>218</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>242</Red>
+          <Green>88</Green>
+          <Blue>106</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>232</Red>
+          <Green>172</Green>
+          <Blue>57</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>255</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>64</Red>
+          <Green>128</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>170</Red>
+          <Green>85</Green>
+          <Blue>85</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>0</Blue>
+        </Entries>
+      </SeriesPalette>
+      <Series>
+        <Visible>true</Visible>
+        <Label>
+          <Caption>
+            <Value>&lt;undefined></Value>
+            <Font>
+              <Alignment/>
+            </Font>
+          </Caption>
+          <Background xsi:type="attribute:ColorDefinition">
+            <Transparency>0</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Background>
+          <Outline>
+            <Style>Solid</Style>
+            <Thickness>1</Thickness>
+            <Color>
+              <Transparency>255</Transparency>
+              <Red>0</Red>
+              <Green>0</Green>
+              <Blue>0</Blue>
+            </Color>
+            <Visible>false</Visible>
+          </Outline>
+          <Insets>
+            <Top>0.0</Top>
+            <Left>2.0</Left>
+            <Bottom>0.0</Bottom>
+            <Right>3.0</Right>
+          </Insets>
+          <Visible>false</Visible>
+        </Label>
+        <DataDefinition>
+          <Definition>row[&quot;sod_part&quot;]</Definition>
+        </DataDefinition>
+        <SeriesIdentifier>&lt;undefined></SeriesIdentifier>
+        <DataPoint>
+          <Components>
+            <Type>Orthogonal_Value</Type>
+          </Components>
+          <Separator>, </Separator>
+        </DataPoint>
+        <LabelPosition>Outside</LabelPosition>
+        <Stacked>false</Stacked>
+      </Series>
+      <Grouping>
+        <Enabled>true</Enabled>
+        <GroupingInterval>2.0</GroupingInterval>
+        <GroupType>Text</GroupType>
+        <AggregateExpression>Sum</AggregateExpression>
+      </Grouping>
+    </SeriesDefinitions>
+    <Orientation>Horizontal</Orientation>
+    <LineAttributes>
+      <Style>Solid</Style>
+      <Thickness>1</Thickness>
+      <Color>
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>0</Green>
+        <Blue>0</Blue>
+      </Color>
+      <Visible>true</Visible>
+    </LineAttributes>
+    <Label>
+      <Caption>
+        <Value>&lt;undefined></Value>
+        <Font>
+          <Alignment/>
+        </Font>
+      </Caption>
+      <Background xsi:type="attribute:ColorDefinition">
+        <Transparency>0</Transparency>
+        <Red>255</Red>
+        <Green>255</Green>
+        <Blue>255</Blue>
+      </Background>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+      </Outline>
+      <Insets>
+        <Top>0.0</Top>
+        <Left>2.0</Left>
+        <Bottom>0.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Visible>true</Visible>
+    </Label>
+    <LabelPosition>Below</LabelPosition>
+    <MajorGrid>
+      <LineAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>196</Red>
+          <Green>196</Green>
+          <Blue>196</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </LineAttributes>
+      <TickStyle>Across</TickStyle>
+      <TickAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>196</Red>
+          <Green>196</Green>
+          <Blue>196</Blue>
+        </Color>
+        <Visible>true</Visible>
+      </TickAttributes>
+    </MajorGrid>
+    <MinorGrid>
+      <LineAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>225</Red>
+          <Green>225</Green>
+          <Blue>225</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </LineAttributes>
+      <TickStyle>Across</TickStyle>
+      <TickAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>225</Red>
+          <Green>225</Green>
+          <Blue>225</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </TickAttributes>
+    </MinorGrid>
+    <Scale>
+      <MinorGridsPerUnit>5</MinorGridsPerUnit>
+    </Scale>
+    <Origin>
+      <Type>Min</Type>
+      <Value xsi:type="data:NumberDataElement">
+        <Value>0.0</Value>
+      </Value>
+    </Origin>
+    <PrimaryAxis>true</PrimaryAxis>
+    <CategoryAxis>true</CategoryAxis>
+    <Percent>false</Percent>
+  </Axes>
+  <Orientation>Vertical</Orientation>
+  <Rotation/>
+</model:ChartWithAxes>
+]]></xml-property>
+                                <property name="outputFormat">SVG</property>
+                                <property name="inheritColumns">false</property>
+                                <property name="dataSet">so_analyse</property>
+                                <property name="height">1.51in</property>
+                                <property name="width">4.447in</property>
+                                <list-property name="boundDataColumns">
+                                    <structure>
+                                        <property name="name">sod_part</property>
+                                        <expression name="expression" type="javascript">dataSetRow["sod_part"]</expression>
+                                        <property name="dataType">string</property>
+                                    </structure>
+                                    <structure>
+                                        <property name="name">sum_price</property>
+                                        <expression name="expression" type="javascript">dataSetRow["sum_price"]</expression>
+                                        <property name="dataType">float</property>
+                                    </structure>
+                                </list-property>
+                            </extended-item>
+                        </cell>
+                    </row>
+                </header>
+                <footer>
+                    <row id="18">
+                        <cell id="19">
+                            <property name="colSpan">3</property>
+                            <property name="rowSpan">1</property>
+                        </cell>
+                    </row>
+                </footer>
+            </group>
+            <detail>
+                <row id="22">
+                    <cell id="23"/>
+                    <cell id="24"/>
+                    <cell id="25"/>
+                </row>
+            </detail>
+            <footer>
+                <row id="26">
+                    <cell id="27"/>
+                    <cell id="28"/>
+                    <cell id="29"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

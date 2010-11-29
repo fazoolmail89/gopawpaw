@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100208 Build &lt;2.5.2.v20100210-0630></property>
+    <property name="units">in</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">conf/gpp_library.rptlibrary</property>
+            <property name="namespace">gpp_library</property>
+        </structure>
+    </list-property>
+    <parameters>
+        <scalar-parameter name="domain" id="317" extends="gpp_library.domain">
+            <property name="hidden">true</property>
+            <text-property name="promptText">域</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">keer</value>
+            </simple-property-list>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="effdate" id="318" extends="gpp_library.effdate"/>
+        <scalar-parameter name="effdate2" id="319" extends="gpp_library.effdate2"/>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="mfgprod" id="23"
+ extends="gpp_library.mfgprod"/>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="select_domain" id="24"
+ extends="gpp_library.select_domain"/>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="select_part" id="25"
+ extends="gpp_library.select_part"/>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="select_product" id="26"
+ extends="gpp_library.select_product"/>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="wo_det" id="316"
+ extends="gpp_library.wo_det"/>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="borderBottomColor">#808000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1px</property>
+            <property name="borderLeftColor">#808000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1px</property>
+            <property name="borderRightColor">#808000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1px</property>
+            <property name="borderTopColor">#808000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1px</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="7">
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">print_date</property>
+                    <text-property name="displayName">打印日期</text-property>
+                    <expression name="expression" type="javascript">var nowdate = getnowdate();&#13;
+&#13;
+function getnowdate(){ &#13;
+	var today = new Date();&#13;
+	var day   = today.getDate();                  &#13;
+	var month = today.getMonth() + 1;&#13;
+	var year  = today.getFullYear();   &#13;
+	month     = month&lt;10?"0"+month:month;      &#13;
+	day       = day&lt;10?"0"+day:day;&#13;
+	var date  = year + "年" + month + "月" + day+"日";&#13;
+return date;&#13;
+}&#13;
+&#13;
+'打印日期：'+nowdate</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <text-property name="displayName">业务日期</text-property>
+                    <expression name="expression" type="javascript">"业务日期："+params["effdate"].value + " 至 " + params["effdate2"].value</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="8"/>
+            <column id="9"/>
+            <column id="10"/>
+            <row id="11">
+                <cell id="12">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <label id="310">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontSize">14pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textUnderline">underline</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">柳州科尔数字化制造技术有限公司</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="15">
+                <cell id="16">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <label id="71">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontSize">14pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textUnderline">underline</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">加工单明细报表</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="311">
+                <property name="fontFamily">"宋体"</property>
+                <property name="fontSize">8pt</property>
+                <cell id="312">
+                    <data id="400">
+                        <property name="resultSetColumn">Column Binding</property>
+                    </data>
+                </cell>
+                <cell id="313"/>
+                <cell id="314">
+                    <data id="315">
+                        <property name="resultSetColumn">print_date</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="19">
+                <cell id="20">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <table id="320">
+                        <property name="width">7.875in</property>
+                        <property name="dataSet">wo_det</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">wo_nbr</property>
+                                <expression name="expression" type="javascript">dataSetRow["wo_nbr"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">wo_part</property>
+                                <expression name="expression" type="javascript">dataSetRow["wo_part"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">wo_type</property>
+                                <expression name="expression" type="javascript">dataSetRow["wo_type"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">wo_qty_ord</property>
+                                <expression name="expression" type="javascript">dataSetRow["wo_qty_ord"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">wo_qty_comp</property>
+                                <expression name="expression" type="javascript">dataSetRow["wo_qty_comp"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">wo_qty_rjct</property>
+                                <expression name="expression" type="javascript">dataSetRow["wo_qty_rjct"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">wo_status</property>
+                                <expression name="expression" type="javascript">dataSetRow["wo_status"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">wo_rmks</property>
+                                <expression name="expression" type="javascript">dataSetRow["wo_rmks"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">pt_desc1</property>
+                                <expression name="expression" type="javascript">dataSetRow["pt_desc1"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">订单汇总</property>
+                                <text-property name="displayName">订单汇总</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>productname</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["wo_qty_ord"]</expression>
+                                    </structure>
+                                </list-property>
+                            </structure>
+                            <structure>
+                                <property name="name">完成量汇总</property>
+                                <text-property name="displayName">完成量汇总</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>productname</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["wo_qty_comp"]</expression>
+                                    </structure>
+                                </list-property>
+                            </structure>
+                        </list-property>
+                        <column id="339">
+                            <property name="width">1.125in</property>
+                        </column>
+                        <column id="340">
+                            <property name="width">1.125in</property>
+                        </column>
+                        <column id="341">
+                            <property name="width">1.125in</property>
+                        </column>
+                        <column id="390">
+                            <property name="width">0.5104166666666666in</property>
+                        </column>
+                        <column id="384">
+                            <property name="width">0.4375in</property>
+                        </column>
+                        <column id="343">
+                            <property name="width">2.4270833333333335in</property>
+                        </column>
+                        <header>
+                            <row id="321">
+                                <property name="fontWeight">bold</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">medium</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">medium</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">medium</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">medium</property>
+                                <cell id="322">
+                                    <label id="371">
+                                        <text-property name="text">加工单号</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="323">
+                                    <label id="373">
+                                        <text-property name="text">订单数量</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="324">
+                                    <label id="375">
+                                        <text-property name="text">完成量</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="385">
+                                    <label id="391">
+                                        <text-property name="text">类型</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="379">
+                                    <label id="393">
+                                        <text-property name="text">状态</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="326">
+                                    <label id="395">
+                                        <text-property name="text">备注</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                        </header>
+                        <group id="357">
+                            <property name="groupName">productname</property>
+                            <property name="interval">none</property>
+                            <property name="sortDirection">asc</property>
+                            <expression name="keyExpr" type="javascript">row["pt_desc1"]</expression>
+                            <structure name="toc">
+                                <expression name="expressionValue" type="javascript">row["pt_desc1"]</expression>
+                            </structure>
+                            <property name="repeatHeader">true</property>
+                            <property name="hideDetail">false</property>
+                            <property name="pageBreakAfter">auto</property>
+                            <property name="pageBreakBefore">auto</property>
+                            <property name="pageBreakInside">auto</property>
+                            <header>
+                                <row id="358">
+                                    <property name="backgroundColor">#C6C68E</property>
+                                    <property name="color">#000000</property>
+                                    <cell id="359">
+                                        <property name="colSpan">2</property>
+                                        <property name="rowSpan">1</property>
+                                        <data id="370">
+                                            <property name="resultSetColumn">pt_desc1</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="361"/>
+                                    <cell id="386"/>
+                                    <cell id="380"/>
+                                    <cell id="363"/>
+                                </row>
+                            </header>
+                            <footer>
+                                <row id="364">
+                                    <property name="backgroundColor">#FFFFFF</property>
+                                    <cell id="365">
+                                        <label id="399">
+                                            <text-property name="text">小计：</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="366">
+                                        <data id="397">
+                                            <property name="resultSetColumn">订单汇总</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="367">
+                                        <data id="398">
+                                            <property name="resultSetColumn">完成量汇总</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="388"/>
+                                    <cell id="382"/>
+                                    <cell id="369"/>
+                                </row>
+                            </footer>
+                        </group>
+                        <detail>
+                            <row id="327">
+                                <cell id="328">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <data id="372">
+                                        <property name="resultSetColumn">wo_nbr</property>
+                                    </data>
+                                </cell>
+                                <cell id="329">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <data id="374">
+                                        <property name="resultSetColumn">wo_qty_ord</property>
+                                    </data>
+                                </cell>
+                                <cell id="330">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <data id="376">
+                                        <property name="resultSetColumn">wo_qty_comp</property>
+                                    </data>
+                                </cell>
+                                <cell id="387">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <data id="392">
+                                        <property name="resultSetColumn">wo_type</property>
+                                    </data>
+                                </cell>
+                                <cell id="381">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <data id="394">
+                                        <property name="resultSetColumn">wo_status</property>
+                                    </data>
+                                </cell>
+                                <cell id="332">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <data id="396">
+                                        <property name="resultSetColumn">wo_rmks</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                        <footer>
+                            <row id="333">
+                                <cell id="334"/>
+                                <cell id="335"/>
+                                <cell id="336"/>
+                                <cell id="389"/>
+                                <cell id="383"/>
+                                <cell id="338"/>
+                            </row>
+                        </footer>
+                    </table>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

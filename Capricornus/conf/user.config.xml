@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "hibernate-configuration-3.0.dtd">
+
+<user-configuration>
+	<frequently-used-function>
+		<property name="menu.item">40.1</property>
+		<property name="menu.item">40.5</property>
+		<property name="menu.item">3.6</property>
+	</frequently-used-function>
+</user-configuration>
