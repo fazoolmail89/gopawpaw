@@ -1,0 +1,85 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "hibernate-configuration-3.0.dtd">
+
+<programs-configuration>
+	<database-config-a>
+		
+		<property name="connection.url">
+			jdbc:odbc:Driver={MicroSoft Access Driver (*.mdb)};DBQ=D:\Eclipse_Workspace\Capricornus\dataBase\keer_mfgprod.mdb
+		</property>
+		<property name="connection.username"></property>
+		<property name="connection.password"></property>
+		<property name="connection.driver_class">
+			sun.jdbc.odbc.JdbcOdbcDriver
+		</property>
+		<property name="dataBaseType">
+			accesss
+		</property>
+	</database-config-a>
+
+	<database-config-p>
+		<property name="connection.url">
+			jdbc:datadirect:openedge://localhost:6672;databaseName=mfgprod
+		</property>
+		<property name="connection.username">sysprogress</property>
+		<property name="connection.password">qad</property>
+		<property name="connection.driver_class">
+			com.ddtek.jdbc.openedge.OpenEdgeDriver
+		</property>
+		<property name="dataBaseType">
+			progress
+		</property>
+	</database-config-p>
+
+	<database-config>
+		<property name="connection.url">
+			jdbc:microsoft:sqlserver://localhost:1433;databaseName=keer_mfgprod
+		</property>
+		<property name="connection.username">sa</property>
+		<property name="connection.password">xxxxxxx</property>
+		<property name="connection.driver_class">
+			com.microsoft.jdbc.sqlserver.SQLServerDriver
+		</property>
+		<property name="dataBaseType">
+			sqlserver
+		</property>
+	</database-config>
+
+
+	<report-host>
+		<property name="domain">
+			localhost
+		</property>
+		<property name="port">
+			27279
+		</property>
+		<property name="virtual-dir">
+		</property>
+	</report-host>
+	
+	<about-info>
+		<property name="programs" describe="程序名称" display="true">
+			QAD报表系统2
+		</property>
+		
+		
+		<property name="versions" describe="版本号" display="true">
+			V2010.05.30
+		</property>
+		
+		<property name="author" describe="作者" display="true">
+			李锦华
+		</property>
+		
+		<property name="support" describe="支持" display="false">
+			http://www.support.com
+		</property>
+		
+		<property name="email" describe="邮件" display="false">
+			email@e.com
+		</property>
+	
+	</about-info>
+</programs-configuration>

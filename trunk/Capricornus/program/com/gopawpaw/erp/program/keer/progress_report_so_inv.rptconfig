@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
+    <list-property name="configVars">
+        <structure>
+            <property name="name">__isdisplay__domain_339_0</property>
+            <property name="value">keer</property>
+        </structure>
+        <structure>
+            <property name="name">__isdisplay__effdate_340_1</property>
+            <property name="value">2010-1-14</property>
+        </structure>
+        <structure>
+            <property name="name">__isdisplay__effdate2_341_2</property>
+            <property name="value">2010-5-14</property>
+        </structure>
+        <structure>
+            <property name="name">effdate2_341_3</property>
+            <property name="value">2010-05-14</property>
+        </structure>
+        <structure>
+            <property name="name">effdate2_341_type_</property>
+            <property name="value">date</property>
+        </structure>
+        <structure>
+            <property name="name">effdate_340_4</property>
+            <property name="value">2010-01-14</property>
+        </structure>
+        <structure>
+            <property name="name">effdate_340_type_</property>
+            <property name="value">date</property>
+        </structure>
+        <structure>
+            <property name="name">domain_339_5</property>
+            <property name="value">keer</property>
+        </structure>
+        <structure>
+            <property name="name">domain_339_type_</property>
+            <property name="value">string</property>
+        </structure>
+    </list-property>
+</report>

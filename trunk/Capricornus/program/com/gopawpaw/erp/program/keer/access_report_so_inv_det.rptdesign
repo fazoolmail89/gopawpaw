@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100208 Build &lt;2.5.2.v20100210-0630></property>
+    <property name="units">in</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">conf/gpp_library.rptlibrary</property>
+            <property name="namespace">gpp_library</property>
+        </structure>
+    </list-property>
+    <parameters>
+        <scalar-parameter name="domain" id="316" extends="gpp_library.domain">
+            <property name="hidden">true</property>
+            <text-property name="promptText">域</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">keer</value>
+            </simple-property-list>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="effdate" id="317" extends="gpp_library.effdate">
+            <text-property name="promptText">生效日期</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new Date()</value>
+            </simple-property-list>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="effdate2" id="318" extends="gpp_library.effdate2">
+            <text-property name="promptText">生效日期2</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new Date()</value>
+            </simple-property-list>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="mfgprod" id="23"
+ extends="gpp_library.mfgprod"/>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="select_domain" id="24"
+ extends="gpp_library.select_domain"/>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="select_part" id="25"
+ extends="gpp_library.select_part"/>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="select_product" id="26"
+ extends="gpp_library.select_product"/>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="so_inv_det" id="319"
+ extends="gpp_library.so_inv_det"/>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="borderBottomColor">#808000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1px</property>
+            <property name="borderLeftColor">#808000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1px</property>
+            <property name="borderRightColor">#808000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1px</property>
+            <property name="borderTopColor">#808000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1px</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="7">
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">print_date</property>
+                    <text-property name="displayName">打印日期</text-property>
+                    <expression name="expression" type="javascript">var nowdate = getnowdate();&#13;
+&#13;
+function getnowdate(){ &#13;
+	var today = new Date();&#13;
+	var day   = today.getDate();                  &#13;
+	var month = today.getMonth() + 1;&#13;
+	var year  = today.getFullYear();   &#13;
+	month     = month&lt;10?"0"+month:month;      &#13;
+	day       = day&lt;10?"0"+day:day;&#13;
+	var date  = year + "年" + month + "月" + day+"日";&#13;
+return date;&#13;
+}&#13;
+&#13;
+'打印日期：'+nowdate</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <text-property name="displayName">业务日期</text-property>
+                    <expression name="expression" type="javascript">"业务日期："+params["effdate"].value + " 至 " + params["effdate2"].value</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="8"/>
+            <column id="9"/>
+            <column id="10"/>
+            <row id="11">
+                <cell id="12">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <label id="310">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontSize">14pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textUnderline">underline</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">柳州科尔数字化制造技术有限公司</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="15">
+                <cell id="16">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <label id="71">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontSize">14pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textUnderline">underline</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">销售开票明细报表</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="311">
+                <property name="fontFamily">"宋体"</property>
+                <property name="fontSize">8pt</property>
+                <cell id="312">
+                    <data id="348">
+                        <property name="resultSetColumn">Column Binding</property>
+                    </data>
+                </cell>
+                <cell id="313"/>
+                <cell id="314">
+                    <data id="315">
+                        <property name="resultSetColumn">print_date</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="19">
+                <cell id="20">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <table id="320">
+                        <property name="dataSet">so_inv_det</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">tr_part</property>
+                                <expression name="expression" type="javascript">dataSetRow["tr_part"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">salenum</property>
+                                <expression name="expression" type="javascript">dataSetRow["salenum"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                            <structure>
+                                <property name="name">pt_desc1</property>
+                                <expression name="expression" type="javascript">dataSetRow["pt_desc1"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">tr_effdate</property>
+                                <text-property name="displayName">tr_effdate</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["tr_effdate"]</expression>
+                                <property name="dataType">date-time</property>
+                            </structure>
+                        </list-property>
+                        <column id="333"/>
+                        <column id="334"/>
+                        <column id="335"/>
+                        <column id="345"/>
+                        <header>
+                            <row id="321">
+                                <cell id="322">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <label id="336">
+                                        <text-property name="text">产品图号</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="323">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <label id="338">
+                                        <text-property name="text">产品名称</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="324">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <label id="340">
+                                        <text-property name="text">销售数量</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="342">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <label id="346">
+                                        <text-property name="text">销售日期</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                        </header>
+                        <detail>
+                            <row id="325">
+                                <cell id="326">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <data id="337">
+                                        <property name="resultSetColumn">tr_part</property>
+                                    </data>
+                                </cell>
+                                <cell id="327">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <data id="339">
+                                        <property name="resultSetColumn">pt_desc1</property>
+                                    </data>
+                                </cell>
+                                <cell id="328">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <data id="341">
+                                        <property name="resultSetColumn">salenum</property>
+                                    </data>
+                                </cell>
+                                <cell id="343">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <data id="347">
+                                        <property name="resultSetColumn">tr_effdate</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                        <footer>
+                            <row id="329">
+                                <cell id="330"/>
+                                <cell id="331"/>
+                                <cell id="332"/>
+                                <cell id="344"/>
+                            </row>
+                        </footer>
+                    </table>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

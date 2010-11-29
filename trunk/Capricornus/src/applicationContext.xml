@@ -1,0 +1,4602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="configLocation"
+			value="file:conf/hibernate.cfg.xml">
+		</property>
+	</bean>
+	<bean id="AtdcMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AtdcMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcxMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AcxMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AprMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AprMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AnMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AnMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AbssDetDAO"
+		class="com.gopawpaw.erp.hibernate.a.AbssDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AtdcdDetDAO"
+		class="com.gopawpaw.erp.hibernate.a.AtdcdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AttmpMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AttmpMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ArcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.a.ArcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AtapMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AtapMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ArMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.ArMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AtcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.a.AtcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ArsdDetDAO"
+		class="com.gopawpaw.erp.hibernate.a.ArsdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ApmCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.a.ApmCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AdcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.a.AdcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AdxDetDAO"
+		class="com.gopawpaw.erp.hibernate.a.AdxDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ActMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.ActMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AcmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AtakDetDAO"
+		class="com.gopawpaw.erp.hibernate.a.AtakDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AcMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AtdMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AtdMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcodMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AcodMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AttMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AttMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AlMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AlMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AldDetDAO"
+		class="com.gopawpaw.erp.hibernate.a.AldDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AbslDetDAO"
+		class="com.gopawpaw.erp.hibernate.a.AbslDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ApMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.ApMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AbscDetDAO"
+		class="com.gopawpaw.erp.hibernate.a.AbscDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AtgtRefDAO"
+		class="com.gopawpaw.erp.hibernate.a.AtgtRefDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AbsrDetDAO"
+		class="com.gopawpaw.erp.hibernate.a.AbsrDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AnxDetDAO"
+		class="com.gopawpaw.erp.hibernate.a.AnxDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AudDetDAO"
+		class="com.gopawpaw.erp.hibernate.a.AudDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ApmrMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.ApmrMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AtwpMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AtwpMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AstMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AstMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ApcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.a.ApcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AtpDetDAO"
+		class="com.gopawpaw.erp.hibernate.a.AtpDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ArdDetDAO"
+		class="com.gopawpaw.erp.hibernate.a.ArdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AterrMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AterrMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AtgMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AtgMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AnlDetDAO"
+		class="com.gopawpaw.erp.hibernate.a.AnlDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AbsdDetDAO"
+		class="com.gopawpaw.erp.hibernate.a.AbsdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AbsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AbsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AccdDetDAO"
+		class="com.gopawpaw.erp.hibernate.a.AccdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcdfMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AcdfMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AscMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AscMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AlmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AlmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AbsiMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AbsiMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AbsccDetDAO"
+		class="com.gopawpaw.erp.hibernate.a.AbsccDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AtwkDetDAO"
+		class="com.gopawpaw.erp.hibernate.a.AtwkDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AcdDetDAO"
+		class="com.gopawpaw.erp.hibernate.a.AcdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AdMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AdMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AbdDetDAO"
+		class="com.gopawpaw.erp.hibernate.a.AbdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AnsDetDAO"
+		class="com.gopawpaw.erp.hibernate.a.AnsDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ArtMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.ArtMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AprmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.a.AprmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BkMstrDAO"
+		class="com.gopawpaw.erp.hibernate.b.BkMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BkpdDetDAO"
+		class="com.gopawpaw.erp.hibernate.b.BkpdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BicCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.b.BicCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BlCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.b.BlCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BcMstrDAO"
+		class="com.gopawpaw.erp.hibernate.b.BcMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BkfmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.b.BkfmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BkdDetDAO"
+		class="com.gopawpaw.erp.hibernate.b.BkdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BdlMstrDAO"
+		class="com.gopawpaw.erp.hibernate.b.BdlMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BtbDetDAO"
+		class="com.gopawpaw.erp.hibernate.b.BtbDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BdpDetDAO"
+		class="com.gopawpaw.erp.hibernate.b.BdpDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BgdDetDAO"
+		class="com.gopawpaw.erp.hibernate.b.BgdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BdldDetDAO"
+		class="com.gopawpaw.erp.hibernate.b.BdldDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BomMstrDAO"
+		class="com.gopawpaw.erp.hibernate.b.BomMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BkpmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.b.BkpmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BgMstrDAO"
+		class="com.gopawpaw.erp.hibernate.b.BgMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BkadDetDAO"
+		class="com.gopawpaw.erp.hibernate.b.BkadDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BaMstrDAO"
+		class="com.gopawpaw.erp.hibernate.b.BaMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BcdDetDAO"
+		class="com.gopawpaw.erp.hibernate.b.BcdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CnsuMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CnsuMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CdDetDAO" class="com.gopawpaw.erp.hibernate.c.CdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ComMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.ComMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CcdMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CcdMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CmcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.c.CmcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CaMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CaMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="Ccd1DetDAO"
+		class="com.gopawpaw.erp.hibernate.c.Ccd1DetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CccCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.c.CccCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CncsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CncsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CstMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CstMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CsbdDetDAO"
+		class="com.gopawpaw.erp.hibernate.c.CsbdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CctrHistDAO"
+		class="com.gopawpaw.erp.hibernate.c.CctrHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CfcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.c.CfcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CuMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CuMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CmdDetDAO"
+		class="com.gopawpaw.erp.hibernate.c.CmdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CncuMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CncuMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CpcdDetDAO"
+		class="com.gopawpaw.erp.hibernate.c.CpcdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CclCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.c.CclCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CntMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CntMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CaqMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CaqMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ClsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.ClsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CcMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CcMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CtdDetDAO"
+		class="com.gopawpaw.erp.hibernate.c.CtdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="Ccd2DetDAO"
+		class="com.gopawpaw.erp.hibernate.c.Ccd2DetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CmfMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CmfMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CalDetDAO"
+		class="com.gopawpaw.erp.hibernate.c.CalDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CrefMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CrefMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CahHistDAO"
+		class="com.gopawpaw.erp.hibernate.c.CahHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CildDetDAO"
+		class="com.gopawpaw.erp.hibernate.c.CildDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CkdDetDAO"
+		class="com.gopawpaw.erp.hibernate.c.CkdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CphHistDAO"
+		class="com.gopawpaw.erp.hibernate.c.CphHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CkMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CkMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CclscdDetDAO"
+		class="com.gopawpaw.erp.hibernate.c.CclscdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CncudDetDAO"
+		class="com.gopawpaw.erp.hibernate.c.CncudDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CnsudDetDAO"
+		class="com.gopawpaw.erp.hibernate.c.CnsudDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ChmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.ChmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CmhHistDAO"
+		class="com.gopawpaw.erp.hibernate.c.CmhHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CsidDetDAO"
+		class="com.gopawpaw.erp.hibernate.c.CsidDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CilMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CilMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CksdDetDAO"
+		class="com.gopawpaw.erp.hibernate.c.CksdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CdfMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CdfMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CssiDetDAO"
+		class="com.gopawpaw.erp.hibernate.c.CssiDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CoCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.c.CoCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CslmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CslmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CacCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.c.CacCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CsimMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CsimMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CnsixMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CnsixMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CtryMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CtryMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CodeMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CodeMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CsldDetDAO"
+		class="com.gopawpaw.erp.hibernate.c.CsldDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CnsCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.c.CnsCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CtMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CtMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CbMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CbMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CscMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CscMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ChgMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.ChgMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ClcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.c.ClcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CncCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.c.CncCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ComdDetDAO"
+		class="com.gopawpaw.erp.hibernate.c.ComdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CfMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CfMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CsilMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CsilMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CclscMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CclscMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CpcMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CpcMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CctMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CctMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CsaMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CsaMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CssMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CssMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CrMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CrMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CasMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CasMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CncixMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CncixMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CnssMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CnssMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CclsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CclsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CmtDetDAO"
+		class="com.gopawpaw.erp.hibernate.c.CmtDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CostCalDAO"
+		class="com.gopawpaw.erp.hibernate.c.CostCalDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CrcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.c.CrcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ContMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.ContMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CpMstrDAO"
+		class="com.gopawpaw.erp.hibernate.c.CpMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MrpcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.m.MrpcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MonMstrDAO"
+		class="com.gopawpaw.erp.hibernate.m.MonMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MpdDetDAO"
+		class="com.gopawpaw.erp.hibernate.m.MpdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MppDetDAO"
+		class="com.gopawpaw.erp.hibernate.m.MppDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MsgMstrDAO"
+		class="com.gopawpaw.erp.hibernate.m.MsgMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MaMstrDAO"
+		class="com.gopawpaw.erp.hibernate.m.MaMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MrpDetDAO"
+		class="com.gopawpaw.erp.hibernate.m.MrpDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MnpDetDAO"
+		class="com.gopawpaw.erp.hibernate.m.MnpDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MofMstrDAO"
+		class="com.gopawpaw.erp.hibernate.m.MofMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MphHistDAO"
+		class="com.gopawpaw.erp.hibernate.m.MphHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MfsdDetDAO"
+		class="com.gopawpaw.erp.hibernate.m.MfsdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MpMstrDAO"
+		class="com.gopawpaw.erp.hibernate.m.MpMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MaxtDetDAO"
+		class="com.gopawpaw.erp.hibernate.m.MaxtDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MntDetDAO"
+		class="com.gopawpaw.erp.hibernate.m.MntDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MuMstrDAO"
+		class="com.gopawpaw.erp.hibernate.m.MuMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MrppDetDAO"
+		class="com.gopawpaw.erp.hibernate.m.MrppDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MfcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.m.MfcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MpsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.m.MpsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MfrelMstrDAO"
+		class="com.gopawpaw.erp.hibernate.m.MfrelMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MndDetDAO"
+		class="com.gopawpaw.erp.hibernate.m.MndDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MaxMstrDAO"
+		class="com.gopawpaw.erp.hibernate.m.MaxMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DalMstrDAO"
+		class="com.gopawpaw.erp.hibernate.d.DalMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DpcMstrDAO"
+		class="com.gopawpaw.erp.hibernate.d.DpcMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DeltMstrDAO"
+		class="com.gopawpaw.erp.hibernate.d.DeltMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DsrMstrDAO"
+		class="com.gopawpaw.erp.hibernate.d.DsrMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DydMstrDAO"
+		class="com.gopawpaw.erp.hibernate.d.DydMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DeclMstrDAO"
+		class="com.gopawpaw.erp.hibernate.d.DeclMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DbsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.d.DbsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DjrMstrDAO"
+		class="com.gopawpaw.erp.hibernate.d.DjrMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DmwWkflDAO"
+		class="com.gopawpaw.erp.hibernate.d.DmwWkflDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DfMstrDAO"
+		class="com.gopawpaw.erp.hibernate.d.DfMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DprdDetDAO"
+		class="com.gopawpaw.erp.hibernate.d.DprdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DomMstrDAO"
+		class="com.gopawpaw.erp.hibernate.d.DomMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DjrcDetDAO"
+		class="com.gopawpaw.erp.hibernate.d.DjrcDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DptMstrDAO"
+		class="com.gopawpaw.erp.hibernate.d.DptMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DssMstrDAO"
+		class="com.gopawpaw.erp.hibernate.d.DssMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DefrDetDAO"
+		class="com.gopawpaw.erp.hibernate.d.DefrDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DrpCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.d.DrpCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DsdDetDAO"
+		class="com.gopawpaw.erp.hibernate.d.DsdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DbkMstrDAO"
+		class="com.gopawpaw.erp.hibernate.d.DbkMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DprMstrDAO"
+		class="com.gopawpaw.erp.hibernate.d.DprMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DsDetDAO" class="com.gopawpaw.erp.hibernate.d.DsDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DaldDetDAO"
+		class="com.gopawpaw.erp.hibernate.d.DaldDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DcMstrDAO"
+		class="com.gopawpaw.erp.hibernate.d.DcMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DyMstrDAO"
+		class="com.gopawpaw.erp.hibernate.d.DyMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DprtDetDAO"
+		class="com.gopawpaw.erp.hibernate.d.DprtDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EspMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.EspMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="Ecd9DetDAO"
+		class="com.gopawpaw.erp.hibernate.e.Ecd9DetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EsapmpRefDAO"
+		class="com.gopawpaw.erp.hibernate.e.EsapmpRefDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EscxDetDAO"
+		class="com.gopawpaw.erp.hibernate.e.EscxDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="Ecd2DetDAO"
+		class="com.gopawpaw.erp.hibernate.e.Ecd2DetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EsapMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.EsapMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ElgHistDAO"
+		class="com.gopawpaw.erp.hibernate.e.ElgHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EsapsDetDAO"
+		class="com.gopawpaw.erp.hibernate.e.EsapsDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ExruUsageDAO"
+		class="com.gopawpaw.erp.hibernate.e.ExruUsageDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EswpmpRefDAO"
+		class="com.gopawpaw.erp.hibernate.e.EswpmpRefDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EswpfcDetDAO"
+		class="com.gopawpaw.erp.hibernate.e.EswpfcDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EgaMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.EgaMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ExrRateDAO"
+		class="com.gopawpaw.erp.hibernate.e.ExrRateDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EswpMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.EswpMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EswpsDetDAO"
+		class="com.gopawpaw.erp.hibernate.e.EswpsDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EnMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.EnMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EmapDetDAO"
+		class="com.gopawpaw.erp.hibernate.e.EmapDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.EmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EscCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.e.EscCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EsgcRefDAO"
+		class="com.gopawpaw.erp.hibernate.e.EsgcRefDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EsapfilDetDAO"
+		class="com.gopawpaw.erp.hibernate.e.EsapfilDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EgcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.e.EgcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EsapfcDetDAO"
+		class="com.gopawpaw.erp.hibernate.e.EsapfcDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EswpfDetDAO"
+		class="com.gopawpaw.erp.hibernate.e.EswpfDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EgtMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.EgtMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EctMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.EctMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EshMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.EshMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EcmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.EcmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EssMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.EssMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EscatMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.EscatMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EmgMsgDAO"
+		class="com.gopawpaw.erp.hibernate.e.EmgMsgDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EmpMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.EmpMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EaMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.EaMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EudDetDAO"
+		class="com.gopawpaw.erp.hibernate.e.EudDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EmcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.e.EmcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ErsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.ErsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EgsDetDAO"
+		class="com.gopawpaw.erp.hibernate.e.EgsDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EcxRefDAO"
+		class="com.gopawpaw.erp.hibernate.e.EcxRefDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EscdDetDAO"
+		class="com.gopawpaw.erp.hibernate.e.EscdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EsfilMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.EsfilMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EsrecDetDAO"
+		class="com.gopawpaw.erp.hibernate.e.EsrecDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EucCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.e.EucCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EsapfsDetDAO"
+		class="com.gopawpaw.erp.hibernate.e.EsapfsDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EswpfsDetDAO"
+		class="com.gopawpaw.erp.hibernate.e.EswpfsDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EclListDAO"
+		class="com.gopawpaw.erp.hibernate.e.EclListDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EsapfDetDAO"
+		class="com.gopawpaw.erp.hibernate.e.EsapfDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ExcdDetDAO"
+		class="com.gopawpaw.erp.hibernate.e.ExcdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EmsgMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.EmsgMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="Ecd5DetDAO"
+		class="com.gopawpaw.erp.hibernate.e.Ecd5DetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EncdDetDAO"
+		class="com.gopawpaw.erp.hibernate.e.EncdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EsigMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.EsigMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="Ecd3DetDAO"
+		class="com.gopawpaw.erp.hibernate.e.Ecd3DetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EscfRefDAO"
+		class="com.gopawpaw.erp.hibernate.e.EscfRefDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EcaMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.EcaMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EuMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.EuMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EcdDetDAO"
+		class="com.gopawpaw.erp.hibernate.e.EcdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EtCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.e.EtCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EswpfilDetDAO"
+		class="com.gopawpaw.erp.hibernate.e.EswpfilDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EdlgHistDAO"
+		class="com.gopawpaw.erp.hibernate.e.EdlgHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EngMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.EngMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EgwWkflDAO"
+		class="com.gopawpaw.erp.hibernate.e.EgwWkflDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ErawDetDAO"
+		class="com.gopawpaw.erp.hibernate.e.ErawDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EgdDetDAO"
+		class="com.gopawpaw.erp.hibernate.e.EgdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ExcMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.ExcMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="Ecd1DetDAO"
+		class="com.gopawpaw.erp.hibernate.e.Ecd1DetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="Ecd4DetDAO"
+		class="com.gopawpaw.erp.hibernate.e.Ecd4DetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.e.EsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FacdDetDAO"
+		class="com.gopawpaw.erp.hibernate.f.FacdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FrdDetDAO"
+		class="com.gopawpaw.erp.hibernate.f.FrdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="Fsp2PlnDAO"
+		class="com.gopawpaw.erp.hibernate.f.Fsp2PlnDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FaclCalDAO"
+		class="com.gopawpaw.erp.hibernate.f.FaclCalDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FsdDetDAO"
+		class="com.gopawpaw.erp.hibernate.f.FsdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FhMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FhMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FnhHistDAO"
+		class="com.gopawpaw.erp.hibernate.f.FnhHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="Fsp1PlnDAO"
+		class="com.gopawpaw.erp.hibernate.f.Fsp1PlnDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="Fp2PlanDAO"
+		class="com.gopawpaw.erp.hibernate.f.Fp2PlanDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FccMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FccMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FlffMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FlffMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="Fp3PlanDAO"
+		class="com.gopawpaw.erp.hibernate.f.Fp3PlanDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FcgMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FcgMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FtMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FtMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FacldDetDAO"
+		class="com.gopawpaw.erp.hibernate.f.FacldDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FsuMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FsuMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FpciMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FpciMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FamtrdDetDAO"
+		class="com.gopawpaw.erp.hibernate.f.FamtrdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FalMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FalMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FabchdDetDAO"
+		class="com.gopawpaw.erp.hibernate.f.FabchdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FnMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FnMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FasCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.f.FasCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FadfMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FadfMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FactCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.f.FactCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FabaDetDAO"
+		class="com.gopawpaw.erp.hibernate.f.FabaDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FamtMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FamtMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FndDetDAO"
+		class="com.gopawpaw.erp.hibernate.f.FndDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FwkMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FwkMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FlcrMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FlcrMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FaMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FaMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FabchMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FabchMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FaclsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FaclsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FabdDetDAO"
+		class="com.gopawpaw.erp.hibernate.f.FabdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FlsdDetDAO"
+		class="com.gopawpaw.erp.hibernate.f.FlsdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FscMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FscMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FpdCostDAO"
+		class="com.gopawpaw.erp.hibernate.f.FpdCostDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FaadjMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FaadjMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FabkMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FabkMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FktMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FktMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="Fp1PlanDAO"
+		class="com.gopawpaw.erp.hibernate.f.Fp1PlanDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FfMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FfMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FpstMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FpstMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FacCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.f.FacCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FcsSumDAO"
+		class="com.gopawpaw.erp.hibernate.f.FcsSumDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FadDetDAO"
+		class="com.gopawpaw.erp.hibernate.f.FadDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FldfMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FldfMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FrmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FrmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FamtdDetDAO"
+		class="com.gopawpaw.erp.hibernate.f.FamtdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FabDetDAO"
+		class="com.gopawpaw.erp.hibernate.f.FabDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FcdMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FcdMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FctMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FctMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FisMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FisMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FlcrhHistDAO"
+		class="com.gopawpaw.erp.hibernate.f.FlcrhHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FlscMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FlscMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FlpPlanDAO"
+		class="com.gopawpaw.erp.hibernate.f.FlpPlanDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="Fsp3PlnDAO"
+		class="com.gopawpaw.erp.hibernate.f.Fsp3PlnDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FrzdDetDAO"
+		class="com.gopawpaw.erp.hibernate.f.FrzdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FcDetDAO" class="com.gopawpaw.erp.hibernate.f.FcDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FtchHistDAO"
+		class="com.gopawpaw.erp.hibernate.f.FtchHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FshMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FshMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FauopDetDAO"
+		class="com.gopawpaw.erp.hibernate.f.FauopDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FamtrMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FamtrMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FrcdDetDAO"
+		class="com.gopawpaw.erp.hibernate.f.FrcdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FslpPlnDAO"
+		class="com.gopawpaw.erp.hibernate.f.FslpPlnDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FlpwMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FlpwMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FrMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FrMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FalocMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FalocMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FlhMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FlhMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FlscdDetDAO"
+		class="com.gopawpaw.erp.hibernate.f.FlscdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FpcMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FpcMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.f.FmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GlCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.g.GlCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GisiMstrDAO"
+		class="com.gopawpaw.erp.hibernate.g.GisiMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GracDetDAO"
+		class="com.gopawpaw.erp.hibernate.g.GracDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GrigMtxDAO"
+		class="com.gopawpaw.erp.hibernate.g.GrigMtxDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GlcCalDAO"
+		class="com.gopawpaw.erp.hibernate.g.GlcCalDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GiapMstrDAO"
+		class="com.gopawpaw.erp.hibernate.g.GiapMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="Grx2WkflDAO"
+		class="com.gopawpaw.erp.hibernate.g.Grx2WkflDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GrdfMtxDAO"
+		class="com.gopawpaw.erp.hibernate.g.GrdfMtxDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GrxMstrDAO"
+		class="com.gopawpaw.erp.hibernate.g.GrxMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GlctDetDAO"
+		class="com.gopawpaw.erp.hibernate.g.GlctDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GrcdDetDAO"
+		class="com.gopawpaw.erp.hibernate.g.GrcdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GlrdDetDAO"
+		class="com.gopawpaw.erp.hibernate.g.GlrdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GltwWkflDAO"
+		class="com.gopawpaw.erp.hibernate.g.GltwWkflDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GrrdDetDAO"
+		class="com.gopawpaw.erp.hibernate.g.GrrdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GritWkfDAO"
+		class="com.gopawpaw.erp.hibernate.g.GritWkfDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GltmdDetDAO"
+		class="com.gopawpaw.erp.hibernate.g.GltmdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GrCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.g.GrCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GraMstrDAO"
+		class="com.gopawpaw.erp.hibernate.g.GraMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GrrMstrDAO"
+		class="com.gopawpaw.erp.hibernate.g.GrrMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="Grx3WkflDAO"
+		class="com.gopawpaw.erp.hibernate.g.Grx3WkflDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GrasDetDAO"
+		class="com.gopawpaw.erp.hibernate.g.GrasDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GimdMstrDAO"
+		class="com.gopawpaw.erp.hibernate.g.GimdMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GlcdDetDAO"
+		class="com.gopawpaw.erp.hibernate.g.GlcdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GradDetDAO"
+		class="com.gopawpaw.erp.hibernate.g.GradDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GrtxDetDAO"
+		class="com.gopawpaw.erp.hibernate.g.GrtxDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GrvDetDAO"
+		class="com.gopawpaw.erp.hibernate.g.GrvDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GltmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.g.GltmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GribDetDAO"
+		class="com.gopawpaw.erp.hibernate.g.GribDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GlptrHistDAO"
+		class="com.gopawpaw.erp.hibernate.g.GlptrHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GralDetDAO"
+		class="com.gopawpaw.erp.hibernate.g.GralDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GrhdDetDAO"
+		class="com.gopawpaw.erp.hibernate.g.GrhdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GrqdDetDAO"
+		class="com.gopawpaw.erp.hibernate.g.GrqdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GridDetDAO"
+		class="com.gopawpaw.erp.hibernate.g.GridDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GlecDetDAO"
+		class="com.gopawpaw.erp.hibernate.g.GlecDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GipDetDAO"
+		class="com.gopawpaw.erp.hibernate.g.GipDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GltDetDAO"
+		class="com.gopawpaw.erp.hibernate.g.GltDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GltrHistDAO"
+		class="com.gopawpaw.erp.hibernate.g.GltrHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GrbgDetDAO"
+		class="com.gopawpaw.erp.hibernate.g.GrbgDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GriMstrDAO"
+		class="com.gopawpaw.erp.hibernate.g.GriMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GlsdMstrDAO"
+		class="com.gopawpaw.erp.hibernate.g.GlsdMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GrcMstrDAO"
+		class="com.gopawpaw.erp.hibernate.g.GrcMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="Grx1WkflDAO"
+		class="com.gopawpaw.erp.hibernate.g.Grx1WkflDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GricDetDAO"
+		class="com.gopawpaw.erp.hibernate.g.GricDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GlrMstrDAO"
+		class="com.gopawpaw.erp.hibernate.g.GlrMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="HwmDetDAO"
+		class="com.gopawpaw.erp.hibernate.h.HwmDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="HlpMstrDAO"
+		class="com.gopawpaw.erp.hibernate.h.HlpMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="HdMstrDAO"
+		class="com.gopawpaw.erp.hibernate.h.HdMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IbhHistDAO"
+		class="com.gopawpaw.erp.hibernate.i.IbhHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IlgHistDAO"
+		class="com.gopawpaw.erp.hibernate.i.IlgHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IdhlcHistDAO"
+		class="com.gopawpaw.erp.hibernate.i.IdhlcHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="InsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.i.InsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.i.IsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IrawDetDAO"
+		class="com.gopawpaw.erp.hibernate.i.IrawDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IroDetDAO"
+		class="com.gopawpaw.erp.hibernate.i.IroDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IedDetDAO"
+		class="com.gopawpaw.erp.hibernate.i.IedDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IeMstrDAO"
+		class="com.gopawpaw.erp.hibernate.i.IeMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IspMstrDAO"
+		class="com.gopawpaw.erp.hibernate.i.IspMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ImgMsgDAO"
+		class="com.gopawpaw.erp.hibernate.i.ImgMsgDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ImapDetDAO"
+		class="com.gopawpaw.erp.hibernate.i.ImapDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="InMstrDAO"
+		class="com.gopawpaw.erp.hibernate.i.InMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IhHistDAO"
+		class="com.gopawpaw.erp.hibernate.i.IhHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IecCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.i.IecCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ItmDetDAO"
+		class="com.gopawpaw.erp.hibernate.i.ItmDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IpMstrDAO"
+		class="com.gopawpaw.erp.hibernate.i.IpMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IvsCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.i.IvsCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IphHistDAO"
+		class="com.gopawpaw.erp.hibernate.i.IphHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IpdDetDAO"
+		class="com.gopawpaw.erp.hibernate.i.IpdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IehHistDAO"
+		class="com.gopawpaw.erp.hibernate.i.IehHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IsbMstrDAO"
+		class="com.gopawpaw.erp.hibernate.i.IsbMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IsvcMstrDAO"
+		class="com.gopawpaw.erp.hibernate.i.IsvcMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IldDetDAO"
+		class="com.gopawpaw.erp.hibernate.i.IldDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IndDetDAO"
+		class="com.gopawpaw.erp.hibernate.i.IndDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IfsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.i.IfsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IsdDetDAO"
+		class="com.gopawpaw.erp.hibernate.i.IsdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IbDetDAO" class="com.gopawpaw.erp.hibernate.i.IbDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IdhHistDAO"
+		class="com.gopawpaw.erp.hibernate.i.IdhHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ItsdDetDAO"
+		class="com.gopawpaw.erp.hibernate.i.ItsdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IssMstrDAO"
+		class="com.gopawpaw.erp.hibernate.i.IssMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IhccHistDAO"
+		class="com.gopawpaw.erp.hibernate.i.IhccHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IccCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.i.IccCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IhrHistDAO"
+		class="com.gopawpaw.erp.hibernate.i.IhrHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ItsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.i.ItsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ImMstrDAO"
+		class="com.gopawpaw.erp.hibernate.i.ImMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ItmhHistDAO"
+		class="com.gopawpaw.erp.hibernate.i.ItmhHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IdhrHistDAO"
+		class="com.gopawpaw.erp.hibernate.i.IdhrHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="InsdDetDAO"
+		class="com.gopawpaw.erp.hibernate.i.InsdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="KbtrHistDAO"
+		class="com.gopawpaw.erp.hibernate.k.KbtrHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="KbtrdDetDAO"
+		class="com.gopawpaw.erp.hibernate.k.KbtrdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="KnbcdDetDAO"
+		class="com.gopawpaw.erp.hibernate.k.KnbcdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="KnbiMstrDAO"
+		class="com.gopawpaw.erp.hibernate.k.KnbiMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="KnbMstrDAO"
+		class="com.gopawpaw.erp.hibernate.k.KnbMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="KnbddMstrDAO"
+		class="com.gopawpaw.erp.hibernate.k.KnbddMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="KnbismDetDAO"
+		class="com.gopawpaw.erp.hibernate.k.KnbismDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="KnbsDetDAO"
+		class="com.gopawpaw.erp.hibernate.k.KnbsDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="KnbadcHistDAO"
+		class="com.gopawpaw.erp.hibernate.k.KnbadcHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="KbmdMstrDAO"
+		class="com.gopawpaw.erp.hibernate.k.KbmdMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="KnbrsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.k.KnbrsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="KbppMstrDAO"
+		class="com.gopawpaw.erp.hibernate.k.KbppMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="KnpMstrDAO"
+		class="com.gopawpaw.erp.hibernate.k.KnpMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="KnblDetDAO"
+		class="com.gopawpaw.erp.hibernate.k.KnblDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="KbdtMstrDAO"
+		class="com.gopawpaw.erp.hibernate.k.KbdtMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="KnbfdDetDAO"
+		class="com.gopawpaw.erp.hibernate.k.KnbfdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="KnpdDetDAO"
+		class="com.gopawpaw.erp.hibernate.k.KnpdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="KnbsmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.k.KnbsmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="KbcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.k.KbcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="KnbdDetDAO"
+		class="com.gopawpaw.erp.hibernate.k.KnbdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LnfDetDAO"
+		class="com.gopawpaw.erp.hibernate.l.LnfDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LcMstrDAO"
+		class="com.gopawpaw.erp.hibernate.l.LcMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.l.LsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LnaDetDAO"
+		class="com.gopawpaw.erp.hibernate.l.LnaDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LndDetDAO"
+		class="com.gopawpaw.erp.hibernate.l.LndDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LacCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.l.LacCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LdDetDAO" class="com.gopawpaw.erp.hibernate.l.LdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LnMstrDAO"
+		class="com.gopawpaw.erp.hibernate.l.LnMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LngMstrDAO"
+		class="com.gopawpaw.erp.hibernate.l.LngMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LvrDetDAO"
+		class="com.gopawpaw.erp.hibernate.l.LvrDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LblcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.l.LblcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LpmdDetDAO"
+		class="com.gopawpaw.erp.hibernate.l.LpmdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LadDetDAO"
+		class="com.gopawpaw.erp.hibernate.l.LadDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LpmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.l.LpmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LngdDetDAO"
+		class="com.gopawpaw.erp.hibernate.l.LngdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LuaDetDAO"
+		class="com.gopawpaw.erp.hibernate.l.LuaDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LoccDetDAO"
+		class="com.gopawpaw.erp.hibernate.l.LoccDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LacdDetDAO"
+		class="com.gopawpaw.erp.hibernate.l.LacdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LcapHistDAO"
+		class="com.gopawpaw.erp.hibernate.l.LcapHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LgsiDetDAO"
+		class="com.gopawpaw.erp.hibernate.l.LgsiDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LotwWkflDAO"
+		class="com.gopawpaw.erp.hibernate.l.LotwWkflDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LgsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.l.LgsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LocMstrDAO"
+		class="com.gopawpaw.erp.hibernate.l.LocMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LotMstrDAO"
+		class="com.gopawpaw.erp.hibernate.l.LotMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="NrMstrDAO"
+		class="com.gopawpaw.erp.hibernate.n.NrMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="NrhHistDAO"
+		class="com.gopawpaw.erp.hibernate.n.NrhHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="NccCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.n.NccCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="OpglDetDAO"
+		class="com.gopawpaw.erp.hibernate.o.OpglDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="OpsCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.o.OpsCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="OpcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.o.OpcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="OcmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.o.OcmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="OpHistDAO"
+		class="com.gopawpaw.erp.hibernate.o.OpHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="OaDetDAO" class="com.gopawpaw.erp.hibernate.o.OaDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="OpmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.o.OpmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PidDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PidDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PexMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PexMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PqMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PqMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PtrDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PtrDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PcldDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PcldDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PtqaDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PtqaDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PgcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.p.PgcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PjdDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PjdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PaldDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PaldDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PtlsDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PtlsDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PjshHistDAO"
+		class="com.gopawpaw.erp.hibernate.p.PjshHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PtpDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PtpDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PpPlanDAO"
+		class="com.gopawpaw.erp.hibernate.p.PpPlanDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PrdDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PrdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PshcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.p.PshcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PclMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PclMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PliMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PliMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PinMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PinMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PacMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PacMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PthHistDAO"
+		class="com.gopawpaw.erp.hibernate.p.PthHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PrjMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PrjMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PjcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.p.PjcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PodDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PodDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PlidDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PlidDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PfcDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PfcDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PoulMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PoulMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PfdDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PfdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PigpDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PigpDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PjsxDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PjsxDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PouMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PouMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PcMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PcMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PjMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PjMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PttDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PttDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PrMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PrMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PlsdDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PlsdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PigcDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PigcDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PvoMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PvoMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PtsDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PtsDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PtaDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PtaDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PldDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PldDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PlMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PlMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PigMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PigMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PctMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PctMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PvodDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PvodDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PtcDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PtcDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PjsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PjsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PcdDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PcdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PrhHistDAO"
+		class="com.gopawpaw.erp.hibernate.p.PrhHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PouldDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PouldDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PicCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.p.PicCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PihHistDAO"
+		class="com.gopawpaw.erp.hibernate.p.PihHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PccCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.p.PccCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PkDetDAO" class="com.gopawpaw.erp.hibernate.p.PkDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PoMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PoMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PgmDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PgmDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PltDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PltDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PjtMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PjtMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PalMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PalMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PiMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PiMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PghHistDAO"
+		class="com.gopawpaw.erp.hibernate.p.PghHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PtvDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PtvDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PocCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.p.PocCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PtMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.PtMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="QodrDetDAO"
+		class="com.gopawpaw.erp.hibernate.q.QodrDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="QobDetDAO"
+		class="com.gopawpaw.erp.hibernate.q.QobDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="QorMstrDAO"
+		class="com.gopawpaw.erp.hibernate.q.QorMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="QroDetDAO"
+		class="com.gopawpaw.erp.hibernate.q.QroDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="QpsDetDAO"
+		class="com.gopawpaw.erp.hibernate.q.QpsDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="QoMstrDAO"
+		class="com.gopawpaw.erp.hibernate.q.QoMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="QqcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.q.QqcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="QtblExtDAO"
+		class="com.gopawpaw.erp.hibernate.q.QtblExtDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="QocCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.q.QocCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="QcsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.q.QcsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="QaddbCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.q.QaddbCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="QcMstrDAO"
+		class="com.gopawpaw.erp.hibernate.q.QcMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="QcdDetDAO"
+		class="com.gopawpaw.erp.hibernate.q.QcdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="QrTestDAO"
+		class="com.gopawpaw.erp.hibernate.q.QrTestDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="QccCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.q.QccCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="QadWkflDAO"
+		class="com.gopawpaw.erp.hibernate.q.QadWkflDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="QodDetDAO"
+		class="com.gopawpaw.erp.hibernate.q.QodDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RqmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.r.RqmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RqhHistDAO"
+		class="com.gopawpaw.erp.hibernate.r.RqhHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RqcdDetDAO"
+		class="com.gopawpaw.erp.hibernate.r.RqcdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RsnRefDAO"
+		class="com.gopawpaw.erp.hibernate.r.RsnRefDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RpsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.r.RpsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RpcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.r.RpcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RqdDetDAO"
+		class="com.gopawpaw.erp.hibernate.r.RqdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RqaMstrDAO"
+		class="com.gopawpaw.erp.hibernate.r.RqaMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RbmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.r.RbmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RqMstrDAO"
+		class="com.gopawpaw.erp.hibernate.r.RqMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.r.RsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RmcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.r.RmcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RccMstrDAO"
+		class="com.gopawpaw.erp.hibernate.r.RccMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RqcMstrDAO"
+		class="com.gopawpaw.erp.hibernate.r.RqcMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RqdaDetDAO"
+		class="com.gopawpaw.erp.hibernate.r.RqdaDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RqlMstrDAO"
+		class="com.gopawpaw.erp.hibernate.r.RqlMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RmaMstrDAO"
+		class="com.gopawpaw.erp.hibernate.r.RmaMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RstMstrDAO"
+		class="com.gopawpaw.erp.hibernate.r.RstMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RsdDetDAO"
+		class="com.gopawpaw.erp.hibernate.r.RsdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RqpoRefDAO"
+		class="com.gopawpaw.erp.hibernate.r.RqpoRefDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ReqDetDAO"
+		class="com.gopawpaw.erp.hibernate.r.ReqDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RoDetDAO" class="com.gopawpaw.erp.hibernate.r.RoDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RcsdDetDAO"
+		class="com.gopawpaw.erp.hibernate.r.RcsdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RsudDetDAO"
+		class="com.gopawpaw.erp.hibernate.r.RsudDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RcfCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.r.RcfCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RndMstrDAO"
+		class="com.gopawpaw.erp.hibernate.r.RndMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RqfCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.r.RqfCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RscCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.r.RscCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RmdDetDAO"
+		class="com.gopawpaw.erp.hibernate.r.RmdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RstdDetDAO"
+		class="com.gopawpaw.erp.hibernate.r.RstdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RcsMstrDAO"
+		class="com.gopawpaw.erp.hibernate.r.RcsMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RcsxRefDAO"
+		class="com.gopawpaw.erp.hibernate.r.RcsxRefDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RqjMstrDAO"
+		class="com.gopawpaw.erp.hibernate.r.RqjMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RqrMstrDAO"
+		class="com.gopawpaw.erp.hibernate.r.RqrMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RsuMstrDAO"
+		class="com.gopawpaw.erp.hibernate.r.RsuMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RegMstrDAO"
+		class="com.gopawpaw.erp.hibernate.r.RegMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RqmDetDAO"
+		class="com.gopawpaw.erp.hibernate.r.RqmDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RdfMstrDAO"
+		class="com.gopawpaw.erp.hibernate.r.RdfMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RhdHistDAO"
+		class="com.gopawpaw.erp.hibernate.r.RhdHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SgcdDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SgcdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ShftDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.ShftDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SpcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.s.SpcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SdtdDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SdtdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SypsDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SypsDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SodrDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SodrDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SytfMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SytfMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SchMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SchMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ShdDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.ShdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SrrMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SrrMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SypdDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SypdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SarMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SarMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SpMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SpMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SbicCtlDAO"
+		class="com.gopawpaw.erp.hibernate.s.SbicCtlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="StxMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.StxMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SufMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SufMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ShpHistDAO"
+		class="com.gopawpaw.erp.hibernate.s.ShpHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SrWkflDAO"
+		class="com.gopawpaw.erp.hibernate.s.SrWkflDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SpdDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SpdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SobDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SobDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ShpdHistDAO"
+		class="com.gopawpaw.erp.hibernate.s.ShpdHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SvcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.s.SvcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SimDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SimDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SorMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SorMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SosrMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SosrMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SodDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SodDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SctDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SctDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SiMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SiMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SabDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SabDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SalMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SalMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SeocCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.s.SeocCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SeqMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SeqMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SgidDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SgidDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SahHistDAO"
+		class="com.gopawpaw.erp.hibernate.s.SahHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ShpcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.s.ShpcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SbiMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SbiMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SsdDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SsdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SrocCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.s.SrocCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SaMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SaMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SfbDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SfbDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SwcDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SwcDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SixRefDAO"
+		class="com.gopawpaw.erp.hibernate.s.SixRefDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SoccMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SoccMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SalhHistDAO"
+		class="com.gopawpaw.erp.hibernate.s.SalhHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SosrdDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SosrdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ShcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.s.ShcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SodlcDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SodlcDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ScxRefDAO"
+		class="com.gopawpaw.erp.hibernate.s.ScxRefDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SadhHistDAO"
+		class="com.gopawpaw.erp.hibernate.s.SadhHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SopDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SopDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SdtMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SdtMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SbdDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SbdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SttqdDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SttqdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SoMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SoMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SphHistDAO"
+		class="com.gopawpaw.erp.hibernate.s.SphHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SchdDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SchdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SvMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SvMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ShvMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.ShvMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SrcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.s.SrcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SgMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SgMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SroMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SroMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SlrdDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SlrdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SttqMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SttqMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ShtrDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.ShtrDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SacCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.s.SacCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SypjDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SypjDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ScMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.ScMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ScaMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.ScaMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SbidDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SbidDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SocCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.s.SocCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SptDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SptDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SsmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SsmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SccMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SccMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SadDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SadDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SfhHistDAO"
+		class="com.gopawpaw.erp.hibernate.s.SfhHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SgadDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SgadDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ShmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.ShmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SdMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SdMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SbMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SbMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SypMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SypMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SufdDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SufdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ShopCalDAO"
+		class="com.gopawpaw.erp.hibernate.s.ShopCalDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SbcMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SbcMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SlrMstrDAO"
+		class="com.gopawpaw.erp.hibernate.s.SlrMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SapDetDAO"
+		class="com.gopawpaw.erp.hibernate.s.SapDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TblcMstrDAO"
+		class="com.gopawpaw.erp.hibernate.t.TblcMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TeMstrDAO"
+		class="com.gopawpaw.erp.hibernate.t.TeMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="Tx2dDetDAO"
+		class="com.gopawpaw.erp.hibernate.t.Tx2dDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TxbdDetDAO"
+		class="com.gopawpaw.erp.hibernate.t.TxbdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TxcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.t.TxcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TrglDetDAO"
+		class="com.gopawpaw.erp.hibernate.t.TrglDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TrqMstrDAO"
+		class="com.gopawpaw.erp.hibernate.t.TrqMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TzodDetDAO"
+		class="com.gopawpaw.erp.hibernate.t.TzodDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TxrMstrDAO"
+		class="com.gopawpaw.erp.hibernate.t.TxrMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.t.TmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TxhdDetDAO"
+		class="com.gopawpaw.erp.hibernate.t.TxhdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TotMstrDAO"
+		class="com.gopawpaw.erp.hibernate.t.TotMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TzoMstrDAO"
+		class="com.gopawpaw.erp.hibernate.t.TzoMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TrHistDAO"
+		class="com.gopawpaw.erp.hibernate.t.TrHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TxeMstrDAO"
+		class="com.gopawpaw.erp.hibernate.t.TxeMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TagMstrDAO"
+		class="com.gopawpaw.erp.hibernate.t.TagMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TblMstrDAO"
+		class="com.gopawpaw.erp.hibernate.t.TblMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TrcsDetDAO"
+		class="com.gopawpaw.erp.hibernate.t.TrcsDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="Tx2MstrDAO"
+		class="com.gopawpaw.erp.hibernate.t.Tx2MstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TxzMstrDAO"
+		class="com.gopawpaw.erp.hibernate.t.TxzMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TblcdDetDAO"
+		class="com.gopawpaw.erp.hibernate.t.TblcdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TypMstrDAO"
+		class="com.gopawpaw.erp.hibernate.t.TypMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TaxMstrDAO"
+		class="com.gopawpaw.erp.hibernate.t.TaxMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TotdDetDAO"
+		class="com.gopawpaw.erp.hibernate.t.TotdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TrldDetDAO"
+		class="com.gopawpaw.erp.hibernate.t.TrldDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TaxdDetDAO"
+		class="com.gopawpaw.erp.hibernate.t.TaxdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TxrdDetDAO"
+		class="com.gopawpaw.erp.hibernate.t.TxrdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TrlMstrDAO"
+		class="com.gopawpaw.erp.hibernate.t.TrlMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TxedDetDAO"
+		class="com.gopawpaw.erp.hibernate.t.TxedDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UsgDetDAO"
+		class="com.gopawpaw.erp.hibernate.u.UsgDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UsrwWkflDAO"
+		class="com.gopawpaw.erp.hibernate.u.UsrwWkflDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UsrlDetDAO"
+		class="com.gopawpaw.erp.hibernate.u.UsrlDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UmsgDetDAO"
+		class="com.gopawpaw.erp.hibernate.u.UmsgDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UslhHistDAO"
+		class="com.gopawpaw.erp.hibernate.u.UslhHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UrlMstrDAO"
+		class="com.gopawpaw.erp.hibernate.u.UrlMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UsrcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.u.UsrcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UpdDetDAO"
+		class="com.gopawpaw.erp.hibernate.u.UpdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UddDetDAO"
+		class="com.gopawpaw.erp.hibernate.u.UddDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UsrMstrDAO"
+		class="com.gopawpaw.erp.hibernate.u.UsrMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UspwHistDAO"
+		class="com.gopawpaw.erp.hibernate.u.UspwHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UsrgMstrDAO"
+		class="com.gopawpaw.erp.hibernate.u.UsrgMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.u.UmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UfdDetDAO"
+		class="com.gopawpaw.erp.hibernate.u.UfdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UsrgdDetDAO"
+		class="com.gopawpaw.erp.hibernate.u.UsrgdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VerdDetDAO"
+		class="com.gopawpaw.erp.hibernate.v.VerdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VoMstrDAO"
+		class="com.gopawpaw.erp.hibernate.v.VoMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VrcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.v.VrcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VecMstrDAO"
+		class="com.gopawpaw.erp.hibernate.v.VecMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VesMstrDAO"
+		class="com.gopawpaw.erp.hibernate.v.VesMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VpoDetDAO"
+		class="com.gopawpaw.erp.hibernate.v.VpoDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VewMstrDAO"
+		class="com.gopawpaw.erp.hibernate.v.VewMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VdMstrDAO"
+		class="com.gopawpaw.erp.hibernate.v.VdMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VdcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.v.VdcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VefCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.v.VefCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VexMstrDAO"
+		class="com.gopawpaw.erp.hibernate.v.VexMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VepMstrDAO"
+		class="com.gopawpaw.erp.hibernate.v.VepMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VtMstrDAO"
+		class="com.gopawpaw.erp.hibernate.v.VtMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VerMstrDAO"
+		class="com.gopawpaw.erp.hibernate.v.VerMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VesdDetDAO"
+		class="com.gopawpaw.erp.hibernate.v.VesdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VecdDetDAO"
+		class="com.gopawpaw.erp.hibernate.v.VecdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VeeMstrDAO"
+		class="com.gopawpaw.erp.hibernate.v.VeeMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VepdDetDAO"
+		class="com.gopawpaw.erp.hibernate.v.VepdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VdfMstrDAO"
+		class="com.gopawpaw.erp.hibernate.v.VdfMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VtcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.v.VtcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VodDetDAO"
+		class="com.gopawpaw.erp.hibernate.v.VodDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VphHistDAO"
+		class="com.gopawpaw.erp.hibernate.v.VphHistDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="VpMstrDAO"
+		class="com.gopawpaw.erp.hibernate.v.VpMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="WhlMstrDAO"
+		class="com.gopawpaw.erp.hibernate.w.WhlMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="WldDetDAO"
+		class="com.gopawpaw.erp.hibernate.w.WldDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="WodDetDAO"
+		class="com.gopawpaw.erp.hibernate.w.WodDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="WlrmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.w.WlrmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="WtxMstrDAO"
+		class="com.gopawpaw.erp.hibernate.w.WtxMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="WcMstrDAO"
+		class="com.gopawpaw.erp.hibernate.w.WcMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="WlMstrDAO"
+		class="com.gopawpaw.erp.hibernate.w.WlMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="WlrdDetDAO"
+		class="com.gopawpaw.erp.hibernate.w.WlrdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="WltMstrDAO"
+		class="com.gopawpaw.erp.hibernate.w.WltMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="WoMstrDAO"
+		class="com.gopawpaw.erp.hibernate.w.WoMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="WlbmMstrDAO"
+		class="com.gopawpaw.erp.hibernate.w.WlbmMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="WcrRouteDAO"
+		class="com.gopawpaw.erp.hibernate.w.WcrRouteDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="WlbdDetDAO"
+		class="com.gopawpaw.erp.hibernate.w.WlbdDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="WlcCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.w.WlcCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="WrRouteDAO"
+		class="com.gopawpaw.erp.hibernate.w.WrRouteDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="WocCtrlDAO"
+		class="com.gopawpaw.erp.hibernate.w.WocCtrlDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ProDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.ProDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ProMstrDAO"
+		class="com.gopawpaw.erp.hibernate.p.ProMstrDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PcaDetDAO"
+		class="com.gopawpaw.erp.hibernate.p.PcaDetDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean></beans>

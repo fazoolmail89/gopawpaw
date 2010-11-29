@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "hibernate-configuration-3.0.dtd">
+
+<programs-configuration>
+	<database-config>
+		<property name="dialect">
+			org.hibernate.dialect.ProgressDialect
+		</property>
+		<property name="connection.url">
+			jdbc:datadirect:openedge://localhost:6672;databaseName=mfgprod
+		</property>
+		<property name="connection.username">sysprogress</property>
+		<property name="connection.password">qad</property>
+		<property name="connection.driver_class">
+			com.ddtek.jdbc.openedge.OpenEdgeDriver
+		</property>
+		<property name="myeclipse.connection.profile">
+			progress
+		</property>
+	</database-config>
+	<report-host>
+		<property name="domain">
+			localhost
+		</property>
+		<property name="port">
+			27279
+		</property>
+		<property name="virtual-dir">
+		</property>
+	</report-host>
+</programs-configuration>

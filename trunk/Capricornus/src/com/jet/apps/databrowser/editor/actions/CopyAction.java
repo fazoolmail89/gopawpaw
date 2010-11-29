@@ -1,0 +1,27 @@
+package com.jet.apps.databrowser.editor.actions;
+
+import java.awt.event.ActionEvent;
+import java.awt.*;
+
+import javax.swing.*;
+
+import com.jet.apps.databrowser.editor.*;
+import com.jet.apps.databrowser.ui.misc.IconManager;
+
+/** */
+public class CopyAction extends SyntaxEditorAction
+{   
+   static Icon icon=IconManager.getInstance().getIcon("button_copy");
+
+   public CopyAction() {
+      super("Copy", icon);
+      putValue(SHORT_DESCRIPTION, "Ctrl-C");
+   }
+   
+   public void actionPerformed(ActionEvent ae) {
+      SyntaxEditorPane ep=getEditorPane(ae);
+      if (ep != null) {
+         ep.copy();
+      }
+   }
+}

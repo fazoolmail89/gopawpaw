@@ -1,0 +1,2660 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100208 Build &lt;2.5.2.v20100210-0630></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="mfgprod" id="43">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">com.microsoft.jdbc.sqlserver.SQLServerDriver</property>
+            <property name="odaURL">jdbc:microsoft:sqlserver://localhost:1433;databaseName=keer_qaddb2</property>
+            <property name="odaUser">sa</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">eHh4eHh4eA==</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="code_mstr" id="126">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">code_fldname</property>
+                    <text-property name="displayName">code_fldname</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">code_value</property>
+                    <text-property name="displayName">code_value</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">code_desc</property>
+                    <text-property name="displayName">code_desc</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">domain</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">'keer'</expression>
+                    <property name="allowNull">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">code_fldname</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">code_value</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">code_desc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">mfgprod</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">code_fldname</property>
+                    <property name="nativeName">code_fldname</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">code_value</property>
+                    <property name="nativeName">code_value</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">code_desc</property>
+                    <property name="nativeName">code_desc</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select code_fldname,code_value,code_desc from code_mstr
+where code_fldname='pt_part_type'
+and code_domain=?]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="tr_hist" id="44">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">tr_part</property>
+                    <text-property name="displayName">tr_part</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_date</property>
+                    <text-property name="displayName">tr_date</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_per_date</property>
+                    <text-property name="displayName">tr_per_date</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_type</property>
+                    <text-property name="displayName">tr_type</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_loc</property>
+                    <text-property name="displayName">tr_loc</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_loc_begin</property>
+                    <text-property name="displayName">tr_loc_begin</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_begin_qoh</property>
+                    <text-property name="displayName">tr_begin_qoh</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_qty_req</property>
+                    <text-property name="displayName">tr_qty_req</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_qty_chg</property>
+                    <text-property name="displayName">tr_qty_chg</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_qty_short</property>
+                    <text-property name="displayName">tr_qty_short</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_um</property>
+                    <text-property name="displayName">tr_um</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_last_date</property>
+                    <text-property name="displayName">tr_last_date</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_nbr</property>
+                    <text-property name="displayName">tr_nbr</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_so_job</property>
+                    <text-property name="displayName">tr_so_job</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_ship_type</property>
+                    <text-property name="displayName">tr_ship_type</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_addr</property>
+                    <text-property name="displayName">tr_addr</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_rmks</property>
+                    <text-property name="displayName">tr_rmks</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_xdr_acct</property>
+                    <text-property name="displayName">tr_xdr_acct</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_xcr_acct</property>
+                    <text-property name="displayName">tr_xcr_acct</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_mtl_std</property>
+                    <text-property name="displayName">tr_mtl_std</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_lbr_std</property>
+                    <text-property name="displayName">tr_lbr_std</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_bdn_std</property>
+                    <text-property name="displayName">tr_bdn_std</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_price</property>
+                    <text-property name="displayName">tr_price</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_trnbr</property>
+                    <text-property name="displayName">tr_trnbr</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_gl_amt</property>
+                    <text-property name="displayName">tr_gl_amt</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_xdr_cc</property>
+                    <text-property name="displayName">tr_xdr_cc</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_xcr_cc</property>
+                    <text-property name="displayName">tr_xcr_cc</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_lot</property>
+                    <text-property name="displayName">tr_lot</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_sub_std</property>
+                    <text-property name="displayName">tr_sub_std</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_gl_date</property>
+                    <text-property name="displayName">tr_gl_date</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_qty_loc</property>
+                    <text-property name="displayName">tr_qty_loc</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_userid</property>
+                    <text-property name="displayName">tr_userid</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_serial</property>
+                    <text-property name="displayName">tr_serial</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_effdate</property>
+                    <text-property name="displayName">tr_effdate</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_prod_line</property>
+                    <text-property name="displayName">tr_prod_line</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_xslspsn1</property>
+                    <text-property name="displayName">tr_xslspsn1</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_xslspsn2</property>
+                    <text-property name="displayName">tr_xslspsn2</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_xcr_proj</property>
+                    <text-property name="displayName">tr_xcr_proj</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_xdr_proj</property>
+                    <text-property name="displayName">tr_xdr_proj</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_line</property>
+                    <text-property name="displayName">tr_line</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_user1</property>
+                    <text-property name="displayName">tr_user1</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_user2</property>
+                    <text-property name="displayName">tr_user2</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_curr</property>
+                    <text-property name="displayName">tr_curr</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_ex_rate</property>
+                    <text-property name="displayName">tr_ex_rate</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_rev</property>
+                    <text-property name="displayName">tr_rev</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_time</property>
+                    <text-property name="displayName">tr_time</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_ovh_std</property>
+                    <text-property name="displayName">tr_ovh_std</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_site</property>
+                    <text-property name="displayName">tr_site</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_status</property>
+                    <text-property name="displayName">tr_status</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_grade</property>
+                    <text-property name="displayName">tr_grade</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_expire</property>
+                    <text-property name="displayName">tr_expire</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_assay</property>
+                    <text-property name="displayName">tr_assay</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_xgl_ref</property>
+                    <text-property name="displayName">tr_xgl_ref</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__chr01</property>
+                    <text-property name="displayName">tr__chr01</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__chr02</property>
+                    <text-property name="displayName">tr__chr02</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__chr03</property>
+                    <text-property name="displayName">tr__chr03</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__chr04</property>
+                    <text-property name="displayName">tr__chr04</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__chr05</property>
+                    <text-property name="displayName">tr__chr05</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__chr06</property>
+                    <text-property name="displayName">tr__chr06</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__chr07</property>
+                    <text-property name="displayName">tr__chr07</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__chr08</property>
+                    <text-property name="displayName">tr__chr08</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__chr09</property>
+                    <text-property name="displayName">tr__chr09</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__chr10</property>
+                    <text-property name="displayName">tr__chr10</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__chr11</property>
+                    <text-property name="displayName">tr__chr11</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__chr12</property>
+                    <text-property name="displayName">tr__chr12</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__chr13</property>
+                    <text-property name="displayName">tr__chr13</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__chr14</property>
+                    <text-property name="displayName">tr__chr14</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__chr15</property>
+                    <text-property name="displayName">tr__chr15</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__dte01</property>
+                    <text-property name="displayName">tr__dte01</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__dte02</property>
+                    <text-property name="displayName">tr__dte02</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__dte03</property>
+                    <text-property name="displayName">tr__dte03</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__dte04</property>
+                    <text-property name="displayName">tr__dte04</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__dte05</property>
+                    <text-property name="displayName">tr__dte05</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__dec01</property>
+                    <text-property name="displayName">tr__dec01</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__dec02</property>
+                    <text-property name="displayName">tr__dec02</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__dec03</property>
+                    <text-property name="displayName">tr__dec03</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__dec04</property>
+                    <text-property name="displayName">tr__dec04</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__dec05</property>
+                    <text-property name="displayName">tr__dec05</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__log01</property>
+                    <text-property name="displayName">tr__log01</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr__log02</property>
+                    <text-property name="displayName">tr__log02</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_ref</property>
+                    <text-property name="displayName">tr_ref</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_msg</property>
+                    <text-property name="displayName">tr_msg</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_program</property>
+                    <text-property name="displayName">tr_program</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_ord_rev</property>
+                    <text-property name="displayName">tr_ord_rev</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_ref_site</property>
+                    <text-property name="displayName">tr_ref_site</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_rsn_code</property>
+                    <text-property name="displayName">tr_rsn_code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_vend_lot</property>
+                    <text-property name="displayName">tr_vend_lot</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_vend_date</property>
+                    <text-property name="displayName">tr_vend_date</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_daycode</property>
+                    <text-property name="displayName">tr_daycode</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_for</property>
+                    <text-property name="displayName">tr_for</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_slspsn##1</property>
+                    <text-property name="displayName">tr_slspsn##1</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_slspsn##2</property>
+                    <text-property name="displayName">tr_slspsn##2</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_slspsn##3</property>
+                    <text-property name="displayName">tr_slspsn##3</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_slspsn##4</property>
+                    <text-property name="displayName">tr_slspsn##4</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_fsm_type</property>
+                    <text-property name="displayName">tr_fsm_type</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_upd_isb</property>
+                    <text-property name="displayName">tr_upd_isb</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_auto_install</property>
+                    <text-property name="displayName">tr_auto_install</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_ca_int_type</property>
+                    <text-property name="displayName">tr_ca_int_type</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_covered_amt</property>
+                    <text-property name="displayName">tr_covered_amt</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_fcg_code</property>
+                    <text-property name="displayName">tr_fcg_code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_batch</property>
+                    <text-property name="displayName">tr_batch</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_fsc_code</property>
+                    <text-property name="displayName">tr_fsc_code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_sa_nbr</property>
+                    <text-property name="displayName">tr_sa_nbr</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_sv_code</property>
+                    <text-property name="displayName">tr_sv_code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_eng_area</property>
+                    <text-property name="displayName">tr_eng_area</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_sys_prod</property>
+                    <text-property name="displayName">tr_sys_prod</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_svc_type</property>
+                    <text-property name="displayName">tr_svc_type</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_ca_opn_date</property>
+                    <text-property name="displayName">tr_ca_opn_date</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_cprice</property>
+                    <text-property name="displayName">tr_cprice</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_eng_code</property>
+                    <text-property name="displayName">tr_eng_code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_wod_op</property>
+                    <text-property name="displayName">tr_wod_op</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_enduser</property>
+                    <text-property name="displayName">tr_enduser</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_ship_inv_mov</property>
+                    <text-property name="displayName">tr_ship_inv_mov</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_ship_date</property>
+                    <text-property name="displayName">tr_ship_date</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_ship_id</property>
+                    <text-property name="displayName">tr_ship_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_ex_rate2</property>
+                    <text-property name="displayName">tr_ex_rate2</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_ex_ratetype</property>
+                    <text-property name="displayName">tr_ex_ratetype</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_exru_seq</property>
+                    <text-property name="displayName">tr_exru_seq</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_promise_date</property>
+                    <text-property name="displayName">tr_promise_date</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_fldchg_cmtindx</property>
+                    <text-property name="displayName">tr_fldchg_cmtindx</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tr_domain</property>
+                    <text-property name="displayName">tr_domain</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">oid_tr_hist</property>
+                    <text-property name="displayName">oid_tr_hist</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">tr_part</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">tr_date</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">tr_per_date</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">tr_type</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">tr_loc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">tr_loc_begin</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">tr_begin_qoh</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">tr_qty_req</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">tr_qty_chg</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">tr_qty_short</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">tr_um</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">tr_last_date</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">tr_nbr</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">tr_so_job</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">tr_ship_type</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">tr_addr</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">tr_rmks</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">tr_xdr_acct</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">tr_xcr_acct</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">tr_mtl_std</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">tr_lbr_std</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">tr_bdn_std</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">tr_price</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">tr_trnbr</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">tr_gl_amt</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">26</property>
+                        <property name="name">tr_xdr_cc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">27</property>
+                        <property name="name">tr_xcr_cc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">28</property>
+                        <property name="name">tr_lot</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">29</property>
+                        <property name="name">tr_sub_std</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">30</property>
+                        <property name="name">tr_gl_date</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">31</property>
+                        <property name="name">tr_qty_loc</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">32</property>
+                        <property name="name">tr_userid</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">33</property>
+                        <property name="name">tr_serial</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">34</property>
+                        <property name="name">tr_effdate</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">35</property>
+                        <property name="name">tr_prod_line</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">36</property>
+                        <property name="name">tr_xslspsn1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">37</property>
+                        <property name="name">tr_xslspsn2</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">38</property>
+                        <property name="name">tr_xcr_proj</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">39</property>
+                        <property name="name">tr_xdr_proj</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">40</property>
+                        <property name="name">tr_line</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">41</property>
+                        <property name="name">tr_user1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">42</property>
+                        <property name="name">tr_user2</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">43</property>
+                        <property name="name">tr_curr</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">44</property>
+                        <property name="name">tr_ex_rate</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">45</property>
+                        <property name="name">tr_rev</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">46</property>
+                        <property name="name">tr_time</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">47</property>
+                        <property name="name">tr_ovh_std</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">48</property>
+                        <property name="name">tr_site</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">49</property>
+                        <property name="name">tr_status</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">50</property>
+                        <property name="name">tr_grade</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">51</property>
+                        <property name="name">tr_expire</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">52</property>
+                        <property name="name">tr_assay</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">53</property>
+                        <property name="name">tr_xgl_ref</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">54</property>
+                        <property name="name">tr__chr01</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">55</property>
+                        <property name="name">tr__chr02</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">56</property>
+                        <property name="name">tr__chr03</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">57</property>
+                        <property name="name">tr__chr04</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">58</property>
+                        <property name="name">tr__chr05</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">59</property>
+                        <property name="name">tr__chr06</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">60</property>
+                        <property name="name">tr__chr07</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">61</property>
+                        <property name="name">tr__chr08</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">62</property>
+                        <property name="name">tr__chr09</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">63</property>
+                        <property name="name">tr__chr10</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">64</property>
+                        <property name="name">tr__chr11</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">65</property>
+                        <property name="name">tr__chr12</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">66</property>
+                        <property name="name">tr__chr13</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">67</property>
+                        <property name="name">tr__chr14</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">68</property>
+                        <property name="name">tr__chr15</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">69</property>
+                        <property name="name">tr__dte01</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">70</property>
+                        <property name="name">tr__dte02</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">71</property>
+                        <property name="name">tr__dte03</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">72</property>
+                        <property name="name">tr__dte04</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">73</property>
+                        <property name="name">tr__dte05</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">74</property>
+                        <property name="name">tr__dec01</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">75</property>
+                        <property name="name">tr__dec02</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">76</property>
+                        <property name="name">tr__dec03</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">77</property>
+                        <property name="name">tr__dec04</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">78</property>
+                        <property name="name">tr__dec05</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">79</property>
+                        <property name="name">tr__log01</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">80</property>
+                        <property name="name">tr__log02</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">81</property>
+                        <property name="name">tr_ref</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">82</property>
+                        <property name="name">tr_msg</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">83</property>
+                        <property name="name">tr_program</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">84</property>
+                        <property name="name">tr_ord_rev</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">85</property>
+                        <property name="name">tr_ref_site</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">86</property>
+                        <property name="name">tr_rsn_code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">87</property>
+                        <property name="name">tr_vend_lot</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">88</property>
+                        <property name="name">tr_vend_date</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">89</property>
+                        <property name="name">tr_daycode</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">90</property>
+                        <property name="name">tr_for</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">91</property>
+                        <property name="name">tr_slspsn##1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">92</property>
+                        <property name="name">tr_slspsn##2</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">93</property>
+                        <property name="name">tr_slspsn##3</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">94</property>
+                        <property name="name">tr_slspsn##4</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">95</property>
+                        <property name="name">tr_fsm_type</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">96</property>
+                        <property name="name">tr_upd_isb</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">97</property>
+                        <property name="name">tr_auto_install</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">98</property>
+                        <property name="name">tr_ca_int_type</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">99</property>
+                        <property name="name">tr_covered_amt</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">100</property>
+                        <property name="name">tr_fcg_code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">101</property>
+                        <property name="name">tr_batch</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">102</property>
+                        <property name="name">tr_fsc_code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">103</property>
+                        <property name="name">tr_sa_nbr</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">104</property>
+                        <property name="name">tr_sv_code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">105</property>
+                        <property name="name">tr_eng_area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">106</property>
+                        <property name="name">tr_sys_prod</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">107</property>
+                        <property name="name">tr_svc_type</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">108</property>
+                        <property name="name">tr_ca_opn_date</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">109</property>
+                        <property name="name">tr_cprice</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">110</property>
+                        <property name="name">tr_eng_code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">111</property>
+                        <property name="name">tr_wod_op</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">112</property>
+                        <property name="name">tr_enduser</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">113</property>
+                        <property name="name">tr_ship_inv_mov</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">114</property>
+                        <property name="name">tr_ship_date</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">115</property>
+                        <property name="name">tr_ship_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">116</property>
+                        <property name="name">tr_ex_rate2</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">117</property>
+                        <property name="name">tr_ex_ratetype</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">118</property>
+                        <property name="name">tr_exru_seq</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">119</property>
+                        <property name="name">tr_promise_date</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">120</property>
+                        <property name="name">tr_fldchg_cmtindx</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">121</property>
+                        <property name="name">tr_domain</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">122</property>
+                        <property name="name">oid_tr_hist</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">mfgprod</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">tr_part</property>
+                    <property name="nativeName">tr_part</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">tr_date</property>
+                    <property name="nativeName">tr_date</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">tr_per_date</property>
+                    <property name="nativeName">tr_per_date</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">tr_type</property>
+                    <property name="nativeName">tr_type</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">tr_loc</property>
+                    <property name="nativeName">tr_loc</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">tr_loc_begin</property>
+                    <property name="nativeName">tr_loc_begin</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">tr_begin_qoh</property>
+                    <property name="nativeName">tr_begin_qoh</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">tr_qty_req</property>
+                    <property name="nativeName">tr_qty_req</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">tr_qty_chg</property>
+                    <property name="nativeName">tr_qty_chg</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">tr_qty_short</property>
+                    <property name="nativeName">tr_qty_short</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">tr_um</property>
+                    <property name="nativeName">tr_um</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">tr_last_date</property>
+                    <property name="nativeName">tr_last_date</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">tr_nbr</property>
+                    <property name="nativeName">tr_nbr</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">tr_so_job</property>
+                    <property name="nativeName">tr_so_job</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">tr_ship_type</property>
+                    <property name="nativeName">tr_ship_type</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">tr_addr</property>
+                    <property name="nativeName">tr_addr</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">tr_rmks</property>
+                    <property name="nativeName">tr_rmks</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">tr_xdr_acct</property>
+                    <property name="nativeName">tr_xdr_acct</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">tr_xcr_acct</property>
+                    <property name="nativeName">tr_xcr_acct</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">tr_mtl_std</property>
+                    <property name="nativeName">tr_mtl_std</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">21</property>
+                    <property name="name">tr_lbr_std</property>
+                    <property name="nativeName">tr_lbr_std</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">22</property>
+                    <property name="name">tr_bdn_std</property>
+                    <property name="nativeName">tr_bdn_std</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">23</property>
+                    <property name="name">tr_price</property>
+                    <property name="nativeName">tr_price</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">24</property>
+                    <property name="name">tr_trnbr</property>
+                    <property name="nativeName">tr_trnbr</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">25</property>
+                    <property name="name">tr_gl_amt</property>
+                    <property name="nativeName">tr_gl_amt</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">26</property>
+                    <property name="name">tr_xdr_cc</property>
+                    <property name="nativeName">tr_xdr_cc</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">27</property>
+                    <property name="name">tr_xcr_cc</property>
+                    <property name="nativeName">tr_xcr_cc</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">28</property>
+                    <property name="name">tr_lot</property>
+                    <property name="nativeName">tr_lot</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">29</property>
+                    <property name="name">tr_sub_std</property>
+                    <property name="nativeName">tr_sub_std</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">30</property>
+                    <property name="name">tr_gl_date</property>
+                    <property name="nativeName">tr_gl_date</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">31</property>
+                    <property name="name">tr_qty_loc</property>
+                    <property name="nativeName">tr_qty_loc</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">32</property>
+                    <property name="name">tr_userid</property>
+                    <property name="nativeName">tr_userid</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">33</property>
+                    <property name="name">tr_serial</property>
+                    <property name="nativeName">tr_serial</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">34</property>
+                    <property name="name">tr_effdate</property>
+                    <property name="nativeName">tr_effdate</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">35</property>
+                    <property name="name">tr_prod_line</property>
+                    <property name="nativeName">tr_prod_line</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">36</property>
+                    <property name="name">tr_xslspsn1</property>
+                    <property name="nativeName">tr_xslspsn1</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">37</property>
+                    <property name="name">tr_xslspsn2</property>
+                    <property name="nativeName">tr_xslspsn2</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">38</property>
+                    <property name="name">tr_xcr_proj</property>
+                    <property name="nativeName">tr_xcr_proj</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">39</property>
+                    <property name="name">tr_xdr_proj</property>
+                    <property name="nativeName">tr_xdr_proj</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">40</property>
+                    <property name="name">tr_line</property>
+                    <property name="nativeName">tr_line</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">41</property>
+                    <property name="name">tr_user1</property>
+                    <property name="nativeName">tr_user1</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">42</property>
+                    <property name="name">tr_user2</property>
+                    <property name="nativeName">tr_user2</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">43</property>
+                    <property name="name">tr_curr</property>
+                    <property name="nativeName">tr_curr</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">44</property>
+                    <property name="name">tr_ex_rate</property>
+                    <property name="nativeName">tr_ex_rate</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">45</property>
+                    <property name="name">tr_rev</property>
+                    <property name="nativeName">tr_rev</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">46</property>
+                    <property name="name">tr_time</property>
+                    <property name="nativeName">tr_time</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">47</property>
+                    <property name="name">tr_ovh_std</property>
+                    <property name="nativeName">tr_ovh_std</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">48</property>
+                    <property name="name">tr_site</property>
+                    <property name="nativeName">tr_site</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">49</property>
+                    <property name="name">tr_status</property>
+                    <property name="nativeName">tr_status</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">50</property>
+                    <property name="name">tr_grade</property>
+                    <property name="nativeName">tr_grade</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">51</property>
+                    <property name="name">tr_expire</property>
+                    <property name="nativeName">tr_expire</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">52</property>
+                    <property name="name">tr_assay</property>
+                    <property name="nativeName">tr_assay</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">53</property>
+                    <property name="name">tr_xgl_ref</property>
+                    <property name="nativeName">tr_xgl_ref</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">54</property>
+                    <property name="name">tr__chr01</property>
+                    <property name="nativeName">tr__chr01</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">55</property>
+                    <property name="name">tr__chr02</property>
+                    <property name="nativeName">tr__chr02</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">56</property>
+                    <property name="name">tr__chr03</property>
+                    <property name="nativeName">tr__chr03</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">57</property>
+                    <property name="name">tr__chr04</property>
+                    <property name="nativeName">tr__chr04</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">58</property>
+                    <property name="name">tr__chr05</property>
+                    <property name="nativeName">tr__chr05</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">59</property>
+                    <property name="name">tr__chr06</property>
+                    <property name="nativeName">tr__chr06</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">60</property>
+                    <property name="name">tr__chr07</property>
+                    <property name="nativeName">tr__chr07</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">61</property>
+                    <property name="name">tr__chr08</property>
+                    <property name="nativeName">tr__chr08</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">62</property>
+                    <property name="name">tr__chr09</property>
+                    <property name="nativeName">tr__chr09</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">63</property>
+                    <property name="name">tr__chr10</property>
+                    <property name="nativeName">tr__chr10</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">64</property>
+                    <property name="name">tr__chr11</property>
+                    <property name="nativeName">tr__chr11</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">65</property>
+                    <property name="name">tr__chr12</property>
+                    <property name="nativeName">tr__chr12</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">66</property>
+                    <property name="name">tr__chr13</property>
+                    <property name="nativeName">tr__chr13</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">67</property>
+                    <property name="name">tr__chr14</property>
+                    <property name="nativeName">tr__chr14</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">68</property>
+                    <property name="name">tr__chr15</property>
+                    <property name="nativeName">tr__chr15</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">69</property>
+                    <property name="name">tr__dte01</property>
+                    <property name="nativeName">tr__dte01</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">70</property>
+                    <property name="name">tr__dte02</property>
+                    <property name="nativeName">tr__dte02</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">71</property>
+                    <property name="name">tr__dte03</property>
+                    <property name="nativeName">tr__dte03</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">72</property>
+                    <property name="name">tr__dte04</property>
+                    <property name="nativeName">tr__dte04</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">73</property>
+                    <property name="name">tr__dte05</property>
+                    <property name="nativeName">tr__dte05</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">74</property>
+                    <property name="name">tr__dec01</property>
+                    <property name="nativeName">tr__dec01</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">75</property>
+                    <property name="name">tr__dec02</property>
+                    <property name="nativeName">tr__dec02</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">76</property>
+                    <property name="name">tr__dec03</property>
+                    <property name="nativeName">tr__dec03</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">77</property>
+                    <property name="name">tr__dec04</property>
+                    <property name="nativeName">tr__dec04</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">78</property>
+                    <property name="name">tr__dec05</property>
+                    <property name="nativeName">tr__dec05</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">79</property>
+                    <property name="name">tr__log01</property>
+                    <property name="nativeName">tr__log01</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">-6</property>
+                </structure>
+                <structure>
+                    <property name="position">80</property>
+                    <property name="name">tr__log02</property>
+                    <property name="nativeName">tr__log02</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">-6</property>
+                </structure>
+                <structure>
+                    <property name="position">81</property>
+                    <property name="name">tr_ref</property>
+                    <property name="nativeName">tr_ref</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">82</property>
+                    <property name="name">tr_msg</property>
+                    <property name="nativeName">tr_msg</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">83</property>
+                    <property name="name">tr_program</property>
+                    <property name="nativeName">tr_program</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">84</property>
+                    <property name="name">tr_ord_rev</property>
+                    <property name="nativeName">tr_ord_rev</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">85</property>
+                    <property name="name">tr_ref_site</property>
+                    <property name="nativeName">tr_ref_site</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">86</property>
+                    <property name="name">tr_rsn_code</property>
+                    <property name="nativeName">tr_rsn_code</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">87</property>
+                    <property name="name">tr_vend_lot</property>
+                    <property name="nativeName">tr_vend_lot</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">88</property>
+                    <property name="name">tr_vend_date</property>
+                    <property name="nativeName">tr_vend_date</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">89</property>
+                    <property name="name">tr_daycode</property>
+                    <property name="nativeName">tr_daycode</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">90</property>
+                    <property name="name">tr_for</property>
+                    <property name="nativeName">tr_for</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">91</property>
+                    <property name="name">tr_slspsn##1</property>
+                    <property name="nativeName">tr_slspsn##1</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">92</property>
+                    <property name="name">tr_slspsn##2</property>
+                    <property name="nativeName">tr_slspsn##2</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">93</property>
+                    <property name="name">tr_slspsn##3</property>
+                    <property name="nativeName">tr_slspsn##3</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">94</property>
+                    <property name="name">tr_slspsn##4</property>
+                    <property name="nativeName">tr_slspsn##4</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">95</property>
+                    <property name="name">tr_fsm_type</property>
+                    <property name="nativeName">tr_fsm_type</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">96</property>
+                    <property name="name">tr_upd_isb</property>
+                    <property name="nativeName">tr_upd_isb</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">-6</property>
+                </structure>
+                <structure>
+                    <property name="position">97</property>
+                    <property name="name">tr_auto_install</property>
+                    <property name="nativeName">tr_auto_install</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">-6</property>
+                </structure>
+                <structure>
+                    <property name="position">98</property>
+                    <property name="name">tr_ca_int_type</property>
+                    <property name="nativeName">tr_ca_int_type</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">99</property>
+                    <property name="name">tr_covered_amt</property>
+                    <property name="nativeName">tr_covered_amt</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">100</property>
+                    <property name="name">tr_fcg_code</property>
+                    <property name="nativeName">tr_fcg_code</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">101</property>
+                    <property name="name">tr_batch</property>
+                    <property name="nativeName">tr_batch</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">102</property>
+                    <property name="name">tr_fsc_code</property>
+                    <property name="nativeName">tr_fsc_code</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">103</property>
+                    <property name="name">tr_sa_nbr</property>
+                    <property name="nativeName">tr_sa_nbr</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">104</property>
+                    <property name="name">tr_sv_code</property>
+                    <property name="nativeName">tr_sv_code</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">105</property>
+                    <property name="name">tr_eng_area</property>
+                    <property name="nativeName">tr_eng_area</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">106</property>
+                    <property name="name">tr_sys_prod</property>
+                    <property name="nativeName">tr_sys_prod</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">107</property>
+                    <property name="name">tr_svc_type</property>
+                    <property name="nativeName">tr_svc_type</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">108</property>
+                    <property name="name">tr_ca_opn_date</property>
+                    <property name="nativeName">tr_ca_opn_date</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">109</property>
+                    <property name="name">tr_cprice</property>
+                    <property name="nativeName">tr_cprice</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">110</property>
+                    <property name="name">tr_eng_code</property>
+                    <property name="nativeName">tr_eng_code</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">111</property>
+                    <property name="name">tr_wod_op</property>
+                    <property name="nativeName">tr_wod_op</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">112</property>
+                    <property name="name">tr_enduser</property>
+                    <property name="nativeName">tr_enduser</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">113</property>
+                    <property name="name">tr_ship_inv_mov</property>
+                    <property name="nativeName">tr_ship_inv_mov</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">114</property>
+                    <property name="name">tr_ship_date</property>
+                    <property name="nativeName">tr_ship_date</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">115</property>
+                    <property name="name">tr_ship_id</property>
+                    <property name="nativeName">tr_ship_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">116</property>
+                    <property name="name">tr_ex_rate2</property>
+                    <property name="nativeName">tr_ex_rate2</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">117</property>
+                    <property name="name">tr_ex_ratetype</property>
+                    <property name="nativeName">tr_ex_ratetype</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">118</property>
+                    <property name="name">tr_exru_seq</property>
+                    <property name="nativeName">tr_exru_seq</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">119</property>
+                    <property name="name">tr_promise_date</property>
+                    <property name="nativeName">tr_promise_date</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">120</property>
+                    <property name="name">tr_fldchg_cmtindx</property>
+                    <property name="nativeName">tr_fldchg_cmtindx</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">121</property>
+                    <property name="name">tr_domain</property>
+                    <property name="nativeName">tr_domain</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">122</property>
+                    <property name="name">oid_tr_hist</property>
+                    <property name="nativeName">oid_tr_hist</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select * from tr_hist
+]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="part_inv" id="345">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_tr_part</property>
+                    <property name="dataType">string</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">'24514600'</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_tr_effdate</property>
+                    <property name="dataType">date</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue" type="javascript">'2009-04-02'</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">tr_part</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">tr_serial</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">tr_qty_chg</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">tr_price</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">jine</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">mfgprod</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">tr_part</property>
+                    <property name="nativeName">tr_part</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">tr_serial</property>
+                    <property name="nativeName">tr_serial</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">tr_qty_chg</property>
+                    <property name="nativeName">tr_qty_chg</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">tr_price</property>
+                    <property name="nativeName">tr_price</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">jine</property>
+                    <property name="nativeName">jine</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select gppw.tr_part as tr_part,gppw.tr_serial as tr_serial,gppw.tr_qty_chg as tr_qty_chg , gppx.tr_price as tr_price,(gppw.tr_qty_chg * gppx.tr_price) as jine from(
+	select gppf.tr_part as tr_part , gppf.tr_serial as tr_serial , (gppf.tr_qty_chg + gppg.tr_loc_begin) as tr_qty_chg from (
+		select tr_part,tr_serial,sum(tr_qty_chg) as tr_qty_chg from (
+			select * from tr_hist where tr_qty_chg<>0 and tr_part=? and tr_effdate<=?
+		) as bec group by tr_part,tr_serial
+	) as gppf
+	left join
+	(	
+		select gppi.tr_part,gppi.tr_serial,gppi.tr_effdate,gppi.tr_trnbr,gppj.tr_loc_begin from(
+			select gpph.tr_part as tr_part,gpph.tr_serial as tr_serial,gpph.tr_effdate as tr_effdate,min(gpph.tr_trnbr) as tr_trnbr from (
+				select tt.tr_part ,tt.tr_serial,tt.tr_effdate,ty.tr_trnbr from (
+					select tr_part,tr_serial,min(tr_effdate) as tr_effdate from tr_hist group by tr_part,tr_serial
+				) as tt inner join 
+				tr_hist 
+				 as ty on tt.tr_part = ty.tr_part and tt.tr_serial = ty.tr_serial and tt.tr_effdate = ty.tr_effdate
+			) as gpph group by gpph.tr_part,gpph.tr_serial,gpph.tr_effdate
+		) as gppi inner join
+		tr_hist
+		as gppj on gppi.tr_part = gppj.tr_part and gppi.tr_serial = gppj.tr_serial and gppi.tr_trnbr = gppj.tr_trnbr
+		
+	) as gppg
+	on 
+	gppf.tr_part = gppg.tr_part and gppf.tr_serial = gppg.tr_serial
+) as gppw 
+left join
+(
+	select gppu.tr_part,gppu.tr_serial,gppv.tr_price from(
+		select tr_part,tr_serial,min(tr_trnbr) as tr_trnbr from (
+			select tr_part,tr_serial,tr_trnbr  from tr_hist where tr_qty_chg<>0 and tr_type in ('RCT-PO','RCT-UNP') --and tr_part='1200LDCT4R16' -- and tr_effdate<='2010-01-01 00:00:00'
+		) as bec group by tr_part,tr_serial
+	) as gppu
+	left join
+	tr_hist as gppv
+	on gppu.tr_trnbr = gppv.tr_trnbr
+) as gppx 
+on gppw.tr_part = gppx.tr_part and gppw.tr_serial = gppx.tr_serial  
+where gppw.tr_qty_chg<>0
+order by gppw.tr_part,gppw.tr_serial]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="part_inv_in" id="410">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_part</property>
+                    <property name="dataType">string</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">'24514600'</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_tr_effdate</property>
+                    <property name="dataType">date</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue" type="javascript">2008-04-02 00:00:00</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_tr_effdate2</property>
+                    <property name="dataType">date</property>
+                    <property name="position">3</property>
+                    <expression name="defaultValue" type="javascript">2010-09-02 00:00:00</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">mfgprod</property>
+            <xml-property name="queryText"><![CDATA[select  gppw.tr_part as tr_part,gppw.tr_serial as tr_serial,gppw.tr_qty_chg as tr_qty_chg , gppx.tr_price as tr_price,(gppw.tr_qty_chg * gppx.tr_price) as jine  from (
+	select tr_part,tr_serial, sum(tr_qty_chg) as tr_qty_chg from(
+		select * from tr_hist where tr_type in ('RCT-PO','RCT-UNP') and tr_part=? and tr_effdate>=? and tr_effdate<=? 
+	) as gppa group by tr_part,tr_serial
+) as gppw
+left join
+(
+	select gppu.tr_part,gppu.tr_serial,gppv.tr_price from(
+		select tr_part,tr_serial,min(tr_trnbr) as tr_trnbr from (
+			select tr_part,tr_serial,tr_trnbr  from tr_hist where tr_qty_chg<>0 and tr_type in ('RCT-PO','RCT-UNP') --and tr_part='1200LDCT4R16' -- and tr_effdate<='2010-01-01 00:00:00'
+		) as bec group by tr_part,tr_serial
+	) as gppu
+	left join
+	tr_hist as gppv
+	on gppu.tr_trnbr = gppv.tr_trnbr
+) as gppx 
+on gppw.tr_part = gppx.tr_part and gppw.tr_serial = gppx.tr_serial  
+where gppw.tr_qty_chg<>0
+order by gppw.tr_part,gppw.tr_serial]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="part_inv_out" id="444">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_part</property>
+                    <property name="dataType">string</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">''</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_tr_effdate</property>
+                    <property name="dataType">date</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue" type="javascript">2008-04-02 00:00:00</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_tr_effdate2</property>
+                    <property name="dataType">date</property>
+                    <property name="position">3</property>
+                    <expression name="defaultValue" type="javascript">2010-09-02 00:00:00</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">tr_part</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">tr_serial</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">tr_qty_chg</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">tr_price</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">jine</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">mfgprod</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">tr_part</property>
+                    <property name="nativeName">tr_part</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">tr_serial</property>
+                    <property name="nativeName">tr_serial</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">tr_qty_chg</property>
+                    <property name="nativeName">tr_qty_chg</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">tr_price</property>
+                    <property name="nativeName">tr_price</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">jine</property>
+                    <property name="nativeName">jine</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[
+select gppw.tr_part as tr_part,gppw.tr_serial as tr_serial,gppw.tr_qty_chg as tr_qty_chg , gppx.tr_price as tr_price,(gppw.tr_qty_chg * gppx.tr_price) as jine  from(	
+	select tr_part,tr_serial, sum(tr_qty_chg) as tr_qty_chg from(
+		select * from tr_hist where tr_type in ('ISS-WO','ISS-UNP') and tr_part=?  and  tr_effdate>=? and tr_effdate<=?
+	) as gppa group by tr_part,tr_serial
+) as gppw
+left join
+(
+	select gppu.tr_part,gppu.tr_serial,gppv.tr_price from(
+		select tr_part,tr_serial,min(tr_trnbr) as tr_trnbr from (
+			select tr_part,tr_serial,tr_trnbr  from tr_hist where tr_qty_chg<>0 and tr_type in ('RCT-PO','RCT-UNP')
+		) as bec group by tr_part,tr_serial
+	) as gppu
+	left join
+	tr_hist as gppv
+	on gppu.tr_trnbr = gppv.tr_trnbr
+) as gppx 
+on gppw.tr_part = gppx.tr_part and gppw.tr_serial = gppx.tr_serial  
+where gppw.tr_qty_chg<>0
+order by gppw.tr_part,gppw.tr_serial]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="part_inv2" id="382">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_tr_part</property>
+                    <property name="dataType">string</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">'24514600'</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_tr_effdate</property>
+                    <property name="dataType">date</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue" type="javascript">'2009-04-02'</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">tr_part</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">tr_serial</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">tr_qty_chg</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">tr_price</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">jine</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">mfgprod</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">tr_part</property>
+                    <property name="nativeName">tr_part</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">tr_serial</property>
+                    <property name="nativeName">tr_serial</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">tr_qty_chg</property>
+                    <property name="nativeName">tr_qty_chg</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">tr_price</property>
+                    <property name="nativeName">tr_price</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">jine</property>
+                    <property name="nativeName">jine</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select gppw.tr_part as tr_part,gppw.tr_serial as tr_serial,gppw.tr_qty_chg as tr_qty_chg , gppx.tr_price as tr_price,(gppw.tr_qty_chg * gppx.tr_price) as jine from(
+	select gppf.tr_part as tr_part , gppf.tr_serial as tr_serial , (gppf.tr_qty_chg + gppg.tr_loc_begin) as tr_qty_chg from (
+		select tr_part,tr_serial,sum(tr_qty_chg) as tr_qty_chg from (
+			select * from tr_hist where tr_qty_chg<>0 and tr_part=? and tr_effdate<=?
+		) as bec group by tr_part,tr_serial
+	) as gppf
+	left join
+	(	
+		select gppi.tr_part,gppi.tr_serial,gppi.tr_effdate,gppi.tr_trnbr,gppj.tr_loc_begin from(
+			select gpph.tr_part as tr_part,gpph.tr_serial as tr_serial,gpph.tr_effdate as tr_effdate,min(gpph.tr_trnbr) as tr_trnbr from (
+				select tt.tr_part ,tt.tr_serial,tt.tr_effdate,ty.tr_trnbr from (
+					select tr_part,tr_serial,min(tr_effdate) as tr_effdate from tr_hist group by tr_part,tr_serial
+				) as tt inner join 
+				tr_hist 
+				 as ty on tt.tr_part = ty.tr_part and tt.tr_serial = ty.tr_serial and tt.tr_effdate = ty.tr_effdate
+			) as gpph group by gpph.tr_part,gpph.tr_serial,gpph.tr_effdate
+		) as gppi inner join
+		tr_hist
+		as gppj on gppi.tr_part = gppj.tr_part and gppi.tr_serial = gppj.tr_serial and gppi.tr_trnbr = gppj.tr_trnbr
+		
+	) as gppg
+	on 
+	gppf.tr_part = gppg.tr_part and gppf.tr_serial = gppg.tr_serial
+) as gppw 
+left join
+(
+	select gppu.tr_part,gppu.tr_serial,gppv.tr_price from(
+		select tr_part,tr_serial,min(tr_trnbr) as tr_trnbr from (
+			select tr_part,tr_serial,tr_trnbr  from tr_hist where tr_qty_chg<>0 and tr_type in ('RCT-PO','RCT-UNP') --and tr_part='1200LDCT4R16' -- and tr_effdate<='2010-01-01 00:00:00'
+		) as bec group by tr_part,tr_serial
+	) as gppu
+	left join
+	tr_hist as gppv
+	on gppu.tr_trnbr = gppv.tr_trnbr
+) as gppx 
+on gppw.tr_part = gppx.tr_part and gppw.tr_serial = gppx.tr_serial  
+where gppw.tr_qty_chg<>0
+order by gppw.tr_part,gppw.tr_serial]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="pt_mstr" id="45">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">domain</property>
+                    <property name="paramName">domain</property>
+                    <property name="dataType">string</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">'keer'</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">pt_part_type</property>
+                    <property name="paramName">part_type</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue" type="javascript">'107按钮'</expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">pt_part_type2</property>
+                    <property name="paramName">part_type2</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                    <property name="position">3</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">pt_prod_line</property>
+                    <property name="paramName">prod_line</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                    <property name="position">4</property>
+                    <expression name="defaultValue" type="javascript">''</expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">pt_prod_line2</property>
+                    <property name="paramName">prod_line2</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                    <property name="position">5</property>
+                    <expression name="defaultValue" type="javascript">''</expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">pt_part</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">pt_part_type</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">pt_desc1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">pt_um</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">mfgprod</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">pt_part</property>
+                    <property name="nativeName">pt_part</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">pt_part_type</property>
+                    <property name="nativeName">pt_part_type</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">pt_desc1</property>
+                    <property name="nativeName">pt_desc1</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">pt_um</property>
+                    <property name="nativeName">pt_um</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[
+--INSERT INTO "MFGPROD"."PUB"."pt_mstr" ("MFGPROD"."PUB"."pt_mstr"."pt_part", "MFGPROD"."PUB"."pt_mstr"."pt_desc1", "MFGPROD"."PUB"."pt_mstr"."pt_desc2", "MFGPROD"."PUB"."pt_mstr"."pt_um", "MFGPROD"."PUB"."pt_mstr"."pt__qad13", "MFGPROD"."PUB"."pt_mstr"."pt__qad12", "MFGPROD"."PUB"."pt_mstr"."pt_draw", "MFGPROD"."PUB"."pt_mstr"."pt_prod_line", "MFGPROD"."PUB"."pt_mstr"."pt_group", "MFGPROD"."PUB"."pt_mstr"."pt_part_type", "MFGPROD"."PUB"."pt_mstr"."pt_status", "MFGPROD"."PUB"."pt_mstr"."pt_abc", "MFGPROD"."PUB"."pt_mstr"."pt_iss_pol", "MFGPROD"."PUB"."pt_mstr"."pt_phantom", "MFGPROD"."PUB"."pt_mstr"."pt_loc", "MFGPROD"."PUB"."pt_mstr"."pt__qad01", "MFGPROD"."PUB"."pt_mstr"."pt__qad02", "MFGPROD"."PUB"."pt_mstr"."pt_abc_amt", "MFGPROD"."PUB"."pt_mstr"."pt__qad03", "MFGPROD"."PUB"."pt_mstr"."pt__qad04", "MFGPROD"."PUB"."pt_mstr"."pt_avg_int", "MFGPROD"."PUB"."pt_mstr"."pt__qad05", "MFGPROD"."PUB"."pt_mstr"."pt_cyc_int", "MFGPROD"."PUB"."pt_mstr"."pt__qad06", "MFGPROD"."PUB"."pt_mstr"."pt__qad07", "MFGPROD"."PUB"."pt_mstr"."pt__qad08", "MFGPROD"."PUB"."pt_mstr"."pt_ms", "MFGPROD"."PUB"."pt_mstr"."pt_plan_ord", "MFGPROD"."PUB"."pt_mstr"."pt_mrp", "MFGPROD"."PUB"."pt_mstr"."pt_ord_pol", "MFGPROD"."PUB"."pt_mstr"."pt_ord_qty", "MFGPROD"."PUB"."pt_mstr"."pt_ord_per", "MFGPROD"."PUB"."pt_mstr"."pt_sfty_stk", "MFGPROD"."PUB"."pt_mstr"."pt_sfty_time", "MFGPROD"."PUB"."pt_mstr"."pt_rop", "MFGPROD"."PUB"."pt_mstr"."pt_buyer", "MFGPROD"."PUB"."pt_mstr"."pt_vend", "MFGPROD"."PUB"."pt_mstr"."pt__qad09", "MFGPROD"."PUB"."pt_mstr"."pt_pm_code", "MFGPROD"."PUB"."pt_mstr"."pt_mfg_lead", "MFGPROD"."PUB"."pt_mstr"."pt_pur_lead", "MFGPROD"."PUB"."pt_mstr"."pt_insp_rqd", "MFGPROD"."PUB"."pt_mstr"."pt_insp_lead", "MFGPROD"."PUB"."pt_mstr"."pt_cum_lead", "MFGPROD"."PUB"."pt_mstr"."pt_ord_min", "MFGPROD"."PUB"."pt_mstr"."pt_ord_max", "MFGPROD"."PUB"."pt_mstr"."pt_ord_mult", "MFGPROD"."PUB"."pt_mstr"."pt_yield_pct", "MFGPROD"."PUB"."pt_mstr"."pt__qad16", "MFGPROD"."PUB"."pt_mstr"."pt_setup", "MFGPROD"."PUB"."pt_mstr"."pt_setup_ll", "MFGPROD"."PUB"."pt_mstr"."pt_run_ll", "MFGPROD"."PUB"."pt_mstr"."pt_run", "MFGPROD"."PUB"."pt_mstr"."pt_price", "MFGPROD"."PUB"."pt_mstr"."pt_xmtl_tl", "MFGPROD"."PUB"."pt_mstr"."pt_xlbr_tl", "MFGPROD"."PUB"."pt_mstr"."pt_xbdn_tl", "MFGPROD"."PUB"."pt_mstr"."pt_xsub_tl", "MFGPROD"."PUB"."pt_mstr"."pt_xmtl_ll", "MFGPROD"."PUB"."pt_mstr"."pt_xlbr_ll", "MFGPROD"."PUB"."pt_mstr"."pt_xbdn_ll", "MFGPROD"."PUB"."pt_mstr"."pt_xsub_ll", "MFGPROD"."PUB"."pt_mstr"."pt_xtot_cur", "MFGPROD"."PUB"."pt_mstr"."pt_cur_date", "MFGPROD"."PUB"."pt_mstr"."pt_xmtl_stdtl", "MFGPROD"."PUB"."pt_mstr"."pt_xlbr_stdtl", "MFGPROD"."PUB"."pt_mstr"."pt_xbdn_stdtl", "MFGPROD"."PUB"."pt_mstr"."pt_xsub_stdtl", "MFGPROD"."PUB"."pt_mstr"."pt_xtot_std", "MFGPROD"."PUB"."pt_mstr"."pt_std_date", "MFGPROD"."PUB"."pt_mstr"."pt_ll_code", "MFGPROD"."PUB"."pt_mstr"."pt_abc_qty", "MFGPROD"."PUB"."pt_mstr"."pt__qad10", "MFGPROD"."PUB"."pt_mstr"."pt__qad11", "MFGPROD"."PUB"."pt_mstr"."pt_routing", "MFGPROD"."PUB"."pt_mstr"."pt_lot_ser", "MFGPROD"."PUB"."pt_mstr"."pt_timefence", "MFGPROD"."PUB"."pt_mstr"."pt_xmtl_stdll", "MFGPROD"."PUB"."pt_mstr"."pt_xlbr_stdll", "MFGPROD"."PUB"."pt_mstr"."pt_xbdn_stdll", "MFGPROD"."PUB"."pt_mstr"."pt_xsub_stdll", "MFGPROD"."PUB"."pt_mstr"."pt_rev", "MFGPROD"."PUB"."pt_mstr"."pt_last_eco", "MFGPROD"."PUB"."pt_mstr"."pt__qad15", "MFGPROD"."PUB"."pt_mstr"."pt__qad17", "MFGPROD"."PUB"."pt_mstr"."pt_qc_lead", "MFGPROD"."PUB"."pt_mstr"."pt_auto_lot", "MFGPROD"."PUB"."pt_mstr"."pt_assay", "MFGPROD"."PUB"."pt_mstr"."pt_batch", "MFGPROD"."PUB"."pt_mstr"."pt__qad14", "MFGPROD"."PUB"."pt_mstr"."pt_user3", "MFGPROD"."PUB"."pt_mstr"."pt_user1", "MFGPROD"."PUB"."pt_mstr"."pt_user2", "MFGPROD"."PUB"."pt_mstr"."pt_net_wt", "MFGPROD"."PUB"."pt_mstr"."pt_net_wt_um", "MFGPROD"."PUB"."pt_mstr"."pt_size", "MFGPROD"."PUB"."pt_mstr"."pt_size_um", "MFGPROD"."PUB"."pt_mstr"."pt_taxable", "MFGPROD"."PUB"."pt_mstr"."pt_taxc", "MFGPROD"."PUB"."pt_mstr"."pt_rollup", "MFGPROD"."PUB"."pt_mstr"."pt_xovh_ll", "MFGPROD"."PUB"."pt_mstr"."pt_xovh_tl", "MFGPROD"."PUB"."pt_mstr"."pt_xovh_stdll", "MFGPROD"."PUB"."pt_mstr"."pt_xovh_stdtl", "MFGPROD"."PUB"."pt_mstr"."pt_site", "MFGPROD"."PUB"."pt_mstr"."pt_shelflife", "MFGPROD"."PUB"."pt_mstr"."pt_critical", "MFGPROD"."PUB"."pt_mstr"."pt_sngl_lot", "MFGPROD"."PUB"."pt_mstr"."pt_upc", "MFGPROD"."PUB"."pt_mstr"."pt_hazard", "MFGPROD"."PUB"."pt_mstr"."pt_added", "MFGPROD"."PUB"."pt_mstr"."pt__chr01", "MFGPROD"."PUB"."pt_mstr"."pt__chr02", "MFGPROD"."PUB"."pt_mstr"."pt__chr03", "MFGPROD"."PUB"."pt_mstr"."pt__chr04", "MFGPROD"."PUB"."pt_mstr"."pt__chr05", "MFGPROD"."PUB"."pt_mstr"."pt__chr06", "MFGPROD"."PUB"."pt_mstr"."pt__chr07", "MFGPROD"."PUB"."pt_mstr"."pt__chr08", "MFGPROD"."PUB"."pt_mstr"."pt__chr09", "MFGPROD"."PUB"."pt_mstr"."pt__chr10", "MFGPROD"."PUB"."pt_mstr"."pt__dte01", "MFGPROD"."PUB"."pt_mstr"."pt__dte02", "MFGPROD"."PUB"."pt_mstr"."pt__dec01", "MFGPROD"."PUB"."pt_mstr"."pt__dec02", "MFGPROD"."PUB"."pt_mstr"."pt__log01", "MFGPROD"."PUB"."pt_mstr"."pt__log02", "MFGPROD"."PUB"."pt_mstr"."pt__qad18", "MFGPROD"."PUB"."pt_mstr"."pt__qad21", "MFGPROD"."PUB"."pt_mstr"."pt__qad19", "MFGPROD"."PUB"."pt_mstr"."pt__qad20", "MFGPROD"."PUB"."pt_mstr"."pt_length", "MFGPROD"."PUB"."pt_mstr"."pt_height", "MFGPROD"."PUB"."pt_mstr"."pt_width", "MFGPROD"."PUB"."pt_mstr"."pt_dim_um", "MFGPROD"."PUB"."pt_mstr"."pt_pkg_code", "MFGPROD"."PUB"."pt_mstr"."pt_network", "MFGPROD"."PUB"."pt_mstr"."pt_ll_drp", "MFGPROD"."PUB"."pt_mstr"."pt_fr_class", "MFGPROD"."PUB"."pt_mstr"."pt_spec_hdlg", "MFGPROD"."PUB"."pt_mstr"."pt_bom_code", "MFGPROD"."PUB"."pt_mstr"."pt_loc_type", "MFGPROD"."PUB"."pt_mstr"."pt_transtype", "MFGPROD"."PUB"."pt_mstr"."pt_cover", "MFGPROD"."PUB"."pt_mstr"."pt_unit_isb", "MFGPROD"."PUB"."pt_mstr"."pt_article", "MFGPROD"."PUB"."pt_mstr"."pt_po_site", "MFGPROD"."PUB"."pt_mstr"."pt_ship_wt", "MFGPROD"."PUB"."pt_mstr"."pt_ship_wt_um", "MFGPROD"."PUB"."pt_mstr"."pt_formula", "MFGPROD"."PUB"."pt_mstr"."pt_dea", "MFGPROD"."PUB"."pt_mstr"."pt__qad26", "MFGPROD"."PUB"."pt_mstr"."pt__qad22", "MFGPROD"."PUB"."pt_mstr"."pt__qad25", "MFGPROD"."PUB"."pt_mstr"."pt__qad24", "MFGPROD"."PUB"."pt_mstr"."pt__qad23", "MFGPROD"."PUB"."pt_mstr"."pt_comm_code", "MFGPROD"."PUB"."pt_mstr"."pt_inst_call", "MFGPROD"."PUB"."pt_mstr"."pt_sys_type", "MFGPROD"."PUB"."pt_mstr"."pt_tariff", "MFGPROD"."PUB"."pt_mstr"."pt_origin", "MFGPROD"."PUB"."pt_mstr"."pt_sttr", "MFGPROD"."PUB"."pt_mstr"."pt_mfg_mtbf", "MFGPROD"."PUB"."pt_mstr"."pt_mfg_mttr", "MFGPROD"."PUB"."pt_mstr"."pt_fru", "MFGPROD"."PUB"."pt_mstr"."pt_ven_warr", "MFGPROD"."PUB"."pt_mstr"."pt_svc_group", "MFGPROD"."PUB"."pt_mstr"."pt_svc_type", "MFGPROD"."PUB"."pt_mstr"."pt_mtbf", "MFGPROD"."PUB"."pt_mstr"."pt_mttr", "MFGPROD"."PUB"."pt_mstr"."pt_isb", "MFGPROD"."PUB"."pt_mstr"."pt_pvm_days", "MFGPROD"."PUB"."pt_mstr"."pt_warr_cd", "MFGPROD"."PUB"."pt_mstr"."pt_mod_date", "MFGPROD"."PUB"."pt_mstr"."pt_userid", "MFGPROD"."PUB"."pt_mstr"."pt_obs_date", "MFGPROD"."PUB"."pt_mstr"."pt_pvm_bom", "MFGPROD"."PUB"."pt_mstr"."pt_pvm_route", "MFGPROD"."PUB"."pt_mstr"."pt_pvm_um", "MFGPROD"."PUB"."pt_mstr"."pt_rp_bom", "MFGPROD"."PUB"."pt_mstr"."pt_rp_route", "MFGPROD"."PUB"."pt_mstr"."pt_rp_vendor", "MFGPROD"."PUB"."pt_mstr"."pt_rctpo_status", "MFGPROD"."PUB"."pt_mstr"."pt_rollup_id", "MFGPROD"."PUB"."pt_mstr"."pt_spec_grav", "MFGPROD"."PUB"."pt_mstr"."pt_joint_type", "MFGPROD"."PUB"."pt_mstr"."pt_mfg_pct", "MFGPROD"."PUB"."pt_mstr"."pt_pur_pct", "MFGPROD"."PUB"."pt_mstr"."pt_drp_pct", "MFGPROD"."PUB"."pt_mstr"."pt_pou_code", "MFGPROD"."PUB"."pt_mstr"."pt_wks_avg", "MFGPROD"."PUB"."pt_mstr"."pt_wks_max", "MFGPROD"."PUB"."pt_mstr"."pt_wks_min", "MFGPROD"."PUB"."pt_mstr"."pt_pick_logic", "MFGPROD"."PUB"."pt_mstr"."pt_fiscal_class", "MFGPROD"."PUB"."pt_mstr"."pt_dsgn_grp", "MFGPROD"."PUB"."pt_mstr"."pt_drwg_loc", "MFGPROD"."PUB"."pt_mstr"."pt_ecn_rev", "MFGPROD"."PUB"."pt_mstr"."pt_drwg_size", "MFGPROD"."PUB"."pt_mstr"."pt_model", "MFGPROD"."PUB"."pt_mstr"."pt_repairable", "MFGPROD"."PUB"."pt_mstr"."pt_rctwo_status", "MFGPROD"."PUB"."pt_mstr"."pt_lot_grp", "MFGPROD"."PUB"."pt_mstr"."pt_rctpo_active", "MFGPROD"."PUB"."pt_mstr"."pt_rctwo_active", "MFGPROD"."PUB"."pt_mstr"."pt_break_cat", "MFGPROD"."PUB"."pt_mstr"."pt_fsc_code", "MFGPROD"."PUB"."pt_mstr"."pt_trace_active", "MFGPROD"."PUB"."pt_mstr"."pt_trace_detail", "MFGPROD"."PUB"."pt_mstr"."pt_pm_mrp", "MFGPROD"."PUB"."pt_mstr"."pt_ins_call_type", "MFGPROD"."PUB"."pt_mstr"."pt_ins_bom", "MFGPROD"."PUB"."pt_mstr"."pt_ins_route", "MFGPROD"."PUB"."pt_mstr"."pt_promo", "MFGPROD"."PUB"."pt_mstr"."pt_meter_interval", "MFGPROD"."PUB"."pt_mstr"."pt_meter_um", "MFGPROD"."PUB"."pt_mstr"."pt_wh", "MFGPROD"."PUB"."pt_mstr"."pt_btb_type", "MFGPROD"."PUB"."pt_mstr"."pt_cfg_type", "MFGPROD"."PUB"."pt_mstr"."pt_app_owner", "MFGPROD"."PUB"."pt_mstr"."pt_op_yield", "MFGPROD"."PUB"."pt_mstr"."pt_run_seq1", "MFGPROD"."PUB"."pt_mstr"."pt_run_seq2", "MFGPROD"."PUB"."pt_mstr"."pt_atp_enforcement", "MFGPROD"."PUB"."pt_mstr"."pt_atp_family", "MFGPROD"."PUB"."pt_mstr"."pt_domain", "MFGPROD"."PUB"."pt_mstr"."oid_pt_mstr")
+--values ()
+
+
+select pt_part,pt_part_type,pt_desc1,pt_um from pt_mstr
+where pt_domain=?
+and pt_part_type>=?
+and pt_part_type<=?
+and pt_prod_line>=?
+and pt_prod_line<=?
+]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">custom</property>
+            <property name="height">12in</property>
+            <property name="width">20in</property>
+            <property name="orientation">landscape</property>
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <label id="310">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">24pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="textUnderline">underline</property>
+            <property name="textAlign">center</property>
+            <text-property name="text">柳州科尔数字化制造技术有限公司</text-property>
+        </label>
+        <label id="71">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">24pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="textUnderline">underline</property>
+            <property name="textAlign">center</property>
+            <text-property name="text">物资库存盘点表</text-property>
+        </label>
+    </body>
+</report>

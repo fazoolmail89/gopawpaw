@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
+    <list-property name="configVars">
+        <structure>
+            <property name="name">__isdisplay__domain_50_0</property>
+            <property name="value">keer</property>
+        </structure>
+        <structure>
+            <property name="name">__isdisplay__prod_line_51_1</property>
+            <property name="value">3000</property>
+        </structure>
+        <structure>
+            <property name="name">__isdisplay__prod_line2_52_2</property>
+            <property name="value">3000</property>
+        </structure>
+        <structure>
+            <property name="name">__isdisplay__part_type_53_3</property>
+            <property name="value">N107按钮开关总成</property>
+        </structure>
+        <structure>
+            <property name="name">__isdisplay__part_type2_54_4</property>
+            <property name="value">N107按钮开关总成</property>
+        </structure>
+        <structure>
+            <property name="name">__isdisplay__tr_effdate_55_5</property>
+            <property name="value">2010-1-1</property>
+        </structure>
+        <structure>
+            <property name="name">__isdisplay__tr_effdate2_56_6</property>
+            <property name="value">2010-2-1</property>
+        </structure>
+        <structure>
+            <property name="name">prod_line_51_7</property>
+            <property name="value">3000</property>
+        </structure>
+        <structure>
+            <property name="name">prod_line_51_type_</property>
+            <property name="value">string</property>
+        </structure>
+        <structure>
+            <property name="name">part_type_53_8</property>
+            <property name="value">107按钮</property>
+        </structure>
+        <structure>
+            <property name="name">part_type_53_type_</property>
+            <property name="value">string</property>
+        </structure>
+        <structure>
+            <property name="name">part_type_53_expr_</property>
+            <property name="value">dataSetRow["code_value"]</property>
+        </structure>
+        <structure>
+            <property name="name">tr_effdate_55_9</property>
+            <property name="value">2010-01-01</property>
+        </structure>
+        <structure>
+            <property name="name">tr_effdate_55_type_</property>
+            <property name="value">date</property>
+        </structure>
+        <structure>
+            <property name="name">domain_50_10</property>
+            <property name="value">keer</property>
+        </structure>
+        <structure>
+            <property name="name">domain_50_type_</property>
+            <property name="value">string</property>
+        </structure>
+        <structure>
+            <property name="name">prod_line2_52_11</property>
+            <property name="value">3000</property>
+        </structure>
+        <structure>
+            <property name="name">prod_line2_52_type_</property>
+            <property name="value">string</property>
+        </structure>
+        <structure>
+            <property name="name">tr_effdate2_56_12</property>
+            <property name="value">2010-02-01</property>
+        </structure>
+        <structure>
+            <property name="name">tr_effdate2_56_type_</property>
+            <property name="value">date</property>
+        </structure>
+        <structure>
+            <property name="name">part_type2_54_13</property>
+            <property name="value">107按钮</property>
+        </structure>
+        <structure>
+            <property name="name">part_type2_54_type_</property>
+            <property name="value">string</property>
+        </structure>
+        <structure>
+            <property name="name">part_type2_54_expr_</property>
+            <property name="value">dataSetRow["code_value"]</property>
+        </structure>
+    </list-property>
+</report>
