@@ -7,6 +7,7 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
+
 /**
  * @version 2009-10-31
  * @author 李锦华
@@ -18,6 +19,7 @@ public class GppTableColumn extends TableColumn {
 	 */
 	public GppTableColumn() {
 		super();
+		initialize();
 	}
 
 	/**
@@ -29,6 +31,7 @@ public class GppTableColumn extends TableColumn {
 	public GppTableColumn(int arg0, int arg1, TableCellRenderer arg2,
 			TableCellEditor arg3) {
 		super(arg0, arg1, arg2, arg3);
+		initialize();
 	}
 
 	/**
@@ -37,6 +40,7 @@ public class GppTableColumn extends TableColumn {
 	 */
 	public GppTableColumn(int arg0, int arg1) {
 		super(arg0, arg1);
+		initialize();
 	}
 
 	/**
@@ -44,6 +48,14 @@ public class GppTableColumn extends TableColumn {
 	 */
 	public GppTableColumn(int arg0) {
 		super(arg0);
+		initialize();
+	}
+	
+	/**
+	 * 初始化
+	 */
+	private void initialize() {
+		
 	}
 
 	/**

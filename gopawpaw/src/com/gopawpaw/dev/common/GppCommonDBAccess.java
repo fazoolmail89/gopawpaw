@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.gopawpaw.javax.swing.GppJFrame;
+
 /**
  * @version 2009-10-03
  * @author 李锦华
@@ -14,6 +16,7 @@ import java.sql.Statement;
  *         </p>
  */
 public class GppCommonDBAccess {
+	private static GppJFrame gjf= null;
 	private Connection sqlCon;
 	private ResultSet rstSql;
 	private Statement stmS;
@@ -22,6 +25,21 @@ public class GppCommonDBAccess {
 	private boolean status;
 	private long rowcount;
 
+	public GppCommonDBAccess() {
+		super();
+		initialize();
+	}
+
+	/**
+	 * 初始化
+	 */
+	private void initialize() {
+		if(GppCommonDBAccess.gjf == null){
+			GppCommonDBAccess.gjf = new GppJFrame();
+		}
+		
+		
+	}
 	/**
 	 * 设置连接驱动名称:
 	 * 
@@ -111,6 +129,7 @@ public class GppCommonDBAccess {
 			this.status = true;
 			return true;
 		} catch (Exception e) {
+			e.printStackTrace();
 			this.status = false;
 			return false;
 		}
