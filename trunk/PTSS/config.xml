@@ -1,0 +1,36 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "hibernate-configuration-3.0.dtd">
+
+<programs-configuration>
+
+	<database-config>
+		<property name="connection.url">
+			jdbc:microsoft:sqlserver://localhost:1433;databaseName=zxkj_rsgzgl_sp
+		</property>
+		<property name="connection.username">sa</property>
+		<property name="connection.password">123</property>
+		<property name="connection.driver_class">
+			com.microsoft.jdbc.sqlserver.SQLServerDriver
+		</property>
+		<property name="dataBaseName">
+			keer_mfgprod
+		</property>
+		
+	</database-config>
+
+	<database-config>
+		<property name="connection.url">
+			jdbc:microsoft:sqlserver://localhost:1433;databaseName=zxkj_rsgzgl_sp
+		</property>
+		<property name="connection.username">sa</property>
+		<property name="connection.password">123</property>
+		<property name="connection.driver_class">
+			com.microsoft.jdbc.sqlserver.SQLServerDriver
+		</property>
+		<property name="dataBaseName">
+			keer_mfgprod22
+		</property>
+	</database-config>
+</programs-configuration>
