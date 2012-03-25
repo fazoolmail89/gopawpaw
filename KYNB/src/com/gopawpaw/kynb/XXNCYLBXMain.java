@@ -51,6 +51,7 @@ import javax.swing.table.DefaultTableModel;
 import com.gopawpaw.dev.common.GppCmdShell;
 import com.gopawpaw.dev.common.GppJarRunableInterface;
 import com.gopawpaw.dev.common.encryption.MD5;
+import com.gopawpaw.frame.GlobalParameter;
 import com.gopawpaw.frame.common.BaseFrame;
 import com.gopawpaw.frame.program.Mgpwmt;
 import com.gopawpaw.javax.swing.GppJCheckBox;
@@ -218,7 +219,7 @@ public class XXNCYLBXMain extends BaseFrame implements GppJarRunableInterface{
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		GlobalParameter.initialize();
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -271,6 +272,7 @@ public class XXNCYLBXMain extends BaseFrame implements GppJarRunableInterface{
 	 * @return void
 	 */
 	private void initialize() {
+		
 		this.setSize(900, 600);
 		this.setLocation(200, 100);
 		this.setContentPane(getJContentPane());
