@@ -412,7 +412,7 @@ public class ThorpManage extends BaseModuleFrame  implements GppJarRunableInterf
 	
 	@Override
 	public boolean runJar(String[] args) {
-		// TODO Auto-generated method stub
+		ThorpManage.main(args);
 		return false;
 	}
 	
