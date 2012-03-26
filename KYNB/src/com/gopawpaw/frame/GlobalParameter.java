@@ -74,7 +74,7 @@ public class GlobalParameter {
 	/**
 	 * д╛хосОят
 	 */
-	private static String defaultLanguage = "ch";
+	private static String defaultLanguage = "0";
 	
 	/**
 	 * applicationContext нд╪Ч
