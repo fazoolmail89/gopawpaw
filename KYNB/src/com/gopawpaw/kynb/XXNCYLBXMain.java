@@ -255,12 +255,12 @@ public class XXNCYLBXMain extends BaseFrame implements GppJarRunableInterface{
 				Image img = kit.getImage("Applications.jpg");
 				thisClass.setIconImage(img);
 
-				if (thisClass.cheakRegister()) {
+//				if (thisClass.cheakRegister()) {
 					thisClass.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 					thisClass.setVisible(true);
-				} else {
-					System.exit(0);
-				}
+//				} else {
+//					System.exit(0);
+//				}
 
 			}
 		});
