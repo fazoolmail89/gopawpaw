@@ -580,7 +580,7 @@ public class MainFrame extends JFrame {
 
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
-		this.setTitle("GPP System");
+		this.setTitle("øÏ“Î≈©±£");
 
 		getMainPanelTree().actionMainMenu();
 		
