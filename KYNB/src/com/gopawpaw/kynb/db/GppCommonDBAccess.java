@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.gopawpaw.frame.log.GLog;
+
 /**
  * @version 2009-10-03
  * @author 李锦华
@@ -211,7 +213,9 @@ public class GppCommonDBAccess {
 		try {
 			return this.rstSql.getString(fileindex);
 		} catch (Exception ex) {
-			return "字段不存在!";
+			
+			GLog.d("=======", ex.toString());
+			return null;
 		}
 	}
 
