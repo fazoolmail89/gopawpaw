@@ -45,14 +45,16 @@ public class IDNumberChecker {
 	public static String IDCardValidate(String IDStr) throws ParseException {
 		String errorInfo = "";// 记录错误信息
 		String[] ValCodeArr = { "1", "0", "X", "9", "8", "7", "6", "5", "4",
-				"3", "2" };
+			"3", "2" };
 		String[] Wi = { "7", "9", "10", "5", "8", "4", "2", "1", "6", "3", "7",
-				"9", "10", "5", "8", "4", "2" };
+			"9", "10", "5", "8", "4", "2" };
 		String Ai = "";
-		// ================ 号码的长度18位 ================
-		if (IDStr.length() != 18) {
-			errorInfo = "身份证号码长度应该为18位。";
-			return errorInfo;
+		// ================ 号码的长度18位 或15位================
+		//2012-03-30 卢向琪 修改
+		if (IDStr.length() == 18 || IDStr.length() == 15) {
+		} else {
+			errorInfo = "身份证号码长度应该为18位或15位。";
+			return errorInfo;			
 		}
 		// =======================(end)========================
 

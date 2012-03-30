@@ -49,6 +49,7 @@ public class Villager {
 	public final static String tab_v_status = "状态";
 	public final static String tab_v_mark = "参保表备注";
 	public final static String tab_v_mark2 = "银行信息表备注";
+	public final static String tab_v_old_ic = "旧身份证号码";
 
 	private static ArrayList<String> keyList ;
 	
@@ -90,6 +91,7 @@ public class Villager {
 	private String v_status="";
 	private String v_mark="";
 	private String v_mark2="";
+	private String v_old_ic="";
 	
 	/**
 	 * 
@@ -475,6 +477,14 @@ public class Villager {
 
 	public void setV_mark2(String v_mark2) {
 		this.v_mark2 = v_mark2;
+	}
+
+	public String getV_old_ic() {
+		return v_old_ic;
+	}
+
+	public void setV_old_ic(String v_old_ic) {
+		this.v_old_ic = v_old_ic;
 	}
 
 	
