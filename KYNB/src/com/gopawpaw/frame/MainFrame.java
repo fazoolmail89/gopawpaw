@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import java.awt.Component;
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -35,9 +36,13 @@ import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
+import com.gopawpaw.dev.common.encryption.MD5;
 import com.gopawpaw.frame.dataEntity.Dmnd_det;
 import com.gopawpaw.frame.dataEntity.Omnd_det;
 import com.gopawpaw.javax.swing.GppJComboBox;
+import com.gopawpaw.kynb.RegisterDialog;
+import com.gopawpaw.kynb.utils.GppConfiguration;
+
 import javax.swing.JMenu;
 import javax.swing.plaf.synth.SynthLookAndFeel;
 
@@ -61,6 +66,12 @@ import javax.swing.plaf.synth.SynthLookAndFeel;
 public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+
+	private String mLiyeqin = "\r\n技术支持：李业钦\r\n QQ:1483695671\r\n 电话：0774-7290788";
+
+	private String mOffice = "联系快译支持：kuaiyi_support@163.com" + mLiyeqin;
+	private String mSupport = mLiyeqin;
+
 	private JPanel jContentPane = null;
 	private MainPanelTree mainPanelTree = null;
 
@@ -79,15 +90,18 @@ public class MainFrame extends JFrame {
 	private JButton jButton4 = null;
 	private JButton jButton5 = null;
 
-	public static Vector<Dmnd_det> actionHistory = new Vector<Dmnd_det>();  //  @jve:decl-index=0:
+	public static Vector<Dmnd_det> actionHistory = new Vector<Dmnd_det>(); // @jve:decl-index=0:
 	public static Vector<Dmnd_det> actionHistory2 = new Vector<Dmnd_det>();
+
+	private GppConfiguration mGppConfiguration;
+
 	/**
 	 * @throws HeadlessException
 	 */
 	public MainFrame() throws HeadlessException {
 		// TODO Auto-generated constructor stub
 		super();
- 
+
 		initialize();
 	}
 
@@ -172,8 +186,7 @@ public class MainFrame extends JFrame {
 			jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
 					if (MainFrame.actionHistory.size() > 1) {
-						Dmnd_det tempdd = MainFrame.actionHistory
-								.lastElement();
+						Dmnd_det tempdd = MainFrame.actionHistory.lastElement();
 						MainFrame.actionHistory2.add(tempdd);
 						MainFrame.actionHistory.removeElement(tempdd);
 						if (!MainFrame.actionHistory.isEmpty()) {
@@ -293,9 +306,9 @@ public class MainFrame extends JFrame {
 
 							if (!modules.actionModule(dd)) {
 
-								JOptionPane.showConfirmDialog(null, modules
-										.getActionModuleMessage(), "系统提示",
-										JOptionPane.YES_NO_OPTION,
+								JOptionPane.showConfirmDialog(null,
+										modules.getActionModuleMessage(),
+										"系统提示", JOptionPane.YES_NO_OPTION,
 										JOptionPane.QUESTION_MESSAGE);
 							} else {
 
@@ -342,9 +355,9 @@ public class MainFrame extends JFrame {
 								tempdd = tempod.getDmnd_det();
 								if (!modules.actionModule(tempdd)) {
 
-									JOptionPane.showConfirmDialog(null, modules
-											.getActionModuleMessage(), "系统提示",
-											JOptionPane.YES_NO_OPTION,
+									JOptionPane.showConfirmDialog(null,
+											modules.getActionModuleMessage(),
+											"系统提示", JOptionPane.YES_NO_OPTION,
 											JOptionPane.QUESTION_MESSAGE);
 								} else {
 
@@ -449,8 +462,8 @@ public class MainFrame extends JFrame {
 			jButton3.setText("登陆");
 			jButton3.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent evt) {
-					System.out.println("jButton3.mouseClicked, event="+evt);
-					//TODO add your code for jButton3.mouseClicked
+					System.out.println("jButton3.mouseClicked, event=" + evt);
+					// TODO add your code for jButton3.mouseClicked
 				}
 			});
 		}
@@ -500,32 +513,32 @@ public class MainFrame extends JFrame {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 
-//				 SynthLookAndFeel synth = new SynthLookAndFeel();
-//				 try {
-//				 synth.load(MainFrame.class.getResourceAsStream("demo.xml"),
-//				 MainFrame.class);
-//				 } catch (ParseException e1) {
-//				 // TODO Auto-generated catch block
-//				 e1.printStackTrace();
-//				 }
-//				 try {
-//				 UIManager.setLookAndFeel(synth);
-//				 } catch (UnsupportedLookAndFeelException e1) {
-//				 // TODO Auto-generated catch block
-//				 e1.printStackTrace();
-//				 }
+				// SynthLookAndFeel synth = new SynthLookAndFeel();
+				// try {
+				// synth.load(MainFrame.class.getResourceAsStream("demo.xml"),
+				// MainFrame.class);
+				// } catch (ParseException e1) {
+				// // TODO Auto-generated catch block
+				// e1.printStackTrace();
+				// }
+				// try {
+				// UIManager.setLookAndFeel(synth);
+				// } catch (UnsupportedLookAndFeelException e1) {
+				// // TODO Auto-generated catch block
+				// e1.printStackTrace();
+				// }
 
 				try {
 
-//					 UIManager.setLookAndFeel("com.jgoodies.looks.plastic.Plastic3DLookAndFeel");
+					// UIManager.setLookAndFeel("com.jgoodies.looks.plastic.Plastic3DLookAndFeel");
 					UIManager.setLookAndFeel(
-//					 UIManager.getCrossPlatformLookAndFeelClassName()
-//							 UIManager.getSystemLookAndFeelClassName()
-//							 new com.sun.java.swing.plaf.motif.MotifLookAndFeel()
-//							 "com.jgoodies.looks.windows.WindowsLookAndFeel"
-//							"com.jgoodies.looks.plastic.PlasticLookAndFeel"
-							 "com.jgoodies.looks.plastic.Plastic3DLookAndFeel"
-//							 "com.jgoodies.looks.plastic.PlasticXPLookAndFeel"
+					// UIManager.getCrossPlatformLookAndFeelClassName()
+					// UIManager.getSystemLookAndFeelClassName()
+					// new com.sun.java.swing.plaf.motif.MotifLookAndFeel()
+					// "com.jgoodies.looks.windows.WindowsLookAndFeel"
+					// "com.jgoodies.looks.plastic.PlasticLookAndFeel"
+							"com.jgoodies.looks.plastic.Plastic3DLookAndFeel"
+							// "com.jgoodies.looks.plastic.PlasticXPLookAndFeel"
 
 							);
 
@@ -553,7 +566,13 @@ public class MainFrame extends JFrame {
 						exitSystem();
 					}
 				});
-				thisClass.setVisible(true);
+
+				if (thisClass.cheakRegister()) {
+					thisClass.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+					thisClass.setVisible(true);
+				} else {
+					System.exit(0);
+				}
 
 			}
 		});
@@ -566,7 +585,6 @@ public class MainFrame extends JFrame {
 			System.exit(0);
 	}
 
-	
 	/**
 	 * This method initializes this
 	 * 
@@ -581,13 +599,13 @@ public class MainFrame extends JFrame {
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
 		this.setTitle("快译农保");
-
+		mGppConfiguration = new GppConfiguration("ini.ini");
 		getMainPanelTree().actionMainMenu();
-		
-		Component[] c  = this.getJPanel().getComponents();
-		for(int i = 0 ;i<c.length;i++){
+
+		Component[] c = this.getJPanel().getComponents();
+		for (int i = 0; i < c.length; i++) {
 			Object o = c[i];
-			
+
 			System.out.println(o.getClass());
 		}
 
@@ -603,8 +621,8 @@ public class MainFrame extends JFrame {
 
 			jContentPane = new JPanel();
 			jContentPane.setLayout(new BorderLayout());
-			//隐藏掉头部工具栏
-//			jContentPane.add(getJPanel(), BorderLayout.NORTH);
+			// 隐藏掉头部工具栏
+			// jContentPane.add(getJPanel(), BorderLayout.NORTH);
 			jContentPane.add(getMainPanelTree(), BorderLayout.CENTER);
 			jContentPane.add(getJPanel1(), BorderLayout.SOUTH);
 		}
@@ -614,7 +632,7 @@ public class MainFrame extends JFrame {
 	private MainPanelTree getMainPanelTree() {
 		if (mainPanelTree == null) {
 			mainPanelTree = new MainPanelTree();
-			
+
 		}
 		return mainPanelTree;
 	}
@@ -626,4 +644,89 @@ public class MainFrame extends JFrame {
 		}
 		return jJMenuBar;
 	}
+
+	private boolean cheakRegister() {
+		String diskID = chenmin.io.DiskID.DiskID();
+
+		String registerCode = mGppConfiguration.getValue("registerCode");
+
+		String displayKey = genDisplayCode(diskID);
+
+		final String regKey = genKeyCode(displayKey);
+
+		// System.out.println(displayKey);
+		//
+		// System.out.println(genKeyCode(displayKey));
+
+		if (registerCode == null || !registerCode.equals(regKey)) {
+			boolean regFlag = false;
+			RegisterDialog rd = new RegisterDialog(this) {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				protected void actionFinish(int option, String regCode) {
+					// TODO Auto-generated method stub
+					if (option == RegisterDialog.YES_OPTION) {
+						System.out.println(regCode);
+						if (regKey.equals(regCode)) {
+							// 注册成功
+							mGppConfiguration.setValue("registerCode", regCode);
+							mGppConfiguration.saveFile();
+
+							String tempMSG = "恭喜您注册成功，非常感谢您对快译软件的支持！\r\n请重新启动系统，即可生效。";
+							// 声音提示
+							Toolkit.getDefaultToolkit().beep();
+							JOptionPane.showConfirmDialog(null, tempMSG,
+									"系统提示", JOptionPane.YES_NO_OPTION,
+									JOptionPane.INFORMATION_MESSAGE);
+
+							super.actionFinish(option, regCode);
+						} else {
+							// 注册失败
+							String tempMSG = "该注册码不能在本机使用，或者您的注册码已经过期，请联系管理员获取注册码！\r\n"
+									+ mSupport;
+							// 声音提示
+							Toolkit.getDefaultToolkit().beep();
+							JOptionPane.showConfirmDialog(null, tempMSG,
+									"系统提示", JOptionPane.YES_NO_OPTION,
+									JOptionPane.INFORMATION_MESSAGE);
+						}
+
+					} else {
+						// 取消
+						super.actionFinish(option, regCode);
+					}
+
+				}
+			};
+			rd.setTitle("您的支持，我们的动力！");
+			rd.setKeyCode(displayKey);
+			rd.setVisible(true);
+
+			return regFlag;
+		} else {
+			return true;
+		}
+
+		//
+		// return true;
+	}
+
+	private String genDisplayCode(String diskID) {
+		MD5 md5 = new MD5();
+
+		return md5.getMD5ofStr(diskID);
+	}
+
+	private String genKeyCode(String displayCode) {
+		String k3 = displayCode.substring(6, 21);
+
+		MD5 md5 = new MD5();
+
+		return md5.getMD5ofStr(k3);
+	}
+
 } // @jve:decl-index=0:visual-constraint="8,5"

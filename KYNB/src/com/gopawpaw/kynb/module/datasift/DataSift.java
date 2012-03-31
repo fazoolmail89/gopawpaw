@@ -221,7 +221,7 @@ public class DataSift extends BaseModuleFrame implements GppJarRunableInterface 
 				jPanel3, jPanel4);
 		jSplitPane11.setDividerLocation(225);
 		jSplitPane11.setOneTouchExpandable(true);
-		jSplitPane11.setDividerSize(10);
+		jSplitPane11.setDividerSize(6);
 
 		JSplitPane jSplitPane1 = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
 				jPanel1, jSplitPane11);
@@ -235,7 +235,7 @@ public class DataSift extends BaseModuleFrame implements GppJarRunableInterface 
 				jPanel5, jPanel6);
 		jSplitPane21.setDividerLocation(225);
 		jSplitPane21.setOneTouchExpandable(true);
-		jSplitPane21.setDividerSize(10);
+		jSplitPane21.setDividerSize(6);
 
 		JSplitPane jSplitPane2 = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
 				jPanel2, jSplitPane21);
@@ -663,23 +663,34 @@ public class DataSift extends BaseModuleFrame implements GppJarRunableInterface 
 					int i = 0;
 					while (commonsql.nextrecord()) {
 						i++;
-						// GLog.d("", commonsql.getString(1));
-						// GLog.d("", commonsql.getString(2));
-						// GLog.d("", commonsql.getString(3));
-						// GLog.d("", commonsql.getString(4));
-						// GLog.d("", commonsql.getString(5));
-						// GLog.d("", commonsql.getString(6));
 						if (i == 1) {
 							// 当是第一行时，遍历第一行共有多少列，并以此列数来做表格
 							String c = null;
-							while ((c = commonsql.getString(colum)) != null) {
-								GLog.d("colum:" + colum, c);
-								mTitle.add(c);
+							String c2 = null;
+							String c20 = "";
+							boolean flag = false;
+							while ((c = commonsql.getString(colum)) != null || (c2 = commonsql.getString(colum+1)) != null) {
+								//允许其中一列未null时，第二列以后还有数据
+								String temp = c;
+								if(flag){
+									temp = c20;
+									c20 = c2;
+								}
+								
+								if(temp == null){
+									temp = "<列名未知>";
+									c20 = c2;
+									flag = true;
+								}
+								
+									
+								GLog.d("colum:" + colum, temp);
+								mTitle.add(temp);
 
 								if (jComboBox != null) {
 									JComboBoxItem ji = new JComboBoxItem();
 									ji.index = colum-1;
-									ji.name = c;
+									ji.name = temp;
 									jComboBox.addItem(ji);
 								}
 								colum++;

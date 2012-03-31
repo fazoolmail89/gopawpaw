@@ -7,7 +7,7 @@
 			jdbc:odbc:Driver={MicroSoft Access Driver (*.mdb)};DBQ=D:\Eclipse_Workspace\KYNB\DBCenter\DBCenter.mdb
 		</property>
 		<property name="connection.username">admin</property>
-		<property name="connection.password">xxxxxxx</property>
+		<property name="connection.password">qtwjm`c</property>
 		<property name="connection.driver_class">
 			sun.jdbc.odbc.JdbcOdbcDriver
 		</property>
@@ -21,7 +21,7 @@
 			jdbc:datadirect:openedge://localhost:6672;databaseName=mfgprod
 		</property>
 		<property name="connection.username">sysprogress</property>
-		<property name="connection.password">qad</property>
+		<property name="connection.password">qtwjm`c</property>
 		<property name="connection.driver_class">
 			com.ddtek.jdbc.openedge.OpenEdgeDriver
 		</property>
@@ -35,7 +35,7 @@
 			jdbc:microsoft:sqlserver://localhost:1433;databaseName=gpp_sys
 		</property>
 		<property name="connection.username">sa</property>
-		<property name="connection.password">xxxxxxx</property>
+		<property name="connection.password">qtwjm`c</property>
 		<property name="connection.driver_class">
 			com.microsoft.jdbc.sqlserver.SQLServerDriver
 		</property>
@@ -56,27 +56,4 @@
 		</property>
 	</report-host>
 	
-	<about-info>
-		<property name="programs" describe="程序名称" display="true">
-			QAD报表系统2
-		</property>
-		
-		
-		<property name="versions" describe="版本号" display="true">
-			V2010.05.30
-		</property>
-		
-		<property name="author" describe="作者" display="true">
-			李锦华
-		</property>
-		
-		<property name="support" describe="支持" display="false">
-			http://www.support.com
-		</property>
-		
-		<property name="email" describe="邮件" display="false">
-			email@e.com
-		</property>
-	
-	</about-info>
 </programs-configuration>
