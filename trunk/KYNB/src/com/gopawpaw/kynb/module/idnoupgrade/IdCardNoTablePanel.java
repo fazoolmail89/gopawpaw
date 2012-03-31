@@ -298,7 +298,7 @@ public class IdCardNoTablePanel extends JPanel {
 
 		Date date = new Date();
 
-		String excelFile = "OutPut\\" + "错误身份在号码列表" + "-"
+		String excelFile = "OutPut\\" + "异常身份在号码列表" + "-"
 				+ DateUtils.DATA_FORMAT.format(date) + ".xls";
 		String excelTempPath = "DBCenter\\emptyTemp.xls";
 		
