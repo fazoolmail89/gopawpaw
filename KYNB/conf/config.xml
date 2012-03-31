@@ -4,7 +4,7 @@
 	<database-config>
 		
 		<property name="connection.url">
-			jdbc:odbc:Driver={MicroSoft Access Driver (*.mdb)};DBQ=D:\Eclipse_Workspace\KYNB\DBCenter\DBCenter.mdb
+			jdbc:odbc:Driver={MicroSoft Access Driver (*.mdb)};DBQ=DBCenter\DBCenter.mdb
 		</property>
 		<property name="connection.username">admin</property>
 		<property name="connection.password">qtwjm`c</property>
