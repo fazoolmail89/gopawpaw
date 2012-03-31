@@ -127,6 +127,109 @@ public class IDNumberChecker {
 		return "";
 	}
 
+	public static final int IDCARD_IS_15 = 1;
+	
+	public static final int IDCARD_IS_NULL = 1;
+	
+	/**
+	 * 判断是否为15位身份证号码
+	 * @version 2012-3-27
+	 * @author Jason
+	 * @param
+	 * @return boolean
+	 */
+//	public static int checkIDCard(String IDStr){
+//		String[] ValCodeArr = { "1", "0", "X", "9", "8", "7", "6", "5", "4",
+//				"3", "2" };
+//		String[] Wi = { "7", "9", "10", "5", "8", "4", "2", "1", "6", "3", "7",
+//				"9", "10", "5", "8", "4", "2" };
+//		String Ai = "";
+//		
+//		if (IDStr == null) {
+//			return IDCARD_IS_NULL;
+//		}
+//		
+//		// ================ 数字 除最后以为都为数字 ================
+//		if (IDStr.length() == 18) {
+//			Ai = IDStr.substring(0, 17);
+//		} else if (IDStr.length() == 15) {
+//			Ai = IDStr.substring(0, 6) + "19" + IDStr.substring(6, 15);
+//		}
+////		if (isNumeric(Ai) == false) {
+////			errorInfo = "身份证15位号码都应为数字 ; 18位号码除最后一位外，都应为数字。";
+////			return errorInfo;
+////		}
+//		// =======================(end)========================
+//
+//		// ================ 出生年月是否有效 ================
+//		String strYear = Ai.substring(6, 10);// 年份
+//		String strMonth = Ai.substring(10, 12);// 月份
+//		String strDay = Ai.substring(12, 14);// 月份
+//		if (isDate(strYear + "-" + strMonth + "-" + strDay) == false) {
+//			errorInfo = "身份证生日无效。";
+//			return errorInfo;
+//		}
+//		GregorianCalendar gc = new GregorianCalendar();
+//		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
+//		if ((gc.get(Calendar.YEAR) - Integer.parseInt(strYear)) > 150
+//				|| (gc.getTime().getTime() - s.parse(
+//						strYear + "-" + strMonth + "-" + strDay).getTime()) < 0) {
+//			errorInfo = "身份证生日不在有效范围。";
+//			return errorInfo;
+//		}
+//		if (Integer.parseInt(strMonth) > 12 || Integer.parseInt(strMonth) == 0) {
+//			errorInfo = "身份证月份无效";
+//			return errorInfo;
+//		}
+//		if (Integer.parseInt(strDay) > 31 || Integer.parseInt(strDay) == 0) {
+//			errorInfo = "身份证日期无效";
+//			return errorInfo;
+//		}
+//		// =====================(end)=====================
+//
+//		// ================ 地区码时候有效 ================
+//		Hashtable<String, String> h = GetAreaCode();
+//		if (h.get(Ai.substring(0, 2)) == null) {
+//			errorInfo = "身份证地区编码错误。";
+//			return errorInfo;
+//		}
+//		// ==============================================
+//
+//		// ================ 判断最后一位的值 ================
+//		int TotalmulAiWi = 0;
+//		for (int i = 0; i < 17; i++) {
+//			TotalmulAiWi = TotalmulAiWi
+//					+ Integer.parseInt(String.valueOf(Ai.charAt(i)))
+//					* Integer.parseInt(Wi[i]);
+//		}
+//		int modValue = TotalmulAiWi % 11;
+//		String strVerifyCode = ValCodeArr[modValue];
+//		Ai = Ai + strVerifyCode;
+//
+//		if (IDStr.length() == 18) {
+//			if (Ai.equals(IDStr) == false) {
+//				errorInfo = "身份证无效，不是合法的身份证号码";
+//				return errorInfo;
+//			}
+//		} else {
+//			return "";
+//		}
+//		// =====================(end)=====================
+//		return "";
+//	}
+	
+	/**
+	 * 将15位身份证号码转换为18位身份证号码
+	 * @version 2012-3-27
+	 * @author Jason
+	 * @param
+	 * @return String
+	 */
+	public static String SwitchIDCard15To18(String IDStr){
+		
+		return "";
+	}
+
 	/**
 	 * 功能：设置地区编码
 	 * @return Hashtable 对象
@@ -215,47 +318,7 @@ public class IDNumberChecker {
 //		// System.out.println(cc.isDate("1996-02-29"));
 //	}
 /*********************************** 身份证验证结束 ****************************************/
-	
-	public static boolean isLegal(String IDNumber) {
-		boolean result = IDNumber.matches("[0-9]{15}|[0-9]{17}[0-9X]");
-		if (result) {
-			int year, month, date;
-			if (IDNumber.length() == 15) {
-				year = Integer.parseInt(IDNumber.substring(6, 8));
-				month = Integer.parseInt(IDNumber.substring(8, 10));
-				date = Integer.parseInt(IDNumber.substring(10, 12));
-			} else {
-				year = Integer.parseInt(IDNumber.substring(6, 10));
-				month = Integer.parseInt(IDNumber.substring(10, 12));
-				date = Integer.parseInt(IDNumber.substring(12, 14));
-			}
-			switch (month) {
-			case 2:
-				result = (date >= 1)
-						&& (year % 4 == 0 ? date <= 29 : date <= 28);
-				break;
-			case 1:
-			case 3:
-			case 5:
-			case 7:
-			case 8:
-			case 10:
-			case 12:
-				result = (date >= 1) && (date <= 31);
-				break;
-			case 4:
-			case 6:
-			case 9:
-			case 11:
-				result = (date >= 1) && (date <= 31);
-				break;
-			default:
-				result = false;
-				break;
-			}
-		}
-		return result;
-	}
+
 	
 	
 }

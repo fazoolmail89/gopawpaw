@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gopawpaw.frame.tool;
+package com.gopawpaw.frame.utils;
 
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;

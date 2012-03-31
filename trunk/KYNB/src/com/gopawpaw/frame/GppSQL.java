@@ -3,20 +3,11 @@
  */
 package com.gopawpaw.frame;
 
-import java.io.File;
-import java.io.IOException;
 import java.sql.ResultSet;
-import java.util.Iterator;
-import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
-
-import com.gopawpaw.dev.common.GppCommonDBAccess;
+import com.gopawpaw.frame.utils.StringUtils;
 
 /**
  * @version 2009-10-7
@@ -43,7 +34,9 @@ public class GppSQL {
 		if (driveName == null || connectName == null) {
 			initDrive();
 		}
-
+		
+		
+		
 		commonsql = new GppCommonDBAccessEx();
 		commonsql.setDriveName(driveName);
 		commonsql.setConnectName(connectName);
@@ -66,7 +59,7 @@ public class GppSQL {
 		driveName = GlobalParameter.getDatabaseInfo().getDriveName();
 		user = GlobalParameter.getDatabaseInfo().getUser();
 		password = GlobalParameter.getDatabaseInfo().getPassword();
-
+		password = StringUtils.unObfuscation(password);
 	}
 
 	/**

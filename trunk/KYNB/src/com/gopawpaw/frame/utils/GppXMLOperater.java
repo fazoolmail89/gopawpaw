@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gopawpaw.frame.tool;
+package com.gopawpaw.frame.utils;
 
 import javax.swing.SwingUtilities;
 import java.awt.BorderLayout;

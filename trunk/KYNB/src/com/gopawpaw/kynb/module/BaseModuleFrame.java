@@ -75,7 +75,7 @@ public class BaseModuleFrame extends BaseFrame{
 	private void initialize() {
 		this.setSize(900, 600);
 		this.setLocation(200, 100);
-		this.setTitle("快译农保信息处理系统 V1.1");
+		this.setTitle("快译农保信息处理系统 ");
 		GlobalParameter.initialize();
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Image img = kit.getImage("Applications.jpg");
