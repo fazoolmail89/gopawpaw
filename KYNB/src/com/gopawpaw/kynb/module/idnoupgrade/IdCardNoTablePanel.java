@@ -4,13 +4,18 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.text.ParseException;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -19,8 +24,13 @@ import javax.swing.table.TableColumn;
 
 import com.gopawpaw.kynb.GppStyleTable;
 import com.gopawpaw.kynb.IDNumberChecker;
+import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.db.DBException;
+import com.gopawpaw.kynb.db.ExcelAccess;
+import com.gopawpaw.kynb.db.ExcelWriter;
+import com.gopawpaw.kynb.db.ExportExcelListener;
+import com.gopawpaw.kynb.utils.DateUtils;
 
 /**
  * @描述 带有15位身份证号码及错误身份证号码表格的滚动面板
@@ -60,7 +70,7 @@ public class IdCardNoTablePanel extends JPanel {
 	private JFrame mf = null;
 	private JLabel title = new JLabel("需升级身份证号码列表(红色为错误身份证号码)：");
 	private Vector<String> mVillagerTableTitle = new Vector<String>(34);
-	private Vector<Vector<Object>> mVillagerData = new Vector<Vector<Object>>(
+	private Vector<Vector<String>> mVillagerData = new Vector<Vector<String>>(
 			34);
 	private IdCardDbAccess icdAccess = new IdCardDbAccess();
 	private IDNumberChecker idNumberChecker = new IDNumberChecker();
@@ -78,7 +88,7 @@ public class IdCardNoTablePanel extends JPanel {
 	 * 初始化面板
 	 */
 	private void initialize() {
-		mVillagerData = getMVillagerData();
+		//mVillagerData = getMVillagerData();//改为点击验证按钮时加载数据
 		setLayout(new BorderLayout());
 		add(title, BorderLayout.NORTH);
 		add(getPaneTableContainer(), BorderLayout.CENTER);
@@ -160,7 +170,7 @@ public class IdCardNoTablePanel extends JPanel {
 	}
 	
 	@SuppressWarnings("static-access")
-	public Vector<Vector<Object>> getMVillagerData() {
+	public Vector<Vector<String>> getMVillagerDataFromDb() {
 		try {
 			List<Villager> list = icdAccess.findAllVillagers();
 
@@ -170,6 +180,7 @@ public class IdCardNoTablePanel extends JPanel {
 					mVillagerData.add(getVillagerVector(v));
 				} 
 			}
+			
 		} catch (DBException e) {
 			e.printStackTrace();
 		} catch (ParseException e) {
@@ -180,10 +191,10 @@ public class IdCardNoTablePanel extends JPanel {
 	
 	/**
 	 * 刷新表格数据
-	 * @param mVillagerData
+	 * @param rowData
 	 */
-	public void refreshTable(Vector<Vector<Object>> mVillagerData) {
-		DefaultTableModel model = new DefaultTableModel(mVillagerData,
+	public void refreshTable(Vector<Vector<String>> rowData) {
+		DefaultTableModel model = new DefaultTableModel(rowData,
 				mVillagerTableTitle);
 		((GppStyleTable) idCardNoTable).updateModel(model);
 
@@ -235,8 +246,8 @@ public class IdCardNoTablePanel extends JPanel {
 		newITcolumn.setCellRenderer(newITFontColor);
 	}
 	
-	private Vector<Object> getVillagerVector(Villager v) {
-		Vector<Object> rowdata = new Vector<Object>(33);
+	private Vector<String> getVillagerVector(Villager v) {
+		Vector<String> rowdata = new Vector<String>(33);
 		rowdata.add("" + v.getV_id());
 		rowdata.add(v.getV_name());
 		rowdata.add(v.getV_sex());
@@ -279,6 +290,52 @@ public class IdCardNoTablePanel extends JPanel {
 		return rowdata;
 	}
 	
+	/**
+	 * 导出页面表格数据
+	 * @param progressBar
+	 */
+	public void actionSaveTableDateToExce(final JProgressBar progressBar) {
+
+		Date date = new Date();
+
+		String excelFile = "OutPut\\" + "错误身份在号码列表" + "-"
+				+ DateUtils.DATA_FORMAT.format(date) + ".xls";
+		String excelTempPath = "DBCenter\\emptyTemp.xls";
+		
+		progressBar.setStringPainted(true); // 显示提示信息
+		progressBar.setIndeterminate(false); // 确定进度的进度条
+		progressBar.setString("进度：" + 0 + "/" + 0);
+		progressBar.setValue(0); // 进度值
+		
+		ExcelWriter ew = new ExcelWriter(excelTempPath,excelFile);
+		ew.setmTableTitle(mVillagerTableTitle);
+		
+		Vector<Vector<String>> exportDate = mVillagerData;
+		
+		ew.setmTableData(mVillagerData);
+		ew.setExportExcelListener(new ExportExcelListener() {
+			
+			private boolean flag = false;
+			@Override
+			public void onExportProgress(int total, int current, boolean isOk) {
+				// TODO Auto-generated method stub
+				if(!flag){
+					progressBar.setMaximum(total);
+					flag = true;
+				}else{
+					progressBar.setString("进度：" + current + "/" + total);
+					progressBar.setValue(current); // 进度值
+				}
+			}
+		});
+		
+		if(ew.actionSave()){
+			String tempMSG = "成功导出到："+excelFile;
+			Toolkit.getDefaultToolkit().beep();
+			JOptionPane.showConfirmDialog(null, tempMSG, "系统提示",
+					JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE);
+		}
+	}
 	public JFrame getMf() {
 		return mf;
 	}
@@ -291,11 +348,11 @@ public class IdCardNoTablePanel extends JPanel {
 		return idCardNoTable;
 	}
 	
-	public Vector<Vector<Object>> getmVillagerData() {
+	public Vector<Vector<String>> getmVillagerData() {
 		return mVillagerData;
 	}
 
-	public void setmVillagerData(Vector<Vector<Object>> mVillagerData) {
+	public void setmVillagerData(Vector<Vector<String>> mVillagerData) {
 		this.mVillagerData = mVillagerData;
 	}
 

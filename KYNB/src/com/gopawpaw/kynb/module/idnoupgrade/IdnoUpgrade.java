@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
 
 import com.gopawpaw.dev.common.GppJarRunableInterface;
@@ -58,10 +59,14 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 	 * 按钮面板
 	 */
 	private JPanel panelButtonContainer = null;
-	private JButton btnUpgrade = new JButton("升级");
 	private JButton btnCheck = new JButton("验证");
+	private JButton btnUpgrade = new JButton("升级");
 	private JButton btnSave = new JButton("保存");
 	private JButton btnQuit = new JButton("取消");
+	private JButton btnExport = new JButton("导出");
+	
+	private JProgressBar progressBar1 = new JProgressBar();
+	private JProgressBar progressBar2 = new JProgressBar();
 	// ---------------------------------------------------
 
 	private JPanel jPanelBottom = null;
@@ -125,7 +130,7 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 		setLayout(new BorderLayout());
 		setContentPane(getJContentPane());
 		// add(getJContentPane(), BorderLayout.CENTER);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
 
@@ -232,7 +237,7 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// 获取表格数据
-				Vector<Vector<Object>> rowData = idCardNoTablePanel
+				Vector<Vector<String>> rowData = idCardNoTablePanel
 						.getmVillagerData();
 				for (int i = 0; i < rowData.size(); i++) {
 					// 获取旧身份证号码
@@ -252,7 +257,12 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 		btnCheck.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				idCardNoTablePanel.setCellColor();
+				Vector<Vector<String>> rowData = idCardNoTablePanel
+						.getMVillagerDataFromDb();
+				progressBar1.setStringPainted(true); // 显示提示信息
+				progressBar1.setIndeterminate(false); // 确定进度的进度条
+				//System.out.println(rowData.size());
+				idCardNoTablePanel.refreshTable(rowData);
 			}
 		});
 
@@ -266,7 +276,7 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 				if (choseRs == 0) {
 					boolean result = false;
 					// 获取表格数据
-					Vector<Vector<Object>> rowData = idCardNoTablePanel
+					Vector<Vector<String>> rowData = idCardNoTablePanel
 							.getmVillagerData();
 					List<Villager> list = new ArrayList<Villager>();
 					IdCardDbAccess icdAccess = new IdCardDbAccess();
@@ -293,6 +303,7 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 						e1.printStackTrace();
 					}
 						// 无论升级是否成功，都刷新表格
+						rowData = idCardNoTablePanel.getMVillagerDataFromDb();
 						idCardNoTablePanel.refreshTable(rowData);
 				}
 			}
@@ -307,7 +318,7 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 						JOptionPane.YES_NO_OPTION);
 				if (choseRs == 0) {
 					// 获取表格数据
-					Vector<Vector<Object>> rowData = idCardNoTablePanel
+					Vector<Vector<String>> rowData = idCardNoTablePanel
 							.getmVillagerData();
 					for (int i = 0; i < rowData.size(); i++) {
 						rowData.get(i)
@@ -318,11 +329,19 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 				}
 			}
 		});
+		
+		btnExport.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				idCardNoTablePanel.actionSaveTableDateToExce(progressBar2);
+			}
+		});
 
-		panelButtonContainer.add(btnUpgrade);
 		panelButtonContainer.add(btnCheck);
+		panelButtonContainer.add(btnUpgrade);
 		panelButtonContainer.add(btnSave);
 		panelButtonContainer.add(btnQuit);
+		panelButtonContainer.add(btnExport);
 		panelButtonContainer.setPreferredSize(new Dimension(70, 500));
 		return panelButtonContainer;
 	}
