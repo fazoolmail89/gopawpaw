@@ -336,6 +336,7 @@ public class IdCardNoTablePanel extends JPanel {
 					JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE);
 		}
 	}
+	
 	public JFrame getMf() {
 		return mf;
 	}
