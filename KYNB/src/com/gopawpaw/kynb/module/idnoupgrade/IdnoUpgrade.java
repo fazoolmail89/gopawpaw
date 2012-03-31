@@ -37,7 +37,7 @@ import com.gopawpaw.kynb.module.BaseModuleFrame;
 public class IdnoUpgrade extends BaseModuleFrame implements
 		GppJarRunableInterface {
 
-	public static JFrame mf = null;
+	//public JFrame mf = null;
 
 	/**
 	 * 
@@ -131,7 +131,7 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 		setContentPane(getJContentPane());
 		// add(getJContentPane(), BorderLayout.CENTER);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setVisible(true);
+		//setVisible(true);
 	}
 
 	/**
@@ -172,11 +172,11 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 				GlobalUI.initUI();
 
 				// IdnoUpgrade thisClass = new IdnoUpgrade();
-				mf = new IdnoUpgrade();
+				IdnoUpgrade thisClass  = new IdnoUpgrade();
 				// thisClass.setVisible(true);
-				mf.setVisible(true);
+				thisClass.setVisible(true);
 
-				idCardNoTablePanel.setMf(mf);
+				idCardNoTablePanel.setMf(thisClass);
 			}
 		});
 	}
@@ -206,7 +206,7 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 		panelCenter.setLayout(new BorderLayout());
 		panelCenter.add(getIdCardNoTablePanel(), BorderLayout.CENTER);
 		panelCenter.add(getPanelButtonContainer(), BorderLayout.EAST);
-		panelCenter.setVisible(true);
+		//panelCenter.setVisible(true);
 		return panelCenter;
 	}
 
