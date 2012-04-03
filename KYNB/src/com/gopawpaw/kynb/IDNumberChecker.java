@@ -127,96 +127,210 @@ public class IDNumberChecker {
 		return "";
 	}
 
-	public static final int IDCARD_IS_15 = 1;
+	/**
+	 * 身份证是合法
+	 */
+	public static final int IDCARD_IS_OK = 0;
 	
-	public static final int IDCARD_IS_NULL = 1;
+	/**
+	 * 身份证是15位 合法
+	 */
+	public static final int IDCARD_IS_OK_15 = 1;
 	
+	/**
+	 *  身份证为null
+	 */
+	public static final int IDCARD_IS_NULL = 2;
+	
+	/**
+	 *  身份证生日无效
+	 */
+	public static final int IDCARD_BITHDAY_FALSE = 3;
+	
+	/**
+	 *  身份证生日不在有效范围
+	 */
+	public static final int IDCARD_BITHDAY_FALSE2 = 4;
+	
+	/**
+	 *  身份证月份无效
+	 */
+	public static final int IDCARD_BITHDAY_FALSE_MONTH = 5;
+	
+	/**
+	 *  身份证日期无效
+	 */
+	public static final int IDCARD_BITHDAY_FALSE_DATE = 6;
+	
+	/**
+	 *  身份证地区编码错误
+	 */
+	public static final int IDCARD_ADDRESS_FALSE = 7;
+	
+	/**
+	 *  身份证无效，不是合法的身份证号码
+	 */
+	public static final int IDCARD_CHECK_FALSE = 8;
+	
+	/**
+	 *  身份证15位号码都应为数字 ; 18位号码除最后一位外，都应为数字。
+	 */
+	public static final int IDCARD_CHECK_FALSE_NUMBER = 9;
+	
+	/**
+	 *  身份证号位数应该为15位或18位号码
+	 */
+	public static final int IDCARD_CHECK_FALSE_LENGTH= 10;
+	
+	/**
+	 * 获取身份证错误信息
+	 * @version 2012-4-3
+	 * @author Jason
+	 * @param
+	 * @return String
+	 */
+	public static String getIDCardErrorInfo(int errorCode){
+		
+		String errorInfo = "";
+		switch(errorCode){
+		case IDCARD_IS_OK:
+			errorInfo = "身份证是合法";
+			break;
+		case IDCARD_IS_OK_15:
+			errorInfo = "身份证是15位 合法";
+			break;
+		case IDCARD_IS_NULL:
+			errorInfo = "身份证号码为null";
+			break;
+		case IDCARD_BITHDAY_FALSE:
+			errorInfo = "身份证生日无效";
+			break;
+		case IDCARD_BITHDAY_FALSE2:
+			errorInfo = "身份证生日不在有效范围";
+			break;
+		case IDCARD_BITHDAY_FALSE_MONTH:
+			errorInfo = "身份证月份无效";
+			break;
+		case IDCARD_BITHDAY_FALSE_DATE:
+			errorInfo = "身份证日期无效";
+			break;
+		case IDCARD_ADDRESS_FALSE:
+			errorInfo = "身份证地区编码错误";
+			break;
+		case IDCARD_CHECK_FALSE:
+			errorInfo = "身份证无效，不是合法的身份证号码";
+			break;
+		case IDCARD_CHECK_FALSE_NUMBER:
+			errorInfo = "身份证15位号码都应为数字 ; 18位号码除最后一位外，都应为数字。";
+			break;
+		case IDCARD_CHECK_FALSE_LENGTH:
+			errorInfo = "身份证号位数应该为15位或18位号码";
+			break;
+		}
+		
+		return errorInfo;
+	}
 	/**
 	 * 判断是否为15位身份证号码
 	 * @version 2012-3-27
 	 * @author Jason
 	 * @param
 	 * @return boolean
+	 * @throws ParseException 
+	 * @throws NumberFormatException 
 	 */
-//	public static int checkIDCard(String IDStr){
-//		String[] ValCodeArr = { "1", "0", "X", "9", "8", "7", "6", "5", "4",
-//				"3", "2" };
-//		String[] Wi = { "7", "9", "10", "5", "8", "4", "2", "1", "6", "3", "7",
-//				"9", "10", "5", "8", "4", "2" };
-//		String Ai = "";
-//		
-//		if (IDStr == null) {
-//			return IDCARD_IS_NULL;
-//		}
-//		
-//		// ================ 数字 除最后以为都为数字 ================
-//		if (IDStr.length() == 18) {
-//			Ai = IDStr.substring(0, 17);
-//		} else if (IDStr.length() == 15) {
-//			Ai = IDStr.substring(0, 6) + "19" + IDStr.substring(6, 15);
-//		}
-////		if (isNumeric(Ai) == false) {
-////			errorInfo = "身份证15位号码都应为数字 ; 18位号码除最后一位外，都应为数字。";
-////			return errorInfo;
-////		}
-//		// =======================(end)========================
-//
-//		// ================ 出生年月是否有效 ================
-//		String strYear = Ai.substring(6, 10);// 年份
-//		String strMonth = Ai.substring(10, 12);// 月份
-//		String strDay = Ai.substring(12, 14);// 月份
-//		if (isDate(strYear + "-" + strMonth + "-" + strDay) == false) {
-//			errorInfo = "身份证生日无效。";
-//			return errorInfo;
-//		}
-//		GregorianCalendar gc = new GregorianCalendar();
-//		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
-//		if ((gc.get(Calendar.YEAR) - Integer.parseInt(strYear)) > 150
-//				|| (gc.getTime().getTime() - s.parse(
-//						strYear + "-" + strMonth + "-" + strDay).getTime()) < 0) {
-//			errorInfo = "身份证生日不在有效范围。";
-//			return errorInfo;
-//		}
-//		if (Integer.parseInt(strMonth) > 12 || Integer.parseInt(strMonth) == 0) {
-//			errorInfo = "身份证月份无效";
-//			return errorInfo;
-//		}
-//		if (Integer.parseInt(strDay) > 31 || Integer.parseInt(strDay) == 0) {
-//			errorInfo = "身份证日期无效";
-//			return errorInfo;
-//		}
-//		// =====================(end)=====================
-//
-//		// ================ 地区码时候有效 ================
-//		Hashtable<String, String> h = GetAreaCode();
-//		if (h.get(Ai.substring(0, 2)) == null) {
-//			errorInfo = "身份证地区编码错误。";
-//			return errorInfo;
-//		}
-//		// ==============================================
-//
-//		// ================ 判断最后一位的值 ================
-//		int TotalmulAiWi = 0;
-//		for (int i = 0; i < 17; i++) {
-//			TotalmulAiWi = TotalmulAiWi
-//					+ Integer.parseInt(String.valueOf(Ai.charAt(i)))
-//					* Integer.parseInt(Wi[i]);
-//		}
-//		int modValue = TotalmulAiWi % 11;
-//		String strVerifyCode = ValCodeArr[modValue];
-//		Ai = Ai + strVerifyCode;
-//
-//		if (IDStr.length() == 18) {
-//			if (Ai.equals(IDStr) == false) {
-//				errorInfo = "身份证无效，不是合法的身份证号码";
-//				return errorInfo;
-//			}
-//		} else {
-//			return "";
-//		}
-//		// =====================(end)=====================
-//		return "";
-//	}
+	public static int checkIDCard(String IDStr) throws NumberFormatException, ParseException{
+		String[] ValCodeArr = { "1", "0", "X", "9", "8", "7", "6", "5", "4",
+				"3", "2" };
+		String[] Wi = { "7", "9", "10", "5", "8", "4", "2", "1", "6", "3", "7",
+				"9", "10", "5", "8", "4", "2" };
+		String Ai = "";
+		
+		if (IDStr == null) {
+			return IDCARD_IS_NULL;
+		}
+		
+		// ================ 数字 除最后以为都为数字 ================
+		boolean flag15 = false;
+		if (IDStr.length() == 18) {
+			Ai = IDStr.substring(0, 17);
+		} else if (IDStr.length() == 15) {
+			flag15 = true;
+			Ai = IDStr.substring(0, 6) + "19" + IDStr.substring(6, 15);
+		} else {
+			return IDCARD_CHECK_FALSE_LENGTH;
+		}
+		if (isNumeric(Ai) == false) {
+			//"身份证15位号码都应为数字 ; 18位号码除最后一位外，都应为数字。";
+			return IDCARD_CHECK_FALSE_NUMBER;
+		}
+		// =======================(end)========================
+
+		// ================ 出生年月是否有效 ================
+		String strYear = Ai.substring(6, 10);// 年份
+		String strMonth = Ai.substring(10, 12);// 月份
+		String strDay = Ai.substring(12, 14);// 月份
+		if (isDate(strYear + "-" + strMonth + "-" + strDay) == false) {
+			//"身份证生日无效。";
+			return IDCARD_BITHDAY_FALSE;
+		}
+		GregorianCalendar gc = new GregorianCalendar();
+		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
+		if ((gc.get(Calendar.YEAR) - Integer.parseInt(strYear)) > 150
+				|| (gc.getTime().getTime() - s.parse(
+						strYear + "-" + strMonth + "-" + strDay).getTime()) < 0) {
+			//"身份证生日不在有效范围。";
+			return IDCARD_BITHDAY_FALSE2;
+		}
+		if (Integer.parseInt(strMonth) > 12 || Integer.parseInt(strMonth) == 0) {
+			//"身份证月份无效";
+			return IDCARD_BITHDAY_FALSE_MONTH;
+		}
+		if (Integer.parseInt(strDay) > 31 || Integer.parseInt(strDay) == 0) {
+			//"身份证日期无效";
+			return IDCARD_BITHDAY_FALSE_DATE;
+		}
+		// =====================(end)=====================
+
+		// ================ 地区码时候有效 ================
+		Hashtable<String, String> h = GetAreaCode();
+		if (h.get(Ai.substring(0, 2)) == null) {
+			//"身份证地区编码错误。";
+			return IDCARD_ADDRESS_FALSE;
+		}
+		// ==============================================
+
+		// ================ 判断最后一位的值 ================
+		int TotalmulAiWi = 0;
+		for (int i = 0; i < 17; i++) {
+			TotalmulAiWi = TotalmulAiWi
+					+ Integer.parseInt(String.valueOf(Ai.charAt(i)))
+					* Integer.parseInt(Wi[i]);
+		}
+		int modValue = TotalmulAiWi % 11;
+		String strVerifyCode = ValCodeArr[modValue];
+		Ai = Ai + strVerifyCode;
+
+		if (IDStr.length() == 18) {
+			if (Ai.equals(IDStr) == false) {
+				//"身份证无效，不是合法的身份证号码";
+				return IDCARD_CHECK_FALSE;
+			}
+		} else {
+			if(flag15){
+				return IDCARD_IS_OK_15;
+			}else{
+				
+				return IDCARD_IS_OK;
+			}
+		}
+		// =====================(end)=====================
+		if(flag15){
+			return IDCARD_IS_OK_15;
+		}else{
+			return IDCARD_IS_OK;
+		}
+	}
 	
 	/**
 	 * 将15位身份证号码转换为18位身份证号码
@@ -227,9 +341,59 @@ public class IDNumberChecker {
 	 */
 	public static String SwitchIDCard15To18(String IDStr){
 		
-		return "";
+		String[] ValCodeArr = { "1", "0", "X", "9", "8", "7", "6", "5", "4",
+				"3", "2" };
+		String[] Wi = { "7", "9", "10", "5", "8", "4", "2", "1", "6", "3", "7",
+				"9", "10", "5", "8", "4", "2" };
+		
+		if(IDStr == null || IDStr.length() != 15){
+			return null;
+		}
+		
+		String Ai = IDStr.substring(0, 6) + "19" + IDStr.substring(6, 15);
+		
+		int TotalmulAiWi = 0;
+		for (int i = 0; i < 17; i++) {
+			TotalmulAiWi = TotalmulAiWi
+					+ Integer.parseInt(String.valueOf(Ai.charAt(i)))
+					* Integer.parseInt(Wi[i]);
+		}
+		int modValue = TotalmulAiWi % 11;
+		String strVerifyCode = ValCodeArr[modValue];
+		Ai = Ai + strVerifyCode;
+		
+		return Ai;
 	}
 
+	/**
+	 * 将18位身份证号码转换为15位身份证号码
+	 * @version 2012-4-3
+	 * @author Jason
+	 * @param
+	 * @return String 转换后的值，失败则返回错误信息
+	 */
+	public static String SwitchIDCard18To15(String IDStr){
+		try {
+			int check = checkIDCard(IDStr);
+			if(check == IDCARD_IS_OK_15){
+				return IDStr;
+			}else if(check == IDCARD_IS_OK){
+				String s1 = IDStr.substring(0, 6);
+				String s2 = IDStr.substring(8, 17);
+				return s1 + s2;
+			}else{
+				return getIDCardErrorInfo(check);
+			}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "";
+	}
 	/**
 	 * 功能：设置地区编码
 	 * @return Hashtable 对象
@@ -309,14 +473,16 @@ public class IDNumberChecker {
 	 * @param args
 	 * @throws ParseException
 	 */
-//	public static void main(String[] args) throws ParseException {
-//		// String IDCardNum="210102820826411";
-//		// String IDCardNum="210102198208264114";
-//		String IDCardNum = "500113198606245216";
-//		CommonUtil cc = new CommonUtil();
-//		System.out.println(cc.IDCardValidate(IDCardNum));
-//		// System.out.println(cc.isDate("1996-02-29"));
-//	}
+	public static void main(String[] args) throws ParseException {
+		// String IDCardNum="210102820826411";
+		// String IDCardNum="210102198208264114";
+		String IDCardNum = "500113860624521";
+		
+		System.out.println(IDNumberChecker.checkIDCard(IDCardNum));
+		System.out.println(IDNumberChecker.SwitchIDCard15To18(IDCardNum));
+		System.out.println(IDNumberChecker.SwitchIDCard18To15("500113198606245211"));
+		// System.out.println(cc.isDate("1996-02-29"));
+	}
 /*********************************** 身份证验证结束 ****************************************/
 
 	
