@@ -3,6 +3,7 @@ package com.gopawpaw.kynb.module.idnoupgrade;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.GraphicsConfiguration;
 import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
@@ -27,6 +28,7 @@ import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
+import com.lxq.swing.util.Progress;
 
 /**
  * @描述 身份证号码升级界面
@@ -38,6 +40,7 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 
 	//public JFrame mf = null;
 
+	private static IdnoUpgrade thisClass;
 	/**
 	 * 
 	 */
@@ -64,7 +67,6 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 	private JButton btnQuit = new JButton("取消");
 	private JButton btnExport = new JButton("导出");
 	
-	private JProgressBar progressBar1 = new JProgressBar();
 	private JProgressBar progressBar2 = new JProgressBar();
 	// ---------------------------------------------------
 
@@ -171,7 +173,7 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 				GlobalUI.initUI();
 
 				// IdnoUpgrade thisClass = new IdnoUpgrade();
-				IdnoUpgrade thisClass  = new IdnoUpgrade();
+				thisClass = new IdnoUpgrade();
 				// thisClass.setVisible(true);
 				thisClass.setVisible(true);
 
@@ -256,12 +258,11 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 		btnCheck.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Vector<Vector<String>> rowData = idCardNoTablePanel
+/*				Vector<Vector<String>> rowData = idCardNoTablePanel
 						.getMVillagerDataFromDb();
-				progressBar1.setStringPainted(true); // 显示提示信息
-				progressBar1.setIndeterminate(false); // 确定进度的进度条
-				//System.out.println(rowData.size());
-				idCardNoTablePanel.refreshTable(rowData);
+				idCardNoTablePanel.refreshTable(rowData);*/
+				DataLoadProgrees dlp = new DataLoadProgrees(thisClass);
+				dlp.start();
 			}
 		});
 
@@ -349,5 +350,24 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 		if (jPanelBottom == null)
 			jPanelBottom = new JPanel();
 		return jPanelBottom;
+	}
+	
+	
+	/**
+	 * 
+	 * @author 卢向琪
+	 *
+	 */
+	class DataLoadProgrees extends Progress {
+		public DataLoadProgrees(Frame frame) {
+			super(frame);
+		}
+		
+		@Override
+		public void execut() {
+			Vector<Vector<String>> rowData = idCardNoTablePanel
+					.getMVillagerDataFromDb();
+			idCardNoTablePanel.refreshTable(rowData);
+		}
 	}
 }
