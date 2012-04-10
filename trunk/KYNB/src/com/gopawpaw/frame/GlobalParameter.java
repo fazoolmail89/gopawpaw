@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Vector;
 
 import org.jdom.Document;
@@ -20,6 +19,7 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.gopawpaw.dev.common.GppConfiguration;
 import com.gopawpaw.frame.dataEntity.Dmnd_det;
 import com.gopawpaw.frame.dataEntity.Omnd_det;
 
@@ -49,6 +49,11 @@ public class GlobalParameter {
 	 * Access 数据库
 	 */
 	public final static int DataBaseType_Access = 3;
+	
+	/**
+	 * MySQL 数据库
+	 */
+	public final static int DataBaseType_MySQL = 4;
 	
 	private static DatabaseInfo databaseInfo = new DatabaseInfo();;
 	
@@ -215,6 +220,8 @@ public class GlobalParameter {
 	public static void initialize() {
 		updateFromConfig();
 		updateFromUserConfig();
+		
+		
 		LoginSession ls = new LoginSession();
 		ls.setDomain("Keer");
 		ls.setUsername("mfg");
@@ -347,6 +354,8 @@ public class GlobalParameter {
 						databaseInfo.setDatabaseType(DataBaseType_SQLServer);
 					}else if(perso.getText().trim().equals("hibernate")){
 						databaseInfo.setDatabaseType(DataBaseType_Hibernate);
+					}else if(perso.getText().trim().equals("mysql")){
+						databaseInfo.setDatabaseType(DataBaseType_MySQL);
 					}
 				}
 			}
@@ -484,5 +493,6 @@ public class GlobalParameter {
 	public static void setGuiClient(GUIclient guiClient) {
 		GlobalParameter.guiClient = guiClient;
 	}
+	
 	
 }

@@ -4,6 +4,20 @@
 	<database-config>
 		
 		<property name="connection.url">
+			jdbc:mysql://localhost:3306/DBCenter?useUnicode=true
+		</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">{c`f</property>
+		<property name="connection.driver_class">
+			com.mysql.jdbc.Driver
+		</property>
+		<property name="dataBaseType">
+			mysql
+		</property>
+	</database-config>
+	
+	<database-config-a>
+		<property name="connection.url">
 			jdbc:odbc:Driver={MicroSoft Access Driver (*.mdb)};DBQ=DBCenter\DBCenter.mdb
 		</property>
 		<property name="connection.username">admin</property>
@@ -14,7 +28,7 @@
 		<property name="dataBaseType">
 			accesss
 		</property>
-	</database-config>
+	</database-config-a>
 
 	<database-config-p>
 		<property name="connection.url">

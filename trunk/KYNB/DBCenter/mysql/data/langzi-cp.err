@@ -1,0 +1,109 @@
+120404 14:58:25  InnoDB: Started; log sequence number 0 68560
+120404 14:58:25 [Note] MySQL: ready for connections.
+Version: '5.1.6-alpha-max-log'  socket: ''  port: 3306  MySQL Community Edition (GPL)
+120404 15:33:47 [Note] MySQL: Normal shutdown
+
+120404 15:33:47  InnoDB: Starting shutdown...
+120404 15:33:50  InnoDB: Shutdown completed; log sequence number 0 68570
+120404 15:33:50 [Note] MySQL: Shutdown complete
+
+120404 15:34:48  InnoDB: Started; log sequence number 0 68570
+120404 15:34:49 [Note] MySQL: ready for connections.
+Version: '5.1.6-alpha-max-log'  socket: ''  port: 3306  MySQL Community Edition (GPL)
+120404 15:44:29 [Note] MySQL: Normal shutdown
+
+120404 15:44:29  InnoDB: Starting shutdown...
+120404 15:44:30  InnoDB: Shutdown completed; log sequence number 0 68570
+120404 15:44:30 [Note] MySQL: Shutdown complete
+
+120404 15:47:26  InnoDB: Started; log sequence number 0 68570
+120404 15:47:27 [Note] MySQL: ready for connections.
+Version: '5.1.6-alpha-max-log'  socket: ''  port: 3306  MySQL Community Edition (GPL)
+120404 17:10:40 [Note] MySQL: Normal shutdown
+
+120404 17:10:40  InnoDB: Starting shutdown...
+120404 17:10:41  InnoDB: Shutdown completed; log sequence number 0 68580
+120404 17:10:41 [Note] MySQL: Shutdown complete
+
+120405  9:12:21  InnoDB: Started; log sequence number 0 68580
+120405  9:12:22 [Note] MySQL: ready for connections.
+Version: '5.1.6-alpha-max-log'  socket: ''  port: 3306  MySQL Community Edition (GPL)
+120405 11:17:05120405 11:17:05 [ERROR] Cannot find table mysql/general_log from the internal data dictionary
+of InnoDB though the .frm file for the table exists. Maybe you
+have deleted and recreated InnoDB data files but have forgotten
+to delete the corresponding .frm files of InnoDB tables, or you
+have moved .frm files to another database?
+Look from section 15.1 of http://www.innodb.com/ibman.html
+how you can resolve the problem.
+
+120405 11:17:05120405 11:17:05 [ERROR] Cannot find table mysql/slow_log from the internal data dictionary
+of InnoDB though the .frm file for the table exists. Maybe you
+have deleted and recreated InnoDB data files but have forgotten
+to delete the corresponding .frm files of InnoDB tables, or you
+have moved .frm files to another database?
+Look from section 15.1 of http://www.innodb.com/ibman.html
+how you can resolve the problem.
+
+120406  9:07:56 [Note] MySQL: Normal shutdown
+
+120406  9:07:57  InnoDB: Starting shutdown...
+120406  9:08:00  InnoDB: Shutdown completed; log sequence number 0 177243
+120406  9:08:00 [Note] MySQL: Shutdown complete
+
+120406  9:08:57  InnoDB: Started; log sequence number 0 177243
+120406  9:08:57 [Note] MySQL: ready for connections.
+Version: '5.1.6-alpha-max-log'  socket: ''  port: 3306  MySQL Community Edition (GPL)
+120406 18:38:19 [Note] MySQL: Normal shutdown
+
+120406 18:38:19  InnoDB: Starting shutdown...
+120406 18:38:22  InnoDB: Shutdown completed; log sequence number 0 177685
+120406 18:38:22 [Note] MySQL: Shutdown complete
+
+120407  9:04:43  InnoDB: Started; log sequence number 0 177685
+120407  9:04:43 [Note] MySQL: ready for connections.
+Version: '5.1.6-alpha-max-log'  socket: ''  port: 3306  MySQL Community Edition (GPL)
+120407 15:31:44  InnoDB: Started; log sequence number 0 177685
+120407 15:31:44 [Note] Recovering after a crash using mysql-bin
+120407 15:31:44 [Note] Starting crash recovery...
+120407 15:31:44 [Note] Crash recovery finished.
+120407 15:31:46 [Note] MySQL: ready for connections.
+Version: '5.1.6-alpha-max-log'  socket: ''  port: 3306  MySQL Community Edition (GPL)
+120408  9:08:18 [Note] MySQL: Normal shutdown
+
+120408  9:08:18  InnoDB: Starting shutdown...
+120408  9:15:10  InnoDB: Database was not shut down normally!
+InnoDB: Starting crash recovery.
+InnoDB: Reading tablespace information from the .ibd files...
+InnoDB: Restoring possible half-written data pages from the doublewrite
+InnoDB: buffer...
+120408  9:15:10  InnoDB: Starting log scan based on checkpoint at
+InnoDB: log sequence number 0 177695.
+InnoDB: Doing recovery: scanned up to log sequence number 0 177695
+InnoDB: Last MySQL binlog file position 0 227, file name .\mysql-bin.000009
+120408  9:15:11  InnoDB: Started; log sequence number 0 177695
+120408  9:15:11 [Note] MySQL: ready for connections.
+Version: '5.1.6-alpha-max-log'  socket: ''  port: 3306  MySQL Community Edition (GPL)
+120408  9:28:36 [Note] MySQL: Normal shutdown
+
+120408  9:28:36  InnoDB: Starting shutdown...
+120408  9:28:39  InnoDB: Shutdown completed; log sequence number 0 177695
+120408  9:28:39 [Note] MySQL: Shutdown complete
+
+120408  9:29:40  InnoDB: Started; log sequence number 0 177695
+120408  9:29:40 [Note] MySQL: ready for connections.
+Version: '5.1.6-alpha-max-log'  socket: ''  port: 3306  MySQL Community Edition (GPL)
+120408 22:50:33 [Note] MySQL: Normal shutdown
+
+120408 22:50:33  InnoDB: Starting shutdown...
+120408 22:50:35  InnoDB: Shutdown completed; log sequence number 0 220606
+120408 22:50:35 [Note] MySQL: Shutdown complete
+
+120409  9:02:37  InnoDB: Started; log sequence number 0 220606
+120409  9:02:39 [Note] MySQL: ready for connections.
+Version: '5.1.6-alpha-max-log'  socket: ''  port: 3306  MySQL Community Edition (GPL)
+120409 18:26:02 [Note] MySQL: Normal shutdown
+
+120409 18:26:02  InnoDB: Starting shutdown...
+120409 18:26:04  InnoDB: Shutdown completed; log sequence number 0 253215
+120409 18:26:04 [Note] MySQL: Shutdown complete
+

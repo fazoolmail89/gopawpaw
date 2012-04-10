@@ -46,7 +46,7 @@ public class StringUtils {
 	
 	
 	public static void main(String[] args) {
-		GLog.d("", getObfuscation("xxxxxxx"));
-		GLog.d("", unObfuscation("qtwjm`c"));
+		GLog.d("", getObfuscation("y9TsnOMpG]#P"));
+		GLog.d("", unObfuscation("p5[a{WVnfyz"));
 	}
 }
