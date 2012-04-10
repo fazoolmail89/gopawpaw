@@ -126,8 +126,11 @@ public class Omnd_det {
 					 "select * from mnd_det left join mnt_det on mnd_det.mnd_nbr=mnt_det.mnt_nbr and mnd_det.mnd_select=mnt_det.mnt_select where mnd_nbr='"
 					 + this.dmnd_det.getMnd_exec() +
 					 "' and mnt_lang='"+this.globalParameter.getDefaultLanguage()+"' order by mnd_select";
-			} else if (GlobalParameter.getDatabaseInfo().getDatabaseType() == GlobalParameter.DataBaseType_Hibernate) {
-
+			} else if (GlobalParameter.getDatabaseInfo().getDatabaseType() == GlobalParameter.DataBaseType_MySQL) {
+				sqlstr =
+					 "select * from mnd_det left join mnt_det on mnd_det.mnd_nbr=mnt_det.mnt_nbr and mnd_det.mnd_select=mnt_det.mnt_select where mnd_nbr='"
+					 + this.dmnd_det.getMnd_exec() +
+					 "' and mnt_lang='"+this.globalParameter.getDefaultLanguage()+"' order by mnd_select";
 			}
 
 		}
@@ -296,8 +299,9 @@ public class Omnd_det {
 		} else if (GlobalParameter.getDatabaseInfo().getDatabaseType() == GlobalParameter.DataBaseType_SQLServer) {
 			sqlstr ="select count(*) as cont from mnd_det where mnd_nbr='"
 				 + mnd_nbr + "'";
-		} else if (GlobalParameter.getDatabaseInfo().getDatabaseType() == GlobalParameter.DataBaseType_Hibernate) {
-
+		} else if (GlobalParameter.getDatabaseInfo().getDatabaseType() == GlobalParameter.DataBaseType_MySQL) {
+			sqlstr ="select count(*) as cont from mnd_det where mnd_nbr='"
+				 + mnd_nbr + "'";
 		}
 
 		GppSQL gppsql = new GppSQL();
@@ -371,8 +375,10 @@ public class Omnd_det {
 			 sqlstr =
 				 "select * from mnd_det left join mnt_det on mnd_det.mnd_nbr=mnt_det.mnt_nbr and mnd_det.mnd_select=mnt_det.mnt_select where mnd_exec='"
 				 + dd.getMnd_nbr() + "' and mnt_lang='"+gp.getDefaultLanguage()+"'";
-		} else if (GlobalParameter.getDatabaseInfo().getDatabaseType() == GlobalParameter.DataBaseType_Hibernate) {
-
+		} else if (GlobalParameter.getDatabaseInfo().getDatabaseType() == GlobalParameter.DataBaseType_MySQL) {
+			 sqlstr =
+				 "select * from mnd_det left join mnt_det on mnd_det.mnd_nbr=mnt_det.mnt_nbr and mnd_det.mnd_select=mnt_det.mnt_select where mnd_exec='"
+				 + dd.getMnd_nbr() + "' and mnt_lang='"+gp.getDefaultLanguage()+"'";
 		}
 		
 		GppSQL gppsql = new GppSQL();
@@ -443,11 +449,16 @@ public class Omnd_det {
 				 + this.dmnd_det.getMnd_nbr() + "' and mnd_select="
 				 + this.dmnd_det.getMnd_select()
 				 +" and mnt_lang='"+this.globalParameter.getDefaultLanguage()+"'";
-		} else if (GlobalParameter.getDatabaseInfo().getDatabaseType() == GlobalParameter.DataBaseType_Hibernate) {
-
+		} else if (GlobalParameter.getDatabaseInfo().getDatabaseType() == GlobalParameter.DataBaseType_MySQL) {
+			sqlstr =
+				 "select * from mnd_det left join mnt_det on mnd_det.mnd_nbr=mnt_det.mnt_nbr and mnd_det.mnd_select=mnt_det.mnt_select where mnd_nbr='"
+				 + this.dmnd_det.getMnd_nbr() + "' and mnd_select="
+				 + this.dmnd_det.getMnd_select()
+				 +" and mnt_lang='"+this.globalParameter.getDefaultLanguage()+"'";
 		}
 		
-		GLog.d(TAG, "updateDmnd_det:" + sqlstr);
+		GLog.d(TAG, "updateDmnd_det = :" + GlobalParameter.getDatabaseInfo().getDatabaseType());
+		GLog.d(TAG, "updateDmnd_det = :" + sqlstr);
 		GppSQL gppsql = new GppSQL();
 		ResultSet rst = gppsql.query(sqlstr);
 		try {

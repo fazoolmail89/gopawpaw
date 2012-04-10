@@ -1,0 +1,39 @@
+120410 21:30:51  InnoDB: Started; log sequence number 0 253215
+120410 21:30:52 [Note] MySQL: ready for connections.
+Version: '5.1.6-alpha-max-log'  socket: ''  port: 3306  MySQL Community Edition (GPL)
+120410 22:07:01 [Note] MySQL: Normal shutdown
+
+120410 22:07:01  InnoDB: Starting shutdown...
+120410 22:07:04  InnoDB: Shutdown completed; log sequence number 0 253225
+120410 22:07:04 [Note] MySQL: Shutdown complete
+
+120410 23:43:00  InnoDB: Started; log sequence number 0 253225
+120410 23:43:01 [Note] MySQL: ready for connections.
+Version: '5.1.6-alpha-max-log'  socket: ''  port: 3306  MySQL Community Edition (GPL)
+120410 23:43:44 [Note] MySQL: Normal shutdown
+
+120410 23:43:44  InnoDB: Starting shutdown...
+120410 23:43:46  InnoDB: Shutdown completed; log sequence number 0 253235
+120410 23:43:46 [Note] MySQL: Shutdown complete
+
+120410 23:44:00  InnoDB: Started; log sequence number 0 253235
+120410 23:44:01 [Note] MySQL: ready for connections.
+Version: '5.1.6-alpha-max-log'  socket: ''  port: 3306  MySQL Community Edition (GPL)
+120410 23:44:21 [Note] MySQL: Normal shutdown
+
+120410 23:44:22  InnoDB: Starting shutdown...
+120410 23:44:25  InnoDB: Shutdown completed; log sequence number 0 253245
+120410 23:44:25 [Note] MySQL: Shutdown complete
+
+120410 23:47:42  InnoDB: Started; log sequence number 0 253245
+120410 23:47:42 [Note] MySQL: ready for connections.
+Version: '5.1.6-alpha-max-log'  socket: ''  port: 3306  MySQL Community Edition (GPL)
+120410 23:47:44 [Note] MySQL: Normal shutdown
+
+120410 23:47:45  InnoDB: Starting shutdown...
+120410 23:47:46  InnoDB: Shutdown completed; log sequence number 0 253245
+120410 23:47:46 [Note] MySQL: Shutdown complete
+
+120410 23:47:58  InnoDB: Started; log sequence number 0 253245
+120410 23:47:58 [Note] MySQL: ready for connections.
+Version: '5.1.6-alpha-max-log'  socket: ''  port: 3306  MySQL Community Edition (GPL)

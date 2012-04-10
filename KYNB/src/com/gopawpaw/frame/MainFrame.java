@@ -42,6 +42,7 @@ import com.gopawpaw.frame.dataEntity.Omnd_det;
 import com.gopawpaw.javax.swing.GppJComboBox;
 import com.gopawpaw.kynb.RegisterDialog;
 import com.gopawpaw.kynb.utils.GppConfiguration;
+import com.gopawpaw.kynb.utils.MySQLUtils;
 
 import javax.swing.JMenu;
 import javax.swing.plaf.synth.SynthLookAndFeel;
@@ -95,6 +96,7 @@ public class MainFrame extends JFrame {
 
 	private GppConfiguration mGppConfiguration;
 
+	private static MainFrame thisClassMainFrame;
 	/**
 	 * @throws HeadlessException
 	 */
@@ -557,6 +559,7 @@ public class MainFrame extends JFrame {
 				}
 
 				MainFrame thisClass = new MainFrame();
+				thisClassMainFrame = thisClass;
 				thisClass.setLocation(200, 100);
 				thisClass.setSize(800, 350);
 				thisClass
@@ -564,7 +567,9 @@ public class MainFrame extends JFrame {
 				thisClass.addWindowListener(new WindowAdapter() {
 					public void windowClosing(WindowEvent e) {
 						exitSystem();
+						
 					}
+					
 				});
 
 				if (thisClass.cheakRegister()) {
@@ -581,8 +586,12 @@ public class MainFrame extends JFrame {
 	public static void exitSystem() {
 		int option = JOptionPane.showConfirmDialog(null, "是否完全退出该系统？", "系统提示",
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-		if (option == JOptionPane.YES_OPTION)
+		if (option == JOptionPane.YES_OPTION){
 			System.exit(0);
+		}else{
+			thisClassMainFrame.setVisible(true);
+		}
+		
 	}
 
 	/**
@@ -592,6 +601,9 @@ public class MainFrame extends JFrame {
 	 */
 	private void initialize() {
 		GlobalParameter.initialize();
+//		MySQLUtils.initMySQLConfig();
+//		MySQLUtils.startMySQLService();
+		
 		modules = new Modules();
 		// this.setSize(GlobalParameter.getGuiClient().getSizeOfMainFrame());
 		// this.setLocation(GlobalParameter.getGuiClient().getLocationOfMainFrame());

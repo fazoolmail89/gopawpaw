@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.gopawpaw.dev.common.GppCommonDBAccess;
+import com.gopawpaw.frame.log.GLog;
 
 public class GppCommonDBAccessEx extends GppCommonDBAccess {
 	private Connection sqlCon;
@@ -111,6 +112,10 @@ public class GppCommonDBAccessEx extends GppCommonDBAccess {
 	 */
 	public boolean connect(String username, String password) {
 		try {
+//			GLog.d("", this.driveName);
+//			GLog.d("", this.strCon);
+//			GLog.d("", username);
+//			GLog.d("", password);
 			Class.forName(this.driveName).newInstance();
 			this.sqlCon = java.sql.DriverManager.getConnection(this.strCon,
 					username, password);
