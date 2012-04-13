@@ -19,16 +19,24 @@ GppJarRunableInterface {
 	private static ExcelDataTablePane excelDataTablePane = null;
 	private static OptBtnsPanel optBtnsPanel = null;
 	private static List<ScanItem> siList = new ArrayList<ScanItem>();
+
+	//文件选择控件
+	private static JFileChooser fileChooser = new JFileChooser();
+	
+	/**
+	 * 静态代码段
+	 * 1、为扫描项列表赋初始值
+	 * 2、为文件选择对话框设置文件过滤器
+	 */
 	static {
 		ScanItem si = new ScanItem();
 		si.setDbtColumnName("v_ic");
 		si.setExlColumnName("身份证号");
 		siList.add(si);
+		
+		//设置文件过滤器
+		fileChooser.setFileFilter(new ExcelFileFilter());
 	}
-	//private static ScanItemDialog scanItemDialog = null;
-	
-	//文件选择控件
-	private final JFileChooser fileChooser = new JFileChooser();
 	
 	public DataScanFrame() {
 		excelDataTablePane = new ExcelDataTablePane();

@@ -1,6 +1,5 @@
 package com.gopawpaw.kynb.module.idnoupgrade4;
 
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Frame;
@@ -8,7 +7,7 @@ import java.awt.Frame;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
-import com.lxq.swing.util.SwingConsole;
+import com.gopawpaw.kynb.module.idnoupgrade.SwingConsole;
 
 public class MutualDialog extends JDialog {
 	private static final long serialVersionUID = -4557608213171202955L;
