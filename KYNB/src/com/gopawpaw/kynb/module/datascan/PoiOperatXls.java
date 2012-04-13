@@ -215,7 +215,6 @@ public class PoiOperatXls {
 			if(workbook != null) workbook = null;
 			if(sheet != null) sheet = null;
 		}
-
 		return result;
 	}
 }

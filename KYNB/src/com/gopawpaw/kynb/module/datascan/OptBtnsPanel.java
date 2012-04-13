@@ -1,17 +1,11 @@
 package com.gopawpaw.kynb.module.datascan;
 
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class OptBtnsPanel extends JPanel {
@@ -20,6 +14,8 @@ public class OptBtnsPanel extends JPanel {
 	private static DataScanFrame mainFrame = null;
 	private JButton btnImportExcel = new JButton("导入Excel");
 	private JButton btnExportExcel = new JButton("导出Excel");
+	private JButton btnScanItem = new JButton("扫描项选择");
+	private JButton btnScanning = new JButton("开始扫描");
 
 	public OptBtnsPanel() {
 		btnImportExcel.addActionListener(new ActionListener() {
@@ -30,24 +26,19 @@ public class OptBtnsPanel extends JPanel {
 				// 接受选中文件
 				File file = mainFrame.getFilechooser().getSelectedFile();
 				
-				System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()));				
+				Object[][] excelData = PoiOperatXls.readXlsRTA(file);
+				mainFrame.getExcelDataTablePane().refreshTableByOriginalData(excelData);
 				
-				Object[][] excelRow = PoiOperatXls.readXlsRTA(file);
-				if (excelRow != null) {
-					Object[] columnNames = excelRow[0];
-					Object[][] data = new Object[excelRow.length - 1][];
-					for (int i = 0; i < data.length; i++)
-						data[i] = excelRow[i + 1];
-					//刷新对应的表格数据
-					mainFrame.getExcelDataTablePane().refreshTable(data,
-							columnNames);
-				}
-				
-				System.out.println("总数据量：" + excelRow.length);
-				System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()));
+				//将导入表格的第一列做为默认扫描项
+				mainFrame.getSiList().clear();
+				ScanItem si = new ScanItem();
+				si.setDbtColumnName("v_ic");
+				si.setExlColumnName(excelData[0][0].toString());
+				mainFrame.getSiList().add(si);
 			}
 		});
-
+		
+		//-----------------------------------------------------------------------
 		btnExportExcel.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -63,34 +54,43 @@ public class OptBtnsPanel extends JPanel {
 						.getCurrentDirectory().getAbsolutePath()
 						+ "\\" + fileName;
 				//获取文件保存的表格数据
-				Object[] columnNames = mainFrame.getExcelDataTablePane().getColumnNames();
-				Object[][] data = mainFrame.getExcelDataTablePane().getData();
-				Object[][] excelRow = new Object[data.length + 1][];
-				for(int i = 0; i < excelRow.length; i++) {
-					if(i == 0) excelRow[i] = columnNames;
-					else excelRow[i] = data[i - 1];
-				}
+				Object[][] excelData = mainFrame.getExcelDataTablePane().getHaveTitleData();
 				//保存文件
-				PoiOperatXls.writeXls(excelRow, writePath);
+				PoiOperatXls.writeXls(excelData, writePath);
+			}
+		});
+		
+		//-----------------------------------------------------------------------
+		btnScanItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ScanItemDialog sid = new ScanItemDialog(mainFrame);
+			}
+		});
+		
+		//-----------------------------------------------------------------------
+		
+		btnScanning.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DataScanning ds = new DataScanning();
+				//获得表格原始数据，并扫描数据
+				Object[][] sranResult = ds.scaning(mainFrame.getSiList(), mainFrame.getExcelDataTablePane().getOriginalData());
+				//刷新表格
+				mainFrame.getExcelDataTablePane().refreshTable(sranResult);
 			}
 		});
 		
 		setLayout(new FlowLayout());
 		add(btnImportExcel);
 		add(btnExportExcel);
+		add(btnScanItem);
+		add(btnScanning);
 		setSize(50, mainFrame.HEIGHT);
 	}
 
 	public JButton getBtnImportExcel() {
 		return btnImportExcel;
-	}
-
-	public void setBtnImporttExcel(JButton btnImportExcel) {
-		this.btnImportExcel = btnImportExcel;
-	}
-
-	public DataScanFrame getMainFrame() {
-		return mainFrame;
 	}
 
 	public void setMainFrame(DataScanFrame mainFrame) {

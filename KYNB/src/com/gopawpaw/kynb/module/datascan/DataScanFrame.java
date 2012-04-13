@@ -1,6 +1,8 @@
 package com.gopawpaw.kynb.module.datascan;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
@@ -16,6 +18,14 @@ GppJarRunableInterface {
 	private static DataScanFrame thisClass;
 	private static ExcelDataTablePane excelDataTablePane = null;
 	private static OptBtnsPanel optBtnsPanel = null;
+	private static List<ScanItem> siList = new ArrayList<ScanItem>();
+	static {
+		ScanItem si = new ScanItem();
+		si.setDbtColumnName("v_ic");
+		si.setExlColumnName("身份证号");
+		siList.add(si);
+	}
+	//private static ScanItemDialog scanItemDialog = null;
 	
 	//文件选择控件
 	private final JFileChooser fileChooser = new JFileChooser();
@@ -73,5 +83,9 @@ GppJarRunableInterface {
 
 	public JFileChooser getFilechooser() {
 		return fileChooser;
+	}
+
+	public static List<ScanItem> getSiList() {
+		return siList;
 	}
 }
