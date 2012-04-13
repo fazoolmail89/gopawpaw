@@ -7,9 +7,6 @@ import java.util.Map;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 
 public class DataScanning extends XXNCYLBXDBAccess {
-	/*
-	 * private String[] columnNames = null; private String[][] data = null;
-	 */
 
 	/**
 	 * 扫描数据，根据扫描项，扫描数据库中是否存在相应记录

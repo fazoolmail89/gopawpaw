@@ -9,11 +9,16 @@ import com.gopawpaw.kynb.GppStyleTable;
 public class ExcelDataTablePane extends JScrollPane {
 
 	private static final long serialVersionUID = -5122156432319858282L;
-	private static DataScanFrame mainFrame = null;
 	private JTable excelDataTable = null;
 	private Object[] columnNames = null;
 	private Object[][] data = null;
+	/**
+	 * 表格当前数据（含表头）
+	 */
 	private Object[][] haveTitleData = null;
+	/**
+	 * 表格原始数据（含表头）
+	 */
 	private Object[][] originalData = null;
 	private static DefaultTableModel dtm = null;
 	
@@ -26,18 +31,17 @@ public class ExcelDataTablePane extends JScrollPane {
 		setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 	}
     
+	/**
+	 * 刷新表格当前数据及原始数据
+	 * @param originalData
+	 */
 	public void refreshTableByOriginalData(Object[][] originalData) {
 		this.originalData = originalData;
-    	this.haveTitleData = originalData;
-    	separateTitleAndData(originalData);
-		dtm = new DefaultTableModel(data, columnNames);
-		((GppStyleTable) excelDataTable).updateModel(dtm);
-		excelDataTable.repaint();
-		excelDataTable.updateUI();		
+		refreshTable(originalData);
 	}
 	
     /**
-     * 刷新表格
+     * 刷新表格当前数据
      * @param haveTitleData 含有表头的二维数组
      */
     public void refreshTable(Object[][] haveTitleData) {
@@ -50,7 +54,6 @@ public class ExcelDataTablePane extends JScrollPane {
     }
 
 	public static void setMainFrame(DataScanFrame mainFrame) {
-		ExcelDataTablePane.mainFrame = mainFrame;
 	}
 
 	public JTable getExcelDataTable() {
@@ -77,6 +80,10 @@ public class ExcelDataTablePane extends JScrollPane {
 		}
 	}
 
+	/**
+	 * 获取表格当前数据(含表头)
+	 * @return
+	 */	
 	public Object[][] getHaveTitleData() {
 		return haveTitleData;
 	}
@@ -93,6 +100,10 @@ public class ExcelDataTablePane extends JScrollPane {
 		return columnNames;
 	}
 
+	/**
+	 * 获取表格原始数据(含表头)
+	 * @return
+	 */
 	public Object[][] getOriginalData() {
 		return originalData;
 	}

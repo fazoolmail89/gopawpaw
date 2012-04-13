@@ -572,13 +572,13 @@ public class MainFrame extends JFrame {
 					
 				});
 
-				if (thisClass.cheakRegister()) {
+				//if (thisClass.cheakRegister()) {
+				if (true) {
 					thisClass.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 					thisClass.setVisible(true);
 				} else {
 					System.exit(0);
 				}
-
 			}
 		});
 	}
@@ -658,6 +658,7 @@ public class MainFrame extends JFrame {
 	}
 
 	private boolean cheakRegister() {
+		
 		String diskID = chenmin.io.DiskID.DiskID();
 
 		String registerCode = mGppConfiguration.getValue("registerCode");

@@ -28,7 +28,6 @@ import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
-import com.lxq.swing.util.Progress;
 
 /**
  * @描述 身份证号码升级界面
@@ -351,7 +350,6 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 			jPanelBottom = new JPanel();
 		return jPanelBottom;
 	}
-	
 	
 	/**
 	 * 
