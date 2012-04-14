@@ -16,24 +16,12 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 /**
- * 
+ * @描述 Excel 文件操作类
+ * 			输出函数自动检测及修改输出文件后缀名功能
  * @author 卢向琪
  * 
  */
 public class PoiOperatXls {
-	public static void main(String[] args) {
-		File file = new File("d:\\aaa.xls");
-		List<Map<Integer, String>> list = readExcelRLM(file);
-		System.out.println(FormetUtil.formetFileSize(file.length()));
-		
-		 for(Map m : list) { System.out.println(m.toString()); }
-		
-		System.out.println("总行数：" + list.size());
-		/*
-		 * for(String[] s:tempList) { for(int i = 0; i < s.length; i++) {
-		 * System.out.print(s[i] + "\t"); } System.out.println(); }
-		 */
-	}
 
 	public static List<Map<Integer, String>> readExcelRLM(String path) {
 		return readExcelRLM(new File(path));
@@ -170,12 +158,87 @@ public class PoiOperatXls {
 		}
 		return data;
 	}
+
+	/**
+	 * 输出Excel表格，表头数组长度要求等于数据的列数
+	 * @param data 真实数据
+	 * @param columnNamds 表头
+	 * @param file
+	 * @return
+	 */
+	public static boolean writeXls(Object[][] data, Object[] columnNamds,
+			File file) {
+		return writeXls(data, columnNamds, file.getPath());
+	}
 	
+	/**
+	 *  输出Excel表格，表头数组长度要求等于数据的列数
+	 * @param data 真实数据
+	 * @param columnNamds 表头
+	 * @param path 文件路径
+	 * @return
+	 */
 	public static boolean writeXls(Object[][] data, Object[] columnNamds,
 			String path) {
-		return false;
+		boolean result = false;
+		FileOutputStream fout = null;
+		HSSFWorkbook workbook = null;
+		HSSFSheet sheet = null;
+
+		try {
+			// 创建新的Excel工作簿
+			workbook = new HSSFWorkbook();
+			// 在excel中新建一个工作表，起名字为工作表（一）
+			sheet = workbook.createSheet("工作表（一）");
+
+			for (int i = 0; i < data.length + 1; i++) {
+				HSSFRow row = sheet.createRow(i);
+				Object[] temp = data[i];
+				for (int j = 0; j < temp.length; j++) {
+					HSSFCell cell = row.createCell(j);
+					if(i == 0) {
+						cell.setCellValue((String) columnNamds[j]);
+					} else {
+						cell.setCellValue((String) data[i - 1][j]);
+					}
+				}
+			}
+			// 新建一输出流
+			fout = new FileOutputStream(autoAddXlsSuffix(path));
+			// 存盘
+			workbook.write(fout);
+			fout.flush();
+			// 结束关闭
+			fout.close();
+			result = true;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(fout != null) fout = null;
+			if(workbook != null) workbook = null;
+			if(sheet != null) sheet = null;
+		}
+		return result;
 	}
 
+	/**
+	 * 输出 Excel 表格
+	 * @param data
+	 * @param file
+	 * @return
+	 */
+	public static boolean writeXls(Object[][] data, File file) {
+		return writeXls(data, file.getPath());
+	}
+	
+	/**
+	 * 输出 Excel 表格
+	 * @param data 
+	 * @param path
+	 * @return
+	 */
 	public static boolean writeXls(Object[][] data, String path) {
 		boolean result = false;
 		FileOutputStream fout = null;
@@ -197,15 +260,13 @@ public class PoiOperatXls {
 				}
 			}
 			// 新建一输出流
-			fout = new FileOutputStream(path);
+			fout = new FileOutputStream(autoAddXlsSuffix(path));
 			// 存盘
 			workbook.write(fout);
 			fout.flush();
 			// 结束关闭
 			fout.close();
 			result = true;
-			System.out.println("成功输出文件：" + path);
-			System.out.println("数据量为：" + data.length + "条");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -216,5 +277,44 @@ public class PoiOperatXls {
 			if(sheet != null) sheet = null;
 		}
 		return result;
+	}
+	
+	/**
+	 * 校验文件后缀名是否为”.xls“（忽略大小写）
+	 * @param path 文件路径
+	 * @return
+	 */
+	public static boolean checkSuffix(String path) {
+		boolean result = false;
+		String temp = "";
+	    int index = path.lastIndexOf(".");
+	    	temp = path.substring(index + 1, path.length());
+	    	if("xls".equals(temp.toLowerCase())) {
+	    		result = true;
+	    	}
+		return result;
+	}
+	
+	/**
+	 * 将不是”.xls“后缀的文件，自动添加”.xls“后缀(忽略大小写)
+	 * @param path 文件路径
+	 * @return 
+	 */
+	public static String autoAddXlsSuffix(String path) {
+		if(!checkSuffix(path))
+			path = path + ".xls";
+		return path;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(autoAddXlsSuffix("d:\\aaa.xL"));
+		
+/*		File file = new File("d:\\aaa.xls");
+		List<Map<Integer, String>> list = readExcelRLM(file);
+		System.out.println(FormetUtil.formetFileSize(file.length()));
+		
+		 for(Map m : list) { System.out.println(m.toString()); }
+		
+		System.out.println("总行数：" + list.size());*/
 	}
 }

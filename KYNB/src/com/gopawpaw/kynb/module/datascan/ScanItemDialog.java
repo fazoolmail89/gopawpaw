@@ -1,10 +1,7 @@
 package com.gopawpaw.kynb.module.datascan;
 
 import java.awt.FlowLayout;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.swing.ComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -12,8 +9,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class ScanItemDialog extends JDialog {
+	
+	private static final long serialVersionUID = -5278013924047489607L;
 	private DataScanFrame mainFrame = null;
-	private JPanel pnlMain = null;
 	
 	private JPanel pnlItemFirst = null;
 	private JCheckBox ckbItemFirst = null;
