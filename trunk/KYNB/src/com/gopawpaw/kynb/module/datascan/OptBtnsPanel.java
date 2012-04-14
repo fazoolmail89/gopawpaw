@@ -1,13 +1,11 @@
 package com.gopawpaw.kynb.module.datascan;
 
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -73,14 +71,8 @@ public class OptBtnsPanel extends JPanel {
 				if(returnVal == JFileChooser.APPROVE_OPTION) {
 					//获取要保存的文件
 					File file = mainFrame.getFilechooser().getSelectedFile();
-					//给文件名加上 ".xls" 后缀
-					String fileName = mainFrame.getFilechooser().getName(file)
-							+ ".xls";
-					//拼接完整的文件保存路径
-					String writePath = mainFrame.getFilechooser()
-							.getCurrentDirectory().getAbsolutePath()
-							+ "\\" + fileName;
-					mainFrame.executExportExcel(new File(writePath));
+
+					mainFrame.executExportExcel(new File(file.getPath()));
 				}
 			}
 		});
@@ -89,7 +81,7 @@ public class OptBtnsPanel extends JPanel {
 		btnScanItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ScanItemDialog sid = new ScanItemDialog(mainFrame);
+				new ScanItemDialog(mainFrame);
 			}
 		});
 		
@@ -120,22 +112,5 @@ public class OptBtnsPanel extends JPanel {
 		add(btnScanItem);
 		add(btnScanning);
 		add(btnExportExcel);
-
-/*		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
-		btnImportExcel.setPreferredSize(new Dimension(100, 20));
-		btnScanItem.setPreferredSize(new Dimension(100, 20));
-		btnScanning.setPreferredSize(new Dimension(100, 20));
-		btnExportExcel.setPreferredSize(new Dimension(100, 20));
-		
-		btnImportExcel.setSize(new Dimension(100, 20));
-		btnScanItem.setSize(new Dimension(100, 20));
-		btnScanning.setSize(new Dimension(100, 20));
-		btnExportExcel.setSize(new Dimension(100, 20));
-		
-		add(btnImportExcel);
-        add(btnScanItem);
-		add(btnScanning);
-		add(btnExportExcel);*/
 	}
 }
