@@ -18,31 +18,23 @@ public class ProgressBarDialog extends JDialog {
 		this.owner = owner;
 		initialize();
 	}
-
-	public ProgressBarDialog() {
-		initialize();
-	}
-
+	
 	public void initialize() {
-		if (owner != null)
-			owner.setEnabled(false);
-
+		owner.setEnabled(false);
 		progressBar = new JProgressBar();
 		progressBar.setStringPainted(true); // 显示提示信息
 		progressBar.setIndeterminate(true); // 不确定进度的进度条
-		// progressBar.setString(runString); //
-		// 确定信息时加上此条，则提示升级中，没有%比，如是不加上这个，则会提示%
+		//progressBar.setString(runString); // 确定信息时加上此条，则提示升级中，没有%比，如是不加上这个，则会提示%
 		add(progressBar);
 		// 取消标题栏
 		setUndecorated(true);
-		setBounds(SwingConsole.getTop(DEFAULT_WIDTH),
-				SwingConsole.getTop(DEFAULT_HEIGHT), DEFAULT_WIDTH,
-				DEFAULT_HEIGHT);
+		setBounds(SwingConsole.getTop(DEFAULT_WIDTH), SwingConsole
+				.getTop(DEFAULT_HEIGHT), DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		setLocation();
-		setModal(true);
+		setModal(false);
 		setVisible(false);
 	}
-
+	
 	public JProgressBar getProgressBar() {
 		return progressBar;
 	}
@@ -50,14 +42,10 @@ public class ProgressBarDialog extends JDialog {
 	public Frame getOwner() {
 		return owner;
 	}
-
+	
 	public void setLocation() {
-		int left = 400;
-		int top = 500;
-		if (owner != null) {
-			left = (owner.getWidth() - this.getWidth()) / 2 + owner.getX();
-			top = (owner.getHeight() - this.getHeight()) / 2 + owner.getY();
-		}
+		int left = (owner.getWidth() - this.getWidth())/2 + owner.getX();
+		int top = (owner.getHeight() - this.getHeight())/2 + owner.getY();
 		setLocation(left, top);
 	}
 }

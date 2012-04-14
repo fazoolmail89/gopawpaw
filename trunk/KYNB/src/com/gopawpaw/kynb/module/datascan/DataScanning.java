@@ -37,6 +37,8 @@ public class DataScanning extends XXNCYLBXDBAccess {
 				System.out.println(temp1 + " : " + temp2);				
 				if (temp1.equals(temp2)) {
 					map.put(i, siList.get(j));
+					//找到列名相同的数据后退出子循环
+					break;
 				}
 			}
 		}
@@ -56,9 +58,10 @@ public class DataScanning extends XXNCYLBXDBAccess {
 					resultData[i][j] = data[i][j];
 
 					ScanItem si = map.get(j);
-					if (si != null)
+					if (si != null) {
 						sql = sql + " and " + si.getDbtColumnName() + " = '"
-								+ data[i][j] + "' ";
+								+ data[i][j] + "' ";						
+					}
 				}
 System.out.println(sql);
 				String isSame = "不相同";

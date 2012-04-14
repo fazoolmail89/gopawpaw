@@ -260,7 +260,7 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 /*				Vector<Vector<String>> rowData = idCardNoTablePanel
 						.getMVillagerDataFromDb();
 				idCardNoTablePanel.refreshTable(rowData);*/
-				DataLoadProgrees dlp = new DataLoadProgrees(thisClass);
+				DataLoadProgrees dlp = new DataLoadProgrees(IdnoUpgrade.this);
 				dlp.start();
 			}
 		});
