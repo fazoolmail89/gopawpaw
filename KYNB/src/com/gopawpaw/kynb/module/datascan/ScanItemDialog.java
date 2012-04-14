@@ -4,6 +4,7 @@ import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -40,8 +41,8 @@ public class ScanItemDialog extends JDialog {
 		add(getPnlItemSecond());
 		add(getPnlItemThird());
 		
-		setSize(500, 300);
-		
+		setSize(500, 200);
+		DataScanFrame.setDialogLocaltion(this);
 		setModal(true);
 		setVisible(true);
 		
@@ -73,6 +74,8 @@ public class ScanItemDialog extends JDialog {
 		lblItemSecond = new JLabel("扫描参保人姓名，对应表格列名：");
 		cbbItemSecond = new JComboBox(cbbItem);	
 		
+		setDefault(ckbItemSecond, cbbItemSecond, ScanItem.SI_V_NAME);
+		
 		pnlItemSecond.add(ckbItemSecond);
 		pnlItemSecond.add(lblItemSecond);
 		pnlItemSecond.add(cbbItemSecond);
@@ -88,6 +91,8 @@ public class ScanItemDialog extends JDialog {
 		lblItemThird = new JLabel("扫描参保人账户，对应表格列名：");
 		cbbItemThird = new JComboBox(cbbItem);
 		
+		setDefault(ckbItemThird, cbbItemThird, ScanItem.SI_V_BANK_ACCOUNT);
+		
 		pnlItemThird.add(ckbItemThird);
 		pnlItemThird.add(lblItemThird);
 		pnlItemThird.add(cbbItemThird);
@@ -102,7 +107,7 @@ public class ScanItemDialog extends JDialog {
 		
 		if(ckbItemFirst.isSelected()) {
 			ScanItem siF = new ScanItem();
-			siF.setDbtColumnName("v_ic");
+			siF.setDbtColumnName(ScanItem.SI_V_IC);
 			siF.setExlColumnName((String)cbbItemFirst.getSelectedItem());
 			mainFrame.getSiList().add(siF);
 		}
@@ -132,5 +137,29 @@ public class ScanItemDialog extends JDialog {
 		}
 		else 
 			cbbItem = new String[0];
+	}
+	
+	/**
+	 * 设置默认值
+	 * @param ckb
+	 * @param cbb
+	 * @param equalsStr
+	 */
+	private void setDefault(JCheckBox ckb, JComboBox cbb, String equalsStr) {
+		//设置默认值
+		if(cbbItem.length > 0 && mainFrame.getSiList().size() > 1) {
+			for(int i = 0; i < mainFrame.getSiList().size(); i++) {
+				ScanItem si = mainFrame.getSiList().get(i);
+				if(si.getDbtColumnName().equals(equalsStr)) {
+					for(int j = 0; j < cbbItem.length; j++) {
+						if(si.getExlColumnName().equals(cbbItem[j])) {
+							ckb.setSelected(true);
+							cbb.setSelectedIndex(j);
+							break;
+						}
+					}
+				}
+			}
+		}		
 	}
 }
