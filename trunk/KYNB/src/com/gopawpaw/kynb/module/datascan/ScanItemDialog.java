@@ -16,17 +16,17 @@ public class ScanItemDialog extends JDialog {
 	private JPanel pnlItemFirst = null;
 	private JCheckBox ckbItemFirst = null;
 	private JLabel lblItemFirst = null;
-	private JComboBox<String[]> cbbItemFirst = null;
+	private JComboBox cbbItemFirst = null;
 
 	private JPanel pnlItemSecond = null;
 	private JCheckBox ckbItemSecond = null;
 	private JLabel lblItemSecond = null;
-	private JComboBox<String[]> cbbItemSecond = null;
+	private JComboBox cbbItemSecond = null;
 	
 	private JPanel pnlItemThird = null;
 	private JCheckBox ckbItemThird = null;
 	private JLabel lblItemThird = null;
-	private JComboBox<String[]> cbbItemThird = null;
+	private JComboBox cbbItemThird = null;
 	
 	private String[] cbbItem = null;
 	
