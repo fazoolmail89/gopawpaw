@@ -16,7 +16,6 @@ import javax.swing.SwingUtilities;
 import com.gopawpaw.dev.common.GppJarRunableInterface;
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
-import com.gopawpaw.kynb.module.idnoupgrade.Progress;
 
 public class DataScanFrame extends BaseModuleFrame implements
 GppJarRunableInterface {
