@@ -65,6 +65,7 @@ import com.gopawpaw.kynb.db.ExcelAccess;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 import com.gopawpaw.kynb.utils.DateUtils;
 import com.gopawpaw.kynb.utils.GppConfiguration;
+import com.gopawpaw.kynb.utils.Tools;
 
 /**
  * @version 2011-11-13
@@ -2053,6 +2054,12 @@ public class XXNCYLBXMain extends BaseFrame implements GppJarRunableInterface{
 
 				}
 			}
+			
+			if(!checkDataInput(this)){
+				//输入的字符非法
+				
+				return false;
+			}
 
 			// 滚动到指定位置
 			Point p = this.getParent().getLocation();
@@ -2187,6 +2194,50 @@ public class XXNCYLBXMain extends BaseFrame implements GppJarRunableInterface{
 		public void setAutoPopup(boolean isAutoPopup) {
 			this.isAutoPopup = isAutoPopup;
 		}
+	}
+	
+	/**
+	 * 检查数据是否合法
+	 * @version 2012-4-12
+	 * @author Jason
+	 * @param
+	 * @return boolean
+	 */
+	private boolean checkDataInput(GppJComboBoxExp gjcbe){
+		
+		boolean flag = true;
+		String valuse = gjcbe.getSelectedItem().toString();
+		
+		if(gjcbe == jComboBox_birthday || 
+				gjcbe == jComboBox_begin_get_date || 
+				gjcbe == jComboBox_join_time){
+			
+			if(Tools.isContainsChinese(valuse)){
+				
+				String tempMSG = "您输入的日期含有中文字，请重新输入";
+				
+				//声音提示
+				Toolkit.getDefaultToolkit().beep();
+				JOptionPane.showConfirmDialog(null, tempMSG, "系统提示",
+						JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE);
+				flag = false;
+			}
+			
+			
+		}else{
+			if(!Tools.checkStringLegal(valuse)){
+				
+				String tempMSG = "您输入的信息含有 ：\"-\" 和 \"+\"两个非法字符";
+				
+				//声音提示
+				Toolkit.getDefaultToolkit().beep();
+				JOptionPane.showConfirmDialog(null, tempMSG, "系统提示",
+						JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE);
+				flag = false;
+			}
+		}
+		
+		return flag;
 	}
 
 	private void selectEditVillager(String v_ic) {
