@@ -212,6 +212,12 @@ public class IdnoUpgrade3 extends BaseModuleFrame implements GppJarRunableInterf
 		int size = array18.length;
 		
 		for(int i=0;i<size;i++){
+			String temp = array18[i];
+			if(temp != null && temp.endsWith("x")){
+				temp = temp.subSequence(0, temp.length()-1) + "X";
+				array18[i] = temp;
+			}
+			
 			array18[i] = IDNumberChecker.SwitchIDCard18To15(array18[i]);
 		}
 		
@@ -235,7 +241,12 @@ public class IdnoUpgrade3 extends BaseModuleFrame implements GppJarRunableInterf
 		
 		for(int i=0;i<size;i++){
 			try {
-				int check = IDNumberChecker.checkIDCard(array15[i]);
+				String temp = array15[i];
+				if(temp != null && temp.endsWith("x")){
+					temp = temp.subSequence(0, temp.length()-1) + "X";
+					array15[i] = temp;
+				}
+				int check = IDNumberChecker.checkIDCard(temp);
 				if(check == IDNumberChecker.IDCARD_IS_OK){
 					//是正确的18位
 				}else if(check == IDNumberChecker.IDCARD_IS_OK_15){

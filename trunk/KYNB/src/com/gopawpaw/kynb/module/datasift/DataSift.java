@@ -6,13 +6,11 @@ package com.gopawpaw.kynb.module.datasift;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.Vector;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
@@ -22,16 +20,15 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 import com.gopawpaw.dev.common.GppJarRunableInterface;
-import com.gopawpaw.frame.log.GLog;
 import com.gopawpaw.javax.swing.GppJComboBox;
 import com.gopawpaw.javax.swing.GppJTable;
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.GppStyleTable;
-import com.gopawpaw.kynb.db.DBException;
-import com.gopawpaw.kynb.db.ExcelDBAccess;
-import com.gopawpaw.kynb.db.ExcelWriter;
-import com.gopawpaw.kynb.db.ExportExcelListener;
-import com.gopawpaw.kynb.db.GppCommonDBAccess;
+import com.gopawpaw.kynb.bean.JComboBoxItem;
+import com.gopawpaw.kynb.common.ExcelExportListener;
+import com.gopawpaw.kynb.common.ExcelImportListener;
+import com.gopawpaw.kynb.common.ProgressExportExcel;
+import com.gopawpaw.kynb.common.ProgressImportExcel;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
 import com.gopawpaw.kynb.utils.DateUtils;
 
@@ -39,7 +36,8 @@ import com.gopawpaw.kynb.utils.DateUtils;
  * @version 2012-3-27
  * @author Jason
  */
-public class DataSift extends BaseModuleFrame implements GppJarRunableInterface {
+public class DataSift extends BaseModuleFrame implements
+		GppJarRunableInterface {
 
 	/**
 	 * 
@@ -55,11 +53,13 @@ public class DataSift extends BaseModuleFrame implements GppJarRunableInterface 
 
 	private JProgressBar progressBar1 = new JProgressBar();
 	private JProgressBar progressBar2 = new JProgressBar();
-	
+
 	private JProgressBar progressBar3 = new JProgressBar();
 	private JProgressBar progressBar4 = new JProgressBar();
 	private JProgressBar progressBar5 = new JProgressBar();
 	private JProgressBar progressBar6 = new JProgressBar();
+	
+	private JProgressBar progressBar7 = new JProgressBar();
 
 	private GppJComboBox jComboBox1 = null;
 	private GppJComboBox jComboBox2 = null;
@@ -70,28 +70,35 @@ public class DataSift extends BaseModuleFrame implements GppJarRunableInterface 
 	/**
 	 * 第一个表的标题
 	 */
-	private Vector<String> mTableTitle1;
+	private Object[] mTableTitle1;
 	/**
 	 * 第一个表的数据
 	 */
-	private Vector<Vector<String>> mTableData1;
+	private Object[][] mTableData1;
 
 	/**
 	 * 第二个表的标题
 	 */
-	private Vector<String> mTableTitle2;
+	private Object[] mTableTitle2;
 	/**
 	 * 第二个表的数据
 	 */
-	private Vector<Vector<String>> mTableData2;
+	private Object[][] mTableData2;
 
 	/**
 	 * 导出表的数据
 	 */
-	private Vector<Vector<String>> exportTable1 = null;
-	private Vector<Vector<String>> exportTable2 = null;
-	private Vector<Vector<String>> exportTable3 = null;
-	private Vector<Vector<String>> exportTable4 = null;
+	private Object[][] exportTable1 = null;
+	private Object[][] exportTable2 = null;
+	private Object[][] exportTable3 = null;
+	private Object[][] exportTable4 = null;
+	
+	private JLabel jLableExportCount1 = new JLabel();
+	private JLabel jLableExportCount2 = new JLabel();
+	private JLabel jLableExportCount3 = new JLabel();
+	private JLabel jLableExportCount4 = new JLabel();
+
+	private JButton jButtonActionSift;
 	
 	public DataSift() {
 		initialize();
@@ -118,6 +125,8 @@ public class DataSift extends BaseModuleFrame implements GppJarRunableInterface 
 		jContentPane.setLayout(new BorderLayout());
 
 		jContentPane.add(getJPanelCenter(), BorderLayout.CENTER);
+		jContentPane.add(progressBar7, BorderLayout.NORTH);
+		
 		return jContentPane;
 	}
 
@@ -148,14 +157,12 @@ public class DataSift extends BaseModuleFrame implements GppJarRunableInterface 
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				mJComboBoxItem1 = (JComboBoxItem) jComboBox1.getSelectedItem();
 
-				actionSift();
 			}
 		});
 
 		jComboBox2.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				mJComboBoxItem2 = (JComboBoxItem) jComboBox2.getSelectedItem();
-				actionSift();
 			}
 		});
 
@@ -176,6 +183,8 @@ public class DataSift extends BaseModuleFrame implements GppJarRunableInterface 
 		jPanel21.add(getJButtonSelect2());
 		jPanel21.add(progressBar2);
 		jPanel21.add(jComboBox2);
+		jPanel21.add(getJButtonActionSift());
+
 		jPanel2.add(jScrollPane2, BorderLayout.CENTER);
 		jPanel2.add(jPanel21, BorderLayout.NORTH);
 
@@ -187,7 +196,8 @@ public class DataSift extends BaseModuleFrame implements GppJarRunableInterface 
 		jPanel31.add(progressBar3);
 		jPanel3.add(jScrollPane3, BorderLayout.CENTER);
 		jPanel3.add(jPanel31, BorderLayout.SOUTH);
-
+		jPanel3.add(jLableExportCount1, BorderLayout.NORTH);
+		
 		JPanel jPanel4 = new JPanel();
 		jPanel4.setLayout(new BorderLayout());
 		JPanel jPanel41 = new JPanel();
@@ -196,6 +206,7 @@ public class DataSift extends BaseModuleFrame implements GppJarRunableInterface 
 		jPanel41.add(progressBar4);
 		jPanel4.add(jScrollPane4, BorderLayout.CENTER);
 		jPanel4.add(jPanel41, BorderLayout.SOUTH);
+		jPanel4.add(jLableExportCount2, BorderLayout.NORTH);
 
 		JPanel jPanel5 = new JPanel();
 		jPanel5.setLayout(new BorderLayout());
@@ -205,6 +216,7 @@ public class DataSift extends BaseModuleFrame implements GppJarRunableInterface 
 		jPanel51.add(progressBar5);
 		jPanel5.add(jScrollPane5, BorderLayout.CENTER);
 		jPanel5.add(jPanel51, BorderLayout.SOUTH);
+		jPanel5.add(jLableExportCount3, BorderLayout.NORTH);
 
 		JPanel jPanel6 = new JPanel();
 		jPanel6.setLayout(new BorderLayout());
@@ -214,6 +226,7 @@ public class DataSift extends BaseModuleFrame implements GppJarRunableInterface 
 		jPanel61.add(progressBar6);
 		jPanel6.add(jScrollPane6, BorderLayout.CENTER);
 		jPanel6.add(jPanel61, BorderLayout.SOUTH);
+		jPanel6.add(jLableExportCount4, BorderLayout.NORTH);
 
 		// 左边三个面板============start
 
@@ -298,13 +311,29 @@ public class DataSift extends BaseModuleFrame implements GppJarRunableInterface 
 		return jButton;
 	}
 
+	private JButton getJButtonActionSift() {
+
+		final JButton jButton = new JButton();
+		jButton.setText("  执行筛选   ");
+		jButton.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent e) {
+
+				actionSift();
+			}
+		});
+		jButtonActionSift = jButton;
+		
+		return jButton;
+	}
+
 	private JButton getJButtonExport1() {
 
-		JButton jButton = new JButton();
+		final JButton jButton = new JButton();
 		jButton.setText("A不同导出Excel");
 		jButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent e) {
-				actionSaveToExce(mTableTitle1,exportTable2,progressBar3,"导出表A不同");
+				actionSaveToExce(mTableTitle1, exportTable2, progressBar3,
+						"导出表A不同",jButton);
 			}
 		});
 
@@ -313,11 +342,12 @@ public class DataSift extends BaseModuleFrame implements GppJarRunableInterface 
 
 	private JButton getJButtonExport2() {
 
-		JButton jButton = new JButton();
+		final JButton jButton = new JButton();
 		jButton.setText("A相同导出Excel");
 		jButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent e) {
-				actionSaveToExce(mTableTitle1,exportTable1,progressBar4,"导出表A相同");
+				actionSaveToExce(mTableTitle1, exportTable1, progressBar4,
+						"导出表A相同",jButton);
 			}
 		});
 
@@ -326,11 +356,12 @@ public class DataSift extends BaseModuleFrame implements GppJarRunableInterface 
 
 	private JButton getJButtonExport3() {
 
-		JButton jButton = new JButton();
+		final JButton jButton = new JButton();
 		jButton.setText("B相同导出Excel");
 		jButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent e) {
-				actionSaveToExce(mTableTitle2,exportTable3,progressBar5,"导出表B相同");
+				actionSaveToExce(mTableTitle2, exportTable3, progressBar5,
+						"导出表B相同",jButton);
 			}
 		});
 
@@ -339,11 +370,12 @@ public class DataSift extends BaseModuleFrame implements GppJarRunableInterface 
 
 	private JButton getJButtonExport4() {
 
-		JButton jButton = new JButton();
+		final JButton jButton = new JButton();
 		jButton.setText("B不同导出Excel");
 		jButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent e) {
-				actionSaveToExce(mTableTitle2,exportTable4,progressBar6,"导出表B不同");
+				actionSaveToExce(mTableTitle2, exportTable4, progressBar6,
+						"导出表B不同",jButton);
 			}
 		});
 
@@ -358,180 +390,114 @@ public class DataSift extends BaseModuleFrame implements GppJarRunableInterface 
 	 * @param
 	 * @return void
 	 */
-	@SuppressWarnings("unchecked")
 	private void actionSift() {
 
 		if (mJComboBoxItem1 == null || mJComboBoxItem2 == null) {
 			return;
 		}
-		
-		Object[] obj = actionSift(mTableData1,mTableData2,mJComboBoxItem1.index,mJComboBoxItem2.index);
-		
-		if(obj == null){
-			return;
-		}
-		exportTable1 = (Vector<Vector<String>>)obj[0];
-		exportTable2 = (Vector<Vector<String>>)obj[1];
-		exportTable3 = (Vector<Vector<String>>)obj[2];
-		exportTable4 = (Vector<Vector<String>>)obj[3];
-		
-		{//A
-			DefaultTableModel model = new DefaultTableModel(exportTable2,
-					mTableTitle1);
-			GppStyleTable jTable = new GppStyleTable(model);
-			jTable.setRowHeight(22);
 
-			jScrollPane3.setViewportView(jTable);
-			jTable.updateUI();
-		}
-		
-		{//AB
+		ProgressActionSiftListener lis = new ProgressActionSiftListener() {
 			
-			DefaultTableModel model = new DefaultTableModel(exportTable1,
-					mTableTitle1);
-			GppStyleTable jTable = new GppStyleTable(model);
-			jTable.setRowHeight(22);
-
-			jScrollPane4.setViewportView(jTable);
-			jTable.updateUI();
-		}
-		
-		{//BA
-			DefaultTableModel model = new DefaultTableModel(exportTable3,
-					mTableTitle2);
-			GppStyleTable jTable = new GppStyleTable(model);
-			jTable.setRowHeight(22);
-
-			jScrollPane5.setViewportView(jTable);
-			jTable.updateUI();
-		}
-		
-		{//B
-			DefaultTableModel model = new DefaultTableModel(exportTable4,
-					mTableTitle2);
-			GppStyleTable jTable = new GppStyleTable(model);
-			jTable.setRowHeight(22);
-
-			jScrollPane6.setViewportView(jTable);
-			jTable.updateUI();
-		}
-	}
-
-	/**
-	 * 数据筛选
-	 * @param table1	第一个表的数据
-	 * @param table2	第二个表的数据
-	 * @param index1	第一个表中，用来对比的列索引
-	 * @param index2	第二个表中，用来对比的列索引
-	 * @return	筛选结果的4个表数据（Vector<Vector<String>>[]）数组<br>
-	 * 				0:在table1中相同部分的数据；<br>
-	 * 				1:在table1中不同部分的数据；<br>
-	 * 				2:在table2中相同部分的数据；<br>
-	 * 				3:在table2中不同部分的数据；<br>
-	 */
-	private Object[] actionSift(Vector<Vector<String>> table1,Vector<Vector<String>> table2,int index1,int index2){
-		Vector<Vector<String>> table11 = new Vector<Vector<String>>();
-		Vector<Vector<String>> table12 = new Vector<Vector<String>>();
-		Vector<Vector<String>> table21 = new Vector<Vector<String>>();
-		Vector<Vector<String>> table22 = new Vector<Vector<String>>();
-		
-		Object[] objectArray = null;
-		if(table1 == null || table2 == null){
-			return objectArray;
-		}
-		
-		if(table1.size() > table2.size()){
-			//优化算法，调换位置效率会高一些
-			Vector<Vector<String>> temp = table1;
-			table1 = table2;
-			table2 = temp;
-			objectArray = new Object[]{table21,table22,table11,table12};
-		}else{
-			objectArray = new Object[]{table11,table12,table21,table22};
-		}
-		
-		//复制第二个表
-		table22.addAll(table2);
-		
-		Iterator<Vector<String>> it1 = table1.iterator();
-		
-		while (it1.hasNext()) {
-			//依次取出第一个表的数据进行对比
-			Vector<String> v1 = (Vector<String>) it1.next();
-			String vTemp1 = v1.get(index1);
-			
-			vTemp1 = (vTemp1 == null ? "" : vTemp1);
-			
-			Iterator<Vector<String>> it2 = table2.iterator();
-			
-			boolean flag = false;
-			while (it2.hasNext()) {
-				//将第一个表的一条数据依次与第二个表的数据进行对比
-				Vector<String> v2 = (Vector<String>) it2.next();
-				String vTemp2 = v2.get(index2);
-				if(vTemp1.equals(vTemp2)){
-					//AB两个表有相匹配的数据
-					table11.add(v1);
-					table21.add(v2);
-					
-					//将共同部分从B表移除，剩下的table22就是仅仅B表有的部分
-					table22.remove(v2);
-					flag = true;
-					break;
-				}
-			}
-			
-			if(!flag){
-				//在第二个表中没有找到此数据时，即仅仅A表有的部分
-				table12.add(v1);
-			}
-		}
-		
-		return objectArray;
-	}
-	
-	private void actionSaveToExce(Vector<String> exportTitle,Vector<Vector<String>> exportTable,final JProgressBar progressBar,String filename) {
-
-		Date date = new Date();
-
-		String excelFile = "OutPut\\" + filename + "-"
-				+ DateUtils.DATA_FORMAT.format(date) + ".xls";
-		String excelTempPath = "DBCenter\\emptyTemp.xls";
-		
-		progressBar.setStringPainted(true); // 显示提示信息
-		progressBar.setIndeterminate(false); // 确定进度的进度条
-		progressBar.setString("进度：" + 0 + "/" + 0);
-		progressBar.setValue(0); // 进度值
-		
-		ExcelWriter ew = new ExcelWriter(excelTempPath,excelFile);
-		ew.setmTableTitle(exportTitle);
-		ew.setmTableData(exportTable);
-		ew.setExportExcelListener(new ExportExcelListener() {
-			
-			private boolean flag = false;
 			@Override
-			public void onExportProgress(int total, int current, boolean isOk) {
+			public void onProgressActionSiftFinish(Object[][] table11,
+					Object[][] table12, Object[][] table21, Object[][] table22) {
 				// TODO Auto-generated method stub
-				if(!flag){
-					progressBar.setMaximum(total);
-					flag = true;
-				}else{
-					progressBar.setString("进度：" + current + "/" + total);
-					progressBar.setValue(current); // 进度值
+				
+				exportTable1 = table11;
+				exportTable2 = table12;
+				exportTable3 = table21;
+				exportTable4 = table22;
+				
+				{// A
+					jLableExportCount1.setText("A不同数量："+exportTable2.length);
+					DefaultTableModel model = new DefaultTableModel(exportTable2,
+							mTableTitle1);
+					GppStyleTable jTable = new GppStyleTable(model);
+					jTable.setRowHeight(22);
+
+					jScrollPane3.setViewportView(jTable);
+					jTable.updateUI();
+				}
+
+				{// AB
+					jLableExportCount2.setText("A相同数量："+exportTable1.length);
+					DefaultTableModel model = new DefaultTableModel(exportTable1,
+							mTableTitle1);
+					GppStyleTable jTable = new GppStyleTable(model);
+					jTable.setRowHeight(22);
+
+					jScrollPane4.setViewportView(jTable);
+					jTable.updateUI();
+				}
+
+				{// BA
+					jLableExportCount3.setText("B相同数量："+exportTable3.length);
+					DefaultTableModel model = new DefaultTableModel(exportTable3,
+							mTableTitle2);
+					GppStyleTable jTable = new GppStyleTable(model);
+					jTable.setRowHeight(22);
+
+					jScrollPane5.setViewportView(jTable);
+					jTable.updateUI();
+				}
+
+				{// B
+					jLableExportCount4.setText("B不同数量："+exportTable4.length);
+					DefaultTableModel model = new DefaultTableModel(exportTable4,
+							mTableTitle2);
+					GppStyleTable jTable = new GppStyleTable(model);
+					jTable.setRowHeight(22);
+
+					jScrollPane6.setViewportView(jTable);
+					jTable.updateUI();
 				}
 			}
-		});
+		};
 		
-		if(ew.actionSave()){
-			String tempMSG = "成功导出到："+excelFile;
-			Toolkit.getDefaultToolkit().beep();
-			JOptionPane.showConfirmDialog(null, tempMSG, "系统提示",
-					JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE);
+		if(jButtonActionSift.isEnabled()){
+			
+			ProgressActionSift p = new ProgressActionSift(mTableData1, mTableData2,
+					mJComboBoxItem1.index, mJComboBoxItem2.index,progressBar7,lis);
+			p.setButton(jButtonActionSift);
+			p.start();
 		}
 		
+
+
 		
 	}
-	
+
+
+	private void actionSaveToExce(Object[] exportTitle, Object[][] exportTable,
+			final JProgressBar progressBar, String filename,JButton button) {
+
+		ExcelExportListener exportListener = new ExcelExportListener(){
+
+			@Override
+			public void onExprotFinish(String path, int count) {
+				// TODO Auto-generated method stub
+				String tempMSG = "成功导出到："+path;
+				 Toolkit.getDefaultToolkit().beep();
+				 JOptionPane.showConfirmDialog(null, tempMSG, "系统提示",
+				 JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE);
+			}
+			
+		};
+		Date date = new Date();
+		
+		 String excelFile = "OutPut\\" + filename + "-"
+		 + DateUtils.DATA_FORMAT.format(date) + ".xls";
+		 
+		 //导出excel进度
+		ProgressExportExcel p = new ProgressExportExcel(progressBar, button, excelFile);
+		p.setExportListener(exportListener);
+		p.setTitle(exportTitle);
+		p.setData(exportTable);
+		p.start();
+
+
+	}
+
 	/**
 	 * 导入excle数据
 	 * 
@@ -546,18 +512,19 @@ public class DataSift extends BaseModuleFrame implements GppJarRunableInterface 
 		progressBar1.setIndeterminate(false); // 确定进度的进度条
 
 		jComboBox1.removeAllItems();
-		Progress p = new Progress(progressBar1, jButton, excelPath, jComboBox1);
-		p.setImportListener(new ImportListener() {
+		
+		//导入excel进度
+		ProgressImportExcel p = new ProgressImportExcel(progressBar1, jButton, excelPath, jComboBox1);
+		p.setImportListener(new ExcelImportListener() {
 
 			@Override
-			public void onImprotFinish(Vector<String> title, Vector<Vector<String>> data,
+			public void onImprotFinish(Object[] title, Object[][] data,
 					GppJTable table) {
 				// TODO Auto-generated method stub
 				mTableTitle1 = title;
 				mTableData1 = data;
 				jScrollPane1.setViewportView(table);
 				table.updateUI();
-				actionSift();
 			}
 		});
 
@@ -578,183 +545,25 @@ public class DataSift extends BaseModuleFrame implements GppJarRunableInterface 
 		progressBar2.setIndeterminate(false); // 确定进度的进度条
 
 		jComboBox2.removeAllItems();
-		Progress p = new Progress(progressBar2, jButton, excelPath, jComboBox2);
-		p.setImportListener(new ImportListener() {
+		ProgressImportExcel p = new ProgressImportExcel(progressBar2, jButton, excelPath, jComboBox2);
+		p.setImportListener(new ExcelImportListener() {
 
 			@Override
-			public void onImprotFinish(Vector<String> title, Vector<Vector<String>> data,
+			public void onImprotFinish(Object[] title, Object[][] data,
 					GppJTable table) {
 				// TODO Auto-generated method stub
 				mTableTitle2 = title;
 				mTableData2 = data;
 				jScrollPane2.setViewportView(table);
 				table.updateUI();
-				actionSift();
+
 			}
 		});
 
 		p.start();
 	}
 
-	interface ImportListener {
-		void onImprotFinish(Vector<String> title, Vector<Vector<String>> data, GppJTable table);
-	}
-
-	class Progress extends Thread {// 自定义类progress
-
-		private JProgressBar progressBar;
-		private JButton button;
-		private ExcelDBAccess mExcelDBAccess;
-		private ImportListener mImportListener;
-		private Vector<String> mTitle = new Vector<String>();
-		private Vector<Vector<String>> mData = new Vector<Vector<String>>();
-		private JComboBox jComboBox;
-
-		public Progress(JProgressBar progressBar, JButton button,
-				String excelPath) {
-			this.progressBar = progressBar;
-			this.button = button;
-
-			mExcelDBAccess = new ExcelDBAccess(excelPath);
-
-		}
-
-		public Progress(JProgressBar progressBar, JButton button,
-				String excelPath, JComboBox jComboBox) {
-			this.progressBar = progressBar;
-			this.button = button;
-
-			mExcelDBAccess = new ExcelDBAccess(excelPath);
-			this.jComboBox = jComboBox;
-
-		}
-
-		/**
-		 * 设置监听器
-		 * 
-		 * @version 2012-3-28
-		 * @author Jason
-		 * @param
-		 * @return void
-		 */
-		public void setImportListener(ImportListener listener) {
-			mImportListener = listener;
-		}
-
-		public void run() {
-			try {
-				button.setEnabled(false);
-
-				// ===================================方案二 begin
-				GppCommonDBAccess commonsql = mExcelDBAccess.getCommonSQL();
-				String sql = "select * from [Sheet1$] ";
-
-				if (!commonsql.query(sql)) {
-					return;
-				}
-
-				if (commonsql != null && commonsql.getrowcount() > 0) {
-
-					int size = (int) commonsql.getrowcount();
-					progressBar.setMaximum(size);
-
-					// 表的列数
-					int colum = 1;
-					int i = 0;
-					while (commonsql.nextrecord()) {
-						i++;
-						if (i == 1) {
-							// 当是第一行时，遍历第一行共有多少列，并以此列数来做表格
-							String c = null;
-							String c2 = null;
-							String c20 = "";
-							boolean flag = false;
-							while ((c = commonsql.getString(colum)) != null || (c2 = commonsql.getString(colum+1)) != null) {
-								//允许其中一列未null时，第二列以后还有数据
-								String temp = c;
-								if(flag){
-									temp = c20;
-									c20 = c2;
-								}
-								
-								if(temp == null){
-									temp = "<列名未知>";
-									c20 = c2;
-									flag = true;
-								}
-								
-									
-								GLog.d("colum:" + colum, temp);
-								mTitle.add(temp);
-
-								if (jComboBox != null) {
-									JComboBoxItem ji = new JComboBoxItem();
-									ji.index = colum-1;
-									ji.name = temp;
-									jComboBox.addItem(ji);
-								}
-								colum++;
-							}
-						} else {
-							// 表内容
-							Vector<String> row = new Vector<String>();
-							for (int c = 1; c < colum; c++) {
-								String v = commonsql.getString(c);
-								// GLog.d("==", v);
-								row.add(v);
-							}
-							mData.add(row);
-						}
-
-						progressBar.setString("进度：" + (i) + "/" + size);
-						progressBar.setValue(i); // 进度值
-					}
-
-					commonsql.close();
-
-					progressBar.setIndeterminate(false);
-
-					actionFinish();
-				}
-				// ==========================方案二 end
-
-			} catch (DBException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-
-			button.setEnabled(true); // 按钮可用
-
-		}
-
-		/**
-		 * 完成后调用，在此进行回调
-		 * 
-		 * @version 2012-3-28
-		 * @author Jason
-		 * @param
-		 * @return void
-		 */
-		private void actionFinish() {
-			DefaultTableModel model = new DefaultTableModel(mData, mTitle);
-			GppStyleTable jTable = new GppStyleTable(model);
-			jTable.setRowHeight(22);
-			if (mImportListener != null) {
-				GLog.d("", "导入完成");
-				mImportListener.onImprotFinish(mTitle, mData, jTable);
-			}
-		}
-	}
-
-	class JComboBoxItem {
-		int index;
-		String name;
-
-		@Override
-		public String toString() {
-			return "[" + index + "]" + "[" + name + "]";
-		}
-	}
+	
 
 	@Override
 	public boolean runJar(String[] args) {
