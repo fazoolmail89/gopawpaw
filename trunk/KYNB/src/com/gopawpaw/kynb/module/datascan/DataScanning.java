@@ -47,7 +47,6 @@ public class DataScanning extends XXNCYLBXDBAccess {
 
 		String frontSql =  "select count(*) as countN from villager where 1 = 1 ";
 		String sql = "";
-		
 		if (commonsql.connect(user, password)) {
 			// data含有表头，所以从index从1开始循环
 			// 由行到列开始遍历表格的单元格
