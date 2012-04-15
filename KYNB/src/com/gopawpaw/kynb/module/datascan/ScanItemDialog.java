@@ -57,6 +57,8 @@ public class ScanItemDialog extends JDialog {
 		lblItemFirst = new JLabel("扫描身份证号码，对应表格列名：");
 		cbbItemFirst = new JComboBox(cbbItem);	
 		
+		setDefault(ckbItemFirst, cbbItemFirst, ScanItem.SI_V_IC);
+		
 		pnlItemFirst.add(ckbItemFirst);
 		pnlItemFirst.add(lblItemFirst);
 		pnlItemFirst.add(cbbItemFirst);
@@ -145,7 +147,7 @@ public class ScanItemDialog extends JDialog {
 	 */
 	private void setDefault(JCheckBox ckb, JComboBox cbb, String equalsStr) {
 		//设置默认值
-		if(cbbItem.length > 0 && mainFrame.getSiList().size() > 1) {
+		if(cbbItem.length > 0 && mainFrame.getSiList().size() > 0) {
 			for(int i = 0; i < mainFrame.getSiList().size(); i++) {
 				ScanItem si = mainFrame.getSiList().get(i);
 				if(si.getDbtColumnName().equals(equalsStr)) {
