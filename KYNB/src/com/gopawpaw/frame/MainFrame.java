@@ -574,7 +574,6 @@ public class MainFrame extends JFrame {
 
 				//if (thisClass.cheakRegister()) {
 				if (true) {
-					thisClass.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 					thisClass.setVisible(true);
 				} else {
 					System.exit(0);

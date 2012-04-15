@@ -1,4 +1,4 @@
-package com.gopawpaw.kynb.module.datasift;
+package com.gopawpaw.kynb.common;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,6 +14,8 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellValue;
+import org.apache.poi.ss.usermodel.FormulaEvaluator;
 
 import com.gopawpaw.kynb.module.datascan.FormetUtil;
 
@@ -157,7 +159,13 @@ public class PoiOperatXls2 {
 							case HSSFCell.CELL_TYPE_BOOLEAN: // Boolean
 								break;
 							case HSSFCell.CELL_TYPE_FORMULA: // 公式
-								temp[j] = cell.getCellFormula();
+								//temp[j] = cell.getCellFormula();
+								//temp[j] = cell.getStringCellValue();//只取单元格显示值
+							 	FormulaEvaluator evaluator = cell.getSheet().getWorkbook().getCreationHelper().createFormulaEvaluator();
+							    evaluator.evaluateFormulaCell(cell);
+							    CellValue cellValue = evaluator.evaluate(cell);
+							    temp[j] = String.valueOf(cellValue.getNumberValue()) ;
+								
 								break;
 							case HSSFCell.CELL_TYPE_BLANK: // 空值
 								temp[j] = " ";
