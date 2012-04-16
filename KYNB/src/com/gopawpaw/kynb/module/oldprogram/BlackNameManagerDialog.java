@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gopawpaw.kynb;
+package com.gopawpaw.kynb.module.oldprogram;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -41,6 +41,8 @@ import com.gopawpaw.dev.common.GppJarRunableInterface;
 import com.gopawpaw.java.awt.GppDialog;
 import com.gopawpaw.javax.swing.GppJButton;
 import com.gopawpaw.javax.swing.GppJTextField;
+import com.gopawpaw.kynb.GppMessageDialog;
+import com.gopawpaw.kynb.GppStyleTable;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.db.DBException;
