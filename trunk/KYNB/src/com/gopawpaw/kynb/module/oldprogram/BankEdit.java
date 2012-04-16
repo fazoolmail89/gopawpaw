@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gopawpaw.kynb;
+package com.gopawpaw.kynb.module.oldprogram;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -39,13 +39,15 @@ import com.gopawpaw.javax.swing.GppJCheckBox;
 import com.gopawpaw.javax.swing.GppJComboBox;
 import com.gopawpaw.javax.swing.GppJDialog;
 import com.gopawpaw.javax.swing.GppJFrame;
-import com.gopawpaw.kynb.XXNCYLBXMain.GppJComboBoxExp;
+import com.gopawpaw.kynb.GppStyleTable;
+import com.gopawpaw.kynb.IDNumberChecker;
 import com.gopawpaw.kynb.bean.DefultData;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.ExcelAccess;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
+import com.gopawpaw.kynb.module.oldprogram.XXNCYLBXMain.GppJComboBoxExp;
 import com.gopawpaw.kynb.utils.DateUtils;
 
 /**

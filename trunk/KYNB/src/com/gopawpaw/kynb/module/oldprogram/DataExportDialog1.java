@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gopawpaw.kynb;
+package com.gopawpaw.kynb.module.oldprogram;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

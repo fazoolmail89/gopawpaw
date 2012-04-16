@@ -24,11 +24,11 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import com.gopawpaw.dev.common.GppJarRunableInterface;
 import com.gopawpaw.javax.swing.GppJComboBox;
-import com.gopawpaw.kynb.ThorpDialog;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
+import com.gopawpaw.kynb.module.oldprogram.ThorpDialog;
 
 /**
  * @version 2012-3-12
