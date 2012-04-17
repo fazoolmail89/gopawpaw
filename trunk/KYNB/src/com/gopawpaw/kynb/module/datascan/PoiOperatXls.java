@@ -317,10 +317,10 @@ public class PoiOperatXls {
 	 * 检测文件是否正确
 	 * @param xlsFile
 	 * @return
-	 * 0：正确
-	 * 1：不是xls文件
-	 * 2：输入流无法读取文件
-	 * 3：文件格式错误
+	 * 0：正确；
+	 * 1：不是xls文件；
+	 * 2：输入流无法读取文件；
+	 * 3：文件格式错误；
 	 */
 	public static int checkXls(File xlsFile) {
 		int result = 0;
