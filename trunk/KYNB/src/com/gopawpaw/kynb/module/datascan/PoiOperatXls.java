@@ -313,6 +313,34 @@ public class PoiOperatXls {
 		return path;
 	}
 	
+	/**
+	 * 检测文件是否正确
+	 * @param xlsFile
+	 * @return
+	 * 0：正确
+	 * 1：不是xls文件
+	 * 2：输入流无法读取文件
+	 * 3：文件格式错误
+	 */
+	public static int checkXls(File xlsFile) {
+		int result = 0;
+		if(!checkSuffix(xlsFile.getPath())) result = 1;
+		
+		FileInputStream is;
+		try {
+			is = new FileInputStream(xlsFile);
+			HSSFWorkbook wbs = new HSSFWorkbook(is);
+		} catch (FileNotFoundException e) {
+			result = 2;
+			e.printStackTrace();
+		} catch (IOException e) {
+			result = 3;
+			e.printStackTrace();
+		}
+		return result;
+		
+	}
+	
 	public static void main(String[] args) {
 		System.out.println(autoAddXlsSuffix("d:\\aaa.xL"));
 		
