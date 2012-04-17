@@ -462,9 +462,6 @@ public class DataSift extends BaseModuleFrame implements
 			p.start();
 		}
 		
-
-
-		
 	}
 
 

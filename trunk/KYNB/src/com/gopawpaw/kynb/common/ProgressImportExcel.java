@@ -27,6 +27,12 @@ public class ProgressImportExcel extends Thread {// 自定义类progress,导入excel用
 	private JComboBox jComboBox;
 	private String excelPath;
 
+	public ProgressImportExcel(JProgressBar progressBar,
+			String excelPath) {
+		this.progressBar = progressBar;
+		this.excelPath = excelPath;
+	}
+	
 	public ProgressImportExcel(JProgressBar progressBar, JButton button,
 			String excelPath) {
 		this.progressBar = progressBar;
@@ -56,7 +62,10 @@ public class ProgressImportExcel extends Thread {// 自定义类progress,导入excel用
 	}
 
 	public void run() {
-		button.setEnabled(false);
+		if(button != null){
+			
+			button.setEnabled(false);
+		}
 
 		mData = PoiOperatXls2.readXlsRTA(new File(excelPath),
 				new ReadXlsListener() {
@@ -83,7 +92,10 @@ public class ProgressImportExcel extends Thread {// 自定义类progress,导入excel用
 
 		actionFinish();
 
-		button.setEnabled(true); // 按钮可用
+		if(button != null){
+			
+			button.setEnabled(true); // 按钮可用
+		}
 
 	}
 

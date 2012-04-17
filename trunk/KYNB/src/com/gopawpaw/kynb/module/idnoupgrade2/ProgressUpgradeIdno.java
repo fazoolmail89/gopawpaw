@@ -94,6 +94,10 @@ public class ProgressUpgradeIdno extends Thread {
 			String vTemp1 = (String) v1[index];
 			
 			try {
+				if(vTemp1 != null && vTemp1.endsWith("x")){
+					vTemp1 = vTemp1.subSequence(0, vTemp1.length()-1) + "X";
+				}
+				
 				int checkCode = IDNumberChecker.checkIDCard(vTemp1);
 				if(IDNumberChecker.IDCARD_IS_OK == checkCode){
 					//合法的18位身份证

@@ -17,6 +17,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.util.List;
 import java.util.Vector;
 
@@ -45,6 +46,7 @@ import com.gopawpaw.kynb.GppMessageDialog;
 import com.gopawpaw.kynb.GppStyleTable;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
+import com.gopawpaw.kynb.common.PoiOperatXls2;
 import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.ExcelDBAccess;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
@@ -71,8 +73,6 @@ public class BlackNameManagerDialog  extends GppDialog implements ActionListener
 	private JTextField mJTextICEdit;
 
 	private JProgressBar progressBar = new JProgressBar();
-
-	private ExcelDBAccess mExcelDBAccess;
 
 	private JTable jTableVillager = null;
 	
@@ -640,23 +640,21 @@ public class BlackNameManagerDialog  extends GppDialog implements ActionListener
 		
 		private JProgressBar progressBar;
 		private JButton button;
+		private String excelPath;
 		private XXNCYLBXDBAccess mXXNCYLBXDBAccess;
 		public Progress(JProgressBar progressBar, JButton button) {
 			this.progressBar = progressBar;
 			this.button = button;
-			
-			mExcelDBAccess = new ExcelDBAccess(mJTextExcelPath.getText());
+			this.excelPath = mJTextExcelPath.getText();
 			mXXNCYLBXDBAccess = new XXNCYLBXDBAccess();
 			
 		}
 
 		public void run() {
 			try {
-				List<String> list = mExcelDBAccess.getVillagerBlackNameAll();
-				
-				
-				if (list != null) {
-					int size = list.size();
+				Object[][] arr = PoiOperatXls2.readXlsRTA(new File(excelPath));
+				if (arr != null) {
+					int size = arr.length;
 					progressBar.setMaximum(size);
 					
 					int importOKCount = 0;
@@ -665,7 +663,7 @@ public class BlackNameManagerDialog  extends GppDialog implements ActionListener
 					
 					String ve_ic = "";
 					for (int i = 0; i < size; i++) {
-						ve_ic = list.get(i);
+						ve_ic = (String) arr[i][0];
 						if(mXXNCYLBXDBAccess.isExistVillagerError(ve_ic)){
 							//ÒÑ¾­´æÔÚ
 							importHasExistCount++;
