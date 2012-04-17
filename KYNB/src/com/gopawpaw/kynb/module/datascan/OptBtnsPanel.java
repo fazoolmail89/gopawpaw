@@ -18,8 +18,8 @@ public class OptBtnsPanel extends JPanel {
 	private static DataScanFrame mainFrame = null;
 	private JButton btnImportExcel = new JButton(" 导入Excel ");
 	private JButton btnExportExcel = new JButton(" 导出Excel ");
-	   private JButton btnScanItem = new JButton("扫描项选择");
-	   private JButton btnScanning = new JButton(" 开始扫描  ");
+	private JButton btnScanItem = new JButton("扫描项选择");
+	private JButton btnScanning = new JButton(" 开始扫描  ");
 
 	public JButton getBtnExportExcel() {
 		return btnExportExcel;
@@ -36,7 +36,7 @@ public class OptBtnsPanel extends JPanel {
 	public void setBtnImportExcel(JButton btnImportExcel) {
 		this.btnImportExcel = btnImportExcel;
 	}
-	
+
 	public JButton getBtnImportExcel() {
 		return btnImportExcel;
 	}
@@ -44,58 +44,74 @@ public class OptBtnsPanel extends JPanel {
 	public void setMainFrame(DataScanFrame mainFrame) {
 		OptBtnsPanel.mainFrame = mainFrame;
 	}
-	
+
 	public OptBtnsPanel() {
 		btnImportExcel.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				String error = "";
 				// 创建文件选择窗口
-				int returnVal = mainFrame.getFilechooser().showOpenDialog(mainFrame);
-				if(returnVal == JFileChooser.APPROVE_OPTION) {
+				int returnVal = mainFrame.getFilechooser().showOpenDialog(
+						mainFrame);
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					// 接收选中文件
 					File file = mainFrame.getFilechooser().getSelectedFile();
-					
-					mainFrame.executImportExcel(file);
+					returnVal = PoiOperatXls.checkXls(file);
+					if (returnVal == 0) {
+						mainFrame.executImportExcel(file);
+					} else {
+						error = "不是有效excel文件，请将文件“另存为”或将数据复制到新的Excel文件中，再尝试重新导入";
+						JDialog jd = new JDialog();
+						jd.setTitle("错误提示！");
+						JLabel message = new JLabel(error);
+						message.setFont(new Font("宋体 ", java.awt.Font.BOLD, 14));
+						jd.add(message);
+						DataScanFrame.setDialogLocaltion(jd);
+						jd.setSize(600, 90);
+						jd.setVisible(true);
+						jd.setModal(true);
+					}
 				}
 			}
 		});
-		
-		//-----------------------------------------------------------------------
+
+		// -----------------------------------------------------------------------
 		btnExportExcel.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				//打开文件保存视图
-				int returnVal = mainFrame.getFilechooser().showSaveDialog(mainFrame);
-				if(returnVal == JFileChooser.APPROVE_OPTION) {
-					//获取要保存的文件
+
+				// 打开文件保存视图
+				int returnVal = mainFrame.getFilechooser().showSaveDialog(
+						mainFrame);
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					// 获取要保存的文件
 					File file = mainFrame.getFilechooser().getSelectedFile();
 
 					mainFrame.executExportExcel(new File(file.getPath()));
 				}
 			}
 		});
-		
-		//-----------------------------------------------------------------------
+
+		// -----------------------------------------------------------------------
 		btnScanItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new ScanItemDialog(mainFrame);
 			}
 		});
-		
-		//-----------------------------------------------------------------------
-		
+
+		// -----------------------------------------------------------------------
+
 		btnScanning.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Object[][] data = mainFrame.getExcelDataTablePane().getOriginalData();
-				if(data == null || data.length < 1) {
+				Object[][] data = mainFrame.getExcelDataTablePane()
+						.getOriginalData();
+				if (data == null || data.length < 1) {
 					JDialog md = new JDialog(mainFrame);
 					md.setTitle("扫描数据异常");
 					JLabel message = new JLabel("无导入数据，不需要进行扫描！");
-					message.setFont(new Font("宋体 ",java.awt.Font.BOLD,14));
+					message.setFont(new Font("宋体 ", java.awt.Font.BOLD, 14));
 					md.add(message);
 					DataScanFrame.setDialogLocaltion(md);
 					md.setSize(500, 100);
@@ -106,7 +122,7 @@ public class OptBtnsPanel extends JPanel {
 				}
 			}
 		});
-		
+
 		setLayout(new FlowLayout());
 		add(btnImportExcel);
 		add(btnScanItem);
