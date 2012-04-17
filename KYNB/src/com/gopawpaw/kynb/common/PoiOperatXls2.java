@@ -136,7 +136,12 @@ public class PoiOperatXls2 {
 			int size = childSheet.getLastRowNum();
 			
 			//第一行为头部，第二行开始才是数据
-			data = new Object[size-1][];
+			if(readXlsListener != null){
+				
+				data = new Object[size-1][];
+			}else{
+				data = new Object[size][];
+			}
 			
 			//是否已经响应过预读取
 			boolean flagOnReadXlsPre = false;
@@ -193,12 +198,17 @@ public class PoiOperatXls2 {
 							continue;
 						}
 						
-						//
-						data[i-1] = temp;
+						
 						
 						if(readXlsListener != null){
+							
+							//
+							data[i-1] = temp;
 							//回调接口
 							readXlsListener.onReadXlsProgress(i);
+						}else{
+							//
+							data[i] = temp;
 						}
 				}
 			}

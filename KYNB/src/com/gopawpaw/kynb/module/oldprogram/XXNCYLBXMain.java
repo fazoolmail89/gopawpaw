@@ -52,11 +52,8 @@ import com.gopawpaw.dev.common.GppCmdShell;
 import com.gopawpaw.dev.common.GppJarRunableInterface;
 import com.gopawpaw.dev.common.encryption.MD5;
 import com.gopawpaw.frame.GlobalParameter;
-import com.gopawpaw.frame.common.BaseFrame;
-import com.gopawpaw.frame.program.Mgpwmt;
 import com.gopawpaw.javax.swing.GppJCheckBox;
 import com.gopawpaw.javax.swing.GppJComboBox;
-import com.gopawpaw.javax.swing.GppJFrame;
 import com.gopawpaw.kynb.GppMessageDialog;
 import com.gopawpaw.kynb.GppStyleTable;
 import com.gopawpaw.kynb.IDNumberChecker;
@@ -67,6 +64,7 @@ import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.ExcelAccess;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
+import com.gopawpaw.kynb.module.BaseModuleFrame;
 import com.gopawpaw.kynb.utils.DateUtils;
 import com.gopawpaw.kynb.utils.GppConfiguration;
 import com.gopawpaw.kynb.utils.Tools;
@@ -75,7 +73,7 @@ import com.gopawpaw.kynb.utils.Tools;
  * @version 2011-11-13
  * @author Jason
  */
-public class XXNCYLBXMain extends BaseFrame implements GppJarRunableInterface{
+public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterface{
 
 	
 	private static final long serialVersionUID = 1L;
@@ -724,7 +722,7 @@ public class XXNCYLBXMain extends BaseFrame implements GppJarRunableInterface{
 			jButtonImportVillager
 					.addMouseListener(new java.awt.event.MouseAdapter() {
 						public void mouseClicked(java.awt.event.MouseEvent e) {
-							DataImportDialog gmd = new DataImportDialog(
+							DataImportDialog2 gmd = new DataImportDialog2(
 									XXNCYLBXMain.this) {
 								/**
 						 * 
