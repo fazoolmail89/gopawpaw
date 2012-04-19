@@ -1,15 +1,14 @@
 package com.gopawpaw.kynb.module.datascan;
 
 import java.awt.FlowLayout;
-import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class OptBtnsPanel extends JPanel {
@@ -20,6 +19,7 @@ public class OptBtnsPanel extends JPanel {
 	private JButton btnExportExcel = new JButton(" 导出Excel ");
 	private JButton btnScanItem = new JButton("扫描项选择");
 	private JButton btnScanning = new JButton(" 开始扫描  ");
+	private JButton btnTest = new JButton("测试");
 
 	public JButton getBtnExportExcel() {
 		return btnExportExcel;
@@ -61,15 +61,9 @@ public class OptBtnsPanel extends JPanel {
 						mainFrame.executImportExcel(file);
 					} else {
 						error = "不是有效excel文件，请将文件“另存为”或将数据复制到新的Excel文件中，再尝试重新导入";
-						JDialog jd = new JDialog();
-						jd.setTitle("错误提示！");
-						JLabel message = new JLabel(error);
-						message.setFont(new Font("宋体 ", java.awt.Font.BOLD, 14));
-						jd.add(message);
-						DataScanFrame.setDialogLocaltion(jd);
-						jd.setSize(600, 90);
-						jd.setVisible(true);
-						jd.setModal(true);
+						Toolkit.getDefaultToolkit().beep();
+						JOptionPane.showMessageDialog(null, error,
+								"错误提示！", JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}
@@ -79,15 +73,23 @@ public class OptBtnsPanel extends JPanel {
 		btnExportExcel.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				// 打开文件保存视图
-				int returnVal = mainFrame.getFilechooser().showSaveDialog(
-						mainFrame);
-				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					// 获取要保存的文件
-					File file = mainFrame.getFilechooser().getSelectedFile();
-
-					mainFrame.executExportExcel(new File(file.getPath()));
+				
+				Object[][] excelData = mainFrame.getExcelDataTablePane()
+						.getHaveTitleData();
+				if (excelData != null && excelData.length > 0) {
+					// 打开文件保存视图
+					int returnVal = mainFrame.getFilechooser().showSaveDialog(
+							mainFrame);
+					if (returnVal == JFileChooser.APPROVE_OPTION) {
+						// 获取要保存的文件
+						File file = mainFrame.getFilechooser()
+								.getSelectedFile();
+						mainFrame.executExportExcel(new File(file.getPath()));
+					}
+				} else {
+					Toolkit.getDefaultToolkit().beep();
+					JOptionPane.showMessageDialog(null, "没有数据，不需要导出！",
+							"文件保存提示！", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
@@ -108,18 +110,25 @@ public class OptBtnsPanel extends JPanel {
 				Object[][] data = mainFrame.getExcelDataTablePane()
 						.getOriginalData();
 				if (data == null || data.length < 1) {
-					JDialog md = new JDialog(mainFrame);
-					md.setTitle("扫描数据异常");
-					JLabel message = new JLabel("无导入数据，不需要进行扫描！");
-					message.setFont(new Font("宋体 ", java.awt.Font.BOLD, 14));
-					md.add(message);
-					DataScanFrame.setDialogLocaltion(md);
-					md.setSize(500, 100);
-					md.setVisible(true);
-					md.setModal(true);
+					Toolkit.getDefaultToolkit().beep();
+					JOptionPane.showMessageDialog(null, "请先导入数据再进行扫描！",
+							"数据扫描提示！", JOptionPane.WARNING_MESSAGE);
 				} else {
 					mainFrame.executlScanning();
 				}
+			}
+		});
+
+		btnTest.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				HsqlMemDbUtil hmduThread = new HsqlMemDbUtil();
+				hmduThread.start();
+
+				DataDump dataDump = new DataDump();
+				dataDump.excute();
+				dataDump.selectTest();
+				hmduThread.destoryConn();
 			}
 		});
 
@@ -128,5 +137,6 @@ public class OptBtnsPanel extends JPanel {
 		add(btnScanItem);
 		add(btnScanning);
 		add(btnExportExcel);
+		add(btnTest);
 	}
 }
