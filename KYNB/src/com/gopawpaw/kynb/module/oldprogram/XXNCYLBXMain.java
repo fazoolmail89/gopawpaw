@@ -48,15 +48,12 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 
-import com.gopawpaw.dev.common.GppCmdShell;
-import com.gopawpaw.dev.common.GppJarRunableInterface;
-import com.gopawpaw.dev.common.encryption.MD5;
 import com.gopawpaw.frame.GlobalParameter;
-import com.gopawpaw.javax.swing.GppJCheckBox;
-import com.gopawpaw.javax.swing.GppJComboBox;
-import com.gopawpaw.kynb.GppMessageDialog;
-import com.gopawpaw.kynb.GppStyleTable;
-import com.gopawpaw.kynb.IDNumberChecker;
+import com.gopawpaw.frame.dev.common.GppCmdShell;
+import com.gopawpaw.frame.dev.common.GppJarRunableInterface;
+import com.gopawpaw.frame.dev.common.encryption.MD5;
+import com.gopawpaw.frame.javax.swing.GppJCheckBox;
+import com.gopawpaw.frame.javax.swing.GppJComboBox;
 import com.gopawpaw.kynb.RegisterDialog;
 import com.gopawpaw.kynb.bean.DefultData;
 import com.gopawpaw.kynb.bean.Thorp;
@@ -67,7 +64,10 @@ import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
 import com.gopawpaw.kynb.utils.DateUtils;
 import com.gopawpaw.kynb.utils.GppConfiguration;
+import com.gopawpaw.kynb.utils.IDNumberChecker;
 import com.gopawpaw.kynb.utils.Tools;
+import com.gopawpaw.kynb.widget.GppMessageDialog;
+import com.gopawpaw.kynb.widget.GppStyleTable;
 
 /**
  * @version 2011-11-13
@@ -722,7 +722,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 			jButtonImportVillager
 					.addMouseListener(new java.awt.event.MouseAdapter() {
 						public void mouseClicked(java.awt.event.MouseEvent e) {
-							DataImportDialog2 gmd = new DataImportDialog2(
+							DataImportDialog gmd = new DataImportDialog(
 									XXNCYLBXMain.this) {
 								/**
 						 * 

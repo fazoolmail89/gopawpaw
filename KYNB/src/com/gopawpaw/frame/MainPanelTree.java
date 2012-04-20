@@ -37,8 +37,8 @@ import javax.swing.tree.DefaultTreeModel;
 
 import com.gopawpaw.frame.dataEntity.Dmnd_det;
 import com.gopawpaw.frame.dataEntity.Omnd_det;
+import com.gopawpaw.frame.javax.swing.GppJList;
 import com.gopawpaw.frame.log.GLog;
-import com.gopawpaw.javax.swing.GppJList;
 import com.sunking.swing.JGroupPanel;
 
 import javax.swing.JList;

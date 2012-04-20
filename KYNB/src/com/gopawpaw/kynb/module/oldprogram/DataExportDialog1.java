@@ -26,9 +26,9 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
-import com.gopawpaw.java.awt.GppDialog;
-import com.gopawpaw.javax.swing.GppJCheckBox;
-import com.gopawpaw.javax.swing.GppJComboBox;
+import com.gopawpaw.frame.java.awt.GppDialog;
+import com.gopawpaw.frame.javax.swing.GppJCheckBox;
+import com.gopawpaw.frame.javax.swing.GppJComboBox;
 import com.gopawpaw.kynb.bean.DefultData;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;

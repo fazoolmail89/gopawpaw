@@ -35,12 +35,10 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-import com.gopawpaw.javax.swing.GppJCheckBox;
-import com.gopawpaw.javax.swing.GppJComboBox;
-import com.gopawpaw.javax.swing.GppJDialog;
-import com.gopawpaw.javax.swing.GppJFrame;
-import com.gopawpaw.kynb.GppStyleTable;
-import com.gopawpaw.kynb.IDNumberChecker;
+import com.gopawpaw.frame.javax.swing.GppJCheckBox;
+import com.gopawpaw.frame.javax.swing.GppJComboBox;
+import com.gopawpaw.frame.javax.swing.GppJDialog;
+import com.gopawpaw.frame.javax.swing.GppJFrame;
 import com.gopawpaw.kynb.bean.DefultData;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
@@ -49,6 +47,8 @@ import com.gopawpaw.kynb.db.ExcelAccess;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 import com.gopawpaw.kynb.module.oldprogram.XXNCYLBXMain.GppJComboBoxExp;
 import com.gopawpaw.kynb.utils.DateUtils;
+import com.gopawpaw.kynb.utils.IDNumberChecker;
+import com.gopawpaw.kynb.widget.GppStyleTable;
 
 /**
  * @version 2011-12-3

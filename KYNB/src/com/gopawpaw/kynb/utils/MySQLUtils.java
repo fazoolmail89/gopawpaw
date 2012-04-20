@@ -10,8 +10,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gopawpaw.dev.common.GppCmdShell;
-import com.gopawpaw.dev.common.GppConfiguration;
+import com.gopawpaw.frame.dev.common.GppCmdShell;
+import com.gopawpaw.frame.dev.common.GppConfiguration;
 import com.gopawpaw.frame.log.GLog;
 
 /**

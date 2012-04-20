@@ -1,6 +1,6 @@
 package com.gopawpaw.kynb.common;
 
-import com.gopawpaw.javax.swing.GppJTable;
+import com.gopawpaw.frame.javax.swing.GppJTable;
 
 /**
  * µ¼Èëexcle¼àÌýÆ÷

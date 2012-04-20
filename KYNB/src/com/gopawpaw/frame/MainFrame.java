@@ -36,10 +36,10 @@ import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
-import com.gopawpaw.dev.common.encryption.MD5;
 import com.gopawpaw.frame.dataEntity.Dmnd_det;
 import com.gopawpaw.frame.dataEntity.Omnd_det;
-import com.gopawpaw.javax.swing.GppJComboBox;
+import com.gopawpaw.frame.dev.common.encryption.MD5;
+import com.gopawpaw.frame.javax.swing.GppJComboBox;
 import com.gopawpaw.kynb.RegisterDialog;
 import com.gopawpaw.kynb.utils.GppConfiguration;
 import com.gopawpaw.kynb.utils.MySQLUtils;

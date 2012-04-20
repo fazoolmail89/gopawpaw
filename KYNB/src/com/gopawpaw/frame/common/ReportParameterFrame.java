@@ -10,7 +10,8 @@ import java.awt.HeadlessException;
 
 import com.gopawpaw.frame.GlobalParameter;
 import com.gopawpaw.frame.GppReportBrowser;
-import com.gopawpaw.javax.swing.GppJFrame;
+import com.gopawpaw.frame.javax.swing.GppJFrame;
+
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;

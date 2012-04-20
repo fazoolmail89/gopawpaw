@@ -6,8 +6,8 @@ package com.gopawpaw.frame.program;
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
 
-import com.gopawpaw.dev.common.GppJarRunableInterface;
 import com.gopawpaw.frame.common.BaseFrame;
+import com.gopawpaw.frame.dev.common.GppJarRunableInterface;
 
 /**
  * @version 2010-7-14

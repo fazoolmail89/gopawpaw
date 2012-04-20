@@ -22,8 +22,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import com.gopawpaw.kynb.GppStyleTable;
-import com.gopawpaw.kynb.IDNumberChecker;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.db.DBException;
@@ -31,6 +29,8 @@ import com.gopawpaw.kynb.db.ExcelAccess;
 import com.gopawpaw.kynb.db.ExcelWriter;
 import com.gopawpaw.kynb.db.ExportExcelListener;
 import com.gopawpaw.kynb.utils.DateUtils;
+import com.gopawpaw.kynb.utils.IDNumberChecker;
+import com.gopawpaw.kynb.widget.GppStyleTable;
 
 /**
  * @描述 带有15位身份证号码及错误身份证号码表格的滚动面板

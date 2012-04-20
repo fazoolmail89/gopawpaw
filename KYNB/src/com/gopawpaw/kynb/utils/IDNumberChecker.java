@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gopawpaw.kynb;
+package com.gopawpaw.kynb.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

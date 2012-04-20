@@ -21,7 +21,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
-import com.gopawpaw.javax.swing.GppJPanel;
+import com.gopawpaw.frame.javax.swing.GppJPanel;
 
 /**
  * @version 2010-6-4

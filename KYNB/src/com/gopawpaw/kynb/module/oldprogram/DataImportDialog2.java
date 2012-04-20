@@ -15,6 +15,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -26,23 +29,16 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
 
-import com.gopawpaw.frame.log.GLog;
-import com.gopawpaw.java.awt.GppDialog;
-import com.gopawpaw.javax.swing.GppJButton;
-import com.gopawpaw.javax.swing.GppJTable;
-import com.gopawpaw.kynb.GppStyleTable;
+import com.gopawpaw.frame.java.awt.GppDialog;
+import com.gopawpaw.frame.javax.swing.GppJButton;
+import com.gopawpaw.frame.javax.swing.GppJTable;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.common.ExcelImportListener;
 import com.gopawpaw.kynb.common.PoiOperatXls2;
 import com.gopawpaw.kynb.common.ProgressImportExcel;
-import com.gopawpaw.kynb.db.DBException;
-import com.gopawpaw.kynb.db.GppCommonDBAccess;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
-import com.gopawpaw.kynb.module.datasift.ProgressActionSift;
-import com.gopawpaw.kynb.module.datasift.ProgressActionSiftListener;
 
 /**
  * @version 2011-11-18
@@ -456,6 +452,10 @@ public class DataImportDialog2 extends GppDialog implements ActionListener {
 					progressBar.setMaximum(size);
 					
 					Villager villager = new Villager();
+					XXNCYLBXDBAccess xxAccess = new XXNCYLBXDBAccess();
+					Connection conn = xxAccess.getSqlCon();
+					
+					conn.setAutoCommit(false);
 					
 					for(int i=1;i<size;i++){
 						//第一行是头部，需要过滤掉
@@ -467,6 +467,8 @@ public class DataImportDialog2 extends GppDialog implements ActionListener {
 						villager.setV_ic((String)arr[i][4]);
 						villager.setV_address_live((String)arr[i][5]);
 						villager.setV_householder_name((String)arr[i][6]);
+
+						
 						
 						if(mXXNCYLBXDBAccess.isExistVillager(villager.getV_ic())){
 							//已经存在
@@ -485,6 +487,15 @@ public class DataImportDialog2 extends GppDialog implements ActionListener {
 							villager.setV_status("a");
 						}
 						
+						
+						String tsql=XXNCYLBXDBAccess.getInsertVillagerSQL(villager);
+						Statement psta = conn.prepareStatement(tsql);
+						
+						psta.executeUpdate(tsql);
+						//没1000条提交一次，可不用
+						if(i%1000 == 0) conn.commit();
+						
+						
 						if(mXXNCYLBXDBAccess.insertVillager(villager)){
 							//导入成功
 							importOKCount++;
@@ -497,7 +508,8 @@ public class DataImportDialog2 extends GppDialog implements ActionListener {
 						progressBar.setValue(i+1); // 进度值
 					}
 
-					
+					conn.commit();
+					conn.close();
 					progressBar.setIndeterminate(false);
 				}
 				//==========================方案二 end
@@ -515,6 +527,8 @@ public class DataImportDialog2 extends GppDialog implements ActionListener {
 			
 			
 		}
+		
+		
 	}
 
 }

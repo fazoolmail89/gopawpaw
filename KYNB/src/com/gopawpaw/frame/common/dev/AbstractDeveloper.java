@@ -12,13 +12,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.gopawpaw.dev.common.encryption.MD5;
 import com.gopawpaw.frame.common.DataSelectObject;
-import com.gopawpaw.javax.swing.GppJButton;
-import com.gopawpaw.javax.swing.GppJComboBox;
-import com.gopawpaw.javax.swing.GppJLabel;
-import com.gopawpaw.javax.swing.GppJPanel;
-import com.gopawpaw.javax.swing.GppJTextField;
+import com.gopawpaw.frame.dev.common.encryption.MD5;
+import com.gopawpaw.frame.javax.swing.GppJButton;
+import com.gopawpaw.frame.javax.swing.GppJComboBox;
+import com.gopawpaw.frame.javax.swing.GppJLabel;
+import com.gopawpaw.frame.javax.swing.GppJPanel;
+import com.gopawpaw.frame.javax.swing.GppJTextField;
 
 
 /**

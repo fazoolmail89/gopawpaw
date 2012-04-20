@@ -21,19 +21,19 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
-import com.gopawpaw.dev.common.GppJarRunableInterface;
 import com.gopawpaw.frame.Authorization;
 import com.gopawpaw.frame.GlobalParameter;
 import com.gopawpaw.frame.common.BaseFrame;
 import com.gopawpaw.frame.dataEntity.Dmnd_det;
 import com.gopawpaw.frame.dataEntity.Omnd_det;
-import com.gopawpaw.javax.swing.GppJButton;
-import com.gopawpaw.javax.swing.GppJLabel;
-import com.gopawpaw.javax.swing.GppJPanel;
-import com.gopawpaw.javax.swing.GppJScrollPane;
-import com.gopawpaw.javax.swing.GppJSplitPane;
-import com.gopawpaw.javax.swing.GppJTextField;
-import com.gopawpaw.javax.swing.GppJTree;
+import com.gopawpaw.frame.dev.common.GppJarRunableInterface;
+import com.gopawpaw.frame.javax.swing.GppJButton;
+import com.gopawpaw.frame.javax.swing.GppJLabel;
+import com.gopawpaw.frame.javax.swing.GppJPanel;
+import com.gopawpaw.frame.javax.swing.GppJScrollPane;
+import com.gopawpaw.frame.javax.swing.GppJSplitPane;
+import com.gopawpaw.frame.javax.swing.GppJTextField;
+import com.gopawpaw.frame.javax.swing.GppJTree;
 import com.swtdesigner.FocusTraversalOnArray;
 
 /**

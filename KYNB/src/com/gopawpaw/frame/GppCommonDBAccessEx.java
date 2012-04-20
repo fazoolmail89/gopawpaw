@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.gopawpaw.dev.common.GppCommonDBAccess;
+import com.gopawpaw.frame.dev.common.GppCommonDBAccess;
 import com.gopawpaw.frame.log.GLog;
 
 public class GppCommonDBAccessEx extends GppCommonDBAccess {
@@ -330,6 +330,10 @@ public class GppCommonDBAccessEx extends GppCommonDBAccess {
 		} else {
 			System.err.println("connect failed!");
 		}
+	}
+
+	public Connection getSqlCon() {
+		return sqlCon;
 	}
 
 }
