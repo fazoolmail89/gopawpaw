@@ -2,7 +2,7 @@ package com.gopawpaw.kynb.module.idnoupgrade;
 
 import java.text.ParseException;
 
-import com.gopawpaw.kynb.IDNumberChecker;
+import com.gopawpaw.kynb.utils.IDNumberChecker;
 
 /**
  * @描述 身份证号码升级工具类

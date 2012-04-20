@@ -19,11 +19,10 @@ import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
-import com.gopawpaw.dev.common.GppJarRunableInterface;
-import com.gopawpaw.javax.swing.GppJComboBox;
-import com.gopawpaw.javax.swing.GppJTable;
+import com.gopawpaw.frame.dev.common.GppJarRunableInterface;
+import com.gopawpaw.frame.javax.swing.GppJComboBox;
+import com.gopawpaw.frame.javax.swing.GppJTable;
 import com.gopawpaw.kynb.GlobalUI;
-import com.gopawpaw.kynb.GppStyleTable;
 import com.gopawpaw.kynb.bean.JComboBoxItem;
 import com.gopawpaw.kynb.common.ExcelExportListener;
 import com.gopawpaw.kynb.common.ExcelImportListener;
@@ -31,6 +30,7 @@ import com.gopawpaw.kynb.common.ProgressExportExcel;
 import com.gopawpaw.kynb.common.ProgressImportExcel;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
 import com.gopawpaw.kynb.utils.DateUtils;
+import com.gopawpaw.kynb.widget.GppStyleTable;
 
 /**
  * @version 2012-3-27

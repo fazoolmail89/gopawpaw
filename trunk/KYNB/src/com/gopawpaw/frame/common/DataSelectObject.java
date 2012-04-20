@@ -15,12 +15,12 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
-import com.gopawpaw.dev.common.encryption.MD5;
-import com.gopawpaw.javax.swing.GppJButton;
-import com.gopawpaw.javax.swing.GppJComboBox;
-import com.gopawpaw.javax.swing.GppJLabel;
-import com.gopawpaw.javax.swing.GppJPanel;
-import com.gopawpaw.javax.swing.GppJTextField;
+import com.gopawpaw.frame.dev.common.encryption.MD5;
+import com.gopawpaw.frame.javax.swing.GppJButton;
+import com.gopawpaw.frame.javax.swing.GppJComboBox;
+import com.gopawpaw.frame.javax.swing.GppJLabel;
+import com.gopawpaw.frame.javax.swing.GppJPanel;
+import com.gopawpaw.frame.javax.swing.GppJTextField;
 import com.sunking.swing.JDatePicker;
 
 /**

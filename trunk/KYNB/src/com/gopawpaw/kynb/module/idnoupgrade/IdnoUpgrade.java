@@ -21,8 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
 
-import com.gopawpaw.dev.common.GppJarRunableInterface;
-import com.gopawpaw.javax.swing.GppJComboBox;
+import com.gopawpaw.frame.dev.common.GppJarRunableInterface;
+import com.gopawpaw.frame.javax.swing.GppJComboBox;
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.db.DBException;

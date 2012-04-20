@@ -21,9 +21,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.gopawpaw.java.awt.GppDialog;
-import com.gopawpaw.javax.swing.GppJButton;
-import com.gopawpaw.javax.swing.GppJTextField;
+import com.gopawpaw.frame.java.awt.GppDialog;
+import com.gopawpaw.frame.javax.swing.GppJButton;
+import com.gopawpaw.frame.javax.swing.GppJTextField;
 
 public class RegisterDialog extends GppDialog implements ActionListener{
 

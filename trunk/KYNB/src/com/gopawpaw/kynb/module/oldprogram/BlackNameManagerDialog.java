@@ -38,12 +38,10 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 
-import com.gopawpaw.dev.common.GppJarRunableInterface;
-import com.gopawpaw.java.awt.GppDialog;
-import com.gopawpaw.javax.swing.GppJButton;
-import com.gopawpaw.javax.swing.GppJTextField;
-import com.gopawpaw.kynb.GppMessageDialog;
-import com.gopawpaw.kynb.GppStyleTable;
+import com.gopawpaw.frame.dev.common.GppJarRunableInterface;
+import com.gopawpaw.frame.java.awt.GppDialog;
+import com.gopawpaw.frame.javax.swing.GppJButton;
+import com.gopawpaw.frame.javax.swing.GppJTextField;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.common.PoiOperatXls2;
@@ -51,6 +49,8 @@ import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.ExcelDBAccess;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 import com.gopawpaw.kynb.module.thorpmanage.ThorpManage;
+import com.gopawpaw.kynb.widget.GppMessageDialog;
+import com.gopawpaw.kynb.widget.GppStyleTable;
 
 /**
  * @version 2011-11-19

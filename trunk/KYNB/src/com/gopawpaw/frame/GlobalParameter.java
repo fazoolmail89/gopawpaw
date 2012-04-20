@@ -19,9 +19,9 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.gopawpaw.dev.common.GppConfiguration;
 import com.gopawpaw.frame.dataEntity.Dmnd_det;
 import com.gopawpaw.frame.dataEntity.Omnd_det;
+import com.gopawpaw.frame.dev.common.GppConfiguration;
 
 /**
  * @version 2010-3-11

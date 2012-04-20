@@ -26,8 +26,8 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 
-import com.gopawpaw.java.awt.GppDialog;
-import com.gopawpaw.javax.swing.GppJButton;
+import com.gopawpaw.frame.java.awt.GppDialog;
+import com.gopawpaw.frame.javax.swing.GppJButton;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.db.DBException;

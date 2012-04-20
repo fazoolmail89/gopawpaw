@@ -25,7 +25,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
-import com.gopawpaw.javax.swing.GppJDialog;
+import com.gopawpaw.frame.javax.swing.GppJDialog;
 
 /**
  * @version 2010-4-15

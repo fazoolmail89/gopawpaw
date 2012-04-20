@@ -9,17 +9,17 @@ import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
 
 
-import com.gopawpaw.dev.common.GppComponentAuthorizationControlInterface;
 import com.gopawpaw.frame.GlobalParameter;
 import com.gopawpaw.frame.dataEntity.mfg.GppPcaDet;
 import com.gopawpaw.frame.dataEntity.mfg.GppProDet;
 import com.gopawpaw.frame.dataEntity.mfg.GppProMstr;
+import com.gopawpaw.frame.dev.common.GppComponentAuthorizationControlInterface;
 import com.gopawpaw.frame.hibernate.p.PcaDet;
 import com.gopawpaw.frame.hibernate.p.PcaDetId;
 import com.gopawpaw.frame.hibernate.p.ProDet;
 import com.gopawpaw.frame.hibernate.p.ProMstr;
 import com.gopawpaw.frame.hibernate.p.ProMstrId;
-import com.gopawpaw.javax.swing.GppJFrame;
+import com.gopawpaw.frame.javax.swing.GppJFrame;
 
 import java.awt.Dimension;
 import javax.swing.tree.DefaultMutableTreeNode;

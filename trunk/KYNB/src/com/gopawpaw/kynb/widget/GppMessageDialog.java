@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gopawpaw.kynb;
+package com.gopawpaw.kynb.widget;
 
 import java.awt.BorderLayout;
 import java.awt.Dialog;
@@ -21,9 +21,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.gopawpaw.java.awt.GppDialog;
-import com.gopawpaw.javax.swing.GppJButton;
-import com.gopawpaw.javax.swing.GppJTextArea;
+import com.gopawpaw.frame.java.awt.GppDialog;
+import com.gopawpaw.frame.javax.swing.GppJButton;
+import com.gopawpaw.frame.javax.swing.GppJTextArea;
 
 /**
  * 消息对话框

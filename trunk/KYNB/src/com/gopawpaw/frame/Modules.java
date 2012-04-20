@@ -11,8 +11,8 @@ import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import com.gopawpaw.dev.common.GppDynamicJar;
 import com.gopawpaw.frame.dataEntity.Dmnd_det;
+import com.gopawpaw.frame.dev.common.GppDynamicJar;
 
 /**
  * @version 2010-6-7

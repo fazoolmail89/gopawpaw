@@ -3,6 +3,7 @@
  */
 package com.gopawpaw.frame;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 
 import javax.swing.JOptionPane;
@@ -92,4 +93,7 @@ public class GppSQL {
 		return commonsql.close();
 	}
 
+	public Connection getSqlCon() {
+		return commonsql.getSqlCon();
+	}
 }

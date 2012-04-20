@@ -8,7 +8,7 @@ import java.io.File;
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 
-import com.gopawpaw.dev.common.GppJarRunableInterface;
+import com.gopawpaw.frame.dev.common.GppJarRunableInterface;
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
 

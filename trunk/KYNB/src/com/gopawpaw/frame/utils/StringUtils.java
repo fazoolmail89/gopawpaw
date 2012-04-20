@@ -3,7 +3,7 @@
  */
 package com.gopawpaw.frame.utils;
 
-import com.gopawpaw.dev.common.GppObfuscation;
+import com.gopawpaw.frame.dev.common.GppObfuscation;
 import com.gopawpaw.frame.log.GLog;
 
 /**

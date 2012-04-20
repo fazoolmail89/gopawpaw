@@ -13,9 +13,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import com.gopawpaw.dev.common.GppJarRunableInterface;
 import com.gopawpaw.frame.GlobalParameter;
 import com.gopawpaw.frame.common.BaseFrame;
+import com.gopawpaw.frame.dev.common.GppJarRunableInterface;
 import com.gopawpaw.kynb.module.oldprogram.XXNCYLBXMain;
 import com.gopawpaw.kynb.utils.GppConfiguration;
 

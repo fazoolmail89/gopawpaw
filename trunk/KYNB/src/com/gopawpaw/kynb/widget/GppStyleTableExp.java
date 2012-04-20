@@ -1,4 +1,4 @@
-package com.gopawpaw.kynb;
+package com.gopawpaw.kynb.widget;
 
 
 import java.util.Vector;
@@ -12,7 +12,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
-import com.gopawpaw.javax.swing.GppJTable;
+import com.gopawpaw.frame.javax.swing.GppJTable;
 
 
 public class GppStyleTableExp extends GppJTable{

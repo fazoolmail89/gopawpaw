@@ -4,7 +4,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import com.gopawpaw.kynb.GppStyleTable;
+import com.gopawpaw.kynb.widget.GppStyleTable;
 
 public class ExcelDataTablePane extends JScrollPane {
 

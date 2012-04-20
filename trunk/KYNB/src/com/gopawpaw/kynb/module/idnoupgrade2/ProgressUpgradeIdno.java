@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JProgressBar;
 
-import com.gopawpaw.kynb.IDNumberChecker;
+import com.gopawpaw.kynb.utils.IDNumberChecker;
 
 /**
  * 自定义类progress,执行升级身份证号用

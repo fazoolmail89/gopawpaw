@@ -17,46 +17,46 @@ import com.gopawpaw.kynb.bean.Villager;
 public class XXNCYLBXDBAccess extends BaseSQL{
 
 	
-	private final static String t_id = "t_id";
-	private final static String t_name = "t_name";
+	public final static String t_id = "t_id";
+	public final static String t_name = "t_name";
 	
-	private final static String v_id = "v_id";
-	private final static String v_name = "v_name";
-	private final static String v_sex = "v_sex";
-	private final static String v_ic = "v_ic";
-	private final static String v_nation = "v_nation";
-	private final static String v_birthday = "v_birthday";
-	private final static String v_address_live = "v_address_live";
-	private final static String v_bank_name = "v_bank_name";
-	private final static String v_bank_account = "v_bank_account";
-	private final static String v_bank_account_name = "v_bank_account_name";
-	private final static String v_bank2_name = "v_bank2_name";
-	private final static String v_bank2_account = "v_bank2_account";
-	private final static String v_bank2_account_name = "v_bank2_account_name";
-	private final static String v_capture_expend_calss = "v_capture_expend_calss";
-	private final static String v_type = "v_type";
-	private final static String v_join_time = "v_join_time";
-	private final static String v_archival_location = "v_archival_location";
-	private final static String v_old_balance = "v_old_balance";
-	private final static String v_old_balance_flag = "v_old_balance_flag";
-	private final static String v_householder_name = "v_householder_name";
-	private final static String v_householder_ic = "v_householder_ic";
-	private final static String v_householder_relation = "v_householder_relation";
-	private final static String v_standard_culture = "v_standard_culture";
-	private final static String v_60not_enough15_flag = "v_60not_enough15_flag";
-	private final static String v_phone_num = "v_phone_num";
-	private final static String v_marital_status = "v_marital_status";
-	private final static String v_politics_status = "v_politics_status";
-	private final static String v_contact_name = "v_contact_name";
-	private final static String v_address_com = "v_address_com";
-	private final static String v_address_zip_code = "v_address_zip_code";
-	private final static String v_soldie_flag = "v_soldie_flag";
-	private final static String v_model_worker = "v_model_worker";
-	private final static String v_social_security_num = "v_social_security_num";
-	private final static String v_begin_get_date = "v_begin_get_date";
-	private final static String v_status = "v_status";
-	private final static String v_mark = "v_mark";
-	private final static String v_mark2 = "v_mark2";
+	public final static String v_id = "v_id";
+	public final static String v_name = "v_name";
+	public final static String v_sex = "v_sex";
+	public final static String v_ic = "v_ic";
+	public final static String v_nation = "v_nation";
+	public final static String v_birthday = "v_birthday";
+	public final static String v_address_live = "v_address_live";
+	public final static String v_bank_name = "v_bank_name";
+	public final static String v_bank_account = "v_bank_account";
+	public final static String v_bank_account_name = "v_bank_account_name";
+	public final static String v_bank2_name = "v_bank2_name";
+	public final static String v_bank2_account = "v_bank2_account";
+	public final static String v_bank2_account_name = "v_bank2_account_name";
+	public final static String v_capture_expend_calss = "v_capture_expend_calss";
+	public final static String v_type = "v_type";
+	public final static String v_join_time = "v_join_time";
+	public final static String v_archival_location = "v_archival_location";
+	public final static String v_old_balance = "v_old_balance";
+	public final static String v_old_balance_flag = "v_old_balance_flag";
+	public final static String v_householder_name = "v_householder_name";
+	public final static String v_householder_ic = "v_householder_ic";
+	public final static String v_householder_relation = "v_householder_relation";
+	public final static String v_standard_culture = "v_standard_culture";
+	public final static String v_60not_enough15_flag = "v_60not_enough15_flag";
+	public final static String v_phone_num = "v_phone_num";
+	public final static String v_marital_status = "v_marital_status";
+	public final static String v_politics_status = "v_politics_status";
+	public final static String v_contact_name = "v_contact_name";
+	public final static String v_address_com = "v_address_com";
+	public final static String v_address_zip_code = "v_address_zip_code";
+	public final static String v_soldie_flag = "v_soldie_flag";
+	public final static String v_model_worker = "v_model_worker";
+	public final static String v_social_security_num = "v_social_security_num";
+	public final static String v_begin_get_date = "v_begin_get_date";
+	public final static String v_status = "v_status";
+	public final static String v_mark = "v_mark";
+	public final static String v_mark2 = "v_mark2";
 	/**
 	 * 
 	 */
@@ -944,5 +944,84 @@ public class XXNCYLBXDBAccess extends BaseSQL{
 		
 	}
 
+	public static String getInsertVillagerSQL(Villager villager){
+		String sql = "insert into villager ("+
+		t_id+","+
+		v_name+","+
+		v_sex+","+
+		v_ic+","+
+		v_nation+","+
+		v_birthday+","+
+		v_address_live+","+
+		v_bank_name+","+
+		v_bank_account+","+
+		v_bank_account_name+","+
+		v_bank2_name+","+
+		v_bank2_account+","+
+		v_bank2_account_name+","+
+		v_capture_expend_calss+","+
+		v_type+","+
+		v_join_time+","+
+		v_archival_location+","+
+		v_old_balance+","+
+		v_old_balance_flag+","+
+		v_householder_name+","+
+		v_householder_ic+","+
+		v_householder_relation +","+
+		v_standard_culture +","+
+		v_60not_enough15_flag +","+
+		v_phone_num +","+
+		v_marital_status+","+
+		v_politics_status+","+
+		v_contact_name+","+
+		v_address_com+","+
+		v_address_zip_code+","+
+		v_soldie_flag+","+
+		v_model_worker+","+
+		v_social_security_num+","+
+		v_begin_get_date+","+
+		v_status+","+
+		v_mark+","+
+		v_mark2+") values ("+
+		villager.getT_id()+",'"+
+		villager.getV_name()+"','"+
+		villager.getV_sex()+"','"+
+		villager.getV_ic()+"','"+
+		villager.getV_nation()+"','"+
+		villager.getV_birthday()+"','"+
+		villager.getV_address_live()+"','"+
+		villager.getV_bank_name()+"','"+
+		villager.getV_bank_account()+"','"+
+		villager.getV_bank_account_name()+"','"+
+		villager.getV_bank2_name()+"','"+
+		villager.getV_bank2_account()+"','"+
+		villager.getV_bank2_account_name()+"','"+
+		villager.getV_capture_expend_calss()+"','"+
+		villager.getV_type()+"','"+
+		villager.getV_join_time()+"','"+
+		villager.getV_archival_location()+"','"+
+		villager.getV_old_balance()+"','"+
+		villager.getV_old_balance_flag()+"','"+
+		villager.getV_householder_name()+"','"+
+		villager.getV_householder_ic()+"','"+
+		villager.getV_householder_relation()+"','"+
+		villager.getV_standard_culture()+"','"+
+		villager.getV_60not_enough15_flag()+"','"+
+		villager.getV_phone_num()+"','"+
+		villager.getV_marital_status()+"','"+
+		villager.getV_politics_status()+"','"+
+		villager.getV_contact_name()+"','"+
+		villager.getV_address_com()+"','"+
+		villager.getV_address_zip_code()+"','"+
+		villager.getV_soldie_flag()+"','"+
+		villager.getV_model_worker()+"','"+
+		villager.getV_social_security_num()+"','"+
+		villager.getV_begin_get_date()+"','"+
+		villager.getV_status()+"','"+
+		villager.getV_mark()+"','"+
+		villager.getV_mark2()+
+		"')";
+		return sql;
+	}
 
 }

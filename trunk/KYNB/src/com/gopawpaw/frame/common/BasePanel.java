@@ -5,7 +5,7 @@ package com.gopawpaw.frame.common;
 
 import java.awt.LayoutManager;
 
-import com.gopawpaw.javax.swing.GppJPanel;
+import com.gopawpaw.frame.javax.swing.GppJPanel;
 
 
 /**

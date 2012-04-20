@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gopawpaw.kynb;
+package com.gopawpaw.kynb.widget;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -22,7 +22,7 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import com.gopawpaw.javax.swing.GppJTable;
+import com.gopawpaw.frame.javax.swing.GppJTable;
 
 /**
  * 本类实现了对JTable颜色的控制，提供了两套方案： 

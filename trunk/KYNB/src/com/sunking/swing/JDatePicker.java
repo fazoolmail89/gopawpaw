@@ -11,7 +11,7 @@ import javax.swing.plaf.*;
 import javax.swing.plaf.basic.*;
 import javax.swing.plaf.metal.*;
 
-import com.gopawpaw.javax.swing.GppJComboBox;
+import com.gopawpaw.frame.javax.swing.GppJComboBox;
 import com.sun.java.swing.plaf.motif.*;
 import com.sun.java.swing.plaf.windows.*;
 import com.sunking.swing.refer.*;
