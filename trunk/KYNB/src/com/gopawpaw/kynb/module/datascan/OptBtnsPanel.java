@@ -137,6 +137,6 @@ public class OptBtnsPanel extends JPanel {
 		add(btnScanItem);
 		add(btnScanning);
 		add(btnExportExcel);
-		add(btnTest);
+		//add(btnTest);
 	}
 }
