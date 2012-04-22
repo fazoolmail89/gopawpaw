@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
+import java.io.File;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -45,6 +46,7 @@ import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.bean.DefultData;
 import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.common.DataDefultManager;
+import com.gopawpaw.kynb.common.PoiOperatXls2;
 import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
@@ -596,7 +598,15 @@ public class BlackList extends BaseModuleFrame implements ActionListener,GppJarR
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		if (jButtonConfirm.equals(e.getSource())) {
+			
+			if(mJTextExcelPath.getText() != null && !mJTextExcelPath.getText().equals("")){
+				new Progress(progressBar, jButtonConfirm).start(); // 自定义类progress
+			}else{
+				//提示选择文件
+			}
+			
+		}
 	}
 	
 	class GppJComboBoxExp extends GppJComboBox {
@@ -1137,5 +1147,101 @@ public class BlackList extends BaseModuleFrame implements ActionListener,GppJarR
 			e.printStackTrace();
 		}
 
+	}
+	
+	class Progress extends Thread {// 自定义类progress
+		
+		private JProgressBar progressBar;
+		private JButton button;
+		private String excelPath;
+		private XXNCYLBXDBAccess mXXNCYLBXDBAccess;
+		public Progress(JProgressBar progressBar, JButton button) {
+			this.progressBar = progressBar;
+			this.button = button;
+			this.excelPath = mJTextExcelPath.getText();
+			mXXNCYLBXDBAccess = new XXNCYLBXDBAccess();
+			
+		}
+
+		public void run() {
+			try {
+				Object[][] arr = PoiOperatXls2.readXlsRTA(new File(excelPath));
+				if (arr != null) {
+					int size = arr.length;
+					progressBar.setMaximum(size-1);
+					
+					int importOKCount = 0;
+					int importErrorCount = 0;
+					int importHasExistCount = 0;
+					
+					KYHashMap<String, String> kyMap = new KYHashMap<String, String>();
+					String ve_ic = "";
+					for (int i = 1; i < size; i++) {
+						ve_ic = (String) arr[i][0];
+						if(mXXNCYLBXDBAccess.isExistVillagerError(ve_ic)){
+							//已经存在
+							importHasExistCount++;
+							progressBar.setString("进度："+(i+1)+"/"+size+" 成功："+importOKCount+" 失败："+importErrorCount+" 已存在："+importHasExistCount);
+							progressBar.setValue(i+1); // 进度值
+							continue;
+						}
+						int ccc = arr[i].length;
+						kyMap.put(KeyConstants.DB.ve_name, (String)arr[i][0]);
+						if(ccc > 1){
+						
+							kyMap.put(KeyConstants.DB.ve_ic, (String)arr[i][1]);
+						}else{
+							kyMap.put(KeyConstants.DB.ve_ic, "");
+						}
+						if(ccc > 2){
+							kyMap.put(KeyConstants.DB.ve_type, (String)arr[i][2]);
+						}else{
+							kyMap.put(KeyConstants.DB.ve_type, "");
+						}
+						
+						if(ccc > 3){
+							kyMap.put(KeyConstants.DB.ve_remark1, (String)arr[i][3]);
+						}else{
+							kyMap.put(KeyConstants.DB.ve_remark1, "");
+						}
+						
+						if(ccc > 4){
+							kyMap.put(KeyConstants.DB.ve_remark2, (String)arr[i][4]);
+						}else{
+							kyMap.put(KeyConstants.DB.ve_remark2, "");
+						}
+						
+						if(ccc > 5){
+							kyMap.put(KeyConstants.DB.ve_remark3, (String)arr[i][5]);
+						}else{
+							kyMap.put(KeyConstants.DB.ve_remark3, "");
+						}
+						
+						
+						if(mXXNCYLBXDBAccess.insertVillagerError(kyMap)){
+							//导入成功
+							importOKCount++;
+						}else{
+							//导入失败
+							importErrorCount++;
+						}
+						
+						progressBar.setString("进度："+(i+1)+"/"+(size-1)+" 成功："+importOKCount+" 失败："+importErrorCount+" 已存在："+importHasExistCount);
+						progressBar.setValue(i+1); // 进度值
+					}
+				}
+
+				progressBar.setIndeterminate(false); // 采用确定的进度条
+				// progressBar.setIndeterminate(true); //不确定进度的进度条
+				
+
+			} catch (DBException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+			
+			refreshTableVillager();
+			button.setEnabled(true); // 按钮可用
+		}
 	}
 }
