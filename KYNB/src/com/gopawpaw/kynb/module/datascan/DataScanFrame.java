@@ -2,18 +2,14 @@ package com.gopawpaw.kynb.module.datascan;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Toolkit;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -32,7 +28,7 @@ public class DataScanFrame extends BaseModuleFrame implements
 	private static Map<String, Integer> scanMap = null;
 
 	// 文件选择控件
-	private static JFileChooser fileChooser = new JFileChooser();
+	private static final JFileChooser fileChooser = new JFileChooser();
 
 	/**
 	 * 静态代码段 1、为扫描项列表赋初始值 2、为文件选择对话框设置文件过滤器
