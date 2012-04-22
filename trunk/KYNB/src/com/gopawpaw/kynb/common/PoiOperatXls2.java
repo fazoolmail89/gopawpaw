@@ -294,25 +294,7 @@ public class PoiOperatXls2 {
 		return result;
 	}
 	
-	/**
-	 * ¶ÁÈ¡excle¼àÌýÆ÷
-	 * @version 2012-4-15
-	 * @author LiJinHua
-	 */
-	interface ReadXlsListener{
-		
-		void onReadXlsPre(int size,Object[] title);
-		void onReadXlsProgress(int n);
-	}
 	
-	/**
-	 * Ð´Èëexcle¼àÌýÆ÷
-	 * @version 2012-4-15
-	 * @author LiJinHua
-	 */
-	interface WriteXlsListener{
-		
-		void onWriteXlsProgress(int n);
-		void onWriteXlsFinish(int count,String path);
-	}
+	
+	
 }
