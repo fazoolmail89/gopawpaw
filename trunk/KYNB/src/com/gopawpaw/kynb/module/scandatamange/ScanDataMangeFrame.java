@@ -4,8 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
-public class ScanDataMangeFrame extends JFrame {
+import com.gopawpaw.frame.dev.common.GppJarRunableInterface;
+import com.gopawpaw.kynb.GlobalUI;
+import com.gopawpaw.kynb.module.BaseModuleFrame;
+
+public class ScanDataMangeFrame extends BaseModuleFrame implements
+GppJarRunableInterface {
 
 	/**
 	 * 
@@ -20,8 +26,8 @@ public class ScanDataMangeFrame extends JFrame {
 	public ScanDataMangeFrame() {
 		spnTable = new TableScrollPane();
 		optBtnsPanel = new OptBtnsPanel();
-		optBtnsPanel.setSize(new Dimension(100, 600));
-		optBtnsPanel.setPreferredSize(new Dimension(100, 600));
+		optBtnsPanel.setSize(new Dimension(70, 600));
+		optBtnsPanel.setPreferredSize(new Dimension(70, 600));
 		
 		setLayout(new BorderLayout());
 		add(spnTable, BorderLayout.CENTER);
@@ -30,10 +36,24 @@ public class ScanDataMangeFrame extends JFrame {
 		
 		//--------------------------------------------
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setVisible(true);
 	}
 	
 	public static void main(String[] args) {
-		new ScanDataMangeFrame();
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				GlobalUI.initUI();
+				// IdnoUpgrade thisClass = new IdnoUpgrade();
+				mainFrame = new ScanDataMangeFrame();
+				// thisClass.setVisible(true);
+				mainFrame.setVisible(true);
+				optBtnsPanel.setMainFrame(mainFrame);
+			}
+		});
+	}
+
+	@Override
+	public boolean runJar(String[] args) {
+		ScanDataMangeFrame.main(args);
+		return false;
 	}
 }
