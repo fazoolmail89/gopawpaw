@@ -33,4 +33,8 @@ public class OptBtnsPanel extends JPanel {
 		add(btnUpate);
 		add(btnDelete);
 	}
+
+	public void setMainFrame(ScanDataMangeFrame mainFrame) {
+		this.mainFrame = mainFrame;
+	}
 }
