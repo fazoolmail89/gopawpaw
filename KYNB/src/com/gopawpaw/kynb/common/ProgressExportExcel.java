@@ -6,8 +6,6 @@ package com.gopawpaw.kynb.common;
 import javax.swing.JButton;
 import javax.swing.JProgressBar;
 
-import com.gopawpaw.kynb.common.PoiOperatXls2.WriteXlsListener;
-
 
 /**
  * excle导出进度类
