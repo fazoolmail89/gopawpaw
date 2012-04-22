@@ -51,6 +51,11 @@ public class Villager {
 	public final static String tab_v_mark2 = "银行信息表备注";
 	public final static String tab_v_old_ic = "旧身份证号码";
 
+	public final static String tab_ve_type = "黑名单类型";
+	public final static String tab_ve_remark1 = "备注信息一";
+	public final static String tab_ve_remark2 = "备注信息二";
+	public final static String tab_ve_remark3 = "备注信息三";
+	
 	private static ArrayList<String> keyList ;
 	
 	private int v_id;

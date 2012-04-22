@@ -58,6 +58,7 @@ import com.gopawpaw.kynb.RegisterDialog;
 import com.gopawpaw.kynb.bean.DefultData;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
+import com.gopawpaw.kynb.common.DataDefultManager;
 import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.ExcelAccess;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
@@ -470,8 +471,8 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 
 			jPanelTop.add(jLabel2, new GridBagConstraints());
 			jPanelTop.add(getJButtonImportVillager(), new GridBagConstraints());
-			jPanelTop.add(getJButtonImportVillagerError(),
-					new GridBagConstraints());
+//			jPanelTop.add(getJButtonImportVillagerError(),
+//					new GridBagConstraints());
 //			jPanelTop.add(getJButtonBankEidt(),
 //					new GridBagConstraints());
 			jPanelTop.add(getJButtonImportDir(),
@@ -2273,6 +2274,23 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 		}
 
 		try {
+			if(mXXDB.isExistVillagerError(v_ic)){
+				//是黑名单数据
+				String[][] arr = mXXDB.getVillagerErrorAll2(v_ic);
+				String tempMSG = "";
+				if(arr!=null && arr[0] != null){
+					
+					tempMSG = "该身份证号（"+v_ic+"）姓名（"+arr[0][1]+"）黑名单类型（"+arr[0][2]+"）属于黑名单数据，请重新输入！";
+				}else{
+					tempMSG = "该身份证号（"+v_ic+"）属于黑名单数据，请重新输入！";
+				}
+				Toolkit.getDefaultToolkit().beep();
+				JOptionPane.showConfirmDialog(null, tempMSG, "系统提示",
+						JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE);
+				jComboBox_ic.requestFocus();
+				return;
+			}
+			
 			if (mXXDB.isExistVillager(v_ic)) {
 				mCurrentVillager = mXXDB.getVillagerByIc(v_ic);
 				

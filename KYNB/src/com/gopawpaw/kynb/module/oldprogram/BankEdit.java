@@ -42,6 +42,7 @@ import com.gopawpaw.frame.javax.swing.GppJFrame;
 import com.gopawpaw.kynb.bean.DefultData;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
+import com.gopawpaw.kynb.common.DataDefultManager;
 import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.ExcelAccess;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;

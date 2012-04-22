@@ -9,6 +9,8 @@ import java.util.List;
 import com.gopawpaw.frame.BaseSQL;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
+import com.gopawpaw.kynb.utils.KYHashMap;
+import com.gopawpaw.kynb.utils.KeyConstants;
 
 /**
  * @version 2011-11-13
@@ -857,6 +859,93 @@ public class XXNCYLBXDBAccess extends BaseSQL{
 		
 	}
 	
+	/**
+	 * 插入一条黑名单
+	 * @version 2012-4-22
+	 * @author LiJinHua
+	 * @param
+	 * @return boolean
+	 */
+	public boolean insertVillagerError(KYHashMap<String,String> kyMap) throws DBException{
+		
+		if(kyMap == null){
+			return false;
+		}
+		
+		if (commonsql.connect(user, password)) {
+			
+			boolean ret = true;
+				String sql = "insert into villager_error ("+KeyConstants.DB.ve_ic+
+				","+KeyConstants.DB.ve_name+
+				","+KeyConstants.DB.ve_type+
+				","+KeyConstants.DB.ve_remark1+
+				","+KeyConstants.DB.ve_remark2+
+				","+KeyConstants.DB.ve_remark3+") values ('"+kyMap.get(KeyConstants.DB.ve_ic)+
+				"','"+kyMap.get(KeyConstants.DB.ve_name)+
+				"','"+kyMap.get(KeyConstants.DB.ve_type)+
+				"','"+kyMap.get(KeyConstants.DB.ve_remark1)+
+				"','"+kyMap.get(KeyConstants.DB.ve_remark2)+
+				"','"+kyMap.get(KeyConstants.DB.ve_remark3)+"')";
+				
+				if(!commonsql.executesql(sql)){
+					ret = false;
+				}
+			
+			commonsql.close();
+			return ret;
+			
+		} else {
+			
+			System.err.println("connect failed!");
+			
+			throw new DBException(DBException.DB_OPEN_FALSE);
+			
+		}
+		
+	}
+	
+	/**
+	 * 更新一条黑名单
+	 * @version 2012-4-22
+	 * @author LiJinHua
+	 * @param
+	 * @return boolean
+	 */
+	public boolean updateVillagerError(KYHashMap<String,String> kyMap) throws DBException{
+		
+		if(kyMap == null){
+			return false;
+		}
+		
+		if (commonsql.connect(user, password)) {
+			
+			boolean ret = true;
+				
+				String sql = "update villager_error set " +
+				KeyConstants.DB.ve_ic+"='"+kyMap.get(KeyConstants.DB.ve_ic)+"', " +
+				KeyConstants.DB.ve_name+"='"+kyMap.get(KeyConstants.DB.ve_name)+"', " +
+				KeyConstants.DB.ve_type+"='"+kyMap.get(KeyConstants.DB.ve_type)+"', " +
+				KeyConstants.DB.ve_remark1+"='"+kyMap.get(KeyConstants.DB.ve_remark1)+"', " +
+				KeyConstants.DB.ve_remark2+"='"+kyMap.get(KeyConstants.DB.ve_remark2)+"', " +
+				KeyConstants.DB.ve_remark3+"='"+kyMap.get(KeyConstants.DB.ve_remark3)+"'" + 
+				"where "+KeyConstants.DB.ve_ic+"='"+kyMap.get(KeyConstants.DB.ve_ic)+"'";
+				if(!commonsql.executesql(sql)){
+					ret = false;
+				}
+			
+			commonsql.close();
+			return ret;
+			
+		} else {
+			
+			System.err.println("connect failed!");
+			
+			throw new DBException(DBException.DB_OPEN_FALSE);
+			
+		}
+		
+	}
+	
 	public boolean isExistVillagerError(String v_ic) throws DBException{
 		if (commonsql.connect(user, password)) {
 			
@@ -933,6 +1022,153 @@ public class XXNCYLBXDBAccess extends BaseSQL{
 			
 			commonsql.close();
 			return list;
+			
+		} else {
+			
+			System.err.println("connect failed!");
+			
+			throw new DBException(DBException.DB_OPEN_FALSE);
+			
+		}
+		
+	}
+	
+	/**
+	 * 根据人名模糊查询黑名单
+	 * @version 2012-4-22
+	 * @author LiJinHua
+	 * @param
+	 * @return String[][]
+	 */
+	public String[][] getVillagerErrorAll2ForName(String ve_name) throws DBException{
+		if (commonsql.connect(user, password)) {
+			
+			String sql = "select * from villager_error ";
+			
+			if(ve_name != null && !"".equals(ve_name)){
+				sql = "select * from villager_error where ve_name like '%"+ve_name+"%'";
+			}
+			
+			if(!commonsql.query(sql)){
+				
+				return null;
+			}
+			
+			int size = (int) commonsql.getrowcount();
+			String[][] arr = new String[size][];
+			
+			int i = 0;
+			while (commonsql.nextrecord()) {
+				String[] temp = new String[6];
+				temp[0] = commonsql.getString("ve_ic");
+				temp[1] = commonsql.getString("ve_name");
+				temp[2] = commonsql.getString("ve_type");
+				temp[3] = commonsql.getString("ve_remark1");
+				temp[4] = commonsql.getString("ve_remark2");
+				temp[5] = commonsql.getString("ve_remark3");
+				
+				arr[i] = temp;
+				i++;
+			}
+			
+			commonsql.close();
+			return arr;
+			
+		} else {
+			
+			System.err.println("connect failed!");
+			
+			throw new DBException(DBException.DB_OPEN_FALSE);
+			
+		}
+		
+	}
+	
+	/**
+	 * 根据黑名单类型查询黑名单
+	 * @version 2012-4-22
+	 * @author LiJinHua
+	 * @param
+	 * @return String[][]
+	 */
+	public String[][] getVillagerErrorAll2ForType(String ve_type) throws DBException{
+		if (commonsql.connect(user, password)) {
+			
+			String sql = "select * from villager_error ";
+			
+			if(ve_type != null && !"".equals(ve_type)){
+				sql = "select * from villager_error where ve_type = '"+ve_type+"'";
+			}else{
+				sql = "select * from villager_error ";
+			}
+			
+			if(!commonsql.query(sql)){
+				
+				return null;
+			}
+			
+			int size = (int) commonsql.getrowcount();
+			String[][] arr = new String[size][];
+			
+			int i = 0;
+			while (commonsql.nextrecord()) {
+				String[] temp = new String[6];
+				temp[0] = commonsql.getString("ve_ic");
+				temp[1] = commonsql.getString("ve_name");
+				temp[2] = commonsql.getString("ve_type");
+				temp[3] = commonsql.getString("ve_remark1");
+				temp[4] = commonsql.getString("ve_remark2");
+				temp[5] = commonsql.getString("ve_remark3");
+				
+				arr[i] = temp;
+				i++;
+			}
+			
+			commonsql.close();
+			return arr;
+			
+		} else {
+			
+			System.err.println("connect failed!");
+			
+			throw new DBException(DBException.DB_OPEN_FALSE);
+			
+		}
+		
+	}
+	public String[][] getVillagerErrorAll2(String ve_ic) throws DBException{
+		if (commonsql.connect(user, password)) {
+			
+			String sql = "select * from villager_error ";
+			
+			if(ve_ic != null && !"".equals(ve_ic)){
+				sql = "select * from villager_error where ve_ic like '%"+ve_ic+"%'";
+			}
+			
+			if(!commonsql.query(sql)){
+				
+				return null;
+			}
+			
+			int size = (int) commonsql.getrowcount();
+			String[][] arr = new String[size][];
+			
+			int i = 0;
+			while (commonsql.nextrecord()) {
+				String[] temp = new String[6];
+				temp[0] = commonsql.getString("ve_ic");
+				temp[1] = commonsql.getString("ve_name");
+				temp[2] = commonsql.getString("ve_type");
+				temp[3] = commonsql.getString("ve_remark1");
+				temp[4] = commonsql.getString("ve_remark2");
+				temp[5] = commonsql.getString("ve_remark3");
+				
+				arr[i] = temp;
+				i++;
+			}
+			
+			commonsql.close();
+			return arr;
 			
 		} else {
 			

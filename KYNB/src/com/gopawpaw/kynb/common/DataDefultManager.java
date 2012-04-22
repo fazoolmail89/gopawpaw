@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gopawpaw.kynb.module.oldprogram;
+package com.gopawpaw.kynb.common;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -16,6 +16,9 @@ import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.utils.GppConfiguration;
 
 /**
+ * 默认编辑数据管理器
+ * 用于管理默认字段的编辑
+ * 位于文件夹 conf\edit\ 下的文件
  * @author 李锦华
  * @since: 2011-11-14
  */
