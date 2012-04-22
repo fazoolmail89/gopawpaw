@@ -341,15 +341,15 @@ public class PoiOperatXls {
 		
 	}
 	
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		System.out.println(autoAddXlsSuffix("d:\\aaa.xL"));
 		
-/*		File file = new File("d:\\aaa.xls");
+		File file = new File("d:\\aaa.xls");
 		List<Map<Integer, String>> list = readExcelRLM(file);
 		System.out.println(FormetUtil.formetFileSize(file.length()));
 		
 		 for(Map m : list) { System.out.println(m.toString()); }
 		
-		System.out.println("总行数：" + list.size());*/
-	}
+		System.out.println("总行数：" + list.size());
+	}*/
 }
