@@ -28,8 +28,7 @@ public class ProgressBarDialog extends JDialog {
 		add(progressBar);
 		// 取消标题栏
 		setUndecorated(true);
-		setBounds(SwingConsole.getTop(DEFAULT_WIDTH), SwingConsole
-				.getTop(DEFAULT_HEIGHT), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		setLocation();
 		setModal(false);
 		setVisible(false);
