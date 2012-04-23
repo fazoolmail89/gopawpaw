@@ -34,12 +34,13 @@ public class DataDump  extends XXNCYLBXDBAccess{
 		Connection conn = HsqlMemDbUtil.getHsqlConn();
 		Statement sta = null;
 		String sql = "";
+		int i = 0;
 		try {
 			sta = conn.createStatement();
 			sta.executeUpdate("delete from mvillager");
 			for (String[] temp : list) {
 				sql = "insert into mvillager values( " + temp[0] + ", '" + temp[1] + "', '" + temp[2] + "', '" + temp[3] + "')";
-				//System.out.println(sql);
+				System.out.println(i++);
 				sta.executeUpdate(sql);
 			}
 			sta.close();

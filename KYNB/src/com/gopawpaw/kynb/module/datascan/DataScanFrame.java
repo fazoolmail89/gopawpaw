@@ -124,8 +124,8 @@ public class DataScanFrame extends BaseModuleFrame implements
 	 */
 	public void executlScanning() {
 		ScanningProgress sp = new ScanningProgress();
-		sp.getProgressBar().setString("正在扫描数据，请耐心等待。。。。");
-		sp.getProgressBar().setIndeterminate(true);
+		//sp.getProgressBar().setString("正在扫描数据，请耐心等待。。。。");
+		sp.getProgressBar().setIndeterminate(false);
 		sp.start();
 	}
 
@@ -173,15 +173,26 @@ public class DataScanFrame extends BaseModuleFrame implements
 	class ScanningProgress extends Progress {
 		public ScanningProgress() {
 			super(DataScanFrame.this);
-			// TODO Auto-generated constructor stub
 		}
 
 		public void execut() {
-			DataScanning ds = new DataScanning();
+			ScanningListener sl = new ScanningListener() {
+				@Override
+				public void onScanningPre(int size) {
+					getProgressBar().setMaximum(size);
+				}
 
+				@Override
+				public void onScanningProgress(int n) {
+					getProgressBar().setString("");
+					getProgressBar().setValue(n);
+				}
+			};
+			
+			DataScanning ds = new DataScanning();
 			// 获得表格原始数据，并扫描数据
 			Object[][] sranResult = ds.scanning(scanMap,
-					getExcelDataTablePane().getOriginalData());
+					getExcelDataTablePane().getOriginalData(), sl);
 			// 刷新表格
 			getExcelDataTablePane().refreshTable(sranResult);
 		}
