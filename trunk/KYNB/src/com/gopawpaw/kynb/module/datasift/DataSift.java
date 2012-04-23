@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 import com.gopawpaw.frame.dev.common.GppJarRunableInterface;
 import com.gopawpaw.frame.javax.swing.GppJComboBox;
 import com.gopawpaw.frame.javax.swing.GppJTable;
+import com.gopawpaw.frame.log.GLog;
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.bean.JComboBoxItem;
 import com.gopawpaw.kynb.common.ExcelExportListener;
@@ -61,11 +62,11 @@ public class DataSift extends BaseModuleFrame implements
 	
 	private JProgressBar progressBar7 = new JProgressBar();
 
-	private GppJComboBox jComboBox1 = null;
-	private GppJComboBox jComboBox2 = null;
+//	private GppJComboBox jComboBox1 = null;
+//	private GppJComboBox jComboBox2 = null;
 
-	private JComboBoxItem mJComboBoxItem1;
-	private JComboBoxItem mJComboBoxItem2;
+//	private JComboBoxItem mJComboBoxItem1;
+//	private JComboBoxItem mJComboBoxItem2;
 
 	/**
 	 * 第一个表的标题
@@ -100,6 +101,11 @@ public class DataSift extends BaseModuleFrame implements
 
 	private JButton jButtonActionSift;
 	
+	/**
+	 * 选择的条件
+	 */
+	private int[][] mCondition;
+	
 	public DataSift() {
 		initialize();
 	}
@@ -112,6 +118,7 @@ public class DataSift extends BaseModuleFrame implements
 	private void initialize() {
 		this.setSize(900, 600);
 		this.setLocation(200, 100);
+		this.setTitle("数据筛选");
 		this.setContentPane(getJContentPane());
 	}
 
@@ -124,8 +131,14 @@ public class DataSift extends BaseModuleFrame implements
 		JPanel jContentPane = new JPanel();
 		jContentPane.setLayout(new BorderLayout());
 
+		JPanel jPanel11 = new JPanel();
+		jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.X_AXIS));
+		jPanel11.add(progressBar7);
+		jPanel11.add(getJButtonCondition());
+		jPanel11.add(getJButtonActionSift());
+		
 		jContentPane.add(getJPanelCenter(), BorderLayout.CENTER);
-		jContentPane.add(progressBar7, BorderLayout.NORTH);
+		jContentPane.add(jPanel11, BorderLayout.NORTH);
 		
 		return jContentPane;
 	}
@@ -147,24 +160,24 @@ public class DataSift extends BaseModuleFrame implements
 		jScrollPane5 = new JScrollPane();
 		jScrollPane6 = new JScrollPane();
 
-		jComboBox1 = new GppJComboBox();
-		jComboBox2 = new GppJComboBox();
-
-		jComboBox1.setEditable(false);
-		jComboBox2.setEditable(false);
-
-		jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent e) {
-				mJComboBoxItem1 = (JComboBoxItem) jComboBox1.getSelectedItem();
-
-			}
-		});
-
-		jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent e) {
-				mJComboBoxItem2 = (JComboBoxItem) jComboBox2.getSelectedItem();
-			}
-		});
+//		jComboBox1 = new GppJComboBox();
+//		jComboBox2 = new GppJComboBox();
+//
+//		jComboBox1.setEditable(false);
+//		jComboBox2.setEditable(false);
+//
+//		jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+//			public void actionPerformed(java.awt.event.ActionEvent e) {
+//				mJComboBoxItem1 = (JComboBoxItem) jComboBox1.getSelectedItem();
+//
+//			}
+//		});
+//
+//		jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+//			public void actionPerformed(java.awt.event.ActionEvent e) {
+//				mJComboBoxItem2 = (JComboBoxItem) jComboBox2.getSelectedItem();
+//			}
+//		});
 
 		JPanel jPanel1 = new JPanel();
 		jPanel1.setLayout(new BorderLayout());
@@ -172,7 +185,7 @@ public class DataSift extends BaseModuleFrame implements
 		jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.X_AXIS));
 		jPanel11.add(getJButtonSelect1());
 		jPanel11.add(progressBar1);
-		jPanel11.add(jComboBox1);
+//		jPanel11.add(jComboBox1);
 		jPanel1.add(jScrollPane1, BorderLayout.CENTER);
 		jPanel1.add(jPanel11, BorderLayout.NORTH);
 
@@ -182,8 +195,8 @@ public class DataSift extends BaseModuleFrame implements
 		jPanel21.setLayout(new BoxLayout(jPanel21, BoxLayout.X_AXIS));
 		jPanel21.add(getJButtonSelect2());
 		jPanel21.add(progressBar2);
-		jPanel21.add(jComboBox2);
-		jPanel21.add(getJButtonActionSift());
+//		jPanel21.add(jComboBox2);
+//		jPanel21.add(getJButtonActionSift());
 
 		jPanel2.add(jScrollPane2, BorderLayout.CENTER);
 		jPanel2.add(jPanel21, BorderLayout.NORTH);
@@ -311,9 +324,45 @@ public class DataSift extends BaseModuleFrame implements
 		return jButton;
 	}
 
+	private JButton getJButtonCondition() {
+
+		JButton jButton = new JButton();
+		jButton.setText("  选择条件   ");
+		jButton.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent e) {
+				ConditionSelectorDialog csd = new ConditionSelectorDialog(DataSift.this);
+				csd.setTitleA(mTableTitle1);
+				csd.setTitleB(mTableTitle2);
+				
+				ConditionSelectedListener c = new ConditionSelectedListener(){
+
+					@Override
+					public void onConditionSelected(int[][] condition) {
+						// TODO Auto-generated method stub
+						GLog.d("", "contition:"+condition);
+						mCondition = condition;
+						if(condition != null){
+							int size = condition.length;
+							for(int i=0;i<size;i++){
+								GLog.d("", ""+condition[i][0]+ " = "+condition[i][1]);
+							}
+						}
+					}
+					
+				};
+				
+				csd.setConditionSelectedListener(c);
+				
+				csd.setVisible(true);
+			}
+		});
+		
+		return jButton;
+	}
+	
 	private JButton getJButtonActionSift() {
 
-		final JButton jButton = new JButton();
+		JButton jButton = new JButton();
 		jButton.setText("  执行筛选   ");
 		jButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -392,7 +441,14 @@ public class DataSift extends BaseModuleFrame implements
 	 */
 	private void actionSift() {
 
-		if (mJComboBoxItem1 == null || mJComboBoxItem2 == null) {
+		if (mCondition == null) {
+			//没有选择条件
+			String tempMSG = "您没有选择筛选条件，请重新选择！";
+			//声音提示
+			Toolkit.getDefaultToolkit().beep();
+			JOptionPane.showConfirmDialog(null, tempMSG, "系统提示",
+					JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE);
+			
 			return;
 		}
 
@@ -457,7 +513,7 @@ public class DataSift extends BaseModuleFrame implements
 		if(jButtonActionSift.isEnabled()){
 			
 			ProgressActionSift p = new ProgressActionSift(mTableData1, mTableData2,
-					mJComboBoxItem1.index, mJComboBoxItem2.index,progressBar7,lis);
+					mCondition,progressBar7,lis);
 			p.setButton(jButtonActionSift);
 			p.start();
 		}
@@ -508,10 +564,10 @@ public class DataSift extends BaseModuleFrame implements
 		progressBar1.setStringPainted(true); // 显示提示信息
 		progressBar1.setIndeterminate(false); // 确定进度的进度条
 
-		jComboBox1.removeAllItems();
+//		jComboBox1.removeAllItems();
 		
 		//导入excel进度
-		ProgressImportExcel p = new ProgressImportExcel(progressBar1, jButton, excelPath, jComboBox1);
+		ProgressImportExcel p = new ProgressImportExcel(progressBar1, jButton, excelPath);
 		p.setImportListener(new ExcelImportListener() {
 
 			@Override
@@ -541,8 +597,8 @@ public class DataSift extends BaseModuleFrame implements
 		progressBar2.setStringPainted(true); // 显示提示信息
 		progressBar2.setIndeterminate(false); // 确定进度的进度条
 
-		jComboBox2.removeAllItems();
-		ProgressImportExcel p = new ProgressImportExcel(progressBar2, jButton, excelPath, jComboBox2);
+//		jComboBox2.removeAllItems();
+		ProgressImportExcel p = new ProgressImportExcel(progressBar2, jButton, excelPath);
 		p.setImportListener(new ExcelImportListener() {
 
 			@Override
