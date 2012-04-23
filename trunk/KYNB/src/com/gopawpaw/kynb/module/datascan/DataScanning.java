@@ -6,17 +6,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Map;
 
-import com.mysql.jdbc.PreparedStatement;
+import javax.swing.JProgressBar;
 
 public class DataScanning {
-
 	/**
 	 * 执行数据扫描
 	 * @param scanMap 
 	 * @param data
 	 * @return
 	 */
-	public Object[][] scanning(Map<String, Integer> scanMap, Object[][] data) {
+	public Object[][] scanning(Map<String, Integer> scanMap, Object[][] data, ScanningListener sl) {
 		if (data == null)
 			return null;
 		if (data.length < 2)
@@ -47,13 +46,16 @@ public class DataScanning {
 		String sql = "";	
 		
 		//获取数据库连接
-		Connection conn = hmduThread.getHsqlConn();
+		Connection conn = HsqlMemDbUtil.getHsqlConn();
 		Statement sta = null;
 		ResultSet rs = null;
+		
+		sl.onScanningPre(resultData.length);
 		
 		try {
 			sta = conn.createStatement();
 			for (int i = 1; i < resultData.length; i++) { 
+				
 				sql = frontSql;
 				if(scanMap.get(ScanItem.V_IC) != null) {
 					sql = sql + " and " + ScanItem.V_IC + " = '"
@@ -82,6 +84,9 @@ public class DataScanning {
 				resultData[i][data[0].length] = isSame;
 				//初始化sql
 				sql = "";
+				
+				//监听器
+				sl.onScanningProgress(i);
 			}
 			sta.close();
 		} catch (SQLException e) {
@@ -94,4 +99,9 @@ public class DataScanning {
 		
 		return resultData;
 	}
+}
+
+interface ScanningListener {
+	void onScanningPre(int size);
+	void onScanningProgress(int n);
 }
