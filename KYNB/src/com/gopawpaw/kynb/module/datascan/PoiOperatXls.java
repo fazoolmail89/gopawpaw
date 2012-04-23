@@ -124,6 +124,12 @@ public class PoiOperatXls {
 					String[] temp = new String[row.getLastCellNum()];
 					for (int j = 0; j < row.getLastCellNum(); j++) {
 						HSSFCell cell = row.getCell(j);
+						
+if(j == 0) {
+	System.out.print(childSheet.getLastRowNum() + " : " + i + " : " + cell.getStringCellValue());
+	System.out.println();
+}
+						
 						if (null != cell) {
 							switch (cell.getCellType()) {
 							case HSSFCell.CELL_TYPE_NUMERIC: // Êý×Ö

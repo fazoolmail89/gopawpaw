@@ -52,9 +52,9 @@ public	class Progress extends Thread {
 		execut();//执行相关操作
 		
 		//完成后改变进度条状态
-		progressBar.setValue(100);
+/*		progressBar.setValue(100);
 		progressBar.setIndeterminate(false);	
-		progressBar.setString(endMessage);
+		progressBar.setString(endMessage);*/
 		
 		endWait(1000);//完成后等待自动关闭
 		

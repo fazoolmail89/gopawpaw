@@ -186,6 +186,7 @@ public class DataScanFrame extends BaseModuleFrame implements
 				public void onScanningProgress(int n) {
 					getProgressBar().setString("");
 					getProgressBar().setValue(n);
+					getProgressBar().setString("½ø¶È£º"+ n + "/"+getProgressBar().getMaximum());
 				}
 			};
 			
