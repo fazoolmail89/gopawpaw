@@ -25,7 +25,7 @@ public class DataScanning {
 		
 		// 为返回结果赋值;
 		for (int i = 0; i < data.length; i++) {
-			for(int j = 0; j < data[0].length; j++) {
+			for(int j = 0; j < data[i].length; j++) {
 				resultData[i][j] = data[i][j];
 			}
 		}
