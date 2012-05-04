@@ -17,20 +17,13 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.CellValue;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 
-public class PoiOperatXls2 {
-	public static void main(String[] args) {
-		File file = new File("C:\\Documents and Settings\\Administrator\\My Documents\\测试数据结果\\身份证号码需升级验证数据.xls");
-		List<Map<Integer, String>> list = readExcelRLM(file);
-		//System.out.println(FormetUtil.formetFileSize(file.length()));
-		
-		 for(Map m : list) { System.out.println(m.toString()); }
-		
-		System.out.println("总行数：" + list.size());
-		/*
-		 * for(String[] s:tempList) { for(int i = 0; i < s.length; i++) {
-		 * System.out.print(s[i] + "\t"); } System.out.println(); }
-		 */
-	}
+/**
+ * @描述 Excel 文件操作类
+ * 			输出函数自动检测及修改输出文件后缀名功能
+ * @author 卢向琪
+ * 
+ */
+public class PoiOperatXls {
 
 	public static List<Map<Integer, String>> readExcelRLM(String path) {
 		return readExcelRLM(new File(path));
@@ -115,14 +108,7 @@ public class PoiOperatXls2 {
 		return list;
 	}
 	
-
 	public static Object[][] readXlsRTA(File xlsFile) {
-		
-		return readXlsRTA(xlsFile,null);
-	}
-	
-	
-	public static Object[][] readXlsRTA(File xlsFile,ReadXlsListener readXlsListener) {
 		if (xlsFile == null)
 			return null;
 		Object[][] data = null;
@@ -131,25 +117,19 @@ public class PoiOperatXls2 {
 			HSSFWorkbook wbs = new HSSFWorkbook(is);
 			//--------------------------------------------------------
 			HSSFSheet childSheet = wbs.getSheetAt(0);
-			int size = childSheet.getLastRowNum();
-			
-			//第一行为头部，第二行开始才是数据
-			if(readXlsListener != null){
-				
-				data = new Object[size-1][];
-			}else{
-				data = new Object[size][];
-			}
-			
-			//是否已经响应过预读取
-			boolean flagOnReadXlsPre = false;
-			
+			data = new Object[childSheet.getLastRowNum()][];
 			for (int i = 0; i < childSheet.getLastRowNum(); i++) {
 				HSSFRow row = childSheet.getRow(i);
 				if (null != row) {
 					String[] temp = new String[row.getLastCellNum()];
 					for (int j = 0; j < row.getLastCellNum(); j++) {
 						HSSFCell cell = row.getCell(j);
+						
+if(j == 0) {
+	System.out.print(childSheet.getLastRowNum() + " : " + i + " : " + cell.getStringCellValue());
+	System.out.println();
+}
+						
 						if (null != cell) {
 							switch (cell.getCellType()) {
 							case HSSFCell.CELL_TYPE_NUMERIC: // 数字
@@ -168,7 +148,6 @@ public class PoiOperatXls2 {
 							    evaluator.evaluateFormulaCell(cell);
 							    CellValue cellValue = evaluator.evaluate(cell);
 							    temp[j] = String.valueOf(cellValue.getNumberValue()) ;
-								
 								break;
 							case HSSFCell.CELL_TYPE_BLANK: // 空值
 								temp[j] = " ";
@@ -183,31 +162,8 @@ public class PoiOperatXls2 {
 						} else {
 							temp[j] = " ";
 						}
-						
-						
 					}
-						
-						if(readXlsListener != null && !flagOnReadXlsPre){
-							//回调接口,响应头部信息
-							readXlsListener.onReadXlsPre(size,temp);
-							flagOnReadXlsPre = true;
-							
-							//第一行为头部，第二行开始才是数据
-							continue;
-						}
-						
-						
-						
-						if(readXlsListener != null){
-							
-							//
-							data[i-1] = temp;
-							//回调接口
-							readXlsListener.onReadXlsProgress(i);
-						}else{
-							//
-							data[i] = temp;
-						}
+						data[i] = temp;
 				}
 			}
 		} catch (Exception e) {
@@ -215,17 +171,28 @@ public class PoiOperatXls2 {
 		}
 		return data;
 	}
-	
-	
 
 	/**
-	 * 写入excle
-	 * @version 2012-4-15
-	 * @author Jason
-	 * @param
-	 * @return boolean
+	 * 输出Excel表格，表头数组长度要求等于数据的列数
+	 * @param data 真实数据
+	 * @param columnNamds 表头
+	 * @param file
+	 * @return
 	 */
-	public static boolean writeXls(Object[][] data, Object[] columnNamds, String path,WriteXlsListener writeXlsListener) {
+	public static boolean writeXls(Object[][] data, Object[] columnNamds,
+			File file) {
+		return writeXls(data, columnNamds, file.getPath());
+	}
+	
+	/**
+	 *  输出Excel表格，表头数组长度要求等于数据的列数
+	 * @param data 真实数据
+	 * @param columnNamds 表头
+	 * @param path 文件路径
+	 * @return
+	 */
+	public static boolean writeXls(Object[][] data, Object[] columnNamds,
+			String path) {
 		boolean result = false;
 		FileOutputStream fout = null;
 		HSSFWorkbook workbook = null;
@@ -236,48 +203,26 @@ public class PoiOperatXls2 {
 			workbook = new HSSFWorkbook();
 			// 在excel中新建一个工作表，起名字为工作表（一）
 			sheet = workbook.createSheet("工作表（一）");
-			
-			int size = data.length;
-			int satrtIndex = 0;
-			
-			if(columnNamds != null){
-				//表头不为空，则导出表头
-				HSSFRow row = sheet.createRow(0);
-				for (int j = 0; j < columnNamds.length; j++) {
-					HSSFCell cell = row.createCell(j);
-					cell.setCellValue((String) columnNamds[j]);
-				}
-				satrtIndex = 1;
-			}
-			
-		
-			
-			for (int i = 0; i < size; i++) {
-				HSSFRow row = sheet.createRow(i+satrtIndex);
+
+			for (int i = 0; i < data.length + 1; i++) {
+				HSSFRow row = sheet.createRow(i);
 				Object[] temp = data[i];
 				for (int j = 0; j < temp.length; j++) {
 					HSSFCell cell = row.createCell(j);
-					cell.setCellValue((String) data[i][j]);
-				}
-				
-				if(writeXlsListener != null){
-					//回调接口
-					writeXlsListener.onWriteXlsProgress(i+1);
+					if(i == 0) {
+						cell.setCellValue((String) columnNamds[j]);
+					} else {
+						cell.setCellValue((String) data[i - 1][j]);
+					}
 				}
 			}
 			// 新建一输出流
-			fout = new FileOutputStream(path);
+			fout = new FileOutputStream(autoAddXlsSuffix(path));
 			// 存盘
 			workbook.write(fout);
 			fout.flush();
 			// 结束关闭
 			fout.close();
-			
-			if(writeXlsListener != null){
-				//回调接口
-				writeXlsListener.onWriteXlsFinish(size, path);
-			}
-			
 			result = true;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -288,11 +233,129 @@ public class PoiOperatXls2 {
 			if(workbook != null) workbook = null;
 			if(sheet != null) sheet = null;
 		}
+		return result;
+	}
 
+	/**
+	 * 输出 Excel 表格
+	 * @param data
+	 * @param file
+	 * @return
+	 */
+	public static boolean writeXls(Object[][] data, File file) {
+		return writeXls(data, file.getPath());
+	}
+	
+	/**
+	 * 输出 Excel 表格
+	 * @param data 
+	 * @param path
+	 * @return
+	 */
+	public static boolean writeXls(Object[][] data, String path) {
+		boolean result = false;
+		FileOutputStream fout = null;
+		HSSFWorkbook workbook = null;
+		HSSFSheet sheet = null;
+
+		try {
+			// 创建新的Excel工作簿
+			workbook = new HSSFWorkbook();
+			// 在excel中新建一个工作表，起名字为工作表（一）
+			sheet = workbook.createSheet("工作表（一）");
+
+			for (int i = 0; i < data.length; i++) {
+				HSSFRow row = sheet.createRow(i);
+				Object[] temp = data[i];
+				for (int j = 0; j < temp.length; j++) {
+					HSSFCell cell = row.createCell(j);
+					cell.setCellValue((String) data[i][j]);
+				}
+			}
+			// 新建一输出流
+			fout = new FileOutputStream(autoAddXlsSuffix(path));
+			// 存盘
+			workbook.write(fout);
+			fout.flush();
+			// 结束关闭
+			fout.close();
+			result = true;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(fout != null) fout = null;
+			if(workbook != null) workbook = null;
+			if(sheet != null) sheet = null;
+		}
 		return result;
 	}
 	
+	/**
+	 * 校验文件后缀名是否为”.xls“（忽略大小写）
+	 * @param path 文件路径
+	 * @return
+	 */
+	public static boolean checkSuffix(String path) {
+		boolean result = false;
+		String temp = "";
+	    int index = path.lastIndexOf(".");
+	    	temp = path.substring(index + 1, path.length());
+	    	if("xls".equals(temp.toLowerCase())) {
+	    		result = true;
+	    	}
+		return result;
+	}
 	
+	/**
+	 * 将不是”.xls“后缀的文件，自动添加”.xls“后缀(忽略大小写)
+	 * @param path 文件路径
+	 * @return 
+	 */
+	public static String autoAddXlsSuffix(String path) {
+		if(!checkSuffix(path))
+			path = path + ".xls";
+		return path;
+	}
 	
+	/**
+	 * 检测文件是否正确
+	 * @param xlsFile
+	 * @return
+	 * 0：正确；
+	 * 1：不是xls文件；
+	 * 2：输入流无法读取文件；
+	 * 3：文件格式错误；
+	 */
+	public static int checkXls(File xlsFile) {
+		int result = 0;
+		if(!checkSuffix(xlsFile.getPath())) result = 1;
+		
+		FileInputStream is;
+		try {
+			is = new FileInputStream(xlsFile);
+			HSSFWorkbook wbs = new HSSFWorkbook(is);
+		} catch (FileNotFoundException e) {
+			result = 2;
+			e.printStackTrace();
+		} catch (IOException e) {
+			result = 3;
+			e.printStackTrace();
+		}
+		return result;
+		
+	}
 	
+/*	public static void main(String[] args) {
+		System.out.println(autoAddXlsSuffix("d:\\aaa.xL"));
+		
+		File file = new File("d:\\aaa.xls");
+		List<Map<Integer, String>> list = readExcelRLM(file);
+		System.out.println(FormetUtil.formetFileSize(file.length()));
+		
+		 for(Map m : list) { System.out.println(m.toString()); }
+		
+		System.out.println("总行数：" + list.size());
+	}*/
 }
