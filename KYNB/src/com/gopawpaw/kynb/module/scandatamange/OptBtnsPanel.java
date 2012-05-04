@@ -11,13 +11,12 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.gopawpaw.kynb.module.datascan.PoiOperatXls;
-import com.gopawpaw.kynb.module.datascan.ScanItemDialog;
+import com.gopawpaw.kynb.common.PoiOperatXls;
 
 public class OptBtnsPanel extends JPanel {
 
 	private static final long serialVersionUID = 7010275930680636751L;
-	private ScanDataMangeFrame mainFrame = null;
+	private ScanDataMangeFrame mainFrame;
 	private JButton btnImport = null;
 	private JButton btnExport = null;
 	private JButton btnCleare = null;
@@ -25,7 +24,8 @@ public class OptBtnsPanel extends JPanel {
 	private JButton btnUpate = null;
 	private JButton btnDelete = null;
 
-	public OptBtnsPanel() {
+	public OptBtnsPanel(ScanDataMangeFrame mf) {
+		this.mainFrame = mf;
 		btnImport = new JButton("导入");
 		btnExport = new JButton("导出");
 		btnCleare = new JButton("清空");
@@ -81,19 +81,51 @@ public class OptBtnsPanel extends JPanel {
 		btnAdd.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new DataEditDialog();
+				new DataEditDialog(mainFrame);
 			}
 		});
 		
 		btnUpate.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				RowData rd = mainFrame.getSpnTable().getSelectData();
+				if(rd.getOdata() != null ) {
+					new DataEditDialog(mainFrame, rd);
+				} else {
+					Toolkit.getDefaultToolkit().beep();
+					JOptionPane.showMessageDialog(null, "请先选中数据", "错误提示！",
+							JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		
 		btnDelete.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				RowData rd = mainFrame.getSpnTable().getSelectData();
+				Toolkit.getDefaultToolkit().beep();
+				if(rd.getOdata() != null ) {
+					Toolkit.getDefaultToolkit().beep();
+					int rv = JOptionPane.showConfirmDialog(mainFrame,
+							"是否要删除选中数据？", "操作提示！",
+							JOptionPane.OK_CANCEL_OPTION,
+							JOptionPane.WARNING_MESSAGE);
+					if(rv == 0) {
+						DataOpertor dot = new DataOpertor();
+						if(dot.deleteOData(rd.getOdata())) {
+							JOptionPane.showMessageDialog(null, "删除成功", "操作提示！",
+									JOptionPane.PLAIN_MESSAGE);		
+							//刷新表格
+							mainFrame.getPnlQuery().executQuery();
+						} else {
+							JOptionPane.showMessageDialog(null, "删除失败", "错误提示！",
+									JOptionPane.ERROR_MESSAGE);						
+						}						
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "请先选中数据", "错误提示！",
+							JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		
@@ -104,9 +136,5 @@ public class OptBtnsPanel extends JPanel {
 		add(btnAdd);
 		add(btnUpate);
 		add(btnDelete);
-	}
-
-	public void setMainFrame(ScanDataMangeFrame mainFrame) {
-		this.mainFrame = mainFrame;
 	}
 }

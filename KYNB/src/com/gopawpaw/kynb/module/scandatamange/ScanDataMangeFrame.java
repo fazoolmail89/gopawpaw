@@ -14,6 +14,8 @@ import javax.swing.SwingUtilities;
 
 import com.gopawpaw.frame.dev.common.GppJarRunableInterface;
 import com.gopawpaw.kynb.GlobalUI;
+import com.gopawpaw.kynb.bean.OtherData;
+import com.gopawpaw.kynb.common.*;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
 
 public class ScanDataMangeFrame extends BaseModuleFrame implements
@@ -39,9 +41,9 @@ GppJarRunableInterface {
 	}
 	
 	public ScanDataMangeFrame() {
-		pnlQuery = new QueryPanel();
+		pnlQuery = new QueryPanel(this);
 		spnTable = new TableScrollPane();
-		optBtnsPanel = new OptBtnsPanel();
+		optBtnsPanel = new OptBtnsPanel(this);
 		
 /*		pnlQuery.setSize(new Dimension(900, 50));
 		pnlQuery.setPreferredSize(new Dimension(900, 50));*/
@@ -55,7 +57,7 @@ GppJarRunableInterface {
 		setSize(900, 600);
 		
 		//--------------------------------------------
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	public static void main(String[] args) {
@@ -66,8 +68,6 @@ GppJarRunableInterface {
 				mainFrame = new ScanDataMangeFrame();
 				// thisClass.setVisible(true);
 				mainFrame.setVisible(true);
-				optBtnsPanel.setMainFrame(mainFrame);
-				pnlQuery.setMainFrame(mainFrame);
 			}
 		});
 	}
@@ -129,11 +129,11 @@ GppJarRunableInterface {
 		public void execut() {
 			Object[][] excelData = PoiOperatXls.readXlsRTA(file);
 			Object[][] tableData = new Object[excelData.length - 1][];
-			List<OtherDataBean> list = new ArrayList<OtherDataBean>();
-			OtherDataBean odata = null;
+			List<OtherData> list = new ArrayList<OtherData>();
+			OtherData odata = null;
 			for(int i = 1; i < excelData.length ; i++) {
 				tableData[i - 1] = excelData[i];
-				odata = new OtherDataBean();
+				odata = new OtherData();
 				odata.setAcol("");
 				odata.setBcol("");
 				odata.setCcol("");

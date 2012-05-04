@@ -12,7 +12,10 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.gopawpaw.kynb.bean.OtherData;
+
 public class QueryPanel extends JPanel {
+	private static final long serialVersionUID = 1463005949441101400L;
 	private ScanDataMangeFrame mainFrame = null;
 	private JPanel pnlFirst = null;
 	private JComboBox cbbFirst = null;
@@ -28,7 +31,8 @@ public class QueryPanel extends JPanel {
 	
 	private JButton btnQuery = null;
 	
-	public QueryPanel() {
+	public QueryPanel(ScanDataMangeFrame mf) {
+		this.mainFrame = mf;
 		Box bgBox = Box.createHorizontalBox();
 		bgBox.add(getPnlFirst());
 		bgBox.add(getPnlSceond());
@@ -80,7 +84,7 @@ public class QueryPanel extends JPanel {
 	
 	public void executQuery() {
 		DataOpertor dot = new DataOpertor();
-		List<OtherDataBean> list = dot.findListByQB(createQueryBean());
+		List<OtherData> list = dot.findListByQB(createQueryBean());
 		mainFrame.getSpnTable().refreshTable(list);	
 	}
 	
@@ -103,9 +107,5 @@ public class QueryPanel extends JPanel {
 		list.add(qbT);
 		
 		return list;
-	}
-	
-	public void setMainFrame(ScanDataMangeFrame mainFrame) {
-		this.mainFrame = mainFrame;
 	}
 }
