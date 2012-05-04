@@ -6,6 +6,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import com.gopawpaw.kynb.bean.OtherData;
 import com.gopawpaw.kynb.widget.GppStyleTable;
 
 public class TableScrollPane extends JScrollPane {
@@ -13,10 +14,10 @@ public class TableScrollPane extends JScrollPane {
 
 	private ScanDataMangeFrame mainFrame = null;
 
-	private static final Object[] columnNames = { "序号", OtherDataBean.ACOL,
-			OtherDataBean.BCOL, OtherDataBean.CCOL, OtherDataBean.DCOL,
-			OtherDataBean.ECOL, OtherDataBean.FCOL, OtherDataBean.GCOL,
-			OtherDataBean.HCOL, OtherDataBean.ICOL, OtherDataBean.JCOL };
+	private static final Object[] columnNames = { "序号", OtherData.ACOL,
+			OtherData.BCOL, OtherData.CCOL, OtherData.DCOL,
+			OtherData.ECOL, OtherData.FCOL, OtherData.GCOL,
+			OtherData.HCOL, OtherData.ICOL, OtherData.JCOL };
 	private Object[][] data = null;
 	private JTable table = null;
 
@@ -50,11 +51,11 @@ public class TableScrollPane extends JScrollPane {
 		table.updateUI();
 	}
 
-	public void refreshTable(List<OtherDataBean> list) {
+	public void refreshTable(List<OtherData> list) {
 		if (list != null && list.size() > 0) {
 			data = new Object[list.size()][columnNames.length];
 			int i = 0;
-			for (OtherDataBean odata : list) {
+			for (OtherData odata : list) {
 				data[i][0] = odata.getId();
 				data[i][1] = odata.getAcol();
 				data[i][2] = odata.getBcol();
@@ -76,6 +77,43 @@ public class TableScrollPane extends JScrollPane {
 		return columnNames;
 	}
 	
+	public RowData getSelectData() {
+		RowData rd = new RowData();
+		int rowIndex = table.getSelectedRow();
+		if(rowIndex > -1) {
+			OtherData odata = new OtherData();
+			for(int i = 0; i < columnNames.length; i++) {
+				String colName = table.getColumnName(i);
+				if(columnNames[0].equals(colName)) {
+					odata.setId(dtm.getValueAt(rowIndex, i).toString());
+				} else if(OtherData.ACOL.equals(colName)) {
+					odata.setAcol(dtm.getValueAt(rowIndex, i).toString());
+				} else if(OtherData.BCOL.equals(colName)) {
+					odata.setBcol(dtm.getValueAt(rowIndex, i).toString());
+				} else if(OtherData.CCOL.equals(colName)) {
+					odata.setCcol(dtm.getValueAt(rowIndex, i).toString());
+				} else if(OtherData.DCOL.equals(colName)) {
+					odata.setDcol(dtm.getValueAt(rowIndex, i).toString());
+				} else if(OtherData.ECOL.equals(colName)) {
+					odata.setEcol(dtm.getValueAt(rowIndex, i).toString());
+				} else if(OtherData.FCOL.equals(colName)) {
+					odata.setFcol(dtm.getValueAt(rowIndex, i).toString());
+				} else if(OtherData.GCOL.equals(colName)) {
+					odata.setGcol(dtm.getValueAt(rowIndex, i).toString());
+				} else if(OtherData.HCOL.equals(colName)) {
+					odata.setHcol(dtm.getValueAt(rowIndex, i).toString());
+				} else if(OtherData.ICOL.equals(colName)) {
+					odata.setIcol(dtm.getValueAt(rowIndex, i).toString());
+				} else if(OtherData.JCOL.equals(colName)) {
+					odata.setJcol(dtm.getValueAt(rowIndex, i).toString());
+				}
+			}
+			rd.setRowIndex(rowIndex);
+			rd.setOdata(odata);
+		}
+		return rd;
+	}
+	
 	/**
 	 * 返回不含第一列的字段名数组
 	 * @return
@@ -89,5 +127,22 @@ public class TableScrollPane extends JScrollPane {
 	
 	public Object[][] getData() {
 		return data;
+	}
+}
+
+class RowData {
+	int rowIndex = -1;
+	OtherData odata;
+	public int getRowIndex() {
+		return rowIndex;
+	}
+	public void setRowIndex(int rowIndex) {
+		this.rowIndex = rowIndex;
+	}
+	public OtherData getOdata() {
+		return odata;
+	}
+	public void setOdata(OtherData odata) {
+		this.odata = odata;
 	}
 }

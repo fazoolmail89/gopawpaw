@@ -13,73 +13,76 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.gopawpaw.kynb.bean.OtherData;
+
 public class DataEditDialog extends JDialog {
 	private static final long serialVersionUID = -5152772964362597159L;
 
 	private ScanDataMangeFrame mainFrame = null;
-	
+
 	private static Dimension dmsTfd = new Dimension(250, 21);
-	
-	private OtherDataBean odata = null;
-	
+
+	private RowData rowData = null;
+
 	private JPanel pnlID = null;
 	private JLabel lblID = null;
 	private JTextField tfdID = null;
-	
+
 	private JPanel pnlA = null;
 	private JLabel lblA = null;
 	private JTextField tfdA = null;
-	
+
 	private JPanel pnlB = null;
 	private JLabel lblB = null;
 	private JTextField tfdB = null;
-	
+
 	private JPanel pnlC = null;
 	private JLabel lblC = null;
 	private JTextField tfdC = null;
-	
+
 	private JPanel pnlD = null;
 	private JLabel lblD = null;
 	private JTextField tfdD = null;
-	
+
 	private JPanel pnlE = null;
 	private JLabel lblE = null;
 	private JTextField tfdE = null;
-	
+
 	private JPanel pnlF = null;
 	private JLabel lblF = null;
 	private JTextField tfdF = null;
-	
+
 	private JPanel pnlG = null;
 	private JLabel lblG = null;
 	private JTextField tfdG = null;
-	
+
 	private JPanel pnlH = null;
 	private JLabel lblH = null;
 	private JTextField tfdH = null;
-	
+
 	private JPanel pnlI = null;
 	private JLabel lblI = null;
 	private JTextField tfdI = null;
-	
+
 	private JPanel pnlJ = null;
 	private JLabel lblJ = null;
 	private JTextField tfdJ = null;
-	
+
 	private JPanel pnlOptBtns = null;
 	private JButton btnSave = null;
 	private JButton btnQuit = null;
-	
-	public DataEditDialog() {
-		initialize();
+
+	public DataEditDialog(ScanDataMangeFrame mainFrame) {
+		initialize(mainFrame);
 	}
-	
-	public DataEditDialog(OtherDataBean odata) {
-		this.odata = odata;
-		initialize();
+
+	public DataEditDialog(ScanDataMangeFrame mainFrame, RowData rd) {
+		this.rowData = rd;
+		initialize(mainFrame);
 	}
-	
-	private void initialize() {
+
+	private void initialize(ScanDataMangeFrame mainFrame) {
+		this.mainFrame = mainFrame;
 		setTitle("编辑数据");
 		Box bgBox = Box.createVerticalBox();
 		bgBox.add(getPnlID());
@@ -94,14 +97,17 @@ public class DataEditDialog extends JDialog {
 		bgBox.add(getPnlI());
 		bgBox.add(getPnlJ());
 		bgBox.add(getPnlOptBtns());
-		
+
+		// 初始化赋值
+		setOdata();
+
 		add(bgBox);
 		setSize(new Dimension(500, 600));
 		ScanDataMangeFrame.setDialogLocaltion(this);
 		setModal(true);
 		setVisible(true);
 	}
-	
+
 	private JPanel getPnlID() {
 		pnlID = new JPanel();
 		lblID = new JLabel("ID");
@@ -122,7 +128,7 @@ public class DataEditDialog extends JDialog {
 		pnlA.add(tfdA);
 		return pnlA;
 	}
-	
+
 	private JPanel getPnlB() {
 		pnlB = new JPanel();
 		lblB = new JLabel("B列");
@@ -132,7 +138,7 @@ public class DataEditDialog extends JDialog {
 		pnlB.add(tfdB);
 		return pnlB;
 	}
-	
+
 	private JPanel getPnlC() {
 		pnlC = new JPanel();
 		lblC = new JLabel("C列");
@@ -142,7 +148,7 @@ public class DataEditDialog extends JDialog {
 		pnlC.add(tfdC);
 		return pnlC;
 	}
-	
+
 	private JPanel getPnlD() {
 		pnlD = new JPanel();
 		lblD = new JLabel("D列");
@@ -152,7 +158,7 @@ public class DataEditDialog extends JDialog {
 		pnlD.add(tfdD);
 		return pnlD;
 	}
-	
+
 	private JPanel getPnlE() {
 		pnlE = new JPanel();
 		lblE = new JLabel("E列");
@@ -162,7 +168,7 @@ public class DataEditDialog extends JDialog {
 		pnlE.add(tfdE);
 		return pnlE;
 	}
-	
+
 	private JPanel getPnlF() {
 		pnlF = new JPanel();
 		lblF = new JLabel("F列");
@@ -172,7 +178,7 @@ public class DataEditDialog extends JDialog {
 		pnlF.add(tfdF);
 		return pnlF;
 	}
-	
+
 	private JPanel getPnlG() {
 		pnlG = new JPanel();
 		lblG = new JLabel("G列");
@@ -182,7 +188,7 @@ public class DataEditDialog extends JDialog {
 		pnlG.add(tfdG);
 		return pnlG;
 	}
-	
+
 	private JPanel getPnlH() {
 		pnlH = new JPanel();
 		lblH = new JLabel("H列");
@@ -192,7 +198,7 @@ public class DataEditDialog extends JDialog {
 		pnlH.add(tfdH);
 		return pnlH;
 	}
-	
+
 	private JPanel getPnlI() {
 		pnlI = new JPanel();
 		lblI = new JLabel("I列");
@@ -202,7 +208,7 @@ public class DataEditDialog extends JDialog {
 		pnlI.add(tfdI);
 		return pnlI;
 	}
-	
+
 	private JPanel getPnlJ() {
 		pnlJ = new JPanel();
 		lblJ = new JLabel("J列");
@@ -212,7 +218,7 @@ public class DataEditDialog extends JDialog {
 		pnlJ.add(tfdJ);
 		return pnlJ;
 	}
-	
+
 	private JPanel getPnlOptBtns() {
 		pnlOptBtns = new JPanel();
 		btnSave = new JButton("保存");
@@ -222,10 +228,13 @@ public class DataEditDialog extends JDialog {
 				DataOpertor dot = new DataOpertor();
 				boolean result = dot.saveOrUpdate(assignment());
 				Toolkit.getDefaultToolkit().beep();
-				if(result) {
+				if (result) {
 					JOptionPane.showMessageDialog(null, "保存成功！", "操作提示！",
-							JOptionPane.PLAIN_MESSAGE);	
-					if(tfdID.getText().trim().length() == 0) cleare();
+							JOptionPane.PLAIN_MESSAGE);
+					if (tfdID.getText().trim().length() == 0)
+						cleare();
+					// 刷新表格
+					mainFrame.getPnlQuery().executQuery();
 				} else {
 					JOptionPane.showMessageDialog(null, "保存失败！", "操作提示！",
 							JOptionPane.ERROR_MESSAGE);
@@ -237,10 +246,9 @@ public class DataEditDialog extends JDialog {
 		pnlOptBtns.add(btnQuit);
 		return pnlOptBtns;
 	}
-	
-	private OtherDataBean assignment() {
-		if(odata == null)
-			odata = new OtherDataBean();
+
+	private OtherData assignment() {
+		OtherData odata = new OtherData();
 		odata.setId(tfdID.getText().trim());
 		odata.setAcol(tfdA.getText().trim());
 		odata.setBcol(tfdB.getText().trim());
@@ -254,27 +262,30 @@ public class DataEditDialog extends JDialog {
 		odata.setJcol(tfdJ.getText().trim());
 		return odata;
 	}
-	
-	public void setOdata(OtherDataBean odata) {
-		this.odata = odata;
-		tfdID.setText(odata.getId());
-		tfdA.setText(odata.getAcol());
-		tfdB.setText(odata.getBcol());
-		tfdC.setText(odata.getCcol());
-		tfdD.setText(odata.getDcol());
-		tfdE.setText(odata.getEcol());
-		tfdF.setText(odata.getFcol());
-		tfdG.setText(odata.getGcol());
-		tfdH.setText(odata.getHcol());
-		tfdI.setText(odata.getIcol());
-		tfdJ.setText(odata.getJcol());
+
+	public void setOdata() {
+		OtherData odata = null;
+		if (rowData != null && rowData.getOdata() != null) {
+			odata = rowData.getOdata();
+			tfdID.setText(odata.getId());
+			tfdA.setText(odata.getAcol());
+			tfdB.setText(odata.getBcol());
+			tfdC.setText(odata.getCcol());
+			tfdD.setText(odata.getDcol());
+			tfdE.setText(odata.getEcol());
+			tfdF.setText(odata.getFcol());
+			tfdG.setText(odata.getGcol());
+			tfdH.setText(odata.getHcol());
+			tfdI.setText(odata.getIcol());
+			tfdJ.setText(odata.getJcol());
+		}
 	}
-	
+
 	/**
 	 * 清空界面输入框
 	 */
 	private void cleare() {
-		this.odata = null;
+		this.rowData = null;
 		tfdID.setText("");
 		tfdA.setText("");
 		tfdB.setText("");
