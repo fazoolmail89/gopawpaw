@@ -25,10 +25,8 @@ public class ScanItemDialog2 extends JDialog {
 	private Object[][] data;
 	private DefaultTableModel dataModel;
 	
-	private static String[] values = new String[] { "1", "2", "3", "4" };
-	
-	private String[] cbbItem = null;
-	private static JComboBox cbb = new JComboBox(values);
+	private String[] cbbItem;
+	//private static JComboBox cbb;
 	
 	private JPanel pnlButton ;
 	private JButton btnOk;
@@ -36,7 +34,10 @@ public class ScanItemDialog2 extends JDialog {
 	
 	public ScanItemDialog2(DataScanFrame2 mainFrame) {
 		this.mainFrame = mainFrame;
+		//-------------------------------
 		initData(DataScanFrame2.getScanItemList());
+		initCbbItem();
+		//-------------------------------
 		setTitle("扫描项选择对话框");
 
 		// 初始化默认值
@@ -69,7 +70,7 @@ public class ScanItemDialog2 extends JDialog {
 		};
 		
 		dataModel = new DefaultTableModel(data, columnNames);
-		table.setComboColume(3, new DefaultCellEditor(cbb));
+		table.setComboColume(3, new DefaultCellEditor(new JComboBox(cbbItem)));
 		table.setModel(dataModel);
 		table.setRowHeight(22);
 		return table;
@@ -117,5 +118,16 @@ public class ScanItemDialog2 extends JDialog {
 			data[i][3] = si.getExcelColumnName();
 			i++;
 		}
+	}
+	
+	private void initCbbItem() {
+		if (mainFrame.getExcelDataTablePane().getColumnNames() != null) {
+			Object[] temp = mainFrame.getExcelDataTablePane().getColumnNames();
+			cbbItem = new String[temp.length];
+			for (int i = 0; i < temp.length; i++) {
+				cbbItem[i] = temp[i].toString();
+			}
+		} else
+			cbbItem = new String[0];
 	}
 }
