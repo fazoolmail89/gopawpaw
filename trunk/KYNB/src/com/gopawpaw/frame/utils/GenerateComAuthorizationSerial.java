@@ -17,13 +17,12 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 
 import com.gopawpaw.frame.GlobalParameter;
-import com.gopawpaw.frame.common.BaseFrame;
-import com.gopawpaw.frame.dataEntity.mfg.GppProDet;
-import com.gopawpaw.frame.dev.common.encryption.MD5;
-import com.gopawpaw.frame.hibernate.p.ProDet;
-import com.gopawpaw.frame.javax.swing.GppJButton;
-import com.gopawpaw.frame.javax.swing.GppJPanel;
-import com.gopawpaw.frame.javax.swing.GppJTextField;
+import com.gopawpaw.frame.database.mfg.GppProDet;
+import com.gopawpaw.frame.struct.p.ProDet;
+import com.gopawpaw.frame.widget.BaseFrame;
+import com.gopawpaw.frame.widget.GJButton;
+import com.gopawpaw.frame.widget.GJPanel;
+import com.gopawpaw.frame.widget.GJTextField;
 
 import java.awt.BorderLayout;
 import java.util.Calendar;
@@ -51,10 +50,10 @@ public class GenerateComAuthorizationSerial extends BaseFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 951077131996001217L;
-	private GppJPanel gppJPanel1;
-	private GppJPanel gppJPanel2;
-	private GppJButton gppJButton1;
-	private GppJTextField gppJTextField1;
+	private GJPanel gppJPanel1;
+	private GJPanel gppJPanel2;
+	private GJButton gppJButton1;
+	private GJTextField gppJTextField1;
 
 	/**
 	 * @throws HeadlessException
@@ -103,24 +102,24 @@ public class GenerateComAuthorizationSerial extends BaseFrame {
 	}
 	private void initialize() {
 		{
-			gppJPanel1 = new GppJPanel();
+			gppJPanel1 = new GJPanel();
 			gppJPanel1.setLayout(new BorderLayout());
 //			gppJPanel1.setLayout(new BoxLayout(gppJPanel1, BoxLayout.Y_AXIS));
 			getContentPane().add(gppJPanel1, BorderLayout.CENTER);
 			{
-				gppJPanel2 = new GppJPanel();
+				gppJPanel2 = new GJPanel();
 				gppJPanel2.setLayout(new BoxLayout(gppJPanel2, BoxLayout.X_AXIS));
 				gppJPanel1.add(gppJPanel2, BorderLayout.NORTH);
 				gppJPanel2.setPreferredSize(new java.awt.Dimension(727, 39));
 				{
-					gppJTextField1 = new GppJTextField();
+					gppJTextField1 = new GJTextField();
 					gppJPanel2.add(gppJTextField1);
 					gppJTextField1.setText("");
 					gppJTextField1.setText(generateAction(String.valueOf(Calendar.getInstance().getTimeInMillis())));
 					
 				}
 				{
-					gppJButton1 = new GppJButton();
+					gppJButton1 = new GJButton();
 					gppJPanel2.add(gppJButton1);
 					gppJButton1.setText("ªÒ»°–Ú¡–∫≈");
 					gppJButton1.addMouseListener(new MouseAdapter() {
