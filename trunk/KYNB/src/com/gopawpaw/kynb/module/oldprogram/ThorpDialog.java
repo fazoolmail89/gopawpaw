@@ -5,6 +5,7 @@ package com.gopawpaw.kynb.module.oldprogram;
 
 import java.awt.BorderLayout;
 import java.awt.Dialog;
+import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GraphicsConfiguration;
@@ -23,16 +24,16 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.gopawpaw.frame.java.awt.GppDialog;
-import com.gopawpaw.frame.javax.swing.GppJButton;
-import com.gopawpaw.frame.javax.swing.GppJTextField;
+import com.gopawpaw.frame.widget.GJButton;
+import com.gopawpaw.frame.widget.GJDialog;
+import com.gopawpaw.frame.widget.GJTextField;
 import com.gopawpaw.kynb.bean.Thorp;
 
 /**
  * @version 2011-11-16
  * @author Jason
  */
-public class ThorpDialog extends GppDialog implements ActionListener{
+public class ThorpDialog extends GJDialog implements ActionListener{
 
 	public final static int YES_OPTION = JOptionPane.YES_OPTION;
 
@@ -48,7 +49,7 @@ public class ThorpDialog extends GppDialog implements ActionListener{
 
 	private JButton jButtonCancel;
 
-	private GppJTextField gppJTextFieldThorp;
+	private GJTextField gppJTextFieldThorp;
 	/**
 	 * 
 	 */
@@ -57,8 +58,7 @@ public class ThorpDialog extends GppDialog implements ActionListener{
 	/**
 	 * @param owner
 	 */
-	public ThorpDialog(Frame owner) {
-		super(owner);
+	public ThorpDialog() {
 		// TODO Auto-generated constructor stub
 		init();
 	}
@@ -237,7 +237,7 @@ public class ThorpDialog extends GppDialog implements ActionListener{
 			JPanel jPanelBottom = new JPanel();
 			jPanelBottom
 					.setLayout(new GridLayout());
-			jButtonConfirm = new GppJButton("确认"){
+			jButtonConfirm = new GJButton("确认"){
 
 				/**
 				 * 
@@ -266,7 +266,7 @@ public class ThorpDialog extends GppDialog implements ActionListener{
 					return true;
 				};
 			};
-			jButtonCancel = new GppJButton("取消"){
+			jButtonCancel = new GJButton("取消"){
 
 				/**
 				 * 
@@ -292,7 +292,7 @@ public class ThorpDialog extends GppDialog implements ActionListener{
 			//上边距，左边距，下边距，右边距
 //			jLabel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 			JPanel jPanelC = new JPanel();
-			gppJTextFieldThorp = new GppJTextField();
+			gppJTextFieldThorp = new GJTextField();
 			gppJTextFieldThorp.setPreferredSize(new Dimension(100,20));
 			if(thorp != null){
 				gppJTextFieldThorp.setText(thorp.getT_name());

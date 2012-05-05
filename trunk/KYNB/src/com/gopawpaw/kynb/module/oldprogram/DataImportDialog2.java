@@ -5,6 +5,7 @@ package com.gopawpaw.kynb.module.oldprogram;
 
 import java.awt.BorderLayout;
 import java.awt.Dialog;
+import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GraphicsConfiguration;
@@ -16,7 +17,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.Statement;
 
 import javax.swing.BorderFactory;
@@ -30,9 +30,9 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import com.gopawpaw.frame.java.awt.GppDialog;
-import com.gopawpaw.frame.javax.swing.GppJButton;
-import com.gopawpaw.frame.javax.swing.GppJTable;
+import com.gopawpaw.frame.widget.GJButton;
+import com.gopawpaw.frame.widget.GJDialog;
+import com.gopawpaw.frame.widget.GJTable;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.common.ExcelImportListener;
@@ -44,7 +44,7 @@ import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
  * @version 2011-11-18
  * @author Jason
  */
-public class DataImportDialog2 extends GppDialog implements ActionListener {
+public class DataImportDialog2 extends GJDialog implements ActionListener {
 
 	public final static int YES_OPTION = JOptionPane.YES_OPTION;
 
@@ -254,7 +254,7 @@ public class DataImportDialog2 extends GppDialog implements ActionListener {
 
 			JPanel jPanelBottom = new JPanel();
 			jPanelBottom.setLayout(new GridLayout());
-			jButtonConfirm = new GppJButton("确认") {
+			jButtonConfirm = new GJButton("确认") {
 
 				/**
 				 * 
@@ -267,7 +267,7 @@ public class DataImportDialog2 extends GppDialog implements ActionListener {
 					return true;
 				};
 			};
-			jButtonCancel = new GppJButton("取消") {
+			jButtonCancel = new GJButton("取消") {
 
 				/**
 				 * 
@@ -370,7 +370,7 @@ public class DataImportDialog2 extends GppDialog implements ActionListener {
 
 			@Override
 			public void onImprotFinish(Object[] title, Object[][] data,
-					GppJTable table) {
+					GJTable table) {
 				// TODO Auto-generated method stub
 				mTableData = data;
 				jScrollPane.setViewportView(table);

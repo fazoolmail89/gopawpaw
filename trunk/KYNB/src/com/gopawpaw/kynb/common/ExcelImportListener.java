@@ -1,6 +1,6 @@
 package com.gopawpaw.kynb.common;
 
-import com.gopawpaw.frame.javax.swing.GppJTable;
+import com.gopawpaw.frame.widget.GJTable;
 
 /**
  * µ¼Èëexcle¼àÌýÆ÷
@@ -8,5 +8,5 @@ import com.gopawpaw.frame.javax.swing.GppJTable;
  * @author LiJinHua
  */
 public interface ExcelImportListener {
-	void onImprotFinish(Object[] title, Object[][] data, GppJTable table);
+	void onImprotFinish(Object[] title, Object[][] data, GJTable table);
 }

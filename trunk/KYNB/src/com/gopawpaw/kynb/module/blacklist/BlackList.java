@@ -14,6 +14,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.beans.PropertyVetoException;
 import java.io.File;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -24,7 +27,9 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDesktopPane;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -37,11 +42,11 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
-import com.gopawpaw.frame.dev.common.GppJarRunableInterface;
-import com.gopawpaw.frame.javax.swing.GppJButton;
-import com.gopawpaw.frame.javax.swing.GppJCheckBox;
-import com.gopawpaw.frame.javax.swing.GppJComboBox;
-import com.gopawpaw.frame.javax.swing.GppJTextField;
+import com.gopawpaw.frame.utils.GppJarRunableInterface;
+import com.gopawpaw.frame.widget.GJButton;
+import com.gopawpaw.frame.widget.GJCheckBox;
+import com.gopawpaw.frame.widget.GJComboBox;
+import com.gopawpaw.frame.widget.GJTextField;
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.bean.DefultData;
 import com.gopawpaw.kynb.bean.Villager;
@@ -50,11 +55,12 @@ import com.gopawpaw.kynb.common.PoiOperatXls2;
 import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
+import com.gopawpaw.kynb.module.datasift.DataSift;
 import com.gopawpaw.kynb.utils.IDNumberChecker;
 import com.gopawpaw.kynb.utils.KYHashMap;
 import com.gopawpaw.kynb.utils.KeyConstants;
 import com.gopawpaw.kynb.utils.Tools;
-import com.gopawpaw.kynb.widget.GppMessageDialog;
+import com.gopawpaw.kynb.widget.MessageDialog;
 import com.gopawpaw.kynb.widget.GppStyleTable;
 
 /**
@@ -135,7 +141,7 @@ public class BlackList extends BaseModuleFrame implements ActionListener,GppJarR
 		JPanel jPanelBottom = new JPanel();
 		jPanelBottom.setLayout(new GridLayout());
 		
-		jButtonConfirm = new GppJButton("执行导入");
+		jButtonConfirm = new GJButton("执行导入");
 
 		jButtonConfirm.addActionListener(this);
 
@@ -177,7 +183,7 @@ public class BlackList extends BaseModuleFrame implements ActionListener,GppJarR
 		mJTextExcelPath.setEditable(false);
 		mJTextExcelPath.setFocusable(false);
 		
-		mJTextICEdit = new GppJTextField(){
+		mJTextICEdit = new GJTextField(){
 			/**
 			 * 
 			 */
@@ -444,8 +450,8 @@ public class BlackList extends BaseModuleFrame implements ActionListener,GppJarR
 		}
 	}
 	
-	private GppJComboBox getBlackListTypeComboBox(){
-		final GppJComboBox jComboBox = new GppJComboBox();
+	private GJComboBox getBlackListTypeComboBox(){
+		final GJComboBox jComboBox = new GJComboBox();
 		
 		jComboBox.addActionListener(new ActionListener() {
 			
@@ -589,8 +595,34 @@ public class BlackList extends BaseModuleFrame implements ActionListener,GppJarR
 			public void run() {
 				GlobalUI.initUI();
 
+				
 				BlackList thisClass = new BlackList();
-				thisClass.setVisible(true);
+				JDesktopPane desktopPane = new JDesktopPane();
+				desktopPane.add(thisClass);
+				
+				JFrame jf = new JFrame();
+				jf.setSize(new Dimension(1000,600));
+				jf.add(desktopPane);
+				jf.addWindowListener(new WindowAdapter(){
+					@Override
+					public void windowClosing(WindowEvent e){
+						System.exit(0);
+					}
+				});
+				jf.setVisible(true);
+				
+				try {
+					thisClass.setClosable(true);
+					thisClass.setMaximizable(true);
+					thisClass.setMaximum(true);
+					thisClass.setIconifiable(true);
+					thisClass.setResizable(true);
+					thisClass.setVisible(true);
+					thisClass.setSelected(true);
+				} catch (PropertyVetoException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 	}
@@ -609,7 +641,7 @@ public class BlackList extends BaseModuleFrame implements ActionListener,GppJarR
 		}
 	}
 	
-	class GppJComboBoxExp extends GppJComboBox {
+	class GppJComboBoxExp extends GJComboBox {
 
 		private GppJComboBoxExp mFocuseNext = null;
 
@@ -791,7 +823,7 @@ public class BlackList extends BaseModuleFrame implements ActionListener,GppJarR
 			b=false;
 		}
 		boolean flagPop = b;
-		final GppJCheckBox gcb = new GppJCheckBox(tab, flagPop);
+		final GJCheckBox gcb = new GJCheckBox(tab, flagPop);
 		gcb.setHorizontalAlignment(SwingConstants.RIGHT);
 		gcb.setPreferredSize(new Dimension(150, 25));
 
@@ -992,7 +1024,7 @@ public class BlackList extends BaseModuleFrame implements ActionListener,GppJarR
 			}
 			
 			String tempMSG = "是否确认将身份证（"+mCurrentBlackIC+"）从黑名单中移除 ？";
-			GppMessageDialog gmd = new GppMessageDialog(this){
+			MessageDialog gmd = new MessageDialog(){
 				/**
 				 * 
 				 */
@@ -1003,7 +1035,7 @@ public class BlackList extends BaseModuleFrame implements ActionListener,GppJarR
 					// TODO Auto-generated method stub
 					
 					super.actionFinish(option);
-					if(option == GppMessageDialog.YES_OPTION){
+					if(option == MessageDialog.YES_OPTION){
 						//确认删除
 						try {
 							mXXDB.deleteVillagerError(mCurrentBlackIC);

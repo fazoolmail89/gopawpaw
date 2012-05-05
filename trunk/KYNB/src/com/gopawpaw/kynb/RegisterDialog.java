@@ -2,13 +2,13 @@ package com.gopawpaw.kynb;
 
 import java.awt.BorderLayout;
 import java.awt.Dialog;
+import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GraphicsConfiguration;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.Window;
-import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -21,11 +21,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.gopawpaw.frame.java.awt.GppDialog;
-import com.gopawpaw.frame.javax.swing.GppJButton;
-import com.gopawpaw.frame.javax.swing.GppJTextField;
+import com.gopawpaw.frame.widget.GJButton;
+import com.gopawpaw.frame.widget.GJDialog;
+import com.gopawpaw.frame.widget.GJTextField;
 
-public class RegisterDialog extends GppDialog implements ActionListener{
+public class RegisterDialog extends GJDialog implements ActionListener{
 
 	public final static int YES_OPTION = JOptionPane.YES_OPTION;
 
@@ -39,8 +39,8 @@ public class RegisterDialog extends GppDialog implements ActionListener{
 
 	private JButton jButtonCancel;
 
-	private GppJTextField gppJTextFieldKeyCode;
-	private GppJTextField gppJTextFieldRegisterCode;
+	private GJTextField gppJTextFieldKeyCode;
+	private GJTextField gppJTextFieldRegisterCode;
 	
 	private String  keyCode;
 	/**
@@ -51,8 +51,7 @@ public class RegisterDialog extends GppDialog implements ActionListener{
 	/**
 	 * @param owner
 	 */
-	public RegisterDialog(Frame owner) {
-		super(owner);
+	public RegisterDialog() {
 		// TODO Auto-generated constructor stub
 		init();
 	}
@@ -231,7 +230,7 @@ public class RegisterDialog extends GppDialog implements ActionListener{
 			JPanel jPanelBottom = new JPanel();
 			jPanelBottom
 					.setLayout(new GridLayout());
-			jButtonConfirm = new GppJButton("确认"){
+			jButtonConfirm = new GJButton("确认"){
 
 				/**
 				 * 
@@ -257,7 +256,7 @@ public class RegisterDialog extends GppDialog implements ActionListener{
 					return true;
 				};
 			};
-			jButtonCancel = new GppJButton("取消"){
+			jButtonCancel = new GJButton("取消"){
 
 				/**
 				 * 
@@ -292,13 +291,13 @@ public class RegisterDialog extends GppDialog implements ActionListener{
 			
 			//机器码
 			jPanelC0.add(new JLabel("机器码："));
-			gppJTextFieldKeyCode = new GppJTextField(keyCode);
+			gppJTextFieldKeyCode = new GJTextField(keyCode);
 			gppJTextFieldKeyCode.setPreferredSize(new Dimension(100,20));
 			
 			jPanelC0.add(gppJTextFieldKeyCode);
 			
 			//注册码
-			gppJTextFieldRegisterCode = new GppJTextField();
+			gppJTextFieldRegisterCode = new GJTextField();
 			gppJTextFieldRegisterCode.setPreferredSize(new Dimension(100,20));
 			
 			jPanelC.setPreferredSize(new Dimension(100,20));

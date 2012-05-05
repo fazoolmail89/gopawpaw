@@ -73,8 +73,8 @@ public class ProgressImportExcel extends Thread {// 自定义类progress,导入excel用
 					@Override
 					public void onReadXlsPre(int size, Object[] title) {
 						// TODO Auto-generated method stub
-						this.size = size - 1;
-						progressBar.setMaximum(size - 1);
+						this.size = size;
+						progressBar.setMaximum(size);
 						mTitle = title;
 					}
 

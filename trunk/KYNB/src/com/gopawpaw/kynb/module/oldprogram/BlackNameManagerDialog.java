@@ -4,8 +4,8 @@
 package com.gopawpaw.kynb.module.oldprogram;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dialog;
+import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GraphicsConfiguration;
@@ -33,30 +33,25 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 
-import com.gopawpaw.frame.dev.common.GppJarRunableInterface;
-import com.gopawpaw.frame.java.awt.GppDialog;
-import com.gopawpaw.frame.javax.swing.GppJButton;
-import com.gopawpaw.frame.javax.swing.GppJTextField;
+import com.gopawpaw.frame.utils.GppJarRunableInterface;
+import com.gopawpaw.frame.widget.GJButton;
+import com.gopawpaw.frame.widget.GJDialog;
+import com.gopawpaw.frame.widget.GJTextField;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.common.PoiOperatXls2;
 import com.gopawpaw.kynb.db.DBException;
-import com.gopawpaw.kynb.db.ExcelDBAccess;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
-import com.gopawpaw.kynb.module.thorpmanage.ThorpManage;
-import com.gopawpaw.kynb.widget.GppMessageDialog;
 import com.gopawpaw.kynb.widget.GppStyleTable;
+import com.gopawpaw.kynb.widget.MessageDialog;
 
 /**
  * @version 2011-11-19
  * @author Jason
  */
-public class BlackNameManagerDialog  extends GppDialog implements ActionListener, GppJarRunableInterface{
+public class BlackNameManagerDialog  extends GJDialog implements ActionListener, GppJarRunableInterface{
 
 	public final static int YES_OPTION = JOptionPane.YES_OPTION;
 
@@ -97,8 +92,7 @@ public class BlackNameManagerDialog  extends GppDialog implements ActionListener
 	/**
 	 * @param owner
 	 */
-	public BlackNameManagerDialog(Frame owner) {
-		super(owner);
+	public BlackNameManagerDialog() {
 		// TODO Auto-generated constructor stub
 		init();
 	}
@@ -276,7 +270,7 @@ public class BlackNameManagerDialog  extends GppDialog implements ActionListener
 
 			JPanel jPanelBottom = new JPanel();
 			jPanelBottom.setLayout(new GridLayout());
-			jButtonConfirm = new GppJButton("执行导入");
+			jButtonConfirm = new GJButton("执行导入");
 
 			jButtonConfirm.addActionListener(this);
 
@@ -320,7 +314,7 @@ public class BlackNameManagerDialog  extends GppDialog implements ActionListener
 			mJTextExcelPath.setEditable(false);
 			mJTextExcelPath.setFocusable(false);
 			
-			mJTextICEdit = new GppJTextField(){
+			mJTextICEdit = new GJTextField(){
 				/**
 				 * 
 				 */
@@ -597,7 +591,7 @@ public class BlackNameManagerDialog  extends GppDialog implements ActionListener
 			}
 			
 			String tempMSG = "是否确认将身份证（"+mCurrentBlackIC+"）从黑名单中移除 ？";
-			GppMessageDialog gmd = new GppMessageDialog(this){
+			MessageDialog gmd = new MessageDialog(this){
 				/**
 				 * 
 				 */
@@ -608,7 +602,7 @@ public class BlackNameManagerDialog  extends GppDialog implements ActionListener
 					// TODO Auto-generated method stub
 					
 					super.actionFinish(option);
-					if(option == GppMessageDialog.YES_OPTION){
+					if(option == MessageDialog.YES_OPTION){
 						//确认删除
 						try {
 							mXXDB.deleteVillagerError(mCurrentBlackIC);

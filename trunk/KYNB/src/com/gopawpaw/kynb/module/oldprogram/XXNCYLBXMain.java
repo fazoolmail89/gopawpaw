@@ -22,6 +22,9 @@ import java.awt.event.AdjustmentListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.beans.PropertyVetoException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,6 +36,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -49,11 +53,12 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 
 import com.gopawpaw.frame.GlobalParameter;
-import com.gopawpaw.frame.dev.common.GppCmdShell;
-import com.gopawpaw.frame.dev.common.GppJarRunableInterface;
-import com.gopawpaw.frame.dev.common.encryption.MD5;
-import com.gopawpaw.frame.javax.swing.GppJCheckBox;
-import com.gopawpaw.frame.javax.swing.GppJComboBox;
+import com.gopawpaw.frame.utils.GppCmdShell;
+import com.gopawpaw.frame.utils.GppJarRunableInterface;
+import com.gopawpaw.frame.utils.MD5;
+import com.gopawpaw.frame.widget.GJCheckBox;
+import com.gopawpaw.frame.widget.GJComboBox;
+import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.RegisterDialog;
 import com.gopawpaw.kynb.bean.DefultData;
 import com.gopawpaw.kynb.bean.Thorp;
@@ -63,11 +68,12 @@ import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.ExcelAccess;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
+import com.gopawpaw.kynb.module.blacklist.BlackList;
 import com.gopawpaw.kynb.utils.DateUtils;
 import com.gopawpaw.kynb.utils.GppConfiguration;
 import com.gopawpaw.kynb.utils.IDNumberChecker;
 import com.gopawpaw.kynb.utils.Tools;
-import com.gopawpaw.kynb.widget.GppMessageDialog;
+import com.gopawpaw.kynb.widget.MessageDialog;
 import com.gopawpaw.kynb.widget.GppStyleTable;
 
 /**
@@ -99,7 +105,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 	private JPanel jPanelBottom = null;
 	private JPanel jPanelDataEdit = null;
 
-	private GppJComboBox jComboBoxThorp = null;
+	private GJComboBox jComboBoxThorp = null;
 	private JButton jButtonNewThorp = null;
 	private JButton jButtonUpdateThorp = null;
 	private JButton jButtonDeleteThorp = null;
@@ -186,34 +192,6 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 		initialize();
 	}
 
-	/**
-	 * @param arg0
-	 */
-	public XXNCYLBXMain(GraphicsConfiguration arg0) {
-		super(arg0);
-		// TODO Auto-generated constructor stub
-		initialize();
-	}
-
-	/**
-	 * @param arg0
-	 * @throws HeadlessException
-	 */
-	public XXNCYLBXMain(String arg0) throws HeadlessException {
-		super(arg0);
-		// TODO Auto-generated constructor stub
-		initialize();
-	}
-
-	/**
-	 * @param arg0
-	 * @param arg1
-	 */
-	public XXNCYLBXMain(String arg0, GraphicsConfiguration arg1) {
-		super(arg0, arg1);
-		// TODO Auto-generated constructor stub
-		initialize();
-	}
 
 	/**
 	 * @version 2011-11-13
@@ -223,48 +201,36 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		GlobalParameter.initialize();
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				try {
-
-					// UIManager.setLookAndFeel("com.jgoodies.looks.plastic.Plastic3DLookAndFeel");
-					UIManager.setLookAndFeel(
-					// UIManager.getCrossPlatformLookAndFeelClassName()
-					// UIManager.getSystemLookAndFeelClassName()
-					// new com.sun.java.swing.plaf.motif.MotifLookAndFeel()
-					// "com.jgoodies.looks.windows.WindowsLookAndFeel"
-					// "com.jgoodies.looks.plastic.PlasticLookAndFeel"
-							"com.jgoodies.looks.plastic.Plastic3DLookAndFeel"
-							// "com.jgoodies.looks.plastic.PlasticXPLookAndFeel"
-
-							);
-
-				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (InstantiationException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IllegalAccessException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (UnsupportedLookAndFeelException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
+				GlobalUI.initUI();
 				XXNCYLBXMain thisClass = new XXNCYLBXMain();
-				Toolkit kit = Toolkit.getDefaultToolkit();
-				Image img = kit.getImage("Applications.jpg");
-				thisClass.setIconImage(img);
-
-//				if (thisClass.cheakRegister()) {
-					thisClass.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				JDesktopPane desktopPane = new JDesktopPane();
+				desktopPane.add(thisClass);
+				
+				JFrame jf = new JFrame();
+				jf.setSize(new Dimension(1000,600));
+				jf.add(desktopPane);
+				jf.addWindowListener(new WindowAdapter(){
+					@Override
+					public void windowClosing(WindowEvent e){
+						System.exit(0);
+					}
+				});
+				jf.setVisible(true);
+				
+				try {
+					thisClass.setClosable(true);
+					thisClass.setMaximizable(true);
+					thisClass.setMaximum(true);
+					thisClass.setIconifiable(true);
+					thisClass.setResizable(true);
 					thisClass.setVisible(true);
-//				} else {
-//					System.exit(0);
-//				}
+					thisClass.setSelected(true);
+				} catch (PropertyVetoException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 			}
 		});
@@ -528,7 +494,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 			jButtonNewThorp.setText("创建村");
 			jButtonNewThorp.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
-					ThorpDialog gmd = new ThorpDialog(XXNCYLBXMain.this) {
+					ThorpDialog gmd = new ThorpDialog() {
 						/**
 						 * 
 						 */
@@ -598,7 +564,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 			jButtonUpdateThorp
 					.addMouseListener(new java.awt.event.MouseAdapter() {
 						public void mouseClicked(java.awt.event.MouseEvent e) {
-							ThorpDialog td = new ThorpDialog(XXNCYLBXMain.this) {
+							ThorpDialog td = new ThorpDialog() {
 								/**
 						 * 
 						 */
@@ -661,7 +627,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 			jButtonDeleteThorp
 					.addMouseListener(new java.awt.event.MouseAdapter() {
 						public void mouseClicked(java.awt.event.MouseEvent e) {
-							ThorpDialog gmd = new ThorpDialog(XXNCYLBXMain.this) {
+							ThorpDialog gmd = new ThorpDialog() {
 								/**
 						 * 
 						 */
@@ -723,8 +689,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 			jButtonImportVillager
 					.addMouseListener(new java.awt.event.MouseAdapter() {
 						public void mouseClicked(java.awt.event.MouseEvent e) {
-							DataImportDialog gmd = new DataImportDialog(
-									XXNCYLBXMain.this) {
+							DataImportDialog gmd = new DataImportDialog() {
 								/**
 						 * 
 						 */
@@ -759,8 +724,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 		jButtonImportVillager
 				.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
-						BlackNameManagerDialog gmd = new BlackNameManagerDialog(
-								XXNCYLBXMain.this);
+						BlackNameManagerDialog gmd = new BlackNameManagerDialog();
 						gmd.setTitle("黑名单管理");
 						gmd.setVisible(true);
 					}
@@ -776,7 +740,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 		jButton
 				.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
-						BankEdit be = new BankEdit(XXNCYLBXMain.this,mCurrentThorp);
+						BankEdit be = new BankEdit(mCurrentThorp);
 						be.setLocation(XXNCYLBXMain.this.getLocation());
 						be.setSize(900,400);
 						be.setModal(true);
@@ -837,7 +801,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						
 					String tempMSG = "是否确认删除所有档案数据？\r\n该操作将不可恢复数据，请谨慎使用！！";
-				GppMessageDialog gmd = new GppMessageDialog(XXNCYLBXMain.this) {
+				MessageDialog gmd = new MessageDialog() {
 					/**
 					 * 
 					 */
@@ -848,7 +812,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 						// TODO Auto-generated method stub
 
 						super.actionFinish(option);
-						if (option == GppMessageDialog.YES_OPTION) {
+						if (option == MessageDialog.YES_OPTION) {
 							// 确认删除
 							try {
 								mXXDB.deleteVillagerAll();
@@ -899,7 +863,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 	 */
 	private JComboBox getJComboBoxThorp() {
 		if (jComboBoxThorp == null) {
-			jComboBoxThorp = new GppJComboBox();
+			jComboBoxThorp = new GJComboBox();
 			// jComboBoxThorp.setPreferredSize(new Dimension(200,20));
 			// jComboBoxThorp.setMinimumSize(new Dimension(200,20));
 			jComboBoxThorp.setEditable(false);
@@ -1071,7 +1035,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 					.addMouseListener(new java.awt.event.MouseAdapter() {
 						public void mouseClicked(java.awt.event.MouseEvent e) {
 //							actionSaveToExcel();
-							DataExportDialog1 ded = new DataExportDialog1(XXNCYLBXMain.this,mCurrentThorp);
+							DataExportDialog1 ded = new DataExportDialog1(mCurrentThorp);
 							
 							ded.setDataType("a");
 							ded.setVisible(true);
@@ -1091,7 +1055,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 					.addMouseListener(new java.awt.event.MouseAdapter() {
 						public void mouseClicked(java.awt.event.MouseEvent e) {
 //							actionSaveToExcel2();
-							DataExportDialog1 ded = new DataExportDialog1(XXNCYLBXMain.this,mCurrentThorp);
+							DataExportDialog1 ded = new DataExportDialog1(mCurrentThorp);
 							ded.setDataType("b");
 							ded.setVisible(true);
 							
@@ -1873,7 +1837,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 		jPanel.setBorder(BorderFactory.createEmptyBorder(4, 0, 4, 0));
 
 		boolean flagPop = mDefultEditShow.get(tab);
-		final GppJCheckBox gcb = new GppJCheckBox(tab, flagPop);
+		final GJCheckBox gcb = new GJCheckBox(tab, flagPop);
 		gcb.setHorizontalAlignment(SwingConstants.RIGHT);
 		gcb.setPreferredSize(new Dimension(150, 25));
 
@@ -1910,7 +1874,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 		return jPanel;
 	}
 
-	class GppJComboBoxExp extends GppJComboBox {
+	class GppJComboBoxExp extends GJComboBox {
 
 		private GppJComboBoxExp mFocuseNext = null;
 
@@ -2553,7 +2517,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 
 			String tempMSG = "是否确认删除:" + tempVillager.getV_name() + "=>"
 					+ tempVillager.getV_ic() + " 的档案？";
-			GppMessageDialog gmd = new GppMessageDialog(this) {
+			MessageDialog gmd = new MessageDialog() {
 				/**
 				 * 
 				 */
@@ -2564,7 +2528,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 					// TODO Auto-generated method stub
 
 					super.actionFinish(option);
-					if (option == GppMessageDialog.YES_OPTION) {
+					if (option == MessageDialog.YES_OPTION) {
 						// 确认删除
 						try {
 							mXXDB.deleteVillager(tempVillager.getV_ic());
@@ -3132,160 +3096,6 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 		}
 	}
 
-	private boolean cheakRegister() {
-		String diskID = chenmin.io.DiskID.DiskID();
-
-		String registerCode = mGppConfiguration.getValue("registerCode");
-
-		String displayKey = genDisplayCode(diskID);
-
-		final String regKey = genKeyCode(displayKey);
-
-		// System.out.println(displayKey);
-		//
-		// System.out.println(genKeyCode(displayKey));
-
-		if (registerCode == null || !registerCode.equals(regKey)) {
-			boolean regFlag = false;
-			RegisterDialog rd = new RegisterDialog(this) {
-				/**
-				 * 
-				 */
-				private static final long serialVersionUID = 1L;
-
-				@Override
-				protected void actionFinish(int option, String regCode) {
-					// TODO Auto-generated method stub
-					if (option == RegisterDialog.YES_OPTION) {
-						System.out.println(regCode);
-						if (regKey.equals(regCode)) {
-							// 注册成功
-							mGppConfiguration.setValue("registerCode", regCode);
-							mGppConfiguration.saveFile();
-
-							String tempMSG = "恭喜您注册成功，非常感谢您对快译软件的支持！\r\n请重新启动系统，即可生效。";
-							//声音提示
-							Toolkit.getDefaultToolkit().beep();
-							JOptionPane.showConfirmDialog(null, tempMSG,
-									"系统提示", JOptionPane.YES_NO_OPTION,
-									JOptionPane.INFORMATION_MESSAGE);
-
-							super.actionFinish(option, regCode);
-						} else {
-							// 注册失败
-							String tempMSG = "该注册码不能在本机使用，或者您的注册码已经过期，请联系管理员获取注册码！\r\n"+mSupport;
-							//声音提示
-							Toolkit.getDefaultToolkit().beep();
-							JOptionPane.showConfirmDialog(null, tempMSG,
-									"系统提示", JOptionPane.YES_NO_OPTION,
-									JOptionPane.INFORMATION_MESSAGE);
-						}
-
-					} else {
-						// 取消
-						super.actionFinish(option, regCode);
-					}
-
-				}
-			};
-			rd.setTitle("您的支持，我们的动力！");
-			rd.setKeyCode(displayKey);
-			rd.setVisible(true);
-
-			return regFlag;
-		} else {
-			return true;
-		}
-
-		//
-		// return true;
-	}
-
-	private String genDisplayCode(String diskID) {
-		MD5 md5 = new MD5();
-
-		return md5.getMD5ofStr(diskID);
-	}
-
-	private String genKeyCode(String displayCode) {
-		String k3 = displayCode.substring(6, 21);
-
-		MD5 md5 = new MD5();
-
-		return md5.getMD5ofStr(k3);
-	}
-
-	private void testDB() {
-		XXNCYLBXDBAccess xxdb = new XXNCYLBXDBAccess();
-
-		Thorp thorp = new Thorp();
-		thorp.setT_id(2);
-		thorp.setT_name("gggggg");
-
-		Villager villager = new Villager();
-		// villager.setV_id(1);
-		villager.setT_id(1);
-		villager.setV_name("SDFSFSD");
-		villager.setV_sex("v_sex");
-		villager.setV_ic("v_ic22");
-		villager.setV_nation("v_nation");
-		villager.setV_birthday("v_birthday");
-		villager.setV_address_live("v_address_live");
-		villager.setV_bank_name("v_bank_name");
-		villager.setV_bank_account("v_bank_account");
-		villager.setV_capture_expend_calss("v_capture_expend_calss");
-		villager.setV_type("v_type");
-		villager.setV_join_time("v_join_time");
-		villager.setV_archival_location("v_archival_location");
-		villager.setV_old_balance("v_old_balance");
-		villager.setV_old_balance_flag("v_old_balance_flag");
-		villager.setV_householder_name("v_householder_name");
-		villager.setV_householder_ic("v_householder_ic");
-		villager.setV_householder_relation("v_householder_relation");
-		villager.setV_standard_culture("v_standard_culture");
-		villager.setV_60not_enough15_flag("v_60not_enough15_flag");
-		villager.setV_phone_num("v_phone_num");
-		villager.setV_marital_status("v_marital_status");
-		villager.setV_politics_status("v_politics_status");
-		villager.setV_contact_name("v_contact_name");
-		villager.setV_address_com("v_address_com");
-		villager.setV_address_zip_code("v_address_zip_code");
-		villager.setV_soldie_flag("v_soldie_flag");
-		villager.setV_model_worker("v_model_worker");
-		villager.setV_social_security_num("v_social_security_num");
-		villager.setV_begin_get_date("v_begin_get_date");
-		villager.setV_status("v_status");
-		villager.setV_mark("v_mark");
-
-		try {
-			// System.out.println("======="+xxdb.insertThorp(thorp));
-			// System.out.println("======="+xxdb.updateThorp(thorp));
-			// System.out.println("======="+xxdb.deleteThorp(thorp));
-
-			// List<Thorp> list = xxdb.getThorpAll();
-			//
-			// for(Thorp th :list){
-			// System.out.println(th);
-			// }
-
-			System.out.println("=======" + xxdb.insertVillager(villager));
-			// System.out.println("======="+xxdb.deleteVillager(1));
-			// System.out.println("=======" + xxdb.isExistVillager("v_ic33"));
-			List<Villager> listV = xxdb.getVillagerByThorp(0, "");
-			for (Villager v : listV) {
-				System.out.println(v);
-			}
-
-			// System.out.println("======="+xxdb.updateVillager(villager));
-			//
-			// Villager v = xxdb.getVillagerById(1);
-			// System.out.println(v);
-
-		} catch (DBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 	@Override
 	public boolean runJar(String[] args) {

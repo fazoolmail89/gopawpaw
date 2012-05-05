@@ -12,18 +12,18 @@ import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
-import com.gopawpaw.frame.java.awt.GppDialog;
-import com.gopawpaw.frame.javax.swing.GppJButton;
-import com.gopawpaw.frame.javax.swing.GppJTextArea;
+import com.gopawpaw.frame.widget.GJButton;
+import com.gopawpaw.frame.widget.GJDialog;
 
 /**
  * 消息对话框
@@ -31,7 +31,7 @@ import com.gopawpaw.frame.javax.swing.GppJTextArea;
  * @author 李锦华
  * @since: 2011-11-16
  */
-public class GppMessageDialog extends GppDialog implements ActionListener{
+public class MessageDialog extends GJDialog implements ActionListener{
 
 	public final static int YES_OPTION = JOptionPane.YES_OPTION;
 
@@ -52,10 +52,16 @@ public class GppMessageDialog extends GppDialog implements ActionListener{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	
+	public MessageDialog() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * @param owner
 	 */
-	public GppMessageDialog(Frame owner) {
+	public MessageDialog(Frame owner) {
 		super(owner);
 		// TODO Auto-generated constructor stub
 		init();
@@ -64,7 +70,7 @@ public class GppMessageDialog extends GppDialog implements ActionListener{
 	/**
 	 * @param owner
 	 */
-	public GppMessageDialog(Dialog owner) {
+	public MessageDialog(Dialog owner) {
 		super(owner);
 		// TODO Auto-generated constructor stub
 		init();
@@ -73,7 +79,7 @@ public class GppMessageDialog extends GppDialog implements ActionListener{
 	/**
 	 * @param owner
 	 */
-	public GppMessageDialog(Window owner) {
+	public MessageDialog(Window owner) {
 		super(owner);
 		// TODO Auto-generated constructor stub
 		init();
@@ -83,7 +89,7 @@ public class GppMessageDialog extends GppDialog implements ActionListener{
 	 * @param owner
 	 * @param modal
 	 */
-	public GppMessageDialog(Frame owner, boolean modal) {
+	public MessageDialog(Frame owner, boolean modal) {
 		super(owner, modal);
 		// TODO Auto-generated constructor stub
 		init();
@@ -93,7 +99,7 @@ public class GppMessageDialog extends GppDialog implements ActionListener{
 	 * @param owner
 	 * @param title
 	 */
-	public GppMessageDialog(Frame owner, String title) {
+	public MessageDialog(Frame owner, String title) {
 		super(owner, title);
 		// TODO Auto-generated constructor stub
 		init();
@@ -103,7 +109,7 @@ public class GppMessageDialog extends GppDialog implements ActionListener{
 	 * @param owner
 	 * @param title
 	 */
-	public GppMessageDialog(Dialog owner, String title) {
+	public MessageDialog(Dialog owner, String title) {
 		super(owner, title);
 		// TODO Auto-generated constructor stub
 		init();
@@ -113,28 +119,20 @@ public class GppMessageDialog extends GppDialog implements ActionListener{
 	 * @param owner
 	 * @param title
 	 */
-	public GppMessageDialog(Window owner, String title) {
+	public MessageDialog(Window owner, String title) {
 		super(owner, title);
 		// TODO Auto-generated constructor stub
 		init();
 	}
 
-	/**
-	 * @param owner
-	 * @param modalityType
-	 */
-	public GppMessageDialog(Window owner, ModalityType modalityType) {
-		super(owner, modalityType);
-		// TODO Auto-generated constructor stub
-		init();
-	}
+
 
 	/**
 	 * @param owner
 	 * @param title
 	 * @param modal
 	 */
-	public GppMessageDialog(Frame owner, String title, boolean modal) {
+	public MessageDialog(Frame owner, String title, boolean modal) {
 		super(owner, title, modal);
 		// TODO Auto-generated constructor stub
 		init();
@@ -145,23 +143,12 @@ public class GppMessageDialog extends GppDialog implements ActionListener{
 	 * @param title
 	 * @param modal
 	 */
-	public GppMessageDialog(Dialog owner, String title, boolean modal) {
+	public MessageDialog(Dialog owner, String title, boolean modal) {
 		super(owner, title, modal);
 		// TODO Auto-generated constructor stub
 		init();
 	}
 
-	/**
-	 * @param owner
-	 * @param title
-	 * @param modalityType
-	 */
-	public GppMessageDialog(Window owner, String title,
-			ModalityType modalityType) {
-		super(owner, title, modalityType);
-		// TODO Auto-generated constructor stub
-		init();
-	}
 
 	/**
 	 * @param owner
@@ -169,7 +156,7 @@ public class GppMessageDialog extends GppDialog implements ActionListener{
 	 * @param modal
 	 * @param gc
 	 */
-	public GppMessageDialog(Frame owner, String title, boolean modal,
+	public MessageDialog(Frame owner, String title, boolean modal,
 			GraphicsConfiguration gc) {
 		super(owner, title, modal, gc);
 		// TODO Auto-generated constructor stub
@@ -182,33 +169,62 @@ public class GppMessageDialog extends GppDialog implements ActionListener{
 	 * @param modal
 	 * @param gc
 	 */
-	public GppMessageDialog(Dialog owner, String title, boolean modal,
+	public MessageDialog(Dialog owner, String title, boolean modal,
 			GraphicsConfiguration gc) {
 		super(owner, title, modal, gc);
 		// TODO Auto-generated constructor stub
 		init();
 	}
 
-	/**
-	 * @param owner
-	 * @param title
-	 * @param modalityType
-	 * @param gc
-	 */
-	public GppMessageDialog(Window owner, String title,
-			ModalityType modalityType, GraphicsConfiguration gc) {
-		super(owner, title, modalityType, gc);
-		init();
-	}
 
 	private void init() {
-		addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				GppMessageDialog.this.setVisible(false);
+		this.addWindowListener(new WindowListener() {
+			
+			@Override
+			public void windowOpened(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowIconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeiconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeactivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				MessageDialog.this.setVisible(false);
+			}
+			
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowActivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
+
 		
-		this.setModal(true);
+		setModal(true);
 	}
 
 	public String getMessage() {
@@ -243,7 +259,7 @@ public class GppMessageDialog extends GppDialog implements ActionListener{
 			JPanel jPanelBottom = new JPanel();
 			jPanelBottom
 					.setLayout(new GridLayout());
-			jButtonConfirm = new GppJButton("确认"){
+			jButtonConfirm = new GJButton("确认"){
 
 				/**
 				 * 
@@ -254,7 +270,7 @@ public class GppMessageDialog extends GppDialog implements ActionListener{
 					return true;
 				};
 			};
-			jButtonCancel = new GppJButton("取消"){
+			jButtonCancel = new GJButton("取消"){
 
 				/**
 				 * 
@@ -276,7 +292,7 @@ public class GppMessageDialog extends GppDialog implements ActionListener{
 			jPanelBottom.add(jLabel, null);
 			jPanelBottom.add(jButtonCancel, null);
 
-			GppJTextArea textA = new GppJTextArea(message);
+			JTextArea textA = new JTextArea(message);
 			textA.setEditable(false);
 			textA.setFocusable(false);
 			textA.setLineWrap(true);

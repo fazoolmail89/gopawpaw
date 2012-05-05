@@ -1,20 +1,34 @@
 package com.sunking.swing;
 
-import java.io.*;
-import java.text.*;
+import java.awt.BorderLayout;
+import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.plaf.*;
-import javax.swing.plaf.basic.*;
-import javax.swing.plaf.metal.*;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.plaf.ComboBoxUI;
+import javax.swing.plaf.basic.BasicComboPopup;
+import javax.swing.plaf.basic.ComboPopup;
+import javax.swing.plaf.metal.MetalComboBoxUI;
 
-import com.gopawpaw.frame.javax.swing.GppJComboBox;
-import com.sun.java.swing.plaf.motif.*;
-import com.sun.java.swing.plaf.windows.*;
-import com.sunking.swing.refer.*;
+import com.gopawpaw.frame.widget.GJComboBox;
+import com.sun.java.swing.plaf.motif.MotifComboBoxUI;
+import com.sun.java.swing.plaf.windows.WindowsComboBoxUI;
+import com.sunking.swing.refer.JDateDocument;
+import com.sunking.swing.refer.SingleObjectComboBoxModel;
 
 /**
  * <p>Title:OpenSwing </p>
@@ -29,7 +43,7 @@ import com.sunking.swing.refer.*;
  * @author <a href="mailto:sunkingxie@hotmail.com"'>Sunking</a>
  * @version 1.0
  */
-public class JDatePicker extends GppJComboBox implements Serializable{
+public class JDatePicker extends GJComboBox implements Serializable{
     /**
      * 日期格式类型
      */

@@ -136,15 +136,15 @@ public class PoiOperatXls2 {
 			//第一行为头部，第二行开始才是数据
 			if(readXlsListener != null){
 				
-				data = new Object[size-1][];
-			}else{
 				data = new Object[size][];
+			}else{
+				data = new Object[size+1][];
 			}
 			
 			//是否已经响应过预读取
 			boolean flagOnReadXlsPre = false;
 			
-			for (int i = 0; i < childSheet.getLastRowNum(); i++) {
+			for (int i = 0; i <= childSheet.getLastRowNum(); i++) {
 				HSSFRow row = childSheet.getRow(i);
 				if (null != row) {
 					String[] temp = new String[row.getLastCellNum()];
