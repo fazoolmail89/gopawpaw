@@ -128,6 +128,13 @@ GppJarRunableInterface {
 		@Override
 		public void execut() {
 			Object[][] excelData = PoiOperatXls.readXlsRTA(file);
+			
+			if(excelData[0].length > 10) {
+				JOptionPane.showMessageDialog(null, "导入Excel表格列数不能大于10！", "导入Excel提示！",
+						JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+			
 			Object[][] tableData = new Object[excelData.length - 1][];
 			List<OtherData> list = new ArrayList<OtherData>();
 			OtherData odata = null;

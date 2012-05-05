@@ -131,8 +131,8 @@ public class OptBtnsPanel extends JPanel {
 		
 		setLayout(new FlowLayout());
 		add(btnImport);
-		add(btnExport);
-		add(btnCleare);
+		//add(btnExport);
+		//add(btnCleare);
 		add(btnAdd);
 		add(btnUpate);
 		add(btnDelete);
