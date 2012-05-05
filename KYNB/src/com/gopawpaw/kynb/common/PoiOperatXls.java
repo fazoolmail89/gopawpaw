@@ -125,10 +125,10 @@ public class PoiOperatXls {
 					for (int j = 0; j < row.getLastCellNum(); j++) {
 						HSSFCell cell = row.getCell(j);
 						
-if(j == 0) {
+/*if(j == 0) {
 	System.out.print(childSheet.getLastRowNum() + " : " + i + " : " + cell.getStringCellValue());
 	System.out.println();
-}
+}*/
 						
 						if (null != cell) {
 							switch (cell.getCellType()) {
