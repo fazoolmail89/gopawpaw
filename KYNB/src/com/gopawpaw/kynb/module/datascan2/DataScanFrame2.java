@@ -27,13 +27,6 @@ public class DataScanFrame2 extends BaseModuleFrame implements
 		GppJarRunableInterface {
 	private static final long serialVersionUID = 3688309249432143888L;
 	
-	private static final String[] dbtColumnNames = {OtherData.ACOL,
-		OtherData.BCOL, OtherData.CCOL, OtherData.DCOL,
-		OtherData.ECOL, OtherData.FCOL, OtherData.GCOL,
-		OtherData.HCOL, OtherData.ICOL, OtherData.JCOL };
-	
-	private static List<ScanItem> scanItemList = new ArrayList<ScanItem>();
-	
 	private static DataScanFrame2 thisClass;
 	private static ExcelDataTablePane excelDataTablePane = null;
 	private static OptBtnsPanel optBtnsPanel = null;
@@ -51,16 +44,6 @@ public class DataScanFrame2 extends BaseModuleFrame implements
 		scanMap = new HashMap<String, Integer>();
 		scanMap.put(OtherData.ACOL, 0);
 		
-		//------------------------------------------------
-		for(int i = 0; i < dbtColumnNames.length; i++ ) {
-			ScanItem si = new ScanItem();
-			si.setCheck(true);
-			si.setDbtColumnName(dbtColumnNames[i]);
-			si.setDbtExample("");
-			si.setExcelColumnName("");
-			scanItemList.add(si);
-		}		
-
 		// 设置文件过滤器
 		fileChooser.setFileFilter(new ExcelFileFilter());
 	}
@@ -263,17 +246,5 @@ public class DataScanFrame2 extends BaseModuleFrame implements
 		int left = (owner.getWidth() - dialog.getWidth()) / 2 + owner.getX();
 		int top = (owner.getHeight() - dialog.getHeight()) / 2 + owner.getY();
 		dialog.setLocation(left, top);
-	}
-
-	public static String[] getDbtcolumnnames() {
-		return dbtColumnNames;
-	}
-	
-	public static List<ScanItem> getScanItemList() {
-		return scanItemList;
-	}
-
-	public static void setScanItemList(List<ScanItem> scanItemList) {
-		DataScanFrame2.scanItemList = scanItemList;
 	}
 }

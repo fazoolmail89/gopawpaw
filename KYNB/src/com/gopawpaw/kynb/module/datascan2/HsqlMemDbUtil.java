@@ -55,7 +55,7 @@ public class HsqlMemDbUtil extends Thread{
 	}
 
 	public static void createTable() {
-		String sql = "create table mvillager ("
+		String sql = "create table motherdata ("
 				+ " id integer not null primary key," 
 				+ " A varchar(255),"
 				+ " B varchar(255),"

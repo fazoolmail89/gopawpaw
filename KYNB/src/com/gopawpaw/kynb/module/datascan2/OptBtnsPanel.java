@@ -24,7 +24,6 @@ public class OptBtnsPanel extends JPanel {
 	private JButton btnExportExcel = new JButton(" 导出Excel ");
 	private JButton btnScanItem = new JButton("扫描项选择");
 	private JButton btnScanning = new JButton(" 开始扫描  ");
-	private JButton btnTest = new JButton("测试");
 
 	public JButton getBtnExportExcel() {
 		return btnExportExcel;
@@ -124,18 +123,10 @@ public class OptBtnsPanel extends JPanel {
 			}
 		});
 
-		btnTest.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new ScanItemDialog2(mainFrame);
-			}
-		});
-
 		setLayout(new FlowLayout());
 		add(btnImportExcel);
 		add(btnScanItem);
 		add(btnScanning);
 		add(btnExportExcel);
-		add(btnTest);
 	}
 }

@@ -8,6 +8,8 @@ import java.util.Map;
 
 import javax.swing.JProgressBar;
 
+import com.gopawpaw.kynb.bean.OtherData;
+
 public class DataScanning {
 	/**
 	 * 执行数据扫描
@@ -42,7 +44,7 @@ public class DataScanning {
 		dataDump.excute();
 		//---------------------------------------------------------------------------------
 		
-		String frontSql =  "select count(*) as countN from mvillager where 1 = 1 ";
+		String frontSql =  "select count(*) as countN from motherdata where 1 = 1 ";
 		String sql = "";	
 		
 		//获取数据库连接
@@ -57,18 +59,47 @@ public class DataScanning {
 			for (int i = 1; i < resultData.length; i++) { 
 				
 				sql = frontSql;
-				if(scanMap.get(ScanItem.V_IC) != null) {
-					sql = sql + " and " + ScanItem.V_IC + " = '"
-							+ resultData[i][scanMap.get(ScanItem.V_IC)] + "' ";				
+				if(scanMap.get(OtherData.ACOL) != null) {
+					sql = sql + " and " + OtherData.ACOL + " = '"
+							+ resultData[i][scanMap.get(OtherData.ACOL)] + "' ";				
 				}
-				if(scanMap.get(ScanItem.V_NAME) != null) {
-					sql = sql + " and " + ScanItem.V_NAME + " = '"
-							+ resultData[i][scanMap.get(ScanItem.V_NAME)] + "' ";				
+				if(scanMap.get(OtherData.BCOL) != null) {
+					sql = sql + " and " + OtherData.BCOL + " = '"
+							+ resultData[i][scanMap.get(OtherData.BCOL)] + "' ";				
 				}
-				if(scanMap.get(ScanItem.V_BANK_ACCOUNT) != null) {
-					sql = sql + " and " + ScanItem.V_BANK_ACCOUNT + " = '"
-							+ resultData[i][scanMap.get(ScanItem.V_BANK_ACCOUNT)] + "' ";					
+				if(scanMap.get(OtherData.CCOL) != null) {
+					sql = sql + " and " + OtherData.CCOL + " = '"
+							+ resultData[i][scanMap.get(OtherData.CCOL)] + "' ";				
 				}
+				if(scanMap.get(OtherData.DCOL) != null) {
+					sql = sql + " and " + OtherData.DCOL + " = '"
+							+ resultData[i][scanMap.get(OtherData.DCOL)] + "' ";				
+				}
+				if(scanMap.get(OtherData.ECOL) != null) {
+					sql = sql + " and " + OtherData.ECOL + " = '"
+							+ resultData[i][scanMap.get(OtherData.ECOL)] + "' ";				
+				}
+				if(scanMap.get(OtherData.FCOL) != null) {
+					sql = sql + " and " + OtherData.FCOL + " = '"
+							+ resultData[i][scanMap.get(OtherData.FCOL)] + "' ";				
+				}
+				if(scanMap.get(OtherData.GCOL) != null) {
+					sql = sql + " and " + OtherData.GCOL + " = '"
+							+ resultData[i][scanMap.get(OtherData.GCOL)] + "' ";				
+				}
+				if(scanMap.get(OtherData.HCOL) != null) {
+					sql = sql + " and " + OtherData.HCOL + " = '"
+							+ resultData[i][scanMap.get(OtherData.HCOL)] + "' ";				
+				}
+				if(scanMap.get(OtherData.ICOL) != null) {
+					sql = sql + " and " + OtherData.ICOL + " = '"
+							+ resultData[i][scanMap.get(OtherData.ICOL)] + "' ";				
+				}
+				if(scanMap.get(OtherData.JCOL) != null) {
+					sql = sql + " and " + OtherData.JCOL + " = '"
+							+ resultData[i][scanMap.get(OtherData.JCOL)] + "' ";				
+				}
+
 
 				String isSame = "不相同";
 				if(!sql.equals(frontSql)) {
