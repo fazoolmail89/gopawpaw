@@ -35,10 +35,10 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-import com.gopawpaw.frame.javax.swing.GppJCheckBox;
-import com.gopawpaw.frame.javax.swing.GppJComboBox;
-import com.gopawpaw.frame.javax.swing.GppJDialog;
-import com.gopawpaw.frame.javax.swing.GppJFrame;
+import com.gopawpaw.frame.widget.GJCheckBox;
+import com.gopawpaw.frame.widget.GJComboBox;
+import com.gopawpaw.frame.widget.GJDialog;
+import com.gopawpaw.frame.widget.GJFrame;
 import com.gopawpaw.kynb.bean.DefultData;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
@@ -55,7 +55,7 @@ import com.gopawpaw.kynb.widget.GppStyleTable;
  * @version 2011-12-3
  * @author Jason
  */
-public class BankEdit extends GppJDialog{
+public class BankEdit extends GJDialog{
 
 	/**
 	 * 
@@ -92,8 +92,7 @@ public class BankEdit extends GppJDialog{
 	private String mStatusInfoEdit = "Enter=下一个字段；Esc=上一个字段；Up/Down=选择预订值；F2/pageDown/+=修改保存";
 
 	
-	public BankEdit(Frame arg0, Thorp thorp) {
-		super(arg0, thorp.getT_name());
+	public BankEdit( Thorp thorp) {
 		mThorp = thorp;
 		
 		JPanel jPaneTop = new JPanel();
@@ -366,7 +365,7 @@ public class BankEdit extends GppJDialog{
 		if(flagPop == null){
 			flagPop = false;
 		}
-		final GppJCheckBox gcb = new GppJCheckBox(tab, flagPop);
+		final GJCheckBox gcb = new GJCheckBox(tab, flagPop);
 		gcb.setHorizontalAlignment(SwingConstants.RIGHT);
 		gcb.setPreferredSize(new Dimension(150, 25));
 
@@ -712,7 +711,7 @@ public class BankEdit extends GppJDialog{
 
 	}
 	
-	class GppJComboBoxExp extends GppJComboBox {
+	class GppJComboBoxExp extends GJComboBox {
 
 		private GppJComboBoxExp mFocuseNext = null;
 

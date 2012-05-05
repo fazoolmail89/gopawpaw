@@ -12,13 +12,14 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import com.gopawpaw.frame.java.awt.GppDialog;
-import com.gopawpaw.frame.javax.swing.GppJCheckBox;
-import com.gopawpaw.frame.javax.swing.GppJComboBox;
+import com.gopawpaw.frame.widget.GJCheckBox;
+import com.gopawpaw.frame.widget.GJComboBox;
+import com.gopawpaw.frame.widget.GJDialog;
 import com.gopawpaw.kynb.bean.JComboBoxItem;
 
 /**
@@ -26,7 +27,7 @@ import com.gopawpaw.kynb.bean.JComboBoxItem;
  * @version 2012-4-23
  * @author LiJinHua
  */
-public class ConditionSelectorDialog extends GppDialog {
+public class ConditionSelectorDialog extends JDialog {
 
 	
 	/**
@@ -42,41 +43,41 @@ public class ConditionSelectorDialog extends GppDialog {
 	/**
 	 * 条件是否被启用
 	 */
-	private GppJCheckBox checkBox1 = new GppJCheckBox("条件一：");
-	private GppJCheckBox checkBox2 = new GppJCheckBox("条件二：");
-	private GppJCheckBox checkBox3 = new GppJCheckBox("条件三：");
-	private GppJCheckBox checkBox4 = new GppJCheckBox("条件四：");
-	private GppJCheckBox checkBox5 = new GppJCheckBox("条件五：");
+	private GJCheckBox checkBox1 = new GJCheckBox("条件一：");
+	private GJCheckBox checkBox2 = new GJCheckBox("条件二：");
+	private GJCheckBox checkBox3 = new GJCheckBox("条件三：");
+	private GJCheckBox checkBox4 = new GJCheckBox("条件四：");
+	private GJCheckBox checkBox5 = new GJCheckBox("条件五：");
 	
 	/**
 	 * 第一组条件
 	 */
-	private GppJComboBox comboBox11 = new GppJComboBox();
-	private GppJComboBox comboBox12 = new GppJComboBox();
+	private GJComboBox comboBox11 = new GJComboBox();
+	private GJComboBox comboBox12 = new GJComboBox();
 	
 	/**
 	 * 第二组条件
 	 */
-	private GppJComboBox comboBox21 = new GppJComboBox();
-	private GppJComboBox comboBox22 = new GppJComboBox();
+	private GJComboBox comboBox21 = new GJComboBox();
+	private GJComboBox comboBox22 = new GJComboBox();
 	
 	/**
 	 * 第三组条件
 	 */
-	private GppJComboBox comboBox31 = new GppJComboBox();
-	private GppJComboBox comboBox32 = new GppJComboBox();
+	private GJComboBox comboBox31 = new GJComboBox();
+	private GJComboBox comboBox32 = new GJComboBox();
 	
 	/**
 	 * 第四组条件
 	 */
-	private GppJComboBox comboBox41 = new GppJComboBox();
-	private GppJComboBox comboBox42 = new GppJComboBox();
+	private GJComboBox comboBox41 = new GJComboBox();
+	private GJComboBox comboBox42 = new GJComboBox();
 	
 	/**
 	 * 第五组条件
 	 */
-	private GppJComboBox comboBox51 = new GppJComboBox();
-	private GppJComboBox comboBox52 = new GppJComboBox();
+	private GJComboBox comboBox51 = new GJComboBox();
+	private GJComboBox comboBox52 = new GJComboBox();
 	
 	
 	private Object[] titleA;
@@ -86,8 +87,7 @@ public class ConditionSelectorDialog extends GppDialog {
 	
 	private int[][] contition;
 	
-	public ConditionSelectorDialog(Frame owner) {
-		super(owner);
+	public ConditionSelectorDialog() {
 		init();
 	}
 

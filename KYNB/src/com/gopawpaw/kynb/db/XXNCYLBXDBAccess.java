@@ -6,7 +6,7 @@ package com.gopawpaw.kynb.db;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gopawpaw.frame.BaseSQL;
+import com.gopawpaw.frame.database.BaseSQL;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.utils.KYHashMap;

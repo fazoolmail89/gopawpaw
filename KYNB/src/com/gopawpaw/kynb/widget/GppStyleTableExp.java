@@ -12,10 +12,10 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
-import com.gopawpaw.frame.javax.swing.GppJTable;
+import com.gopawpaw.frame.widget.GJTable;
 
 
-public class GppStyleTableExp extends GppJTable{
+public class GppStyleTableExp extends GJTable{
 
 	/**
 	 * 

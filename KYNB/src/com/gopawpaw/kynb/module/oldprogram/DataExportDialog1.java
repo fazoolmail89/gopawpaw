@@ -26,9 +26,9 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
-import com.gopawpaw.frame.java.awt.GppDialog;
-import com.gopawpaw.frame.javax.swing.GppJCheckBox;
-import com.gopawpaw.frame.javax.swing.GppJComboBox;
+import com.gopawpaw.frame.widget.GJCheckBox;
+import com.gopawpaw.frame.widget.GJComboBox;
+import com.gopawpaw.frame.widget.GJDialog;
 import com.gopawpaw.kynb.bean.DefultData;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
@@ -43,14 +43,14 @@ import com.gopawpaw.kynb.utils.DateUtils;
  * @version 2011-12-17
  * @author Jason
  */
-public class DataExportDialog1 extends GppDialog {
+public class DataExportDialog1 extends GJDialog {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private GppJComboBox jComboBoxThorp;
+	private GJComboBox jComboBoxThorp;
 
 	private Thorp mCurrentThorp;
 
@@ -64,8 +64,7 @@ public class DataExportDialog1 extends GppDialog {
 	
 	private String dataType = "a";
 
-	public DataExportDialog1(Frame owner, Thorp currentThorp) {
-		super(owner);
+	public DataExportDialog1(Thorp currentThorp) {
 		this.mCurrentThorp = currentThorp;
 		init();
 	}
@@ -148,7 +147,7 @@ public class DataExportDialog1 extends GppDialog {
 	 */
 	private JComboBox getJComboBoxThorp() {
 		if (jComboBoxThorp == null) {
-			jComboBoxThorp = new GppJComboBox();
+			jComboBoxThorp = new GJComboBox();
 			// jComboBoxThorp.setPreferredSize(new Dimension(200,20));
 			// jComboBoxThorp.setMinimumSize(new Dimension(200,20));
 			jComboBoxThorp.setEditable(false);
@@ -277,8 +276,8 @@ public class DataExportDialog1 extends GppDialog {
 		int size = list.size();
 		for (int i = 0; i < size; i++) {
 			DefultData dd = list.get(i);
-			if (dd.getObj() instanceof GppJCheckBox) {
-				GppJCheckBox temp = (GppJCheckBox) dd.getObj();
+			if (dd.getObj() instanceof GJCheckBox) {
+				GJCheckBox temp = (GJCheckBox) dd.getObj();
 				jPanel.add(temp);
 			}
 
@@ -287,9 +286,9 @@ public class DataExportDialog1 extends GppDialog {
 		return jScrollPaneCenterLeft;
 	}
 
-	private GppJCheckBox getGppJCheckBoxNew(String tab) {
+	private GJCheckBox getGppJCheckBoxNew(String tab) {
 
-		GppJCheckBox gcb = new GppJCheckBox(tab, true);
+		GJCheckBox gcb = new GJCheckBox(tab, true);
 		gcb.setHorizontalAlignment(SwingConstants.RIGHT);
 		gcb.setPreferredSize(new Dimension(150, 25));
 		return gcb;
@@ -321,137 +320,137 @@ public class DataExportDialog1 extends GppDialog {
 			
 			Object obj = null;
 			obj = hashMap.get(Villager.tab_v_name);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_name("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_sex);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_sex("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_birthday);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_birthday("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_address_live);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_address_live("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_nation);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_nation("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_bank2_name);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_bank2_name("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_bank2_account);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_bank2_account("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_capture_expend_calss);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_capture_expend_calss("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_type);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_type("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_join_time);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_join_time("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_archival_location);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_archival_location("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_old_balance);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_old_balance("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_old_balance_flag);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_old_balance_flag("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_householder_name);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_householder_name("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_householder_ic);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_householder_ic("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_householder_relation);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_householder_relation("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_standard_culture);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_standard_culture("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_60not_enough15_flag);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_60not_enough15_flag("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_phone_num);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_phone_num("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_marital_status);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_marital_status("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_politics_status);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_politics_status("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_contact_name);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_contact_name("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_address_com);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_address_com("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_address_zip_code);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_address_zip_code("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_soldie_flag);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_soldie_flag("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_model_worker);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_model_worker("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_mark);
-			if(!((GppJCheckBox)obj).isSelected()){
+			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_mark("");
 			}
 			

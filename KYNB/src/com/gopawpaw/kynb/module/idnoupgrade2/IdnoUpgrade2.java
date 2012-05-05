@@ -4,13 +4,19 @@
 package com.gopawpaw.kynb.module.idnoupgrade2;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.beans.PropertyVetoException;
 import java.util.Date;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDesktopPane;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -20,9 +26,9 @@ import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
-import com.gopawpaw.frame.dev.common.GppJarRunableInterface;
-import com.gopawpaw.frame.javax.swing.GppJComboBox;
-import com.gopawpaw.frame.javax.swing.GppJTable;
+import com.gopawpaw.frame.utils.GppJarRunableInterface;
+import com.gopawpaw.frame.widget.GJComboBox;
+import com.gopawpaw.frame.widget.GJTable;
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.bean.JComboBoxItem;
 import com.gopawpaw.kynb.common.ExcelExportListener;
@@ -32,6 +38,7 @@ import com.gopawpaw.kynb.common.ProgressImportExcel;
 import com.gopawpaw.kynb.db.ExcelWriter;
 import com.gopawpaw.kynb.db.ExportExcelListener;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
+import com.gopawpaw.kynb.module.blacklist.BlackList;
 import com.gopawpaw.kynb.utils.DateUtils;
 import com.gopawpaw.kynb.widget.GppStyleTable;
 
@@ -60,7 +67,7 @@ public class IdnoUpgrade2 extends BaseModuleFrame implements GppJarRunableInterf
 
 	private JProgressBar progressBar6 = new JProgressBar();
 	
-	private GppJComboBox jComboBox1 = null;
+	private GJComboBox jComboBox1 = null;
 
 	private JComboBoxItem mJComboBoxItem1;
 
@@ -139,7 +146,7 @@ public class IdnoUpgrade2 extends BaseModuleFrame implements GppJarRunableInterf
 		jScrollPane4 = new JScrollPane();
 		jScrollPane5 = new JScrollPane();
 
-		jComboBox1 = new GppJComboBox();
+		jComboBox1 = new GJComboBox();
 
 		jComboBox1.setEditable(false);
 
@@ -465,7 +472,7 @@ public class IdnoUpgrade2 extends BaseModuleFrame implements GppJarRunableInterf
 
 			@Override
 			public void onImprotFinish(Object[] title, Object[][] data,
-					GppJTable table) {
+					GJTable table) {
 				// TODO Auto-generated method stub
 				mTableTitle1 = title;
 				mTableData1 = data;
@@ -494,7 +501,32 @@ public class IdnoUpgrade2 extends BaseModuleFrame implements GppJarRunableInterf
 				GlobalUI.initUI();
 
 				IdnoUpgrade2 thisClass = new IdnoUpgrade2();
-				thisClass.setVisible(true);
+				JDesktopPane desktopPane = new JDesktopPane();
+				desktopPane.add(thisClass);
+				
+				JFrame jf = new JFrame();
+				jf.setSize(new Dimension(1000,600));
+				jf.add(desktopPane);
+				jf.addWindowListener(new WindowAdapter(){
+					@Override
+					public void windowClosing(WindowEvent e){
+						System.exit(0);
+					}
+				});
+				jf.setVisible(true);
+				
+				try {
+					thisClass.setClosable(true);
+					thisClass.setMaximizable(true);
+					thisClass.setMaximum(true);
+					thisClass.setIconifiable(true);
+					thisClass.setResizable(true);
+					thisClass.setVisible(true);
+					thisClass.setSelected(true);
+				} catch (PropertyVetoException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 	}

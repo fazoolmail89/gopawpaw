@@ -5,6 +5,7 @@ package com.gopawpaw.kynb.module.oldprogram;
 
 import java.awt.BorderLayout;
 import java.awt.Dialog;
+import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GraphicsConfiguration;
@@ -14,7 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -26,8 +26,8 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 
-import com.gopawpaw.frame.java.awt.GppDialog;
-import com.gopawpaw.frame.javax.swing.GppJButton;
+import com.gopawpaw.frame.widget.GJButton;
+import com.gopawpaw.frame.widget.GJDialog;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.db.DBException;
@@ -39,7 +39,7 @@ import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
  * @version 2011-11-18
  * @author Jason
  */
-public class DataImportDialog extends GppDialog implements ActionListener {
+public class DataImportDialog extends GJDialog implements ActionListener {
 
 	public final static int YES_OPTION = JOptionPane.YES_OPTION;
 
@@ -69,8 +69,7 @@ public class DataImportDialog extends GppDialog implements ActionListener {
 	/**
 	 * @param owner
 	 */
-	public DataImportDialog(Frame owner) {
-		super(owner);
+	public DataImportDialog() {
 		// TODO Auto-generated constructor stub
 		init();
 	}
@@ -248,7 +247,7 @@ public class DataImportDialog extends GppDialog implements ActionListener {
 
 			JPanel jPanelBottom = new JPanel();
 			jPanelBottom.setLayout(new GridLayout());
-			jButtonConfirm = new GppJButton("确认") {
+			jButtonConfirm = new GJButton("确认") {
 
 				/**
 				 * 
@@ -261,7 +260,7 @@ public class DataImportDialog extends GppDialog implements ActionListener {
 					return true;
 				};
 			};
-			jButtonCancel = new GppJButton("取消") {
+			jButtonCancel = new GJButton("取消") {
 
 				/**
 				 * 

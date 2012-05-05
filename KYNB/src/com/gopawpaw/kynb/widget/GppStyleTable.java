@@ -22,7 +22,7 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import com.gopawpaw.frame.javax.swing.GppJTable;
+import com.gopawpaw.frame.widget.GJTable;
 
 /**
  * 本类实现了对JTable颜色的控制，提供了两套方案： 
@@ -32,7 +32,7 @@ import com.gopawpaw.frame.javax.swing.GppJTable;
  * @author 李锦华
  * @since: 2011-11-14
  */
-public class GppStyleTable extends GppJTable {
+public class GppStyleTable extends GJTable {
 	/**
 	 * 
 	 */

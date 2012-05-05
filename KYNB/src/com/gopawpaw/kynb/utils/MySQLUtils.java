@@ -10,9 +10,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gopawpaw.frame.dev.common.GppCmdShell;
-import com.gopawpaw.frame.dev.common.GppConfiguration;
 import com.gopawpaw.frame.log.GLog;
+import com.gopawpaw.frame.utils.GppCmdShell;
+import com.gopawpaw.frame.utils.GppConfiguration;
 
 /**
  * @version 2012-4-10

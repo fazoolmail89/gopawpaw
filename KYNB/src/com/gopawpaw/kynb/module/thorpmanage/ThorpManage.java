@@ -22,8 +22,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import com.gopawpaw.frame.dev.common.GppJarRunableInterface;
-import com.gopawpaw.frame.javax.swing.GppJComboBox;
+import com.gopawpaw.frame.utils.GppJarRunableInterface;
+import com.gopawpaw.frame.widget.GJComboBox;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
@@ -43,7 +43,7 @@ public class ThorpManage extends BaseModuleFrame  implements GppJarRunableInterf
 
 	private JPanel jContentPane = null;
 	
-	private GppJComboBox jComboBoxThorp = null;
+	private GJComboBox jComboBoxThorp = null;
 	
 	private Thorp mCurrentThorp = new Thorp();
 	
@@ -56,40 +56,6 @@ public class ThorpManage extends BaseModuleFrame  implements GppJarRunableInterf
 		initialize();
 	}
 
-	/**
-	 * @param args
-	 * @throws HeadlessException
-	 */
-	public ThorpManage(String[] args) throws HeadlessException {
-		super(args);
-		initialize();
-	}
-
-	/**
-	 * @param gc
-	 */
-	public ThorpManage(GraphicsConfiguration gc) {
-		super(gc);
-		initialize();
-	}
-
-	/**
-	 * @param title
-	 * @throws HeadlessException
-	 */
-	public ThorpManage(String title) throws HeadlessException {
-		super(title);
-		initialize();
-	}
-
-	/**
-	 * @param title
-	 * @param gc
-	 */
-	public ThorpManage(String title, GraphicsConfiguration gc) {
-		super(title, gc);
-		initialize();
-	}
 
 	/**
 	 * This method initializes this
@@ -160,7 +126,7 @@ public class ThorpManage extends BaseModuleFrame  implements GppJarRunableInterf
 	 */
 	private JComboBox getJComboBoxThorp() {
 		if (jComboBoxThorp == null) {
-			jComboBoxThorp = new GppJComboBox();
+			jComboBoxThorp = new GJComboBox();
 			// jComboBoxThorp.setPreferredSize(new Dimension(200,20));
 			// jComboBoxThorp.setMinimumSize(new Dimension(200,20));
 			jComboBoxThorp.setEditable(false);
@@ -217,7 +183,7 @@ public class ThorpManage extends BaseModuleFrame  implements GppJarRunableInterf
 			jButtonNewThorp.setText("´´½¨´å");
 			jButtonNewThorp.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
-					ThorpDialog gmd = new ThorpDialog(ThorpManage.this) {
+					ThorpDialog gmd = new ThorpDialog() {
 						/**
 						 * 
 						 */
@@ -288,7 +254,7 @@ public class ThorpManage extends BaseModuleFrame  implements GppJarRunableInterf
 			jButtonUpdateThorp
 					.addMouseListener(new java.awt.event.MouseAdapter() {
 						public void mouseClicked(java.awt.event.MouseEvent e) {
-							ThorpDialog td = new ThorpDialog(ThorpManage.this) {
+							ThorpDialog td = new ThorpDialog() {
 								/**
 						 * 
 						 */
@@ -352,7 +318,7 @@ public class ThorpManage extends BaseModuleFrame  implements GppJarRunableInterf
 			jButtonDeleteThorp
 					.addMouseListener(new java.awt.event.MouseAdapter() {
 						public void mouseClicked(java.awt.event.MouseEvent e) {
-							ThorpDialog gmd = new ThorpDialog(ThorpManage.this) {
+							ThorpDialog gmd = new ThorpDialog() {
 								/**
 						 * 
 						 */

@@ -4,12 +4,19 @@
 package com.gopawpaw.kynb.module.datasift;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.beans.PropertyVetoException;
 import java.util.Date;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDesktopPane;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -19,12 +26,10 @@ import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
-import com.gopawpaw.frame.dev.common.GppJarRunableInterface;
-import com.gopawpaw.frame.javax.swing.GppJComboBox;
-import com.gopawpaw.frame.javax.swing.GppJTable;
 import com.gopawpaw.frame.log.GLog;
+import com.gopawpaw.frame.utils.GppJarRunableInterface;
+import com.gopawpaw.frame.widget.GJTable;
 import com.gopawpaw.kynb.GlobalUI;
-import com.gopawpaw.kynb.bean.JComboBoxItem;
 import com.gopawpaw.kynb.common.ExcelExportListener;
 import com.gopawpaw.kynb.common.ExcelImportListener;
 import com.gopawpaw.kynb.common.ProgressExportExcel;
@@ -330,7 +335,7 @@ public class DataSift extends BaseModuleFrame implements
 		jButton.setText("  Ñ¡ÔñÌõ¼þ   ");
 		jButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent e) {
-				ConditionSelectorDialog csd = new ConditionSelectorDialog(DataSift.this);
+				ConditionSelectorDialog csd = new ConditionSelectorDialog();
 				csd.setTitleA(mTableTitle1);
 				csd.setTitleB(mTableTitle2);
 				
@@ -354,6 +359,11 @@ public class DataSift extends BaseModuleFrame implements
 				csd.setConditionSelectedListener(c);
 				
 				csd.setVisible(true);
+				
+//				JDialog jd = new JDialog();
+//				jd.setModal(true);
+//				
+//				jd.setVisible(true);
 			}
 		});
 		
@@ -572,7 +582,7 @@ public class DataSift extends BaseModuleFrame implements
 
 			@Override
 			public void onImprotFinish(Object[] title, Object[][] data,
-					GppJTable table) {
+					GJTable table) {
 				// TODO Auto-generated method stub
 				mTableTitle1 = title;
 				mTableData1 = data;
@@ -603,7 +613,7 @@ public class DataSift extends BaseModuleFrame implements
 
 			@Override
 			public void onImprotFinish(Object[] title, Object[][] data,
-					GppJTable table) {
+					GJTable table) {
 				// TODO Auto-generated method stub
 				mTableTitle2 = title;
 				mTableData2 = data;
@@ -629,9 +639,34 @@ public class DataSift extends BaseModuleFrame implements
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				GlobalUI.initUI();
-
+				
 				DataSift thisClass = new DataSift();
-				thisClass.setVisible(true);
+				JDesktopPane desktopPane = new JDesktopPane();
+				desktopPane.add(thisClass);
+				
+				JFrame jf = new JFrame();
+				jf.setSize(new Dimension(1000,600));
+				jf.add(desktopPane);
+				jf.addWindowListener(new WindowAdapter(){
+					@Override
+					public void windowClosing(WindowEvent e){
+						System.exit(0);
+					}
+				});
+				jf.setVisible(true);
+				
+				try {
+					thisClass.setClosable(true);
+					thisClass.setMaximizable(true);
+					thisClass.setMaximum(true);
+					thisClass.setIconifiable(true);
+					thisClass.setResizable(true);
+					thisClass.setVisible(true);
+					thisClass.setSelected(true);
+				} catch (PropertyVetoException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 	}
