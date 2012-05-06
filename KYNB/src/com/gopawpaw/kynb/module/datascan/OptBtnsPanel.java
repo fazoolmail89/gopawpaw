@@ -114,7 +114,7 @@ public class OptBtnsPanel extends JPanel {
 					JOptionPane.showMessageDialog(null, "请先导入数据再进行扫描！",
 							"数据扫描提示！", JOptionPane.WARNING_MESSAGE);
 				} else {
-					mainFrame.executlScanning();
+					mainFrame.executScanning();
 				}
 			}
 		});

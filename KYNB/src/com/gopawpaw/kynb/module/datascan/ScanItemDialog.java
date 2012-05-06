@@ -1,6 +1,5 @@
 package com.gopawpaw.kynb.module.datascan;
 
-import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +12,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import com.gopawpaw.kynb.common.DialogUtil;
 
 public class ScanItemDialog extends JDialog {
 
@@ -42,8 +43,8 @@ public class ScanItemDialog extends JDialog {
 
 	private String[] cbbItem = null;
 
-	public ScanItemDialog(DataScanFrame mainFrame) {
-		this.mainFrame = mainFrame;
+	public ScanItemDialog(DataScanFrame mf) {
+		this.mainFrame = mf;
 		initCbbItem();
 		setTitle("扫描项选择对话框");
 		setContentPane(getPnlBGBox());
@@ -52,7 +53,7 @@ public class ScanItemDialog extends JDialog {
 		initDefaultValue();
 
 		setSize(500, 200);
-		DataScanFrame.setDialogLocaltion(this);
+		DialogUtil.setDialogLocaltion(mainFrame, this);
 		setModal(true);
 		setVisible(true);
 
@@ -211,13 +212,5 @@ public class ScanItemDialog extends JDialog {
 						ScanItem.V_BANK_ACCOUNT));
 			}
 		}
-		/*
-		 * if(cbbItem.length > 0 && mainFrame.getSiList().size() > 0) { for(int
-		 * i = 0; i < mainFrame.getSiList().size(); i++) { ScanItem si =
-		 * mainFrame.getSiList().get(i);
-		 * if(si.getDbtColumnName().equals(equalsStr)) { for(int j = 0; j <
-		 * cbbItem.length; j++) { if(si.getExlColumnName().equals(cbbItem[j])) {
-		 * ckb.setSelected(true); cbb.setSelectedIndex(j); break; } } } } }
-		 */
 	}
 }

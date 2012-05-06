@@ -7,13 +7,11 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import com.gopawpaw.frame.dev.common.GppJarRunableInterface;
+import com.gopawpaw.frame.utils.GppJarRunableInterface;
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
 import com.gopawpaw.kynb.common.*;
@@ -22,7 +20,7 @@ public class DataScanFrame extends BaseModuleFrame implements
 		GppJarRunableInterface {
 	private static final long serialVersionUID = 3688309249432143888L;
 
-	private static DataScanFrame thisClass;
+	//private static DataScanFrame thisClass;
 	private static ExcelDataTablePane excelDataTablePane = null;
 	private static OptBtnsPanel optBtnsPanel = null;
 	// private static List<ScanItem> siList = new ArrayList<ScanItem>();
@@ -57,10 +55,8 @@ public class DataScanFrame extends BaseModuleFrame implements
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				GlobalUI.initUI();
-				// IdnoUpgrade thisClass = new IdnoUpgrade();
-				thisClass = new DataScanFrame();
-				// thisClass.setVisible(true);
-				thisClass.setVisible(true);
+				DataScanFrame thisClass = new DataScanFrame();
+				thisClass.showWithFrame();
 			}
 		});
 	}
@@ -69,14 +65,6 @@ public class DataScanFrame extends BaseModuleFrame implements
 	public boolean runJar(String[] args) {
 		DataScanFrame.main(args);
 		return false;
-	}
-
-	public static DataScanFrame getThisClass() {
-		return thisClass;
-	}
-
-	public static void setThisClass(DataScanFrame thisClass) {
-		DataScanFrame.thisClass = thisClass;
 	}
 
 	public ExcelDataTablePane getExcelDataTablePane() {
@@ -111,7 +99,7 @@ public class DataScanFrame extends BaseModuleFrame implements
 	public void executImportExcel(File file) {
 		if (file == null)
 			return;
-		ImportExcelProgree iep = new ImportExcelProgree(file);
+		ImportExcelProgree iep = new ImportExcelProgree(this, file);
 		iep.getProgressBar().setString("正在加载数据，请耐心等待。。。。");
 		iep.getProgressBar().setIndeterminate(true);
 		iep.start();
@@ -122,7 +110,7 @@ public class DataScanFrame extends BaseModuleFrame implements
 	 * 
 	 * @param file
 	 */
-	public void executlScanning() {
+	public void executScanning() {
 		ScanningProgress sp = new ScanningProgress();
 		//sp.getProgressBar().setString("正在扫描数据，请耐心等待。。。。");
 		sp.getProgressBar().setIndeterminate(false);
@@ -152,8 +140,8 @@ public class DataScanFrame extends BaseModuleFrame implements
 	class ImportExcelProgree extends Progress {
 		private File file = null;
 
-		public ImportExcelProgree(File file) {
-			super(DataScanFrame.this);
+		public ImportExcelProgree(DataScanFrame mainFrame, File file) {
+			super(mainFrame);
 			this.file = file;
 		}
 
@@ -232,12 +220,5 @@ public class DataScanFrame extends BaseModuleFrame implements
 						JOptionPane.ERROR_MESSAGE);
 			}
 		}
-	}
-
-	public static void setDialogLocaltion(JDialog dialog) {
-		JFrame owner = thisClass;
-		int left = (owner.getWidth() - dialog.getWidth()) / 2 + owner.getX();
-		int top = (owner.getHeight() - dialog.getHeight()) / 2 + owner.getY();
-		dialog.setLocation(left, top);
 	}
 }
