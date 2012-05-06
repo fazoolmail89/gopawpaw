@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.gopawpaw.kynb.bean.OtherData;
+import com.gopawpaw.kynb.common.DialogUtil;
 
 public class DataEditDialog extends JDialog {
 	private static final long serialVersionUID = -5152772964362597159L;
@@ -103,7 +104,7 @@ public class DataEditDialog extends JDialog {
 
 		add(bgBox);
 		setSize(new Dimension(500, 600));
-		ScanDataMangeFrame.setDialogLocaltion(this);
+		DialogUtil.setDialogLocaltion(this.mainFrame, this);
 		setModal(true);
 		setVisible(true);
 	}
