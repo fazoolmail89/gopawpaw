@@ -1,7 +1,6 @@
 package com.gopawpaw.kynb.module.datascan2;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
  * @author lxq
  * 
  */
-public class DataDump extends XXNCYLBXDBAccess {
+public class DataDump2 extends XXNCYLBXDBAccess {
 
 	/**
 	 * 执行数据转存操作
@@ -35,10 +34,9 @@ public class DataDump extends XXNCYLBXDBAccess {
 	 */
 	private static boolean updataMData(List<OtherData> list) {
 		boolean result = false;
-		Connection conn = HsqlMemDbUtil.getHsqlConn();
+		Connection conn = HsqlMemDbUtil2.getHsqlConn();
 		Statement sta = null;
 		String sql = "";
-		int i = 0;
 		try {
 			sta = conn.createStatement();
 			sta.executeUpdate("delete from motherdata");
@@ -55,7 +53,6 @@ public class DataDump extends XXNCYLBXDBAccess {
 						+ odata.getHcol() + "', '"
 						+ odata.getIcol() + "', '"
 						+ odata.getJcol() + "')";
-				System.out.println(i++);
 				sta.executeUpdate(sql);
 			}
 			sta.close();
@@ -63,7 +60,6 @@ public class DataDump extends XXNCYLBXDBAccess {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		// System.out.println("====================================================");
 		return result;
 	}
 
@@ -97,6 +93,7 @@ public class DataDump extends XXNCYLBXDBAccess {
 				}
 			}
 		}
+		
 		return list;
 	}
 }

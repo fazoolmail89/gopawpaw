@@ -10,7 +10,7 @@ import java.sql.Statement;
  * @author lxq
  *
  */
-public class HsqlMemDbUtil extends Thread{
+public class HsqlMemDbUtil2 extends Thread{
 	private static Connection conn = null;
 	
 	public static Connection getHsqlConn() {

@@ -5,21 +5,18 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.gopawpaw.kynb.common.PoiOperatXls;
 
-public class OptBtnsPanel extends JPanel {
+public class OptBtnsPanel2 extends JPanel {
 
 	private static final long serialVersionUID = 1110115750735407484L;
-	private static DataScanFrame2 mainFrame = null;
+	private static DataScanFrame2 mainFrame;
 	private JButton btnImportExcel = new JButton(" 导入Excel ");
 	private JButton btnExportExcel = new JButton(" 导出Excel ");
 	private JButton btnScanItem = new JButton("扫描项选择");
@@ -45,7 +42,8 @@ public class OptBtnsPanel extends JPanel {
 		return btnImportExcel;
 	}
 
-	public OptBtnsPanel(DataScanFrame2 mf) {
+	@SuppressWarnings("static-access")
+	public OptBtnsPanel2(DataScanFrame2 mf) {
 		this.mainFrame = mf;
 		btnImportExcel.addActionListener(new ActionListener() {
 			@Override
@@ -99,7 +97,7 @@ public class OptBtnsPanel extends JPanel {
 		btnScanItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new ScanItemDialog(mainFrame);
+				new ScanItemDialog2(mainFrame);
 			}
 		});
 
