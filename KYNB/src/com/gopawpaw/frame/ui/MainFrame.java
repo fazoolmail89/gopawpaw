@@ -324,12 +324,12 @@ public class MainFrame extends JFrame {
 
 				});
 
-				if (thisClass.cheakRegister()) {
+//				if (thisClass.cheakRegister()) {
 					// if (true) {
 					thisClass.setVisible(true);
-				} else {
-					System.exit(0);
-				}
+//				} else {
+//					System.exit(0);
+//				}
 			}
 		});
 	}
@@ -471,6 +471,7 @@ public class MainFrame extends JFrame {
 			};
 			rd.setTitle("您的支持，我们的动力！");
 			rd.setKeyCode(displayKey);
+			rd.setModal(true);
 			rd.setVisible(true);
 
 			return regFlag;
