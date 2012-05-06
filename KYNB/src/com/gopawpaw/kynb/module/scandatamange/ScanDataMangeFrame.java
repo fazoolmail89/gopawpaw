@@ -19,9 +19,10 @@ public class ScanDataMangeFrame extends BaseModuleFrame {
 
 	private static final long serialVersionUID = -1184641427476379004L;
 
-	private static QueryPanel pnlQuery = null;
-	private TableScrollPane spnTable = null;
-	private static OptBtnsPanel optBtnsPanel = null;
+	private static QueryPanel pnlQuery;
+	private TableScrollPane spnTable;
+	private static OptBtnsPanel optBtnsPanel;
+	private ProgressBarPanel pnlProgressBar;
 	
 	// 文件选择控件
 	private static final JFileChooser fileChooser = new JFileChooser();
@@ -37,10 +38,8 @@ public class ScanDataMangeFrame extends BaseModuleFrame {
 	public ScanDataMangeFrame() {
 		pnlQuery = new QueryPanel(this);
 		spnTable = new TableScrollPane();
+		pnlProgressBar =  new ProgressBarPanel();
 		optBtnsPanel = new OptBtnsPanel(this);
-		
-/*		pnlQuery.setSize(new Dimension(900, 50));
-		pnlQuery.setPreferredSize(new Dimension(900, 50));*/
 		optBtnsPanel.setSize(new Dimension(70, 600));
 		optBtnsPanel.setPreferredSize(new Dimension(70, 600));
 		
@@ -48,6 +47,7 @@ public class ScanDataMangeFrame extends BaseModuleFrame {
 		add(pnlQuery, BorderLayout.NORTH);
 		add(spnTable, BorderLayout.CENTER);
 		add(optBtnsPanel, BorderLayout.EAST);
+		add(pnlProgressBar, BorderLayout.SOUTH);
 		setSize(900, 600);
 		
 		//--------------------------------------------
@@ -72,9 +72,7 @@ public class ScanDataMangeFrame extends BaseModuleFrame {
 	public void executImportExcel(File file) {
 		if (file == null)
 			return;
-		ImportExcelProgree iep = new ImportExcelProgree(this, file);
-		iep.getProgressBar().setString("正在导入数据，请耐心等待。。。。");
-		iep.getProgressBar().setIndeterminate(true);
+		ImportExcelProgree iep = new ImportExcelProgree(pnlProgressBar, file);
 		iep.start();
 	}
 	
@@ -99,14 +97,14 @@ public class ScanDataMangeFrame extends BaseModuleFrame {
 	class ImportExcelProgree extends Progress {
 		private File file = null;
 
-		public ImportExcelProgree(ScanDataMangeFrame mainFrame, File file) {
-			super(mainFrame);
+		public ImportExcelProgree(ProgressBarPanel pnlProgressBar, File file) {
+			super(pnlProgressBar);
 			this.file = file;
 		}
 
 		@Override
 		public void execut() {
-			Object[][] excelData = PoiOperatXls.readXlsRTA(file);
+			Object[][] excelData = PoiOperatXls.readXlsRTA(file, super.getListener());
 			
 			if(excelData[0].length > 10) {
 				JOptionPane.showMessageDialog(null, "导入Excel表格列数不能大于10！", "导入Excel提示！",
@@ -170,7 +168,7 @@ public class ScanDataMangeFrame extends BaseModuleFrame {
 				list.add(odata);
 			}
 			DataOpertor dot = new DataOpertor();
-			if(dot.batSave(list)) {
+			if(dot.batSave(list, super.getListener())) {
 				dot = new DataOpertor();
 				spnTable.refreshTable(dot.findListAll());
 				JOptionPane.showMessageDialog(null, "导入数据成功！", "导入Excel提示！",

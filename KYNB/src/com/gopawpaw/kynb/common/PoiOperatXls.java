@@ -24,7 +24,6 @@ import org.apache.poi.ss.usermodel.FormulaEvaluator;
  * 
  */
 public class PoiOperatXls {
-
 	public static List<Map<Integer, String>> readExcelRLM(String path) {
 		return readExcelRLM(new File(path));
 	}
@@ -108,7 +107,7 @@ public class PoiOperatXls {
 		return list;
 	}
 	
-	public static Object[][] readXlsRTA(File xlsFile) {
+	public static Object[][] readXlsRTA(File xlsFile, IProgressListener listener) {
 		if (xlsFile == null)
 			return null;
 		Object[][] data = null;
@@ -118,17 +117,16 @@ public class PoiOperatXls {
 			//--------------------------------------------------------
 			HSSFSheet childSheet = wbs.getSheetAt(0);
 			data = new Object[childSheet.getLastRowNum()][];
+			
+			//监听器，设置总条数
+			listener.onBefore(childSheet.getLastRowNum());
+			
 			for (int i = 0; i < childSheet.getLastRowNum(); i++) {
 				HSSFRow row = childSheet.getRow(i);
 				if (null != row) {
 					String[] temp = new String[row.getLastCellNum()];
 					for (int j = 0; j < row.getLastCellNum(); j++) {
 						HSSFCell cell = row.getCell(j);
-						
-/*if(j == 0) {
-	System.out.print(childSheet.getLastRowNum() + " : " + i + " : " + cell.getStringCellValue());
-	System.out.println();
-}*/
 						
 						if (null != cell) {
 							switch (cell.getCellType()) {
@@ -141,9 +139,7 @@ public class PoiOperatXls {
 								break;
 							case HSSFCell.CELL_TYPE_BOOLEAN: // Boolean
 								break;
-							case HSSFCell.CELL_TYPE_FORMULA: // 公式
-								//temp[j] = cell.getCellFormula();
-								//temp[j] = cell.getStringCellValue();//只取单元格显示值
+							case HSSFCell.CELL_TYPE_FORMULA: // 公式 (只取单元格显示值)
 							 	FormulaEvaluator evaluator = cell.getSheet().getWorkbook().getCreationHelper().createFormulaEvaluator();
 							    evaluator.evaluateFormulaCell(cell);
 							    CellValue cellValue = evaluator.evaluate(cell);
@@ -165,6 +161,9 @@ public class PoiOperatXls {
 					}
 						data[i] = temp;
 				}
+				
+				//监听器，执行进度
+				listener.onExecute(i);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -180,8 +179,8 @@ public class PoiOperatXls {
 	 * @return
 	 */
 	public static boolean writeXls(Object[][] data, Object[] columnNamds,
-			File file) {
-		return writeXls(data, columnNamds, file.getPath());
+			File file, IProgressListener listener) {
+		return writeXls(data, columnNamds, file.getPath(), listener);
 	}
 	
 	/**
@@ -192,7 +191,7 @@ public class PoiOperatXls {
 	 * @return
 	 */
 	public static boolean writeXls(Object[][] data, Object[] columnNamds,
-			String path) {
+			String path, IProgressListener listener) {
 		boolean result = false;
 		FileOutputStream fout = null;
 		HSSFWorkbook workbook = null;
@@ -203,7 +202,9 @@ public class PoiOperatXls {
 			workbook = new HSSFWorkbook();
 			// 在excel中新建一个工作表，起名字为工作表（一）
 			sheet = workbook.createSheet("工作表（一）");
-
+			
+			listener.onBefore(data.length);
+			
 			for (int i = 0; i < data.length + 1; i++) {
 				HSSFRow row = sheet.createRow(i);
 				Object[] temp = data[i];
@@ -215,6 +216,7 @@ public class PoiOperatXls {
 						cell.setCellValue((String) data[i - 1][j]);
 					}
 				}
+				listener.onExecute(i);
 			}
 			// 新建一输出流
 			fout = new FileOutputStream(autoAddXlsSuffix(path));
@@ -242,8 +244,8 @@ public class PoiOperatXls {
 	 * @param file
 	 * @return
 	 */
-	public static boolean writeXls(Object[][] data, File file) {
-		return writeXls(data, file.getPath());
+	public static boolean writeXls(Object[][] data, File file, IProgressListener listener) {
+		return writeXls(data, file.getPath(), listener);
 	}
 	
 	/**
@@ -252,7 +254,7 @@ public class PoiOperatXls {
 	 * @param path
 	 * @return
 	 */
-	public static boolean writeXls(Object[][] data, String path) {
+	public static boolean writeXls(Object[][] data, String path, IProgressListener listener) {
 		boolean result = false;
 		FileOutputStream fout = null;
 		HSSFWorkbook workbook = null;
@@ -263,7 +265,9 @@ public class PoiOperatXls {
 			workbook = new HSSFWorkbook();
 			// 在excel中新建一个工作表，起名字为工作表（一）
 			sheet = workbook.createSheet("工作表（一）");
-
+			
+			listener.onBefore(data.length);
+			
 			for (int i = 0; i < data.length; i++) {
 				HSSFRow row = sheet.createRow(i);
 				Object[] temp = data[i];
@@ -271,6 +275,7 @@ public class PoiOperatXls {
 					HSSFCell cell = row.createCell(j);
 					cell.setCellValue((String) data[i][j]);
 				}
+				listener.onExecute(i);
 			}
 			// 新建一输出流
 			fout = new FileOutputStream(autoAddXlsSuffix(path));

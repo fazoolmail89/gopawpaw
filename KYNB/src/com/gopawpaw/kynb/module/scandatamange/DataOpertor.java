@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.gopawpaw.kynb.bean.OtherData;
+import com.gopawpaw.kynb.common.IProgressListener;
 import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 
@@ -15,7 +16,7 @@ public class DataOpertor extends XXNCYLBXDBAccess {
 	 * @param list
 	 * @return
 	 */
-	public boolean batSave(List<OtherData> list) {
+	public boolean batSave(List<OtherData> list, IProgressListener listener) {
 		boolean result = false;
 		if (list == null || list.size() < 1)
 			return result;
@@ -28,6 +29,7 @@ public class DataOpertor extends XXNCYLBXDBAccess {
 		}
 		int i = 0;
 		int n = 0;
+		listener.onBefore(list.size());
 		if (commonsql.connect(user, password)) {
 			for (OtherData odata : list) {
 				result = false;
@@ -77,14 +79,15 @@ public class DataOpertor extends XXNCYLBXDBAccess {
 					commonsql.close();
 					commonsql.connect(user, password);
 				}
+				
 				i++;
-				System.out.println("=====================================" + i);
+				//¼àÌýÆ÷
+				listener.onExecute(i);
 			}
 			commonsql.close();
 		}
-		System.out.println("=====================================");
-		System.out.println(list.size());
-		System.out.println(n);
+		
+		if(n != i) result = false;
 		return result;
 	}
 

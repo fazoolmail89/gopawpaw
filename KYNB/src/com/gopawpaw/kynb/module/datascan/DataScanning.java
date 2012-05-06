@@ -8,6 +8,8 @@ import java.util.Map;
 
 import javax.swing.JProgressBar;
 
+import com.gopawpaw.kynb.common.IProgressListener;
+
 public class DataScanning {
 	/**
 	 * Ö´ÐÐÊý¾ÝÉ¨Ãè
@@ -15,7 +17,7 @@ public class DataScanning {
 	 * @param data
 	 * @return
 	 */
-	public Object[][] scanning(Map<String, Integer> scanMap, Object[][] data, ScanningListener sl) {
+	public Object[][] scanning(Map<String, Integer> scanMap, Object[][] data, IProgressListener listener) {
 		if (data == null)
 			return null;
 		if (data.length < 2)
@@ -50,7 +52,7 @@ public class DataScanning {
 		Statement sta = null;
 		ResultSet rs = null;
 		
-		sl.onScanningPre(resultData.length);
+		listener.onBefore(resultData.length);
 		
 		try {
 			sta = conn.createStatement();
@@ -86,7 +88,7 @@ public class DataScanning {
 				sql = "";
 				
 				//¼àÌýÆ÷
-				sl.onScanningProgress(i);
+				listener.onExecute(i);
 			}
 			sta.close();
 		} catch (SQLException e) {
@@ -99,9 +101,4 @@ public class DataScanning {
 		
 		return resultData;
 	}
-}
-
-interface ScanningListener {
-	void onScanningPre(int size);
-	void onScanningProgress(int n);
 }
