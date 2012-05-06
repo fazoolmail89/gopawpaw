@@ -1,7 +1,6 @@
 package com.gopawpaw.kynb.common;
 
-import java.awt.Frame;
-
+import javax.swing.JInternalFrame;
 import javax.swing.JProgressBar;
 
 /**
@@ -23,17 +22,18 @@ public	class Progress extends Thread {
 	/**
 	 * 执行操作完成后的提示信息
 	 */
+	@SuppressWarnings("unused")
 	private String endMessage = "完成！";
 	
 	/**
 	 * 构造方法 
 	 * @param pbd ProgressBarDialog对象
 	 */
-	public Progress(Frame frame) {
+	public Progress(JInternalFrame frame) {
 		initialize(frame);
 	}
 	
-	public void initialize(Frame frame) {
+	public void initialize(JInternalFrame frame) {
 		pbd = new ProgressBarDialog(frame);
 		progressBar = pbd.getProgressBar();
 	}
