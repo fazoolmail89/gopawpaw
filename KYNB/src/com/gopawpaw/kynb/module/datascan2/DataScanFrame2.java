@@ -22,8 +22,8 @@ public class DataScanFrame2 extends BaseModuleFrame {
 	private static final long serialVersionUID = 3688309249432143888L;
 	
 	private static DataScanFrame2 thisClass;
-	private static ExcelDataTablePane excelDataTablePane = null;
-	private static OptBtnsPanel optBtnsPanel = null;
+	private static ExcelDataTablePane2 excelDataTablePane = null;
+	private static OptBtnsPanel2 optBtnsPanel = null;
 	// private static List<ScanItem> siList = new ArrayList<ScanItem>();
 	private static Map<String, Integer> scanMap = null;
 
@@ -43,8 +43,8 @@ public class DataScanFrame2 extends BaseModuleFrame {
 	}
 
 	public DataScanFrame2() {
-		excelDataTablePane = new ExcelDataTablePane();
-		optBtnsPanel = new OptBtnsPanel(this);
+		excelDataTablePane = new ExcelDataTablePane2();
+		optBtnsPanel = new OptBtnsPanel2(this);
 		optBtnsPanel.setSize(new Dimension(100, 600));
 		optBtnsPanel.setPreferredSize(new Dimension(100, 600));
 		setLayout(new BorderLayout());
@@ -71,19 +71,19 @@ public class DataScanFrame2 extends BaseModuleFrame {
 		DataScanFrame2.thisClass = thisClass;
 	}
 
-	public ExcelDataTablePane getExcelDataTablePane() {
+	public ExcelDataTablePane2 getExcelDataTablePane() {
 		return excelDataTablePane;
 	}
 
-	public void setExcelDataTablePane(ExcelDataTablePane excelDataTablePane) {
+	public void setExcelDataTablePane(ExcelDataTablePane2 excelDataTablePane) {
 		DataScanFrame2.excelDataTablePane = excelDataTablePane;
 	}
 
-	public OptBtnsPanel getOptBtnsPanel() {
+	public OptBtnsPanel2 getOptBtnsPanel() {
 		return optBtnsPanel;
 	}
 
-	public void setOptBtnsPanel(OptBtnsPanel optBtnsPanel) {
+	public void setOptBtnsPanel(OptBtnsPanel2 optBtnsPanel) {
 		DataScanFrame2.optBtnsPanel = optBtnsPanel;
 	}
 
@@ -103,7 +103,7 @@ public class DataScanFrame2 extends BaseModuleFrame {
 	public void executImportExcel(File file) {
 		if (file == null)
 			return;
-		ImportExcelProgree iep = new ImportExcelProgree(file);
+		ImportExcelProgree iep = new ImportExcelProgree(this, file);
 		iep.getProgressBar().setString("正在加载数据，请耐心等待。。。。");
 		iep.getProgressBar().setIndeterminate(true);
 		iep.start();
@@ -115,7 +115,8 @@ public class DataScanFrame2 extends BaseModuleFrame {
 	 * @param file
 	 */
 	public void executlScanning() {
-		ScanningProgress sp = new ScanningProgress();
+		
+		ScanningProgress sp = new ScanningProgress(this);
 		//sp.getProgressBar().setString("正在扫描数据，请耐心等待。。。。");
 		sp.getProgressBar().setIndeterminate(false);
 		sp.start();
@@ -129,7 +130,7 @@ public class DataScanFrame2 extends BaseModuleFrame {
 	public void executExportExcel(File file) {
 		if (file == null)
 			return;
-		ExportExcelProgress eep = new ExportExcelProgress(file);
+		ExportExcelProgress eep = new ExportExcelProgress(this, file);
 		eep.getProgressBar().setString("正在导出数据，请耐心等待。。。。");
 		eep.getProgressBar().setIndeterminate(true);
 		eep.start();
@@ -144,8 +145,8 @@ public class DataScanFrame2 extends BaseModuleFrame {
 	class ImportExcelProgree extends Progress {
 		private File file = null;
 
-		public ImportExcelProgree(File file) {
-			super(DataScanFrame2.this);
+		public ImportExcelProgree(DataScanFrame2 mainFrame, File file) {
+			super(mainFrame);
 			this.file = file;
 		}
 
@@ -163,8 +164,8 @@ public class DataScanFrame2 extends BaseModuleFrame {
 	 * 
 	 */
 	class ScanningProgress extends Progress {
-		public ScanningProgress() {
-			super(DataScanFrame2.this);
+		public ScanningProgress(DataScanFrame2 mainFrame) {
+			super(mainFrame);
 		}
 
 		public void execut() {
@@ -182,7 +183,7 @@ public class DataScanFrame2 extends BaseModuleFrame {
 				}
 			};
 			
-			DataScanning ds = new DataScanning();
+			DataScanning2 ds = new DataScanning2();
 			// 获得表格原始数据，并扫描数据
 			Object[][] sranResult = ds.scanning(scanMap,
 					getExcelDataTablePane().getOriginalData(), sl);
@@ -201,8 +202,8 @@ public class DataScanFrame2 extends BaseModuleFrame {
 		private String message = "";
 		private File file = null;
 
-		public ExportExcelProgress(File file) {
-			super(DataScanFrame2.this);
+		public ExportExcelProgress(DataScanFrame2 mainFrame, File file) {
+			super(mainFrame);
 			this.file = file;
 		}
 

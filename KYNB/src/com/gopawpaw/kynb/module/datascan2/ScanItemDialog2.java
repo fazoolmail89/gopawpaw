@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import com.gopawpaw.kynb.bean.OtherData;
 import com.gopawpaw.kynb.common.DialogUtil;
 
-public class ScanItemDialog extends JDialog {
+public class ScanItemDialog2 extends JDialog {
 
 	private static final long serialVersionUID = -5278013924047489607L;
 	private DataScanFrame2 mainFrame = null;
@@ -79,7 +79,7 @@ public class ScanItemDialog extends JDialog {
 	private JButton btnOk = null;
 	private JButton btnQuit = null;
 
-	public ScanItemDialog(DataScanFrame2 mainFrame) {
+	public ScanItemDialog2(DataScanFrame2 mainFrame) {
 		this.mainFrame = mainFrame;
 		
 		//初始下拉框数据集
@@ -91,7 +91,7 @@ public class ScanItemDialog extends JDialog {
 		// 初始化默认值
 		initDefaultValue();
 
-		setSize(500, 400);
+		setSize(500, 430);
 		DialogUtil.setDialogLocaltion(this.mainFrame, this);
 		setModal(true);
 		setVisible(true);
@@ -220,7 +220,7 @@ public class ScanItemDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Toolkit.getDefaultToolkit().beep();
-				int rv = JOptionPane.showConfirmDialog(ScanItemDialog.this,
+				int rv = JOptionPane.showConfirmDialog(ScanItemDialog2.this,
 						"是否取消操作？", "退出提示！", JOptionPane.OK_CANCEL_OPTION,
 						JOptionPane.WARNING_MESSAGE);
 				if (rv == 0) {

@@ -8,7 +8,7 @@ import java.util.Map;
 
 import com.gopawpaw.kynb.bean.OtherData;
 
-public class DataScanning {
+public class DataScanning2 {
 	/**
 	 * 执行数据扫描
 	 * @param scanMap 
@@ -33,11 +33,11 @@ public class DataScanning {
 		resultData[0][data[0].length] = "扫描结果";
 		
 		//---------------------------------------------------------------------------------
-		HsqlMemDbUtil hmduThread = new HsqlMemDbUtil();
+		HsqlMemDbUtil2 hmduThread = new HsqlMemDbUtil2();
 		//初始化内存数据库（创建数据库连接，创建临时表）
 		hmduThread.start();
 		
-		DataDump dataDump = new DataDump();
+		DataDump2 dataDump = new DataDump2();
 		//将Access数据库中的数据转存入内存数据库中
 		dataDump.excute();
 		//---------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ public class DataScanning {
 		String sql = "";	
 		
 		//获取数据库连接
-		Connection conn = HsqlMemDbUtil.getHsqlConn();
+		Connection conn = HsqlMemDbUtil2.getHsqlConn();
 		Statement sta = null;
 		ResultSet rs = null;
 		
@@ -98,7 +98,6 @@ public class DataScanning {
 							+ resultData[i][scanMap.get(OtherData.JCOL)] + "' ";				
 				}
 
-
 				String isSame = "不相同";
 				if(!sql.equals(frontSql)) {
 					rs = sta.executeQuery(sql);
@@ -108,7 +107,11 @@ public class DataScanning {
 					}		
 					//关闭查询结果集
 					rs.close();	
-				}
+				} 
+				
+/*				if(isSame.equals("不相同"))
+					System.out.println(sql);*/
+				
 				// 给返回结果数组的最后一列的单元格赋值
 				resultData[i][data[0].length] = isSame;
 				//初始化sql

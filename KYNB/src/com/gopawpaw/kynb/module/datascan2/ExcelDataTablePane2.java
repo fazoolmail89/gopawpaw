@@ -6,7 +6,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.gopawpaw.kynb.widget.GppStyleTable;
 
-public class ExcelDataTablePane extends JScrollPane {
+public class ExcelDataTablePane2 extends JScrollPane {
 
 	private static final long serialVersionUID = -5122156432319858282L;
 	private JTable excelDataTable = null;
@@ -23,7 +23,7 @@ public class ExcelDataTablePane extends JScrollPane {
 	private static DefaultTableModel dtm = null;
 	
 
-	public ExcelDataTablePane() {
+	public ExcelDataTablePane2() {
 		dtm = new DefaultTableModel(data, columnNames);
 		excelDataTable = new GppStyleTable(dtm);
 		excelDataTable.setRowHeight(22);
