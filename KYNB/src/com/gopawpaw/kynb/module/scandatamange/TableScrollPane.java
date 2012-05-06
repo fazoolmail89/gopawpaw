@@ -12,8 +12,6 @@ import com.gopawpaw.kynb.widget.GppStyleTable;
 public class TableScrollPane extends JScrollPane {
 	private static final long serialVersionUID = -7738855786592193276L;
 
-	private ScanDataMangeFrame mainFrame = null;
-
 	private static final Object[] columnNames = { "ÐòºÅ", OtherData.ACOL,
 			OtherData.BCOL, OtherData.CCOL, OtherData.DCOL,
 			OtherData.ECOL, OtherData.FCOL, OtherData.GCOL,
