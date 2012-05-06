@@ -16,10 +16,17 @@ public class GlobalUI {
 	public static void initUI(){
 		try {
 
+			// UIManager.setLookAndFeel("com.jgoodies.looks.plastic.Plastic3DLookAndFeel");
 			UIManager.setLookAndFeel(
-			"com.jgoodies.looks.plastic.Plastic3DLookAndFeel"
-			);
+			// UIManager.getCrossPlatformLookAndFeelClassName()
+			// UIManager.getSystemLookAndFeelClassName()
+			// new com.sun.java.swing.plaf.motif.MotifLookAndFeel()
+			// "com.jgoodies.looks.windows.WindowsLookAndFeel"
+			// "com.jgoodies.looks.plastic.PlasticLookAndFeel"
+					"com.jgoodies.looks.plastic.Plastic3DLookAndFeel"
+					// "com.jgoodies.looks.plastic.PlasticXPLookAndFeel"
 
+					);
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

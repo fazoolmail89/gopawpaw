@@ -205,32 +205,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 			public void run() {
 				GlobalUI.initUI();
 				XXNCYLBXMain thisClass = new XXNCYLBXMain();
-				JDesktopPane desktopPane = new JDesktopPane();
-				desktopPane.add(thisClass);
-				
-				JFrame jf = new JFrame();
-				jf.setSize(new Dimension(1000,600));
-				jf.add(desktopPane);
-				jf.addWindowListener(new WindowAdapter(){
-					@Override
-					public void windowClosing(WindowEvent e){
-						System.exit(0);
-					}
-				});
-				jf.setVisible(true);
-				
-				try {
-					thisClass.setClosable(true);
-					thisClass.setMaximizable(true);
-					thisClass.setMaximum(true);
-					thisClass.setIconifiable(true);
-					thisClass.setResizable(true);
-					thisClass.setVisible(true);
-					thisClass.setSelected(true);
-				} catch (PropertyVetoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				thisClass.showWithFrame();
 
 			}
 		});
