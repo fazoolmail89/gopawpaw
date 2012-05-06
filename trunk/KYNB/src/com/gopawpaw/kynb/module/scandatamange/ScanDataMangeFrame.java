@@ -72,7 +72,7 @@ public class ScanDataMangeFrame extends BaseModuleFrame {
 	public void executImportExcel(File file) {
 		if (file == null)
 			return;
-		ImportExcelProgree iep = new ImportExcelProgree(file);
+		ImportExcelProgree iep = new ImportExcelProgree(this, file);
 		iep.getProgressBar().setString("正在导入数据，请耐心等待。。。。");
 		iep.getProgressBar().setIndeterminate(true);
 		iep.start();
@@ -99,8 +99,8 @@ public class ScanDataMangeFrame extends BaseModuleFrame {
 	class ImportExcelProgree extends Progress {
 		private File file = null;
 
-		public ImportExcelProgree(File file) {
-			super(ScanDataMangeFrame.this);
+		public ImportExcelProgree(ScanDataMangeFrame mainFrame, File file) {
+			super(mainFrame);
 			this.file = file;
 		}
 
