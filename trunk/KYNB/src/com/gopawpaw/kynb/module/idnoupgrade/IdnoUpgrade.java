@@ -15,19 +15,21 @@ import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
 
-import com.gopawpaw.frame.dev.common.GppJarRunableInterface;
-import com.gopawpaw.frame.javax.swing.GppJComboBox;
+import com.gopawpaw.frame.utils.GppJarRunableInterface;
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.bean.Villager;
+import com.gopawpaw.kynb.common.Progress;
 import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
+import com.gopawpaw.kynb.module.datascan.DataScanFrame;
 
 /**
  * @描述 身份证号码升级界面
@@ -71,51 +73,10 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 
 	private JPanel jPanelBottom = null;
 
-	@SuppressWarnings("unused")
-	private GppJComboBox jComboBoxThorp = null;
-
-	@SuppressWarnings("unused")
-	private XXNCYLBXDBAccess mXXDB = new XXNCYLBXDBAccess();
-
 	/**
 	 * @throws HeadlessException
 	 */
 	public IdnoUpgrade() throws HeadlessException {
-		initialize();
-	}
-
-	/**
-	 * @param args
-	 * @throws HeadlessException
-	 */
-	public IdnoUpgrade(String[] args) throws HeadlessException {
-		super(args);
-		initialize();
-	}
-
-	/**
-	 * @param gc
-	 */
-	public IdnoUpgrade(GraphicsConfiguration gc) {
-		super(gc);
-		initialize();
-	}
-
-	/**
-	 * @param title
-	 * @throws HeadlessException
-	 */
-	public IdnoUpgrade(String title) throws HeadlessException {
-		super(title);
-		initialize();
-	}
-
-	/**
-	 * @param title
-	 * @param gc
-	 */
-	public IdnoUpgrade(String title, GraphicsConfiguration gc) {
-		super(title, gc);
 		initialize();
 	}
 
@@ -170,11 +131,8 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				GlobalUI.initUI();
-
-				// IdnoUpgrade thisClass = new IdnoUpgrade();
-				thisClass = new IdnoUpgrade();
-				// thisClass.setVisible(true);
-				thisClass.setVisible(true);
+				IdnoUpgrade thisClass = new IdnoUpgrade();
+				thisClass.showWithFrame();
 			}
 		});
 	}
@@ -255,11 +213,7 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 		btnCheck.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-/*				Vector<Vector<String>> rowData = idCardNoTablePanel
-						.getMVillagerDataFromDb();
-				idCardNoTablePanel.refreshTable(rowData);*/
-				DataLoadProgrees dlp = new DataLoadProgrees(IdnoUpgrade.this);
-				dlp.start();
+				executValidata();
 			}
 		});
 
@@ -271,6 +225,7 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 				int choseRs = JOptionPane.showConfirmDialog(null, txt, "提示",
 						JOptionPane.YES_NO_OPTION);
 				if (choseRs == 0) {
+					@SuppressWarnings("unused")
 					boolean result = false;
 					// 获取表格数据
 					Vector<Vector<String>> rowData = idCardNoTablePanel
@@ -350,12 +305,24 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 	}
 	
 	/**
+	 * 执行导入Excel文件
+	 * 
+	 * @param file
+	 */
+	public void executValidata() {
+		DataLoadProgrees dlp = new DataLoadProgrees(this);
+		dlp.getProgressBar().setString("正在扫描数据，请耐心等待。。。。");
+		dlp.getProgressBar().setIndeterminate(false);
+		dlp.start();
+	}
+	
+	/**
 	 * 
 	 * @author 卢向琪
 	 *
 	 */
 	class DataLoadProgrees extends Progress {
-		public DataLoadProgrees(Frame frame) {
+		public DataLoadProgrees(JInternalFrame frame) {
 			super(frame);
 		}
 		
