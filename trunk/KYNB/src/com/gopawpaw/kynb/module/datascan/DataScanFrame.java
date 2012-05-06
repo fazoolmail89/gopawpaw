@@ -44,7 +44,7 @@ public class DataScanFrame extends BaseModuleFrame implements
 
 	public DataScanFrame() {
 		excelDataTablePane = new ExcelDataTablePane();
-		optBtnsPanel = new OptBtnsPanel();
+		optBtnsPanel = new OptBtnsPanel(this);
 		optBtnsPanel.setSize(new Dimension(100, 600));
 		optBtnsPanel.setPreferredSize(new Dimension(100, 600));
 		setLayout(new BorderLayout());
@@ -61,7 +61,6 @@ public class DataScanFrame extends BaseModuleFrame implements
 				thisClass = new DataScanFrame();
 				// thisClass.setVisible(true);
 				thisClass.setVisible(true);
-				optBtnsPanel.setMainFrame(thisClass);
 			}
 		});
 	}
