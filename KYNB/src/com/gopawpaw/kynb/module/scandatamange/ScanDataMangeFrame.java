@@ -19,8 +19,6 @@ public class ScanDataMangeFrame extends BaseModuleFrame {
 
 	private static final long serialVersionUID = -1184641427476379004L;
 
-	private static ScanDataMangeFrame mainFrame = null;
-	
 	private static QueryPanel pnlQuery = null;
 	private TableScrollPane spnTable = null;
 	private static OptBtnsPanel optBtnsPanel = null;
