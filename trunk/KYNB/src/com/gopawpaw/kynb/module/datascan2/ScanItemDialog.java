@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.gopawpaw.kynb.bean.OtherData;
+import com.gopawpaw.kynb.common.DialogUtil;
 
 public class ScanItemDialog extends JDialog {
 
@@ -90,8 +91,8 @@ public class ScanItemDialog extends JDialog {
 		// 初始化默认值
 		initDefaultValue();
 
-		setSize(500, 500);
-		DataScanFrame2.setDialogLocaltion(this);
+		setSize(500, 400);
+		DialogUtil.setDialogLocaltion(this.mainFrame, this);
 		setModal(true);
 		setVisible(true);
 

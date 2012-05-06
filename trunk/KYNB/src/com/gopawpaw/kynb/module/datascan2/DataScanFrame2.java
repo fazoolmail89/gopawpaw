@@ -13,13 +13,14 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import com.gopawpaw.frame.dev.common.GppJarRunableInterface;
+import com.gopawpaw.frame.utils.GppJarRunableInterface;
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.bean.OtherData;
 import com.gopawpaw.kynb.common.ExcelFileFilter;
 import com.gopawpaw.kynb.common.PoiOperatXls;
 import com.gopawpaw.kynb.common.Progress;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
+import com.gopawpaw.kynb.module.datascan.DataScanFrame;
 
 public class DataScanFrame2 extends BaseModuleFrame implements
 		GppJarRunableInterface {
@@ -61,11 +62,8 @@ public class DataScanFrame2 extends BaseModuleFrame implements
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				GlobalUI.initUI();
-				// IdnoUpgrade thisClass = new IdnoUpgrade();
-				thisClass = new DataScanFrame2();
-				// thisClass.setVisible(true);
-				thisClass.setVisible(true);
-				optBtnsPanel.setMainFrame(thisClass);
+				DataScanFrame2 thisClass = new DataScanFrame2();
+				thisClass.showWithFrame();
 			}
 		});
 	}
@@ -237,12 +235,5 @@ public class DataScanFrame2 extends BaseModuleFrame implements
 						JOptionPane.ERROR_MESSAGE);
 			}
 		}
-	}
-
-	public static void setDialogLocaltion(JDialog dialog) {
-		JFrame owner = thisClass;
-		int left = (owner.getWidth() - dialog.getWidth()) / 2 + owner.getX();
-		int top = (owner.getHeight() - dialog.getHeight()) / 2 + owner.getY();
-		dialog.setLocation(left, top);
 	}
 }
