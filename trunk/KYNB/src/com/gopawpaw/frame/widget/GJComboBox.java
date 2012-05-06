@@ -71,6 +71,14 @@ public class GJComboBox extends JComboBox implements GppKeyActionListener,GppCom
 		
 	}
 	
+	@Override
+	public void setEditable(boolean aFlag) {
+		// TODO Auto-generated method stub
+		super.setEditable(aFlag);
+		if(aFlag){
+			updateGppKeyListener();
+		}
+	}
 	/**
 	 * 更新键盘事件监听器
 	 */

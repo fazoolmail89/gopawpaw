@@ -4,12 +4,18 @@
 package com.gopawpaw.frame.ui;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.beans.PropertyVetoException;
+import java.io.File;
+import java.io.IOException;
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Vector;
 
-import javax.swing.DefaultListModel;
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDesktopPane;
@@ -38,15 +44,24 @@ public class MainPanelTree extends JPanel implements ModulesListener{
 	private static final long serialVersionUID = 1L;
 	private JSplitPane jSplitPane = null;
 	private JPanel jPanel = null;
-	private JPanel jPanel1 = null;
-	
-	private DefaultListModel ModelList = new DefaultListModel();
 
 	private JGroupPanel jGroupPanel = null;
 
+	/**
+	 * 模块运行对象
+	 */
 	private Modules modules = null;  //  @jve:decl-index=0:
 
+	/**
+	 * 模块桌面管理面板
+	 */
 	private JDesktopPane desktopPane;
+	
+	/**
+	 * 模块背景图片
+	 */
+	private static final String BACKGROUND_MODULE_IMG_PATH = "bg_module.jpg";
+
 	/**
 	 * This is the default constructor
 	 */
@@ -79,7 +94,7 @@ public class MainPanelTree extends JPanel implements ModulesListener{
 		if (jSplitPane == null) {
 			jSplitPane = new JSplitPane();
 			jSplitPane.setDividerSize(8);
-			jSplitPane.setDividerLocation(250);
+			jSplitPane.setDividerLocation(200);
 			jSplitPane.setResizeWeight(0.4);
 			jSplitPane.setLeftComponent(getJPanel());
 			jSplitPane.setRightComponent(getJPanel1());
@@ -108,13 +123,38 @@ public class MainPanelTree extends JPanel implements ModulesListener{
 	 * @return javax.swing.JPanel
 	 */
 	private JComponent getJPanel1() {
-//		if (jPanel1 == null) {
-//			jPanel1 = new JPanel();
-//			jPanel1.setLayout(new BorderLayout());
-//			jPanel1.add(getJScrollPane1(), BorderLayout.CENTER);
-//		}
+		
 		if (desktopPane == null) {
-			desktopPane = new JDesktopPane();
+			desktopPane = new JDesktopPane(){
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+				
+				
+				private Image backgroundImage = null;
+				
+				//确保图片加载失败时，不重新加载
+				private boolean isInitImage = false;
+				
+				public void paintComponent(Graphics g){ 
+					super.paintComponent(g);
+					
+					if(backgroundImage == null && !isInitImage){
+						try {
+				            backgroundImage = ImageIO.read(new File(BACKGROUND_MODULE_IMG_PATH));
+				        } catch (IOException e) {
+				            System.out.println("无法读取背景图片");
+				            e.printStackTrace(System.err);
+				            isInitImage = true;
+				        }
+					}
+					
+			        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+
+			    } 
+
+			};
 		}
 		return desktopPane;
 	}
@@ -161,10 +201,6 @@ public class MainPanelTree extends JPanel implements ModulesListener{
 						}
 
 						if (dd3.isHaveChild()) {
-							if (!MainFrame.actionHistory.lastElement()
-									.equals(dd3)) {
-								MainFrame.actionHistory.add(dd3);
-							}
 							setTreeSunRoot(dd3, sunroot, retJTree);
 						}
 					}
@@ -242,15 +278,7 @@ public class MainPanelTree extends JPanel implements ModulesListener{
 					
 					return;
 				}
-				// 添加操作历史
-				if (MainFrame.actionHistory.size() == 0) {
-					MainFrame.actionHistory.add(dd3);
-				} else if (MainFrame.actionHistory.size() > 0
-						&& !MainFrame.actionHistory.lastElement()
-								.equals(dd3)) {
-					MainFrame.actionHistory.add(dd3);
-				}
-				MainFrame.actionHistory2.removeAllElements();
+
 				String tem = sunroot.getFirstChild().toString();
 				// 则不需要再次设置该子节点，直接返回
 				if (!tem.equals("")) {
@@ -378,7 +406,83 @@ public class MainPanelTree extends JPanel implements ModulesListener{
 		return jGroupPanel;
 	}
 
+	/**
+	 * 运行模块
+	 * @version 2012-5-6
+	 * @author LiJinHua
+	 * @param
+	 * @return void
+	 */
+	public void actionModule(Object obdd){
+		// 获取菜单对象
 
+		Dmnd_det dd = null;
+		String editString = null;
+
+		if (obdd instanceof Dmnd_det) {
+			dd = (Dmnd_det) obdd;
+		} else {
+			editString = (String) obdd;
+		}
+
+		if (dd != null) {// 标准菜单对象
+
+			Omnd_det od = new Omnd_det(dd);
+			
+			if (od.updateDmnd_det()) {
+				
+				modules.actionModule(dd);
+				
+			} else {// 不存在该菜单
+				JOptionPane.showConfirmDialog(null, "菜单项不存在：" + dd,
+						"系统提示", JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE);
+			}
+
+		} else {// 非标准菜单对象
+			if (Dmnd_det.isRightMenu(editString)) {
+				Dmnd_det tempdd = new Dmnd_det();
+				if (Dmnd_det.isTopMenu(editString)) {
+					int tselect = -1;
+					
+					try{
+						tselect = Integer.parseInt(editString);
+					}catch(Exception e){
+						
+					}
+					
+					tempdd.setMnd_nbr("0");
+					tempdd.setMnd_select(tselect);
+					
+					
+				} else {
+					tempdd.setMnd_nbr(Dmnd_det
+							.getMnd_nbrOfMenuString(editString));
+					tempdd.setMnd_select(Dmnd_det
+							.getMnd_selectOfMenuString(editString));
+				}
+				GLog.d("==="+editString, ""+tempdd);
+				Omnd_det tempod = new Omnd_det(tempdd);
+
+				if (tempod.updateDmnd_det()) {
+					tempdd = tempod.getDmnd_det();
+					modules.actionModule(tempdd);
+					
+				} else {// 不存在该菜单
+					JOptionPane.showConfirmDialog(null, "菜单项不存在："
+							+ editString, "系统提示",
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.QUESTION_MESSAGE);
+				}
+			} else {
+				JOptionPane.showConfirmDialog(null, "非法菜单格式！ "
+						+ editString, "系统提示",
+						JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE);
+			}
+
+		}
+	}
 
 	@Override
 	public void onModulesAction(boolean actionState, String errMsg,
@@ -391,7 +495,10 @@ public class MainPanelTree extends JPanel implements ModulesListener{
 		}
 		
 		if(baseJInternalFrame != null){
+			//先移除后天添加，由于Modules采用缓存机制，相同的引用add两次会有BUG
+			desktopPane.remove(baseJInternalFrame);
 			desktopPane.add(baseJInternalFrame);
+			
 			try {
 				
 				baseJInternalFrame.setClosable(true);
@@ -410,4 +517,56 @@ public class MainPanelTree extends JPanel implements ModulesListener{
 		
 	}
 
+	/**
+	 * 执行所有子模块最小化
+	 * @version 2012-5-6
+	 * @author LiJinHua
+	 * @param
+	 * @return void
+	 */
+	public void actionMinAllModule(){
+
+		Map<String, BaseJInternalFrame> map = modules.getModulesCache();
+		Collection<BaseJInternalFrame> cs = map.values();
+		for (Iterator<BaseJInternalFrame> iterator = cs.iterator(); iterator.hasNext();) {
+			BaseJInternalFrame baseJInternalFrame = (BaseJInternalFrame) iterator
+					.next();
+			if(baseJInternalFrame == null){
+				continue;
+			}
+			try {
+				baseJInternalFrame.setIcon(true);
+			} catch (PropertyVetoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * 关闭所有子模块
+	 * @version 2012-5-6
+	 * @author LiJinHua
+	 * @param
+	 * @return void
+	 */
+	public void actionCloseAllModule(){
+		
+		Map<String, BaseJInternalFrame> map = modules.getModulesCache();
+		Collection<BaseJInternalFrame> cs = map.values();
+		for (Iterator<BaseJInternalFrame> iterator = cs.iterator(); iterator.hasNext();) {
+			BaseJInternalFrame baseJInternalFrame = (BaseJInternalFrame) iterator
+					.next();
+			if(baseJInternalFrame == null){
+				continue;
+			}
+			try {
+				baseJInternalFrame.setClosed(true);
+			} catch (PropertyVetoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
 } // @jve:decl-index=0:visual-constraint="10,10"

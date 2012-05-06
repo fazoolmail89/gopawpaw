@@ -3,6 +3,8 @@
  */
 package com.gopawpaw.frame.database;
 
+import com.gopawpaw.frame.log.GLog;
+
 /**
  * @version 2010-3-4
  * @author Àî½õ»ª
@@ -115,6 +117,7 @@ public class Dmnd_det {
 			retb = true;
 		} else {
 			int ii = menuitem.split("\\.").length;
+			GLog.d("", "===="+ii);
 			if (ii == 1) {
 				retb = true;
 			} else {

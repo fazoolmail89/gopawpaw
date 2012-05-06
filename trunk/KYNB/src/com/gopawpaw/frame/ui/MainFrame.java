@@ -4,10 +4,8 @@
 package com.gopawpaw.frame.ui;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.GraphicsConfiguration;
-import java.awt.HeadlessException;
+import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -16,16 +14,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Iterator;
-import java.util.Vector;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -35,8 +29,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 
 import com.gopawpaw.frame.GlobalParameter;
-import com.gopawpaw.frame.database.Dmnd_det;
-import com.gopawpaw.frame.database.Omnd_det;
 import com.gopawpaw.frame.utils.MD5;
 import com.gopawpaw.frame.widget.GJComboBox;
 import com.gopawpaw.kynb.RegisterDialog;
@@ -44,18 +36,8 @@ import com.gopawpaw.kynb.utils.GppConfiguration;
 import com.gopawpaw.kynb.utils.MacUtils;
 
 /**
- * This code was edited or generated using CloudGarden's Jigloo
- * SWT/Swing GUI Builder, which is free for non-commercial
- * use. If Jigloo is being used commercially (ie, by a corporation,
- * company or business for any purpose whatever) then you
- * should purchase a license for each developer using Jigloo.
- * Please visit www.cloudgarden.com for details.
- * Use of Jigloo implies acceptance of these licensing terms.
- * A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
- * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
- * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
- */
-/**
+ * 主程序入口类
+ * 
  * @version 2010-6-7
  * @author 李锦华
  * 
@@ -67,36 +49,36 @@ public class MainFrame extends JFrame {
 	private String mLiyeqin = "\r\n技术支持：李业钦\r\n QQ:1483695671";
 
 	private String mOffice = "联系快译支持：kuaiyi_support@163.com" + mLiyeqin;
+
 	private String mSupport = mLiyeqin;
 
 	private JPanel jContentPane = null;
+
+	/**
+	 * 选择执行的模块
+	 */
+	private GJComboBox jComboBoxSelectedModule = null;
+	
+	/**
+	 * 主功能面板
+	 */
 	private MainPanelTree mainPanelTree = null;
 
-	private JPanel jPanel = null; // @jve:decl-index=0:visual-constraint="173,440"
-	private JButton jButton = null;
-	private JButton jButton1 = null;
-	private JButton jButton2 = null;
-	private JLabel jLabel = null;
-	private JComboBox jComboBox = null;
-//	private Modules modules = null; // @jve:decl-index=0:
+	/**
+	 * 菜单栏
+	 */
 	private JMenuBar jJMenuBar = null;
-	private JMenu jMenu = null;
-	private JPanel jPanel1 = null;
-	private JLabel jLabel1 = null;
-	private JButton jButton3 = null;
-	private JButton jButton4 = null;
-	private JButton jButton5 = null;
 
-	public static Vector<Dmnd_det> actionHistory = new Vector<Dmnd_det>(); // @jve:decl-index=0:
-	public static Vector<Dmnd_det> actionHistory2 = new Vector<Dmnd_det>();
+	/**
+	 * 状态栏提示
+	 */
+	private JLabel jLabelStatus = null;
 
 	private GppConfiguration mGppConfiguration;
 
 	private static MainFrame thisClassMainFrame;
-	/**
-	 * @throws HeadlessException
-	 */
-	public MainFrame() throws HeadlessException {
+
+	public MainFrame() {
 		// TODO Auto-generated constructor stub
 		super();
 
@@ -104,65 +86,43 @@ public class MainFrame extends JFrame {
 	}
 
 	/**
-	 * @param arg0
-	 */
-	public MainFrame(GraphicsConfiguration arg0) {
-		super(arg0);
-		// TODO Auto-generated constructor stub
-		initialize();
-	}
-
-	/**
-	 * @param arg0
-	 * @throws HeadlessException
-	 */
-	public MainFrame(String arg0) throws HeadlessException {
-		super(arg0);
-		// TODO Auto-generated constructor stub
-		initialize();
-	}
-
-	/**
-	 * @param arg0
-	 * @param arg1
-	 */
-	public MainFrame(String arg0, GraphicsConfiguration arg1) {
-		super(arg0, arg1);
-		// TODO Auto-generated constructor stub
-		initialize();
-	}
-
-	/**
-	 * This method initializes jPanel
+	 * 头部面板
 	 * 
 	 * @return javax.swing.JPanel
 	 */
-	private JPanel getJPanel() {
-		if (jPanel == null) {
-			jPanel = new JPanel();
-			jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.X_AXIS));
-			jPanel.setSize(new Dimension(357, 26));
-			jPanel.add(getJLabel(), null);
-			jPanel.add(getJButton5(), null);
-			jPanel.add(getJButton3(), null);
-			jPanel.add(getJButton4(), null);
-		}
-		return jPanel;
+	private JPanel getJPanelTop() {
+		//头部父面板
+		JPanel jPanelParent = new JPanel();
+		jPanelParent.setLayout(new BorderLayout());
+		jPanelParent.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		
+		//第一组面板（登陆、退出）
+		JPanel jPanel1 = new JPanel();
+		jPanel1.setLayout(new FlowLayout(FlowLayout.LEFT, 5,0));
+		jPanel1.setPreferredSize(new Dimension(200,25));
+		jPanel1.add(getJButton3(), null);
+		jPanel1.add(getJButton4(), null);
+		
+		//第二组面板（执行菜单）
+		JPanel jPanel2 = new JPanel();
+		jPanel2.setLayout(new FlowLayout(FlowLayout.LEFT, 5,0));
+		
+		jPanel2.add(getJLabel(), null);
+		jPanel2.add(getJComboBoxSelectedModule(), null);
+		jPanel2.add(getJButton5(), null);
+		
+		//第三组面板（最小化、关掉）
+		JPanel jPanel3 = new JPanel();
+		jPanel3.setLayout(new FlowLayout(FlowLayout.RIGHT, 5,0));
+		jPanel3.setPreferredSize(new Dimension(200,25));
+		jPanel3.add(getJButtonMinAll(), null);
+		jPanel3.add(getJButtonCloseAll(), null);
+		
+		jPanelParent.add(jPanel1, BorderLayout.WEST);
+		jPanelParent.add(jPanel2, BorderLayout.CENTER);
+		jPanelParent.add(jPanel3, BorderLayout.EAST);
+		return jPanelParent;
 	}
-
-	
-
-	/**
-	 * This method initializes jButton1
-	 * 
-	 * @return javax.swing.JButton
-	 */
-
-	/**
-	 * This method initializes jButton2
-	 * 
-	 * @return javax.swing.JButton
-	 */
 
 	/**
 	 * This method initializes jLabel
@@ -170,31 +130,31 @@ public class MainFrame extends JFrame {
 	 * @return javax.swing.JLabel
 	 */
 	private JLabel getJLabel() {
-		if (jLabel == null) {
-			jLabel = new JLabel();
-			jLabel.setText("    选择菜单（M）： ");
-		}
+		JLabel jLabel = new JLabel();
+		jLabel.setText("执行菜单（M）： ");
+//		jLabel.setBorder(BorderFactory.createEmptyBorder(0, 120, 0, 0));
 		return jLabel;
 	}
 
-	/**
-	 * This method initializes jComboBox
-	 * 
-	 * @return javax.swing.JComboBox
-	 */
+	private GJComboBox getJComboBoxSelectedModule() {
+		if (jComboBoxSelectedModule == null) {
+			jComboBoxSelectedModule = new GJComboBox() {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
 
-	/**
-	 * This method initializes jMenu
-	 * 
-	 * @return javax.swing.JMenu
-	 */
-	private JMenu getJMenu() {
-		if (jMenu == null) {
-			jMenu = new JMenu();
-			jMenu.setText("帮助");
-			
+				public boolean actionEnter() {
+					System.out.println(jComboBoxSelectedModule.getSelectedItem());
+					actionModule();
+					return true;
+				};
+			};
+			jComboBoxSelectedModule.setPreferredSize(new Dimension(400,25));
+			jComboBoxSelectedModule.setMaximumSize(new Dimension(400,25));
+			jComboBoxSelectedModule.setEditable(true);
 		}
-		return jMenu;
+		return jComboBoxSelectedModule;
 	}
 
 	/**
@@ -203,11 +163,9 @@ public class MainFrame extends JFrame {
 	 * @return javax.swing.JPanel
 	 */
 	private JPanel getJPanel1() {
-		if (jPanel1 == null) {
-			jPanel1 = new JPanel();
-			jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.X_AXIS));
-			jPanel1.add(getJLabel1(), null);
-		}
+		JPanel jPanel1 = new JPanel();
+		jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.X_AXIS));
+		jPanel1.add(getJLabel1(), null);
 		return jPanel1;
 	}
 
@@ -217,11 +175,11 @@ public class MainFrame extends JFrame {
 	 * @return javax.swing.JLabel
 	 */
 	private JLabel getJLabel1() {
-		if (jLabel1 == null) {
-			jLabel1 = new JLabel();
-			jLabel1.setText("状态：");
+		if (jLabelStatus == null) {
+			jLabelStatus = new JLabel();
+			jLabelStatus.setText("状态：");
 		}
-		return jLabel1;
+		return jLabelStatus;
 	}
 
 	/**
@@ -230,16 +188,13 @@ public class MainFrame extends JFrame {
 	 * @return javax.swing.JButton
 	 */
 	private JButton getJButton3() {
-		if (jButton3 == null) {
-			jButton3 = new JButton();
-			jButton3.setText("登陆");
-			jButton3.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent evt) {
-					System.out.println("jButton3.mouseClicked, event=" + evt);
-					// TODO add your code for jButton3.mouseClicked
-				}
-			});
-		}
+		JButton jButton3 = new JButton();
+		jButton3.setText("登陆");
+		jButton3.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
+
+			}
+		});
 		return jButton3;
 	}
 
@@ -249,15 +204,13 @@ public class MainFrame extends JFrame {
 	 * @return javax.swing.JButton
 	 */
 	private JButton getJButton4() {
-		if (jButton4 == null) {
-			jButton4 = new JButton();
-			jButton4.setText("退出");
-			jButton4.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					exitSystem();
-				}
-			});
-		}
+		JButton jButton4 = new JButton();
+		jButton4.setText("退出");
+		jButton4.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				exitSystem();
+			}
+		});
 		return jButton4;
 	}
 
@@ -267,40 +220,68 @@ public class MainFrame extends JFrame {
 	 * @return javax.swing.JButton
 	 */
 	private JButton getJButton5() {
-		if (jButton5 == null) {
-			jButton5 = new JButton();
-			jButton5.setText("运行");
-			jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
-				public void mouseClicked(java.awt.event.MouseEvent e) {
-					((GJComboBox) jComboBox).actionEnter();
-				}
-			});
-		}
+		JButton jButton5 = new JButton();
+		jButton5.setText("运行");
+		jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent e) {
+				actionModule();
+			}
+		});
+		
 		return jButton5;
 	}
 
+	/**
+	 * 最小化所有子模块
+	 * 
+	 * @return javax.swing.JButton
+	 */
+	private JButton getJButtonMinAll() {
+		JButton jButton5 = new JButton();
+		jButton5.setText("最小化所有");
+		jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent e) {
+				mainPanelTree.actionMinAllModule();
+			}
+		});
+		
+		return jButton5;
+	}
+	
+	/**
+	 * 关闭所有子模块
+	 * 
+	 * @return javax.swing.JButton
+	 */
+	private JButton getJButtonCloseAll() {
+		JButton jButton5 = new JButton();
+		jButton5.setText("关闭所有");
+		jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent e) {
+				mainPanelTree.actionCloseAllModule();
+			}
+		});
+		
+		return jButton5;
+	}
+	/**
+	 * 执行模块
+	 * @version 2012-5-6
+	 * @author LiJinHua
+	 * @param
+	 * @return void
+	 */
+	private void actionModule(){
+		
+		mainPanelTree.actionModule(jComboBoxSelectedModule.getEditor().getItem());
+		
+	}
 	/**
 	 * 
 	 */
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-
-				// SynthLookAndFeel synth = new SynthLookAndFeel();
-				// try {
-				// synth.load(MainFrame.class.getResourceAsStream("demo.xml"),
-				// MainFrame.class);
-				// } catch (ParseException e1) {
-				// // TODO Auto-generated catch block
-				// e1.printStackTrace();
-				// }
-				// try {
-				// UIManager.setLookAndFeel(synth);
-				// } catch (UnsupportedLookAndFeelException e1) {
-				// // TODO Auto-generated catch block
-				// e1.printStackTrace();
-				// }
-
 				try {
 
 					// UIManager.setLookAndFeel("com.jgoodies.looks.plastic.Plastic3DLookAndFeel");
@@ -332,19 +313,19 @@ public class MainFrame extends JFrame {
 				MainFrame thisClass = new MainFrame();
 				thisClassMainFrame = thisClass;
 				thisClass.setLocation(200, 100);
-				thisClass.setSize(800, 350);
+				thisClass.setSize(1000, 600);
 				thisClass
 						.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 				thisClass.addWindowListener(new WindowAdapter() {
 					public void windowClosing(WindowEvent e) {
 						exitSystem();
-						
+
 					}
-					
+
 				});
 
 				if (thisClass.cheakRegister()) {
-//				if (true) {
+					// if (true) {
 					thisClass.setVisible(true);
 				} else {
 					System.exit(0);
@@ -356,12 +337,12 @@ public class MainFrame extends JFrame {
 	public static void exitSystem() {
 		int option = JOptionPane.showConfirmDialog(null, "是否完全退出该系统？", "系统提示",
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-		if (option == JOptionPane.YES_OPTION){
+		if (option == JOptionPane.YES_OPTION) {
 			System.exit(0);
-		}else{
+		} else {
 			thisClassMainFrame.setVisible(true);
 		}
-		
+
 	}
 
 	/**
@@ -371,23 +352,16 @@ public class MainFrame extends JFrame {
 	 */
 	private void initialize() {
 		GlobalParameter.initialize();
-//		MySQLUtils.initMySQLConfig();
-//		MySQLUtils.startMySQLService();
-		
+		// MySQLUtils.initMySQLConfig();
+		// MySQLUtils.startMySQLService();
+
 		// this.setSize(GlobalParameter.getGuiClient().getSizeOfMainFrame());
 		// this.setLocation(GlobalParameter.getGuiClient().getLocationOfMainFrame());
-		
+
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
-		this.setTitle("快译农保");
+		this.setTitle("快译农保 V1.2");
 		mGppConfiguration = new GppConfiguration("ini.ini");
-
-		Component[] c = this.getJPanel().getComponents();
-		for (int i = 0; i < c.length; i++) {
-			Object o = c[i];
-
-			System.out.println(o.getClass());
-		}
 
 	}
 
@@ -402,7 +376,7 @@ public class MainFrame extends JFrame {
 			jContentPane = new JPanel();
 			jContentPane.setLayout(new BorderLayout());
 			// 隐藏掉头部工具栏
-			// jContentPane.add(getJPanel(), BorderLayout.NORTH);
+			jContentPane.add(getJPanelTop(), BorderLayout.NORTH);
 			jContentPane.add(getMainPanelTree(), BorderLayout.CENTER);
 			jContentPane.add(getJPanel1(), BorderLayout.SOUTH);
 		}
@@ -410,24 +384,26 @@ public class MainFrame extends JFrame {
 	}
 
 	private MainPanelTree getMainPanelTree() {
-		if (mainPanelTree == null) {
-			mainPanelTree = new MainPanelTree();
 
+		if(mainPanelTree == null){
+			mainPanelTree = new MainPanelTree();
 		}
 		return mainPanelTree;
+
 	}
 
 	private JMenuBar getJJMenuBar() {
 		if (jJMenuBar == null) {
 			jJMenuBar = new JMenuBar();
-			
+
 			JButton jb = new JButton("帮助");
 			jb.addActionListener(new ActionListener() {
-				
+
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 					GppAbout a = new GppAbout(MainFrame.this);
+					a.setModal(true);
 					a.setVisible(true);
 				}
 			});
@@ -435,9 +411,12 @@ public class MainFrame extends JFrame {
 		}
 		return jJMenuBar;
 	}
+	
+	
+	
 
 	private boolean cheakRegister() {
-		
+
 		String mac = MacUtils.getMACAddress();
 
 		String registerCode = mGppConfiguration.getValue("registerCode");
@@ -445,10 +424,6 @@ public class MainFrame extends JFrame {
 		String displayKey = genDisplayCode(mac);
 
 		final String regKey = genKeyCode(displayKey);
-
-		// System.out.println(displayKey);
-		//
-		// System.out.println(genKeyCode(displayKey));
 
 		if (registerCode == null || !registerCode.equals(regKey)) {
 			boolean regFlag = false;
@@ -521,7 +496,8 @@ public class MainFrame extends JFrame {
 		return md5.getMD5ofStr(k3);
 	}
 
-	public static Point getMainFrameLocation(){
+	public static Point getMainFrameLocation() {
 		return thisClassMainFrame.getLocation();
 	}
+
 } // @jve:decl-index=0:visual-constraint="8,5"
