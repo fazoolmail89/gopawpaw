@@ -67,7 +67,7 @@ public class IdCardNoTablePanel extends JPanel {
 	/**
 	 * 持有主窗体引用
 	 */
-	private JFrame mf = null;
+	private IdnoUpgrade mainFrame;
 	private JLabel title = new JLabel("需升级身份证号码列表(红色为错误身份证号码)：");
 	private Vector<String> mVillagerTableTitle = new Vector<String>(34);
 	private Vector<Vector<String>> mVillagerData = new Vector<Vector<String>>(
@@ -75,19 +75,20 @@ public class IdCardNoTablePanel extends JPanel {
 	private IdCardDbAccess icdAccess = new IdCardDbAccess();
 	private IDNumberChecker idNumberChecker = new IDNumberChecker();
 	
-	public IdCardNoTablePanel() {
-		initialize();
+	public IdCardNoTablePanel(IdnoUpgrade mainFrame) {
+		initialize(mainFrame);
 	}
 
-	public IdCardNoTablePanel(int width, int height) {
+	public IdCardNoTablePanel(IdnoUpgrade mainFrame, int width, int height) {
 		setSize(new Dimension(width, height));
-		initialize();
+		initialize(mainFrame);
 	}
 
 	/**
 	 * 初始化面板
 	 */
-	private void initialize() {
+	private void initialize(IdnoUpgrade mainFrame) {
+		this.mainFrame = mainFrame;
 		//mVillagerData = getMVillagerData();//改为点击验证按钮时加载数据
 		setLayout(new BorderLayout());
 		add(title, BorderLayout.NORTH);
@@ -335,14 +336,6 @@ public class IdCardNoTablePanel extends JPanel {
 			JOptionPane.showConfirmDialog(null, tempMSG, "系统提示",
 					JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE);
 		}
-	}
-	
-	public JFrame getMf() {
-		return mf;
-	}
-
-	public void setMf(JFrame mf) {
-		this.mf = mf;
 	}
 
 	public JTable getIdCardNoTable() {

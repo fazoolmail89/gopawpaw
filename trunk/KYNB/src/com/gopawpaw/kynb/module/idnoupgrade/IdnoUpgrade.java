@@ -175,8 +175,6 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 				thisClass = new IdnoUpgrade();
 				// thisClass.setVisible(true);
 				thisClass.setVisible(true);
-
-				idCardNoTablePanel.setMf(thisClass);
 			}
 		});
 	}
@@ -216,7 +214,7 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 	 */
 	public JPanel getIdCardNoTablePanel() {
 		if (idCardNoTablePanel == null)
-			idCardNoTablePanel = new IdCardNoTablePanel(800, 500);
+			idCardNoTablePanel = new IdCardNoTablePanel(this, 800, 500);
 		return idCardNoTablePanel;
 	}
 
