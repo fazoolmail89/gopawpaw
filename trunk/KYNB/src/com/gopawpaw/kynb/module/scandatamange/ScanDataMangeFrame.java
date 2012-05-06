@@ -190,7 +190,6 @@ GppJarRunableInterface {
 				}
 				list.add(odata);
 			}
-			
 			DataOpertor dot = new DataOpertor();
 			if(dot.batSave(list)) {
 				dot = new DataOpertor();
