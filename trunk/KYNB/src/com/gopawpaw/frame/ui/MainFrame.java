@@ -100,8 +100,8 @@ public class MainFrame extends JFrame {
 		JPanel jPanel1 = new JPanel();
 		jPanel1.setLayout(new FlowLayout(FlowLayout.LEFT, 5,0));
 		jPanel1.setPreferredSize(new Dimension(200,25));
-		jPanel1.add(getJButton3(), null);
-		jPanel1.add(getJButton4(), null);
+//		jPanel1.add(getJButton3(), null);
+//		jPanel1.add(getJButton4(), null);
 		
 		//第二组面板（执行菜单）
 		JPanel jPanel2 = new JPanel();
