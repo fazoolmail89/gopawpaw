@@ -10,15 +10,12 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import com.gopawpaw.frame.utils.GppJarRunableInterface;
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.bean.OtherData;
 import com.gopawpaw.kynb.common.*;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
-import com.gopawpaw.kynb.module.idnoupgrade.IdnoUpgrade;
 
-public class ScanDataMangeFrame extends BaseModuleFrame implements
-GppJarRunableInterface {
+public class ScanDataMangeFrame extends BaseModuleFrame {
 
 	private static final long serialVersionUID = -1184641427476379004L;
 
@@ -81,12 +78,6 @@ GppJarRunableInterface {
 		iep.getProgressBar().setString("正在导入数据，请耐心等待。。。。");
 		iep.getProgressBar().setIndeterminate(true);
 		iep.start();
-	}
-	
-	@Override
-	public boolean runJar(String[] args) {
-		ScanDataMangeFrame.main(args);
-		return false;
 	}
 	
 	public JFileChooser getFilechooser() {

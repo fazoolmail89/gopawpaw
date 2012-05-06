@@ -7,23 +7,18 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import com.gopawpaw.frame.utils.GppJarRunableInterface;
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.bean.OtherData;
 import com.gopawpaw.kynb.common.ExcelFileFilter;
 import com.gopawpaw.kynb.common.PoiOperatXls;
 import com.gopawpaw.kynb.common.Progress;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
-import com.gopawpaw.kynb.module.datascan.DataScanFrame;
 
-public class DataScanFrame2 extends BaseModuleFrame implements
-		GppJarRunableInterface {
+public class DataScanFrame2 extends BaseModuleFrame {
 	private static final long serialVersionUID = 3688309249432143888L;
 	
 	private static DataScanFrame2 thisClass;
@@ -66,12 +61,6 @@ public class DataScanFrame2 extends BaseModuleFrame implements
 				thisClass.showWithFrame();
 			}
 		});
-	}
-
-	@Override
-	public boolean runJar(String[] args) {
-		DataScanFrame2.main(args);
-		return false;
 	}
 
 	public static DataScanFrame2 getThisClass() {

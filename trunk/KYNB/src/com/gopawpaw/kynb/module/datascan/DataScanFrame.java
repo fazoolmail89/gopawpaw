@@ -11,13 +11,11 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import com.gopawpaw.frame.utils.GppJarRunableInterface;
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
 import com.gopawpaw.kynb.common.*;
 
-public class DataScanFrame extends BaseModuleFrame implements
-		GppJarRunableInterface {
+public class DataScanFrame extends BaseModuleFrame {
 	private static final long serialVersionUID = 3688309249432143888L;
 
 	//private static DataScanFrame thisClass;
@@ -59,12 +57,6 @@ public class DataScanFrame extends BaseModuleFrame implements
 				thisClass.showWithFrame();
 			}
 		});
-	}
-
-	@Override
-	public boolean runJar(String[] args) {
-		DataScanFrame.main(args);
-		return false;
 	}
 
 	public ExcelDataTablePane getExcelDataTablePane() {
