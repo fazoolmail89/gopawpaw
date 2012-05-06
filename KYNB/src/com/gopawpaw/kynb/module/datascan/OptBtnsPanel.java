@@ -44,11 +44,8 @@ public class OptBtnsPanel extends JPanel {
 		return btnImportExcel;
 	}
 
-	public void setMainFrame(DataScanFrame mainFrame) {
-		OptBtnsPanel.mainFrame = mainFrame;
-	}
-
-	public OptBtnsPanel() {
+	public OptBtnsPanel(DataScanFrame mf) {
+		this.mainFrame = mf;
 		btnImportExcel.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
