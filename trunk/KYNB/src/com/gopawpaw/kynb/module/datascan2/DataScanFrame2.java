@@ -49,7 +49,7 @@ public class DataScanFrame2 extends BaseModuleFrame implements
 
 	public DataScanFrame2() {
 		excelDataTablePane = new ExcelDataTablePane();
-		optBtnsPanel = new OptBtnsPanel();
+		optBtnsPanel = new OptBtnsPanel(this);
 		optBtnsPanel.setSize(new Dimension(100, 600));
 		optBtnsPanel.setPreferredSize(new Dimension(100, 600));
 		setLayout(new BorderLayout());
