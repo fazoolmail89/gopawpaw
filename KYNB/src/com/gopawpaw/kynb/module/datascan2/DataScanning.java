@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Map;
 
-import javax.swing.JProgressBar;
-
 import com.gopawpaw.kynb.bean.OtherData;
 
 public class DataScanning {
