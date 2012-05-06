@@ -122,7 +122,7 @@ public class ScanItemDialog2 extends JDialog {
 	}
 	
 	private JPanel getPanelItem_A() {
-		ckbItem_A.setSelected(true);
+		//ckbItem_A.setSelected(true);
 		pnlItem_A.add(ckbItem_A);
 		pnlItem_A.add(lblItem_A);
 		cbbItem_A = new JComboBox(cbbItem);

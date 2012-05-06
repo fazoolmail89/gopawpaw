@@ -19,8 +19,9 @@ public class DataScanFrame extends BaseModuleFrame {
 	private static final long serialVersionUID = 3688309249432143888L;
 
 	//private static DataScanFrame thisClass;
-	private static ExcelDataTablePane excelDataTablePane = null;
-	private static OptBtnsPanel optBtnsPanel = null;
+	private static ExcelDataTablePane excelDataTablePane;
+	private static OptBtnsPanel optBtnsPanel;
+	private ProgressBarPanel pnlProgressBar;
 	// private static List<ScanItem> siList = new ArrayList<ScanItem>();
 	private static Map<String, Integer> scanMap = null;
 
@@ -40,12 +41,14 @@ public class DataScanFrame extends BaseModuleFrame {
 
 	public DataScanFrame() {
 		excelDataTablePane = new ExcelDataTablePane();
+		pnlProgressBar = new ProgressBarPanel();
 		optBtnsPanel = new OptBtnsPanel(this);
 		optBtnsPanel.setSize(new Dimension(100, 600));
 		optBtnsPanel.setPreferredSize(new Dimension(100, 600));
 		setLayout(new BorderLayout());
 		add(excelDataTablePane, BorderLayout.CENTER);
 		add(optBtnsPanel, BorderLayout.EAST);
+		add(pnlProgressBar, BorderLayout.SOUTH);
 		setSize(900, 600);
 	}
 
@@ -91,9 +94,7 @@ public class DataScanFrame extends BaseModuleFrame {
 	public void executImportExcel(File file) {
 		if (file == null)
 			return;
-		ImportExcelProgree iep = new ImportExcelProgree(this, file);
-		iep.getProgressBar().setString("正在加载数据，请耐心等待。。。。");
-		iep.getProgressBar().setIndeterminate(true);
+		ImportExcelProgree iep = new ImportExcelProgree(pnlProgressBar, file);
 		iep.start();
 	}
 
@@ -103,9 +104,7 @@ public class DataScanFrame extends BaseModuleFrame {
 	 * @param file
 	 */
 	public void executScanning() {
-		ScanningProgress sp = new ScanningProgress();
-		//sp.getProgressBar().setString("正在扫描数据，请耐心等待。。。。");
-		sp.getProgressBar().setIndeterminate(false);
+		ScanningProgress sp = new ScanningProgress(pnlProgressBar);
 		sp.start();
 	}
 
@@ -117,9 +116,7 @@ public class DataScanFrame extends BaseModuleFrame {
 	public void executExportExcel(File file) {
 		if (file == null)
 			return;
-		ExportExcelProgress eep = new ExportExcelProgress(file);
-		eep.getProgressBar().setString("正在导出数据，请耐心等待。。。。");
-		eep.getProgressBar().setIndeterminate(true);
+		ExportExcelProgress eep = new ExportExcelProgress(pnlProgressBar, file);
 		eep.start();
 	}
 
@@ -132,14 +129,14 @@ public class DataScanFrame extends BaseModuleFrame {
 	class ImportExcelProgree extends Progress {
 		private File file = null;
 
-		public ImportExcelProgree(DataScanFrame mainFrame, File file) {
-			super(mainFrame);
+		public ImportExcelProgree(ProgressBarPanel pnlProgressBar, File file) {
+			super(pnlProgressBar);
 			this.file = file;
 		}
 
 		@Override
 		public void execut() {
-			Object[][] excelData = PoiOperatXls.readXlsRTA(file);
+			Object[][] excelData = PoiOperatXls.readXlsRTA(file, super.getListener());
 			getExcelDataTablePane().refreshTableByOriginalData(excelData);
 		}
 	}
@@ -151,29 +148,15 @@ public class DataScanFrame extends BaseModuleFrame {
 	 * 
 	 */
 	class ScanningProgress extends Progress {
-		public ScanningProgress() {
-			super(DataScanFrame.this);
+		public ScanningProgress(ProgressBarPanel pnlProgressBar) {
+			super(pnlProgressBar);
 		}
 
 		public void execut() {
-			ScanningListener sl = new ScanningListener() {
-				@Override
-				public void onScanningPre(int size) {
-					getProgressBar().setMaximum(size);
-				}
-
-				@Override
-				public void onScanningProgress(int n) {
-					getProgressBar().setString("");
-					getProgressBar().setValue(n);
-					getProgressBar().setString("进度："+ n + "/"+getProgressBar().getMaximum());
-				}
-			};
-			
 			DataScanning ds = new DataScanning();
 			// 获得表格原始数据，并扫描数据
 			Object[][] sranResult = ds.scanning(scanMap,
-					getExcelDataTablePane().getOriginalData(), sl);
+					getExcelDataTablePane().getOriginalData(), super.getListener());
 			// 刷新表格
 			getExcelDataTablePane().refreshTable(sranResult);
 		}
@@ -189,8 +172,8 @@ public class DataScanFrame extends BaseModuleFrame {
 		private String message = "";
 		private File file = null;
 
-		public ExportExcelProgress(File file) {
-			super(DataScanFrame.this);
+		public ExportExcelProgress(ProgressBarPanel pnlProgressBar, File file) {
+			super(pnlProgressBar);
 			this.file = file;
 		}
 
@@ -199,7 +182,7 @@ public class DataScanFrame extends BaseModuleFrame {
 			Object[][] excelData = getExcelDataTablePane().getHaveTitleData();
 
 			// 保存文件
-			boolean rv = PoiOperatXls.writeXls(excelData, file.getPath());
+			boolean rv = PoiOperatXls.writeXls(excelData, file.getPath(), super.getListener());
 
 			Toolkit.getDefaultToolkit().beep();
 			if (rv) {

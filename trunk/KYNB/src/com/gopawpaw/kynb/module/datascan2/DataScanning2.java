@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.Map;
 
 import com.gopawpaw.kynb.bean.OtherData;
+import com.gopawpaw.kynb.common.IProgressListener;
 
 public class DataScanning2 {
 	/**
@@ -15,7 +16,7 @@ public class DataScanning2 {
 	 * @param data
 	 * @return
 	 */
-	public Object[][] scanning(Map<String, Integer> scanMap, Object[][] data, ScanningListener sl) {
+	public Object[][] scanning(Map<String, Integer> scanMap, Object[][] data, IProgressListener listener) {
 		if (data == null)
 			return null;
 		if (data.length < 2)
@@ -50,7 +51,7 @@ public class DataScanning2 {
 		Statement sta = null;
 		ResultSet rs = null;
 		
-		sl.onScanningPre(resultData.length);
+		listener.onBefore(resultData.length);
 		
 		try {
 			sta = conn.createStatement();
@@ -109,16 +110,13 @@ public class DataScanning2 {
 					rs.close();	
 				} 
 				
-/*				if(isSame.equals("不相同"))
-					System.out.println(sql);*/
-				
 				// 给返回结果数组的最后一列的单元格赋值
 				resultData[i][data[0].length] = isSame;
 				//初始化sql
 				sql = "";
 				
 				//监听器
-				sl.onScanningProgress(i);
+				listener.onExecute(i);
 			}
 			sta.close();
 		} catch (SQLException e) {
@@ -131,9 +129,4 @@ public class DataScanning2 {
 		
 		return resultData;
 	}
-}
-
-interface ScanningListener {
-	void onScanningPre(int size);
-	void onScanningProgress(int n);
 }

@@ -22,6 +22,7 @@ import javax.swing.table.TableColumn;
 
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
+import com.gopawpaw.kynb.common.IProgressListener;
 import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.ExcelAccess;
 import com.gopawpaw.kynb.db.ExcelWriter;
@@ -169,6 +170,29 @@ public class IdCardNoTablePanel extends JPanel {
 	}
 	
 	@SuppressWarnings("static-access")
+	public Vector<Vector<String>> getMVillagerDataFromDb(IProgressListener listener) {
+		try {
+			List<Villager> list = icdAccess.findAllVillagers();
+
+			mVillagerData.removeAllElements();
+			listener.onBefore(list.size());
+			int i = 0;
+			for (Villager v : list) {
+				if(v.getV_ic().length() == 15 || idNumberChecker.IDCardValidate(v.getV_ic()).length() > 0) {
+					mVillagerData.add(getVillagerVector(v));
+				} 
+				i++;
+				listener.onExecute(i);
+			}
+			
+		} catch (DBException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return mVillagerData;
+	}
+	
 	public Vector<Vector<String>> getMVillagerDataFromDb() {
 		try {
 			List<Villager> list = icdAccess.findAllVillagers();

@@ -16,15 +16,16 @@ import com.gopawpaw.kynb.bean.OtherData;
 import com.gopawpaw.kynb.common.ExcelFileFilter;
 import com.gopawpaw.kynb.common.PoiOperatXls;
 import com.gopawpaw.kynb.common.Progress;
+import com.gopawpaw.kynb.common.ProgressBarPanel;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
 
 public class DataScanFrame2 extends BaseModuleFrame {
 	private static final long serialVersionUID = 3688309249432143888L;
 	
-	private static DataScanFrame2 thisClass;
-	private static ExcelDataTablePane2 excelDataTablePane = null;
-	private static OptBtnsPanel2 optBtnsPanel = null;
-	// private static List<ScanItem> siList = new ArrayList<ScanItem>();
+	private ExcelDataTablePane2 excelDataTablePane;
+	private OptBtnsPanel2 optBtnsPanel;
+	private ProgressBarPanel pnlProgressBar;
+
 	private static Map<String, Integer> scanMap = null;
 
 	// 文件选择控件
@@ -44,12 +45,14 @@ public class DataScanFrame2 extends BaseModuleFrame {
 
 	public DataScanFrame2() {
 		excelDataTablePane = new ExcelDataTablePane2();
+		pnlProgressBar = new ProgressBarPanel();
 		optBtnsPanel = new OptBtnsPanel2(this);
 		optBtnsPanel.setSize(new Dimension(100, 600));
 		optBtnsPanel.setPreferredSize(new Dimension(100, 600));
 		setLayout(new BorderLayout());
 		add(excelDataTablePane, BorderLayout.CENTER);
 		add(optBtnsPanel, BorderLayout.EAST);
+		add(pnlProgressBar, BorderLayout.SOUTH);
 		setSize(900, 600);
 	}
 
@@ -62,21 +65,17 @@ public class DataScanFrame2 extends BaseModuleFrame {
 			}
 		});
 	}
-
-	public static DataScanFrame2 getThisClass() {
-		return thisClass;
+	
+	public ProgressBarPanel getPnlProgressBar() {
+		return pnlProgressBar;
 	}
-
-	public static void setThisClass(DataScanFrame2 thisClass) {
-		DataScanFrame2.thisClass = thisClass;
-	}
-
+	
 	public ExcelDataTablePane2 getExcelDataTablePane() {
 		return excelDataTablePane;
 	}
 
 	public void setExcelDataTablePane(ExcelDataTablePane2 excelDataTablePane) {
-		DataScanFrame2.excelDataTablePane = excelDataTablePane;
+		this.excelDataTablePane = excelDataTablePane;
 	}
 
 	public OptBtnsPanel2 getOptBtnsPanel() {
@@ -84,7 +83,7 @@ public class DataScanFrame2 extends BaseModuleFrame {
 	}
 
 	public void setOptBtnsPanel(OptBtnsPanel2 optBtnsPanel) {
-		DataScanFrame2.optBtnsPanel = optBtnsPanel;
+		this.optBtnsPanel = optBtnsPanel;
 	}
 
 	public JFileChooser getFilechooser() {
@@ -103,9 +102,7 @@ public class DataScanFrame2 extends BaseModuleFrame {
 	public void executImportExcel(File file) {
 		if (file == null)
 			return;
-		ImportExcelProgree iep = new ImportExcelProgree(this, file);
-		iep.getProgressBar().setString("正在加载数据，请耐心等待。。。。");
-		iep.getProgressBar().setIndeterminate(true);
+		ImportExcelProgree iep = new ImportExcelProgree(pnlProgressBar, file);
 		iep.start();
 	}
 
@@ -115,10 +112,7 @@ public class DataScanFrame2 extends BaseModuleFrame {
 	 * @param file
 	 */
 	public void executlScanning() {
-		
-		ScanningProgress sp = new ScanningProgress(this);
-		//sp.getProgressBar().setString("正在扫描数据，请耐心等待。。。。");
-		sp.getProgressBar().setIndeterminate(false);
+		ScanningProgress sp = new ScanningProgress(pnlProgressBar);
 		sp.start();
 	}
 
@@ -130,9 +124,7 @@ public class DataScanFrame2 extends BaseModuleFrame {
 	public void executExportExcel(File file) {
 		if (file == null)
 			return;
-		ExportExcelProgress eep = new ExportExcelProgress(this, file);
-		eep.getProgressBar().setString("正在导出数据，请耐心等待。。。。");
-		eep.getProgressBar().setIndeterminate(true);
+		ExportExcelProgress eep = new ExportExcelProgress(pnlProgressBar, file);
 		eep.start();
 	}
 
@@ -145,14 +137,15 @@ public class DataScanFrame2 extends BaseModuleFrame {
 	class ImportExcelProgree extends Progress {
 		private File file = null;
 
-		public ImportExcelProgree(DataScanFrame2 mainFrame, File file) {
-			super(mainFrame);
+		public ImportExcelProgree(ProgressBarPanel pbp, File file) {
+			super(pbp);
 			this.file = file;
 		}
 
 		@Override
 		public void execut() {
-			Object[][] excelData = PoiOperatXls.readXlsRTA(file);
+			Object[][] excelData = PoiOperatXls.readXlsRTA(file,
+					super.getListener());
 			getExcelDataTablePane().refreshTableByOriginalData(excelData);
 		}
 	}
@@ -163,30 +156,17 @@ public class DataScanFrame2 extends BaseModuleFrame {
 	 * @author lxq
 	 * 
 	 */
-	class ScanningProgress extends Progress {
-		public ScanningProgress(DataScanFrame2 mainFrame) {
-			super(mainFrame);
+	class ScanningProgress extends com.gopawpaw.kynb.common.Progress {
+		public ScanningProgress(ProgressBarPanel pbp) {
+			super(pbp);
 		}
 
-		public void execut() {
-			ScanningListener sl = new ScanningListener() {
-				@Override
-				public void onScanningPre(int size) {
-					getProgressBar().setMaximum(size);
-				}
-
-				@Override
-				public void onScanningProgress(int n) {
-					getProgressBar().setString("");
-					getProgressBar().setValue(n);
-					getProgressBar().setString("进度："+ n + "/"+getProgressBar().getMaximum());
-				}
-			};
-			
+		public void execut() {			
 			DataScanning2 ds = new DataScanning2();
 			// 获得表格原始数据，并扫描数据
 			Object[][] sranResult = ds.scanning(scanMap,
-					getExcelDataTablePane().getOriginalData(), sl);
+					getExcelDataTablePane().getOriginalData(), 
+					super.getListener());
 			// 刷新表格
 			getExcelDataTablePane().refreshTable(sranResult);
 		}
@@ -202,8 +182,8 @@ public class DataScanFrame2 extends BaseModuleFrame {
 		private String message = "";
 		private File file = null;
 
-		public ExportExcelProgress(DataScanFrame2 mainFrame, File file) {
-			super(mainFrame);
+		public ExportExcelProgress(ProgressBarPanel pbp, File file) {
+			super(pbp);
 			this.file = file;
 		}
 
@@ -212,7 +192,10 @@ public class DataScanFrame2 extends BaseModuleFrame {
 			Object[][] excelData = getExcelDataTablePane().getHaveTitleData();
 
 			// 保存文件
-			boolean rv = PoiOperatXls.writeXls(excelData, file.getPath());
+			boolean rv = PoiOperatXls.writeXls(
+					excelData, 
+					file.getPath(),
+					super.getListener());
 
 			Toolkit.getDefaultToolkit().beep();
 			if (rv) {

@@ -23,6 +23,7 @@ import javax.swing.SwingUtilities;
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.common.Progress;
+import com.gopawpaw.kynb.common.ProgressBarPanel;
 import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
 
@@ -32,12 +33,6 @@ import com.gopawpaw.kynb.module.BaseModuleFrame;
  * @版本 2012-03-28
  */
 public class IdnoUpgrade extends BaseModuleFrame {
-
-	//public JFrame mf = null;
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private JPanel jContentPane = null;
@@ -45,6 +40,7 @@ public class IdnoUpgrade extends BaseModuleFrame {
 	 * 中部面板
 	 */
 	private JPanel panelCenter = null;
+	private ProgressBarPanel pnlProgressBar;
 
 	/**
 	 * 身份证号码列表面板
@@ -62,30 +58,14 @@ public class IdnoUpgrade extends BaseModuleFrame {
 	private JButton btnExport = new JButton("导出");
 	
 	private JProgressBar progressBar2 = new JProgressBar();
-	// ---------------------------------------------------
-
-	private JPanel jPanelBottom = null;
-
 	/**
 	 * @throws HeadlessException
 	 */
 	public IdnoUpgrade() throws HeadlessException {
-		initialize();
-	}
-
-	/**
-	 * This method initializes this
-	 * 
-	 * @return void
-	 */
-	private void initialize() {
 		setSize(900, 600);
 		setLocation(200, 100);
 		setLayout(new BorderLayout());
 		setContentPane(getJContentPane());
-		// add(getJContentPane(), BorderLayout.CENTER);
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//setVisible(true);
 	}
 
 	/**
@@ -129,12 +109,12 @@ public class IdnoUpgrade extends BaseModuleFrame {
 	 * @return javax.swing.JPanel
 	 */
 	private JPanel getJContentPane() {
-		if (jContentPane == null)
-			jContentPane = new JPanel();
+		jContentPane = new JPanel();
+		pnlProgressBar = new ProgressBarPanel();
 		jContentPane.setLayout(new BorderLayout());
 		jContentPane.add(getJPanelTop(), BorderLayout.NORTH);
 		jContentPane.add(getJPanelCenter(), BorderLayout.CENTER);
-		jContentPane.add(getJPanelBottom(), BorderLayout.SOUTH);
+		jContentPane.add(pnlProgressBar, BorderLayout.SOUTH);
 		return jContentPane;
 	}
 
@@ -284,21 +264,13 @@ public class IdnoUpgrade extends BaseModuleFrame {
 		return panelButtonContainer;
 	}
 
-	public JPanel getJPanelBottom() {
-		if (jPanelBottom == null)
-			jPanelBottom = new JPanel();
-		return jPanelBottom;
-	}
-	
 	/**
 	 * 执行导入Excel文件
 	 * 
 	 * @param file
 	 */
 	public void executValidata() {
-		DataLoadProgrees dlp = new DataLoadProgrees(this);
-		dlp.getProgressBar().setString("正在扫描数据，请耐心等待。。。。");
-		dlp.getProgressBar().setIndeterminate(false);
+		DataLoadProgrees dlp = new DataLoadProgrees(pnlProgressBar);
 		dlp.start();
 	}
 	
@@ -308,14 +280,14 @@ public class IdnoUpgrade extends BaseModuleFrame {
 	 *
 	 */
 	class DataLoadProgrees extends Progress {
-		public DataLoadProgrees(JInternalFrame frame) {
-			super(frame);
+		public DataLoadProgrees(ProgressBarPanel pnlProgressBar) {
+			super(pnlProgressBar);
 		}
 		
 		@Override
 		public void execut() {
 			Vector<Vector<String>> rowData = idCardNoTablePanel
-					.getMVillagerDataFromDb();
+					.getMVillagerDataFromDb(super.getListener());
 			idCardNoTablePanel.refreshTable(rowData);
 		}
 	}
