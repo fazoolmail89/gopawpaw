@@ -379,7 +379,7 @@ public class Omnd_det {
 				 "select * from mnd_det left join mnt_det on mnd_det.mnd_nbr=mnt_det.mnt_nbr and mnd_det.mnd_select=mnt_det.mnt_select where mnd_exec='"
 				 + dd.getMnd_nbr() + "' and mnt_lang='"+gp.getDefaultLanguage()+"'";
 		}
-		
+		GLog.d("+++", sqlstr);
 		GppSQL gppsql = new GppSQL();
 		ResultSet rst = gppsql.query(sqlstr);
 		try {

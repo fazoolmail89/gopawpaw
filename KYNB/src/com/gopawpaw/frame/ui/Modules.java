@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.security.MessageDigest;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.gopawpaw.frame.GlobalParameter;
 import com.gopawpaw.frame.database.Dmnd_det;
@@ -31,6 +33,13 @@ public class Modules {
 	private String actionModulesMessage = "";
 
 	private ModulesListener modulesListener;
+	
+	/**
+	 * 模块缓存
+	 */
+	private Map<String,BaseJInternalFrame> mModulesCache = new HashMap<String,BaseJInternalFrame>();
+	
+	
 	/**
 	 * 
 	 */
@@ -137,7 +146,16 @@ public class Modules {
 	 * 运行JAR程序
 	 */
 	private BaseJInternalFrame actionJarProgram(String jarPath) {
-		BaseJInternalFrame frame = null;
+		
+		BaseJInternalFrame frame = mModulesCache.get(jarPath);
+		if(frame != null && !frame.isClosed()){
+			//若缓存存在，并且未关闭，则返回缓存的对象
+			return frame;
+		}else{
+			//否则重新创建对象
+			frame = null;
+		}
+		
 		GppDynamicJar gdj = new GppDynamicJar(GppDynamicJar.LOCAL, jarPath);
 		if (gdj.isExistJarPack()) {
 			String[] args = new String[2];
@@ -149,6 +167,8 @@ public class Modules {
 					Object obj = c.newInstance();
 					if(obj instanceof BaseJInternalFrame){
 						frame = (BaseJInternalFrame)obj;
+						//缓存对象
+						mModulesCache.put(jarPath, frame);
 					}
 				}
 				
@@ -191,6 +211,10 @@ public class Modules {
 			sb.append(hexChar[b[i] & 0x0f]);
 		}
 		return sb.toString();
+	}
+
+	public Map<String, BaseJInternalFrame> getModulesCache() {
+		return mModulesCache;
 	}
 
 }
