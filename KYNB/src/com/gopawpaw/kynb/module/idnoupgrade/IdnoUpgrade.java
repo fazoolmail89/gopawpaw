@@ -3,8 +3,6 @@ package com.gopawpaw.kynb.module.idnoupgrade;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Frame;
-import java.awt.GraphicsConfiguration;
 import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
@@ -22,26 +20,21 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
 
-import com.gopawpaw.frame.utils.GppJarRunableInterface;
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.common.Progress;
 import com.gopawpaw.kynb.db.DBException;
-import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
-import com.gopawpaw.kynb.module.datascan.DataScanFrame;
 
 /**
  * @描述 身份证号码升级界面
  * @作者 卢向琪
  * @版本 2012-03-28
  */
-public class IdnoUpgrade extends BaseModuleFrame implements
-		GppJarRunableInterface {
+public class IdnoUpgrade extends BaseModuleFrame {
 
 	//public JFrame mf = null;
 
-	private static IdnoUpgrade thisClass;
 	/**
 	 * 
 	 */
@@ -119,14 +112,7 @@ public class IdnoUpgrade extends BaseModuleFrame implements
 		return jPanelTop;
 	}
 
-	@Override
-	public boolean runJar(String[] args) {
-		IdnoUpgrade.main(args);
-		return false;
-	}
-
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
