@@ -2,6 +2,7 @@ package com.gopawpaw.kynb.module.scandatamange;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +75,13 @@ public class ScanDataMangeFrame extends BaseModuleFrame {
 			return;
 		ImportExcelProgree iep = new ImportExcelProgree(pnlProgressBar, file);
 		iep.start();
+	}
+	
+	public void executExportExcel(File file) {
+		if (file == null)
+			return;
+		ExportExcelProgress eep = new ExportExcelProgress(pnlProgressBar, file);
+		eep.start();
 	}
 	
 	public JFileChooser getFilechooser() {
@@ -175,6 +183,47 @@ public class ScanDataMangeFrame extends BaseModuleFrame {
 						JOptionPane.PLAIN_MESSAGE);
 			} else {
 				JOptionPane.showMessageDialog(null, "导入数据失败！", "导入Excel提示！",
+						JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	}
+	
+	/**
+	 * 导出Excel线程类，显示进度条
+	 * 
+	 * @author lxq
+	 * 
+	 */
+	class ExportExcelProgress extends Progress {
+		private String message = "";
+		private File file = null;
+
+		public ExportExcelProgress(ProgressBarPanel pbp, File file) {
+			super(pbp);
+			this.file = file;
+		}
+
+		public void execut() {
+			// 获取文件保存的表格数据
+			@SuppressWarnings("static-access")
+			Object[] columnNaems = spnTable.getColumnNames();
+			Object[][] data = spnTable.getData();
+
+			// 保存文件
+			boolean rv = PoiOperatXls.writeXls(
+					data,
+					columnNaems, 
+					file.getPath(),
+					super.getListener());
+
+			Toolkit.getDefaultToolkit().beep();
+			if (rv) {
+				message = "成功保存文件：" + file.getPath();
+				JOptionPane.showMessageDialog(null, message, "保存文件提示！",
+						JOptionPane.PLAIN_MESSAGE);
+			} else {
+				message = "无法保存文件：" + file.getPath();
+				JOptionPane.showMessageDialog(null, message, "保存文件提示！",
 						JOptionPane.ERROR_MESSAGE);
 			}
 		}

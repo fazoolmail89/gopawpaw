@@ -69,6 +69,22 @@ public class OptBtnsPanel extends JPanel {
 		btnExport.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Object[][] data = mainFrame.getSpnTable().getData();
+				if (data != null && data.length > 0) {
+					// 打开文件保存视图
+					int returnVal = mainFrame.getFilechooser().showSaveDialog(
+							mainFrame);
+					if (returnVal == JFileChooser.APPROVE_OPTION) {
+						// 获取要保存的文件
+						File file = mainFrame.getFilechooser()
+								.getSelectedFile();
+						mainFrame.executExportExcel(new File(file.getPath()));
+					}
+				} else {
+					Toolkit.getDefaultToolkit().beep();
+					JOptionPane.showMessageDialog(null, "没有数据，不需要导出！",
+							"文件保存提示！", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 		
@@ -131,7 +147,7 @@ public class OptBtnsPanel extends JPanel {
 		
 		setLayout(new FlowLayout());
 		add(btnImport);
-		//add(btnExport);
+		add(btnExport);
 		//add(btnCleare);
 		add(btnAdd);
 		add(btnUpate);
