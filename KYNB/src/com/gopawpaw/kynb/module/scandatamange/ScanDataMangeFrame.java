@@ -186,6 +186,10 @@ public class ScanDataMangeFrame extends BaseModuleFrame {
 						JOptionPane.ERROR_MESSAGE);
 			}
 		}
+		
+/*		private  OtherData createODByArray(String[] array) {
+			return null;
+		}*/
 	}
 	
 	/**

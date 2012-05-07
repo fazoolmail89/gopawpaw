@@ -223,6 +223,7 @@ public class DataEditDialog extends JDialog {
 	private JPanel getPnlOptBtns() {
 		pnlOptBtns = new JPanel();
 		btnSave = new JButton("保存");
+		btnQuit = new JButton("取消");
 		btnSave.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -242,7 +243,21 @@ public class DataEditDialog extends JDialog {
 				}
 			}
 		});
-		btnQuit = new JButton("取消");
+		
+		btnQuit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Toolkit.getDefaultToolkit().beep();
+				int rv = JOptionPane.showConfirmDialog(DataEditDialog.this,
+						"是否取消操作？", "退出提示！", JOptionPane.OK_CANCEL_OPTION,
+						JOptionPane.WARNING_MESSAGE);
+				if (rv == 0) {
+					dispose();
+				}
+			}
+		});
+		
 		pnlOptBtns.add(btnSave);
 		pnlOptBtns.add(btnQuit);
 		return pnlOptBtns;
