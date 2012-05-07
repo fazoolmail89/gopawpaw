@@ -207,14 +207,13 @@ public class PoiOperatXls {
 			
 			for (int i = 0; i < data.length + 1; i++) {
 				HSSFRow row = sheet.createRow(i);
-				Object[] temp = data[i];
+				Object[] temp = null;
+				if(i == 0) temp = columnNamds;
+				else temp = data[i - 1];
+				
 				for (int j = 0; j < temp.length; j++) {
 					HSSFCell cell = row.createCell(j);
-					if(i == 0) {
-						cell.setCellValue((String) columnNamds[j]);
-					} else {
-						cell.setCellValue((String) data[i - 1][j]);
-					}
+					cell.setCellValue(temp[j].toString());
 				}
 				listener.onExecute(i);
 			}

@@ -8,6 +8,11 @@ import com.gopawpaw.kynb.common.IProgressListener;
 import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 
+/**
+ * 数据库操作类
+ * @author lxq
+ *
+ */
 public class DataOpertor extends XXNCYLBXDBAccess {
 
 	/**
@@ -33,36 +38,7 @@ public class DataOpertor extends XXNCYLBXDBAccess {
 		if (commonsql.connect(user, password)) {
 			for (OtherData odata : list) {
 				result = false;
-				sql = "insert into OtherData(A,B,C,D,E,F,G,H,I,J) values("
-						+ "'"
-						+ odata.getAcol().trim()
-						+ "',"
-						+ "'"
-						+ odata.getBcol().trim()
-						+ "',"
-						+ "'"
-						+ odata.getCcol().trim()
-						+ "',"
-						+ "'"
-						+ odata.getDcol().trim()
-						+ "',"
-						+ "'"
-						+ odata.getEcol().trim()
-						+ "',"
-						+ "'"
-						+ odata.getFcol().trim()
-						+ "',"
-						+ "'"
-						+ odata.getGcol().trim()
-						+ "',"
-						+ "'"
-						+ odata.getHcol().trim()
-						+ "',"
-						+ "'"
-						+ odata.getIcol().trim()
-						+ "',"
-						+ "'"
-						+ odata.getJcol().trim() + "'" + ")";
+				sql = getIOrUSQL(odata);
 				if (commonsql.executesql(sql)) {
 					result = true;
 					n++;
@@ -95,38 +71,23 @@ public class DataOpertor extends XXNCYLBXDBAccess {
 		boolean result = false;
 		String sql = "";
 		if (commonsql.connect(user, password)) {
-			if (odata.getId() == null || "".equals(odata.getId())) {
-				sql = "insert into OtherData(A,B,C,D,E,F,G,H,I,J) values("
-						+ "'"
-						+ odata.getAcol().trim()
-						+ "',"
-						+ "'"
-						+ odata.getBcol().trim()
-						+ "',"
-						+ "'"
-						+ odata.getCcol().trim()
-						+ "',"
-						+ "'"
-						+ odata.getDcol().trim()
-						+ "',"
-						+ "'"
-						+ odata.getEcol().trim()
-						+ "',"
-						+ "'"
-						+ odata.getFcol().trim()
-						+ "',"
-						+ "'"
-						+ odata.getGcol().trim()
-						+ "',"
-						+ "'"
-						+ odata.getHcol().trim()
-						+ "',"
-						+ "'"
-						+ odata.getIcol().trim()
-						+ "',"
-						+ "'"
-						+ odata.getJcol().trim() + "'" + ")";
-			} else {
+			sql = getIOrUSQL(odata);
+			if (commonsql.executesql(sql)) {
+				result = true;
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * 获取插入或更新SQL
+	 * @param odata
+	 * @return
+	 */
+	private String getIOrUSQL(OtherData odata) {
+		String sql = "";
+		if(odata != null) {
+			if(!"".equals(odata.getId())) {
 				sql = "update OtherData set " + " A = '"
 						+ odata.getAcol().trim() + "'," + " B = '"
 						+ odata.getBcol().trim() + "'," + " C = '"
@@ -138,13 +99,22 @@ public class DataOpertor extends XXNCYLBXDBAccess {
 						+ odata.getHcol().trim() + "'," + " I = '"
 						+ odata.getIcol().trim() + "'," + " J = '"
 						+ odata.getJcol().trim() + "'" + " where ID = "
-						+ odata.getId();
-			}
-			if (commonsql.executesql(sql)) {
-				result = true;
+						+ odata.getId().trim();
+			} else {
+				sql = "insert into OtherData(A,B,C,D,E,F,G,H,I,J) values("
+						+ "'" + odata.getAcol().trim() + "',"
+						+ "'" + odata.getBcol().trim() + "',"
+						+ "'" + odata.getCcol().trim() + "',"
+						+ "'" + odata.getDcol().trim() + "',"
+						+ "'" + odata.getEcol().trim() + "',"
+						+ "'" + odata.getFcol().trim() + "',"
+						+ "'" + odata.getGcol().trim() + "',"
+						+ "'" + odata.getHcol().trim() + "',"
+						+ "'" + odata.getIcol().trim() + "',"
+						+ "'" + odata.getJcol().trim() + "'" + ")";				
 			}
 		}
-		return result;
+		return sql;
 	}
 
 	public boolean deleteOData(OtherData odata) {
