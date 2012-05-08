@@ -1,15 +1,19 @@
 package com.gopawpaw.kynb.module.scandatamange;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.bean.OtherData;
@@ -37,8 +41,18 @@ public class ScanDataMangeFrame extends BaseModuleFrame {
 	}
 	
 	public ScanDataMangeFrame() {
+		setTitle("扫描数据管理");
+
+		// 创建线形边框
+		LineBorder lineBorder = (LineBorder)BorderFactory.createLineBorder(Color.black);
+		//创建数据库数据面板的边框
+		TitledBorder qbBorder = BorderFactory.createTitledBorder(lineBorder, "查询条件");
+		TitledBorder dlBorder = BorderFactory.createTitledBorder(lineBorder, "数据列表");
+		
 		pnlQuery = new QueryPanel(this);
+		pnlQuery.setBorder(qbBorder);
 		spnTable = new TableScrollPane();
+		spnTable.setBorder(dlBorder);
 		pnlProgressBar =  new ProgressBarPanel();
 		optBtnsPanel = new OptBtnsPanel(this);
 		optBtnsPanel.setSize(new Dimension(70, 600));

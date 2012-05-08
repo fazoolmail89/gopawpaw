@@ -1,15 +1,19 @@
 package com.gopawpaw.kynb.module.datascan;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
@@ -40,7 +44,15 @@ public class DataScanFrame extends BaseModuleFrame {
 	}
 
 	public DataScanFrame() {
+		setTitle("数据扫描<一>");
+
+		// 创建线形边框
+		LineBorder lineBorder = (LineBorder)BorderFactory.createLineBorder(Color.black);
+		//创建Excel数据面板的边框
+		TitledBorder edpBorder = BorderFactory.createTitledBorder(lineBorder, "Excel表格数据");
+		
 		excelDataTablePane = new ExcelDataTablePane();
+		excelDataTablePane.setBorder(edpBorder);
 		pnlProgressBar = new ProgressBarPanel();
 		optBtnsPanel = new OptBtnsPanel(this);
 		optBtnsPanel.setSize(new Dimension(100, 600));
