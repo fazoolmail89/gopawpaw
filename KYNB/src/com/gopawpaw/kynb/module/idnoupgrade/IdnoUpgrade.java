@@ -1,6 +1,7 @@
 package com.gopawpaw.kynb.module.idnoupgrade;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
@@ -19,6 +20,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.bean.Villager;
@@ -62,6 +65,8 @@ public class IdnoUpgrade extends BaseModuleFrame {
 	 * @throws HeadlessException
 	 */
 	public IdnoUpgrade() throws HeadlessException {
+		setTitle("身份证号自动升级<一>");
+		
 		setSize(900, 600);
 		setLocation(200, 100);
 		setLayout(new BorderLayout());
@@ -109,6 +114,7 @@ public class IdnoUpgrade extends BaseModuleFrame {
 	 * @return javax.swing.JPanel
 	 */
 	private JPanel getJContentPane() {
+		
 		jContentPane = new JPanel();
 		pnlProgressBar = new ProgressBarPanel();
 		jContentPane.setLayout(new BorderLayout());
@@ -139,6 +145,9 @@ public class IdnoUpgrade extends BaseModuleFrame {
 	public JPanel getIdCardNoTablePanel() {
 		if (idCardNoTablePanel == null)
 			idCardNoTablePanel = new IdCardNoTablePanel(this, 800, 500);
+		// 创建线形边框
+		LineBorder lineBorder = (LineBorder)BorderFactory.createLineBorder(Color.black);
+		idCardNoTablePanel.setBorder(lineBorder);
 		return idCardNoTablePanel;
 	}
 

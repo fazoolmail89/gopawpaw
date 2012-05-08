@@ -1,15 +1,20 @@
 package com.gopawpaw.kynb.module.datascan2;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.bean.OtherData;
@@ -22,6 +27,8 @@ import com.gopawpaw.kynb.module.BaseModuleFrame;
 public class DataScanFrame2 extends BaseModuleFrame {
 	private static final long serialVersionUID = 3688309249432143888L;
 	
+	private JPanel pnlContent;
+	private DBDataPane dbDataPane;
 	private ExcelDataTablePane2 excelDataTablePane;
 	private OptBtnsPanel2 optBtnsPanel;
 	private ProgressBarPanel pnlProgressBar;
@@ -44,16 +51,37 @@ public class DataScanFrame2 extends BaseModuleFrame {
 	}
 
 	public DataScanFrame2() {
+		setTitle("数据扫描<二>");
+		
+		// 创建线形边框
+		LineBorder lineBorder = (LineBorder)BorderFactory.createLineBorder(Color.black);
+		//创建数据库数据面板的边框
+		TitledBorder ddpBorder = BorderFactory.createTitledBorder(lineBorder, "数据库数据示例");
+		//创建Excel数据面板的边框
+		TitledBorder edpBorder = BorderFactory.createTitledBorder(lineBorder, "Excel表格数据");
+		
+		pnlContent = new JPanel();
+		dbDataPane = new DBDataPane();
+		dbDataPane.setBorder(ddpBorder);
+		
 		excelDataTablePane = new ExcelDataTablePane2();
+		excelDataTablePane.setBorder(edpBorder);
+		pnlContent.setLayout(new BorderLayout());
+		pnlContent.add(excelDataTablePane, BorderLayout.NORTH);
+		pnlContent.add(dbDataPane, BorderLayout.CENTER);
+		
+		//创建进度条面板
 		pnlProgressBar = new ProgressBarPanel();
+		
 		optBtnsPanel = new OptBtnsPanel2(this);
 		optBtnsPanel.setSize(new Dimension(100, 600));
 		optBtnsPanel.setPreferredSize(new Dimension(100, 600));
+		
 		setLayout(new BorderLayout());
-		add(excelDataTablePane, BorderLayout.CENTER);
+		add(pnlContent, BorderLayout.CENTER);
 		add(optBtnsPanel, BorderLayout.EAST);
 		add(pnlProgressBar, BorderLayout.SOUTH);
-		setSize(900, 600);
+		setSize(900, 700);
 	}
 
 	public static void main(String[] args) {
@@ -92,6 +120,10 @@ public class DataScanFrame2 extends BaseModuleFrame {
 
 	public Map<String, Integer> getScanMap() {
 		return scanMap;
+	}
+	
+	public DBDataPane getDbDataPane() {
+		return dbDataPane;
 	}
 
 	/**

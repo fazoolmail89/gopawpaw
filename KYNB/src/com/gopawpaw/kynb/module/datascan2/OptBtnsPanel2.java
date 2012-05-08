@@ -106,14 +106,22 @@ public class OptBtnsPanel2 extends JPanel {
 		btnScanning.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Object[][] data = mainFrame.getExcelDataTablePane()
-						.getOriginalData();
-				if (data == null || data.length < 1) {
-					Toolkit.getDefaultToolkit().beep();
-					JOptionPane.showMessageDialog(null, "请先导入数据再进行扫描！",
-							"数据扫描提示！", JOptionPane.WARNING_MESSAGE);
+				String warning = "";
+				Object[][] dbData = mainFrame.getDbDataPane().getData();
+				if(dbData != null && dbData.length > 0) {
+					Object[][] data = mainFrame.getExcelDataTablePane()
+							.getOriginalData();
+					if (data == null || data.length < 1) {
+						warning = "请先导入数据再进行扫描！";
+						JOptionPane.showMessageDialog(null, warning,
+								"数据扫描提示！", JOptionPane.WARNING_MESSAGE);
+					} else {
+						mainFrame.executlScanning();
+					}					
 				} else {
-					mainFrame.executlScanning();
+					warning = "数据库中无数据，请先到扫描数据管理中导入数据，在返回执行此操作！";
+					JOptionPane.showMessageDialog(null, warning,
+							"数据扫描提示！", JOptionPane.WARNING_MESSAGE);					
 				}
 			}
 		});
