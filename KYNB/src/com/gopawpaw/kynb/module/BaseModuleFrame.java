@@ -35,7 +35,7 @@ public class BaseModuleFrame extends BaseJInternalFrame{
 	private void initialize() {
 		this.setSize(900, 600);
 		this.setLocation(200, 100);
-		this.setTitle("快译农保信息处理系统 ");
+		this.setTitle("<功能模块未定义> ");
 		GlobalParameter.initialize();
 		
 	}
