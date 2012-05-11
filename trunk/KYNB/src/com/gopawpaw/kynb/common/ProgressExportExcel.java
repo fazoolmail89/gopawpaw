@@ -22,6 +22,16 @@ public class ProgressExportExcel extends Thread {// 自定义类progress,导入excel用
 	private Object[][] mData;
 	private String excelPath;
 
+	public ProgressExportExcel(	String excelPath) {
+		this.excelPath = excelPath;
+	}
+	
+	public ProgressExportExcel(JProgressBar progressBar,
+			String excelPath) {
+		this.progressBar = progressBar;
+		this.excelPath = excelPath;
+	}
+	
 	public ProgressExportExcel(JProgressBar progressBar, JButton button,
 			String excelPath) {
 		this.progressBar = progressBar;
@@ -51,19 +61,29 @@ public class ProgressExportExcel extends Thread {// 自定义类progress,导入excel用
 	}
 
 	public void run() {
-		button.setEnabled(false);
+		if(button != null){
+			
+			button.setEnabled(false);
+		}
 		final int size = mData.length;
-		progressBar.setMaximum(size);
-		progressBar.setStringPainted(true); // 显示提示信息
-		progressBar.setIndeterminate(false); // 确定进度的进度条
+		
+		if(progressBar != null){
+			progressBar.setMaximum(size);
+			progressBar.setStringPainted(true); // 显示提示信息
+			progressBar.setIndeterminate(false); // 确定进度的进度条
+			
+		}
 		
 		WriteXlsListener writeXlsListener = new WriteXlsListener(){
 
 			@Override
 			public void onWriteXlsProgress(int n) {
 				// TODO Auto-generated method stub
-				progressBar.setString("进度：" + (n) + "/" + size);
-				progressBar.setValue(n); // 进度值
+				if(progressBar != null){
+					
+					progressBar.setString("进度：" + (n) + "/" + size);
+					progressBar.setValue(n); // 进度值
+				}
 			}
 
 			@Override
@@ -77,8 +97,10 @@ public class ProgressExportExcel extends Thread {// 自定义类progress,导入excel用
 		};
 		
 		PoiOperatXls2.writeXls(mData, mTitle, excelPath, writeXlsListener);
-		
-		button.setEnabled(true); // 按钮可用
+		if(button != null){
+			
+			button.setEnabled(true); // 按钮可用
+		}
 
 	}
 }

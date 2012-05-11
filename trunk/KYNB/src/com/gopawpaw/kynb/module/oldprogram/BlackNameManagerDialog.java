@@ -24,6 +24,7 @@ import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -37,7 +38,6 @@ import javax.swing.table.DefaultTableModel;
 
 import com.gopawpaw.frame.utils.GppJarRunableInterface;
 import com.gopawpaw.frame.widget.GJButton;
-import com.gopawpaw.frame.widget.GJDialog;
 import com.gopawpaw.frame.widget.GJTextField;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
@@ -51,7 +51,7 @@ import com.gopawpaw.kynb.widget.MessageDialog;
  * @version 2011-11-19
  * @author Jason
  */
-public class BlackNameManagerDialog  extends GJDialog implements ActionListener, GppJarRunableInterface{
+public class BlackNameManagerDialog  extends JDialog implements ActionListener, GppJarRunableInterface{
 
 	public final static int YES_OPTION = JOptionPane.YES_OPTION;
 

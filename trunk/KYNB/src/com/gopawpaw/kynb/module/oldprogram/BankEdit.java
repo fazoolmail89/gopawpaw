@@ -5,16 +5,12 @@ package com.gopawpaw.kynb.module.oldprogram;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Dialog;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.HeadlessException;
-import java.awt.Point;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -24,10 +20,10 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
@@ -37,8 +33,6 @@ import javax.swing.table.DefaultTableModel;
 
 import com.gopawpaw.frame.widget.GJCheckBox;
 import com.gopawpaw.frame.widget.GJComboBox;
-import com.gopawpaw.frame.widget.GJDialog;
-import com.gopawpaw.frame.widget.GJFrame;
 import com.gopawpaw.kynb.bean.DefultData;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
@@ -46,7 +40,6 @@ import com.gopawpaw.kynb.common.DataDefultManager;
 import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.ExcelAccess;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
-import com.gopawpaw.kynb.module.oldprogram.XXNCYLBXMain.GppJComboBoxExp;
 import com.gopawpaw.kynb.utils.DateUtils;
 import com.gopawpaw.kynb.utils.IDNumberChecker;
 import com.gopawpaw.kynb.widget.GppStyleTable;
@@ -55,7 +48,7 @@ import com.gopawpaw.kynb.widget.GppStyleTable;
  * @version 2011-12-3
  * @author Jason
  */
-public class BankEdit extends GJDialog{
+public class BankEdit extends JDialog{
 
 	/**
 	 * 

@@ -28,6 +28,8 @@ public class GJComboBox extends JComboBox implements GppKeyActionListener,GppCom
 	 * 授权序列号，用于控制该组件的可编辑、可显示状态的唯一标识符，一般为32位MD5密文
 	 */
 	private String authorizationSerial = null;
+	
+	private boolean isInitListener = false;
 	/**
 	 * 
 	 */
@@ -83,6 +85,11 @@ public class GJComboBox extends JComboBox implements GppKeyActionListener,GppCom
 	 * 更新键盘事件监听器
 	 */
 	public void updateGppKeyListener(){
+		if(isInitListener){
+			return;
+		}
+		
+		isInitListener = true;
 		
 		GppKeyListener g = new GppKeyListener(this);
 		g.addGppKeyActionListener(this);

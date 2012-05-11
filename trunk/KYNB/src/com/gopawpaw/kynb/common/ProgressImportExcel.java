@@ -26,6 +26,10 @@ public class ProgressImportExcel extends Thread {// 自定义类progress,导入excel用
 	private JComboBox jComboBox;
 	private String excelPath;
 
+	public ProgressImportExcel(String excelPath) {
+		this.excelPath = excelPath;
+	}
+	
 	public ProgressImportExcel(JProgressBar progressBar,
 			String excelPath) {
 		this.progressBar = progressBar;
@@ -74,20 +78,29 @@ public class ProgressImportExcel extends Thread {// 自定义类progress,导入excel用
 					public void onReadXlsPre(int size, Object[] title) {
 						// TODO Auto-generated method stub
 						this.size = size;
-						progressBar.setMaximum(size);
+						if(progressBar != null){
+							
+							progressBar.setMaximum(size);
+						}
 						mTitle = title;
 					}
 
 					@Override
 					public void onReadXlsProgress(int n) {
 						// TODO Auto-generated method stub
-						progressBar.setString("进度：" + (n) + "/" + size);
-						progressBar.setValue(n); // 进度值
+						if(progressBar != null){
+							progressBar.setString("进度：" + (n) + "/" + size);
+							progressBar.setValue(n); // 进度值
+							
+						}
 					}
 
 				});
 
-		progressBar.setIndeterminate(false);
+		if(progressBar != null){
+			
+			progressBar.setIndeterminate(false);
+		}
 
 		actionFinish();
 

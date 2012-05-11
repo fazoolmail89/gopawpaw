@@ -324,12 +324,12 @@ public class MainFrame extends JFrame {
 
 				});
 
-//				if (thisClass.cheakRegister()) {
+				if (thisClass.cheakRegister()) {
 					// if (true) {
 					thisClass.setVisible(true);
-//				} else {
-//					System.exit(0);
-//				}
+				} else {
+					System.exit(0);
+				}
 			}
 		});
 	}
@@ -360,7 +360,7 @@ public class MainFrame extends JFrame {
 
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
-		this.setTitle("快译农保 V1.2");
+		this.setTitle("藤县快译农保信息处理系统  V1.2");
 		mGppConfiguration = new GppConfiguration("ini.ini");
 
 	}
