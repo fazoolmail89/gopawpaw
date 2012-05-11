@@ -8,11 +8,9 @@ import java.awt.Checkbox;
 import java.awt.CheckboxGroup;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.GraphicsConfiguration;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
-import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -22,9 +20,6 @@ import java.awt.event.AdjustmentListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.beans.PropertyVetoException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,8 +31,6 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JDesktopPane;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -48,18 +41,13 @@ import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 
-import com.gopawpaw.frame.GlobalParameter;
 import com.gopawpaw.frame.utils.GppCmdShell;
 import com.gopawpaw.frame.utils.GppJarRunableInterface;
-import com.gopawpaw.frame.utils.MD5;
 import com.gopawpaw.frame.widget.GJCheckBox;
 import com.gopawpaw.frame.widget.GJComboBox;
 import com.gopawpaw.kynb.GlobalUI;
-import com.gopawpaw.kynb.RegisterDialog;
 import com.gopawpaw.kynb.bean.DefultData;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
@@ -68,13 +56,12 @@ import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.ExcelAccess;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
-import com.gopawpaw.kynb.module.blacklist.BlackList;
 import com.gopawpaw.kynb.utils.DateUtils;
 import com.gopawpaw.kynb.utils.GppConfiguration;
 import com.gopawpaw.kynb.utils.IDNumberChecker;
 import com.gopawpaw.kynb.utils.Tools;
-import com.gopawpaw.kynb.widget.MessageDialog;
 import com.gopawpaw.kynb.widget.GppStyleTable;
+import com.gopawpaw.kynb.widget.MessageDialog;
 
 /**
  * @version 2011-11-13
@@ -221,7 +208,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 		this.setSize(900, 600);
 		this.setLocation(200, 100);
 		this.setContentPane(getJContentPane());
-		this.setTitle("快译农保信息处理系统 V1.1");
+		this.setTitle("旧版程序");
 		mGppConfiguration = new GppConfiguration("ini.ini");
 		// testDB();
 	}
@@ -469,7 +456,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 			jButtonNewThorp.setText("创建村");
 			jButtonNewThorp.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
-					ThorpDialog gmd = new ThorpDialog() {
+					ThorpDialog gmd = new ThorpDialog(XXNCYLBXMain.this) {
 						/**
 						 * 
 						 */
@@ -525,6 +512,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 						}
 					};
 					gmd.setTitle("创建村");
+					gmd.setModal(true);
 					gmd.setVisible(true);
 				}
 			});
@@ -539,7 +527,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 			jButtonUpdateThorp
 					.addMouseListener(new java.awt.event.MouseAdapter() {
 						public void mouseClicked(java.awt.event.MouseEvent e) {
-							ThorpDialog td = new ThorpDialog() {
+							ThorpDialog td = new ThorpDialog(XXNCYLBXMain.this) {
 								/**
 						 * 
 						 */
@@ -587,6 +575,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 								}
 							};
 							td.setTitle("修改村");
+							td.setModal(true);
 							td.setThorp(mCurrentThorp);
 							td.setVisible(true);
 						}
@@ -602,7 +591,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 			jButtonDeleteThorp
 					.addMouseListener(new java.awt.event.MouseAdapter() {
 						public void mouseClicked(java.awt.event.MouseEvent e) {
-							ThorpDialog gmd = new ThorpDialog() {
+							ThorpDialog gmd = new ThorpDialog(XXNCYLBXMain.this) {
 								/**
 						 * 
 						 */
@@ -649,6 +638,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 								}
 							};
 							gmd.setTitle("删除村");
+							gmd.setModal(true);
 							gmd.setThorp(mCurrentThorp);
 							gmd.setVisible(true);
 						}
@@ -664,7 +654,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 			jButtonImportVillager
 					.addMouseListener(new java.awt.event.MouseAdapter() {
 						public void mouseClicked(java.awt.event.MouseEvent e) {
-							DataImportDialog gmd = new DataImportDialog() {
+							DataImportDialog gmd = new DataImportDialog(XXNCYLBXMain.this) {
 								/**
 						 * 
 						 */
@@ -685,6 +675,8 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 							};
 							gmd.setTitle("导入数据");
 							// gmd.setThorp(mCurrentThorp);
+							
+							gmd.setModal(true);
 							gmd.setVisible(true);
 						}
 					});
@@ -776,7 +768,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						
 					String tempMSG = "是否确认删除所有档案数据？\r\n该操作将不可恢复数据，请谨慎使用！！";
-				MessageDialog gmd = new MessageDialog() {
+				MessageDialog gmd = new MessageDialog(XXNCYLBXMain.this) {
 					/**
 					 * 
 					 */
@@ -806,6 +798,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 					}
 				};
 				gmd.setTitle("系统提示");
+				gmd.setModal(true);
 				gmd.setMessage(tempMSG);
 				gmd.setVisible(true);
 					}
@@ -1385,12 +1378,12 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 				@Override
 				public boolean actionEnter() {
 					// TODO Auto-generated method stub
-					super.actionEnter();
+					
 					String ic = getEditor().getItem().toString();
 
 					selectEditVillager(ic);
 
-					return true;
+					return super.actionEnter();
 				}
 
 			};
@@ -2020,7 +2013,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 			if (mFocuseNext != null) {
 				mFocuseNext.requestFocus();
 			}
-			return super.actionEnter();
+			return true;
 		}
 
 		@Override
@@ -2339,9 +2332,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 					mCurrentVillager = tempVillager;
 					mBankAccount = mCurrentVillager.getV_bank_account();
 					mBankAccountName = mCurrentVillager.getV_bank_account_name();
-//					mBank2Account = mCurrentVillager.getV_bank2_account();
-//					mBank2AccountName = mCurrentVillager.getV_bank2_account_name();
-					
+
 				} else {
 					// 插入失败
 					String tempMSG = "数据保存失败！";
@@ -2395,16 +2386,18 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 				return;
 			}
 
+			boolean flagAdd = false;
 			if (!mXXDB.isExistVillager(tempVillager.getV_ic())) {
-				String tempMSG = "该身份证号（" + tempVillager.getV_ic()
-						+ "）不存在系统中，请先添加！";
-				//声音提示
-				Toolkit.getDefaultToolkit().beep();
-				JOptionPane.showConfirmDialog(null, tempMSG, "系统提示",
-						JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE);
-				jComboBox_ic.requestFocus();
-
-				return;
+//				String tempMSG = "该身份证号（" + tempVillager.getV_ic()
+//						+ "）不存在系统中，请先添加！";
+//				//声音提示
+//				Toolkit.getDefaultToolkit().beep();
+//				JOptionPane.showConfirmDialog(null, tempMSG, "系统提示",
+//						JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE);
+//				jComboBox_ic.requestFocus();
+//
+//				return;
+				flagAdd = true;
 			}
 
 			String cheak = cheakData(tempVillager);
@@ -2416,6 +2409,34 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 						JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE);
 			} else {
 				// 数据合法
+				if(flagAdd){
+					if (mXXDB.insertVillager(tempVillager)) {
+						// 插入成功
+						String tempMSG = "数据（" + tempVillager.getV_ic()
+								+ "）保存成功！";
+						//声音提示
+						Toolkit.getDefaultToolkit().beep();
+						JOptionPane.showConfirmDialog(null, tempMSG, "系统提示",
+								JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE);
+						clearEditVillager(false, false);
+						jComboBox_ic.requestFocus();
+						jScrollPaneCenterLeft.getVerticalScrollBar().setValue(0);
+						refreshTableVillager();
+						mCurrentVillager = tempVillager;
+						mBankAccount = mCurrentVillager.getV_bank_account();
+						mBankAccountName = mCurrentVillager.getV_bank_account_name();
+
+					} else {
+						// 插入失败
+						String tempMSG = "数据保存失败！";
+						//声音提示
+						Toolkit.getDefaultToolkit().beep();
+						JOptionPane.showConfirmDialog(null, tempMSG, "系统提示",
+								JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE);
+					}
+					return;
+				}
+				
 				tempVillager.setV_id(mCurrentVillager.getV_id());
 				System.out.println("========"+tempVillager.getV_id());
 				if (mXXDB.updateVillager(tempVillager,isNewId)) {
@@ -2492,7 +2513,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 
 			String tempMSG = "是否确认删除:" + tempVillager.getV_name() + "=>"
 					+ tempVillager.getV_ic() + " 的档案？";
-			MessageDialog gmd = new MessageDialog() {
+			MessageDialog gmd = new MessageDialog(this) {
 				/**
 				 * 
 				 */
@@ -2522,6 +2543,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 				}
 			};
 			gmd.setTitle("系统提示");
+			gmd.setModal(true);
 			gmd.setMessage(tempMSG);
 			gmd.setVisible(true);
 

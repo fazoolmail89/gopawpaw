@@ -17,13 +17,14 @@ import java.awt.event.WindowListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import com.gopawpaw.frame.widget.GJButton;
-import com.gopawpaw.frame.widget.GJDialog;
 
 /**
  * 消息对话框
@@ -31,7 +32,7 @@ import com.gopawpaw.frame.widget.GJDialog;
  * @author 李锦华
  * @since: 2011-11-16
  */
-public class MessageDialog extends GJDialog implements ActionListener{
+public class MessageDialog extends JDialog implements ActionListener{
 
 	public final static int YES_OPTION = JOptionPane.YES_OPTION;
 
@@ -52,7 +53,7 @@ public class MessageDialog extends GJDialog implements ActionListener{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	
+	private JInternalFrame mJInternalFrame;
 	public MessageDialog() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -66,7 +67,12 @@ public class MessageDialog extends GJDialog implements ActionListener{
 		// TODO Auto-generated constructor stub
 		init();
 	}
-
+	
+	public MessageDialog(JInternalFrame owner) {
+		mJInternalFrame = owner;
+		init();
+	}
+	
 	/**
 	 * @param owner
 	 */
@@ -317,7 +323,12 @@ public class MessageDialog extends GJDialog implements ActionListener{
 		super.setTitle(this.title);
 		this.setSize(300, 150);
 		
-		this.setLocation(this.getOwner().getLocation().x+this.getOwner().getSize().width/3,this.getOwner().getLocation().y+this.getOwner().getSize().height/4);
+		if(mJInternalFrame != null){
+			this.setLocation(mJInternalFrame.getLocation().x+mJInternalFrame.getSize().width/3,mJInternalFrame.getLocation().y+mJInternalFrame.getSize().height/4);
+		}else{
+			
+			this.setLocation(this.getOwner().getLocation().x+this.getOwner().getSize().width/3,this.getOwner().getLocation().y+this.getOwner().getSize().height/4);
+		}
 
 		this.add(getJPanelContent());
 		//声音提示

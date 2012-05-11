@@ -17,15 +17,15 @@ import java.awt.event.WindowEvent;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.gopawpaw.frame.widget.GJButton;
-import com.gopawpaw.frame.widget.GJDialog;
 import com.gopawpaw.frame.widget.GJTextField;
 
-public class RegisterDialog extends GJDialog implements ActionListener{
+public class RegisterDialog extends JDialog implements ActionListener{
 
 	public final static int YES_OPTION = JOptionPane.YES_OPTION;
 

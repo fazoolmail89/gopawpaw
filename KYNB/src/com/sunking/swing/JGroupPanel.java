@@ -1,10 +1,29 @@
 package com.sunking.swing;
 
-import java.util.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.LayoutManager;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.UIManager;
+
+import com.gopawpaw.frame.GlobalParameter;
 
 /**
  * <p>Title:OpenSwing </p>
@@ -19,7 +38,7 @@ import javax.swing.*;
  * @version 1.0
  */
 public class JGroupPanel
-    extends JPanel {
+    extends JImagePane {
     /*用来管理组的三个容器*/
     private JPanel pNorth = new JPanel() {
     };
@@ -510,7 +529,7 @@ public class JGroupPanel
     class JGroupContainer
         extends JPanel {
         private JButton bttGroupTitle = new JButton();
-        private JPanel pMembers = new JPanel();
+        private JImagePane pMembers = new JImagePane();
         private JScrollPane sp;
         public JGroupContainer() {
             this("");
@@ -530,9 +549,16 @@ public class JGroupPanel
             pMembers.setLayout(new GroupLayout(5, 5));
             this.setLayout(new BorderLayout());
             this.add(bttGroupTitle, BorderLayout.NORTH);
-
-            pMembers.setBackground(background);
-
+            try {
+            	
+            	String impath = GlobalParameter.getCourrenPath()+"/images/bg_module.jpg";
+				Image backgroundImage = ImageIO.read(new File(impath));
+				pMembers.setBackgroundImage(backgroundImage);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+           
             Color thumbColor = UIManager.getColor("ScrollBar.thumb");
             Color trackColor = UIManager.getColor("ScrollBar.track");
             Color trackHighlightColor = UIManager.getColor(
@@ -541,6 +567,38 @@ public class JGroupPanel
             UIManager.put("ScrollBar.thumb", background);
             UIManager.put("ScrollBar.track", background);
             UIManager.put("ScrollBar.trackHighlight", background);
+            sp = new JScrollPane(pMembers);
+            sp.setHorizontalScrollBarPolicy(
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            this.add(sp, BorderLayout.CENTER);
+            collapse();
+            UIManager.put("ScrollBar.thumb", thumbColor);
+            UIManager.put("ScrollBar.track", trackColor);
+            UIManager.put("ScrollBar.trackHighlight", trackHighlightColor);
+
+        }
+        
+        /**
+         * @param name String  组名
+         * @param background Color 成员组件所在面板背景色
+         */
+        public JGroupContainer(String name, Image image) {
+            bttGroupTitle.setText(name);
+            bttGroupTitle.setFocusable(false);
+            pMembers.setLayout(new GroupLayout(5, 5));
+            this.setLayout(new BorderLayout());
+            this.add(bttGroupTitle, BorderLayout.NORTH);
+
+            pMembers.setBackgroundImage(image);
+           
+            Color thumbColor = UIManager.getColor("ScrollBar.thumb");
+            Color trackColor = UIManager.getColor("ScrollBar.track");
+            Color trackHighlightColor = UIManager.getColor(
+                "ScrollBar.trackHighlight");
+
+            UIManager.put("ScrollBar.thumb", image);
+            UIManager.put("ScrollBar.track", image);
+            UIManager.put("ScrollBar.trackHighlight", image);
             sp = new JScrollPane(pMembers);
             sp.setHorizontalScrollBarPolicy(
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);

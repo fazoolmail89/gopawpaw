@@ -20,12 +20,13 @@ import java.awt.event.WindowEvent;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.gopawpaw.frame.widget.GJButton;
-import com.gopawpaw.frame.widget.GJDialog;
 import com.gopawpaw.frame.widget.GJTextField;
 import com.gopawpaw.kynb.bean.Thorp;
 
@@ -33,7 +34,7 @@ import com.gopawpaw.kynb.bean.Thorp;
  * @version 2011-11-16
  * @author Jason
  */
-public class ThorpDialog extends GJDialog implements ActionListener{
+public class ThorpDialog extends JDialog implements ActionListener{
 
 	public final static int YES_OPTION = JOptionPane.YES_OPTION;
 
@@ -55,6 +56,8 @@ public class ThorpDialog extends GJDialog implements ActionListener{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private JInternalFrame mJInternalFrame;
+	
 	/**
 	 * @param owner
 	 */
@@ -72,6 +75,11 @@ public class ThorpDialog extends GJDialog implements ActionListener{
 		init();
 	}
 
+	public ThorpDialog(JInternalFrame owner) {
+		mJInternalFrame = owner;
+		init();
+	}
+	
 	/**
 	 * @param owner
 	 */
@@ -315,8 +323,12 @@ public class ThorpDialog extends GJDialog implements ActionListener{
 		super.setTitle(this.title);
 		this.setSize(300, 150);
 		
-		this.setLocation(this.getOwner().getLocation().x+this.getOwner().getSize().width/3,this.getOwner().getLocation().y+this.getOwner().getSize().height/4);
-
+		if(mJInternalFrame != null){
+			this.setLocation(mJInternalFrame.getLocation().x+mJInternalFrame.getSize().width/3,mJInternalFrame.getLocation().y+mJInternalFrame.getSize().height/4);
+		}else{
+			
+			this.setLocation(this.getOwner().getLocation().x+this.getOwner().getSize().width/3,this.getOwner().getLocation().y+this.getOwner().getSize().height/4);
+		}
 		this.add(getJPanelContent());
 
 		super.setVisible(arg0);

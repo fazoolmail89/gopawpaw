@@ -19,7 +19,9 @@ import java.awt.event.WindowEvent;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -27,7 +29,6 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 
 import com.gopawpaw.frame.widget.GJButton;
-import com.gopawpaw.frame.widget.GJDialog;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.db.DBException;
@@ -39,7 +40,7 @@ import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
  * @version 2011-11-18
  * @author Jason
  */
-public class DataImportDialog extends GJDialog implements ActionListener {
+public class DataImportDialog extends JDialog implements ActionListener {
 
 	public final static int YES_OPTION = JOptionPane.YES_OPTION;
 
@@ -66,6 +67,7 @@ public class DataImportDialog extends GJDialog implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private JInternalFrame mJInternalFrame;
 	/**
 	 * @param owner
 	 */
@@ -83,6 +85,10 @@ public class DataImportDialog extends GJDialog implements ActionListener {
 		init();
 	}
 
+	public DataImportDialog(JInternalFrame owner) {
+		mJInternalFrame = owner;
+		init();
+	}
 	/**
 	 * @param owner
 	 */
@@ -343,10 +349,12 @@ public class DataImportDialog extends GJDialog implements ActionListener {
 		super.setTitle(this.title);
 		this.setSize(400, 150);
 
-		this.setLocation(this.getOwner().getLocation().x
-				+ this.getOwner().getSize().width / 3, this.getOwner()
-				.getLocation().y + this.getOwner().getSize().height / 4);
-
+		if(mJInternalFrame != null){
+			this.setLocation(mJInternalFrame.getLocation().x+mJInternalFrame.getSize().width/3,mJInternalFrame.getLocation().y+mJInternalFrame.getSize().height/4);
+		}else{
+			
+			this.setLocation(this.getOwner().getLocation().x+this.getOwner().getSize().width/3,this.getOwner().getLocation().y+this.getOwner().getSize().height/4);
+		}
 		this.add(getJPanelContent());
 
 		super.setVisible(arg0);

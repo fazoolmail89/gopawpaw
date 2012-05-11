@@ -76,6 +76,7 @@ public class IdnoUpgrade3 extends BaseModuleFrame implements GppJarRunableInterf
 	private void initialize() {
 		this.setSize(900, 600);
 		this.setLocation(200, 100);
+		this.setTitle("身份证升级（手工）");
 		this.setContentPane(getJContentPane());
 	}
 

@@ -286,20 +286,32 @@ public class GppAbout extends JDialog {
 //				}
 //			});
 			
+			
+			jLabel = new JLabel();
+			jLabel.setBounds(new Rectangle(22, 18, 333, 24));
+			jLabel.setText("程序名称：藤县快译农保信息处理系统");
+			
+			jLabel1 = new JLabel();
+			jLabel1.setBounds(new Rectangle(22, 48, 333, 22));
+			jLabel1.setText("版    本：V1.2");
+			
+			
 			jLabel2 = new JLabel();
-			jLabel2.setBounds(new Rectangle(22, 90, 333, 19));
+			jLabel2.setBounds(new Rectangle(22, 78, 333, 19));
 			jLabel2.setText("技术支持：李业钦");
 			
 			jLabel3 = new JLabel();
-			jLabel3.setBounds(new Rectangle(22, 122, 333, 20));
-			jLabel3.setText("QQ:1483695671");
+			jLabel3.setBounds(new Rectangle(22, 108, 333, 20));
+			jLabel3.setText("Email:kuaiyi_support@163.com");
 			
-			jLabel1 = new JLabel();
-			jLabel1.setBounds(new Rectangle(22, 50, 333, 22));
-			jLabel1.setText("版    本：V1.2");
-			jLabel = new JLabel();
-			jLabel.setBounds(new Rectangle(22, 18, 333, 24));
-			jLabel.setText("程序名称：快译农保信息处理系统");
+			jLabel4 = new JLabel();
+			jLabel4.setBounds(new Rectangle(22, 138, 333, 20));
+			jLabel4.setText("QQ:1483695671");
+			
+			JLabel jLabel5 = new JLabel();
+			jLabel5.setBounds(new Rectangle(22, 168, 333, 20));
+			jLabel5.setText("电话:18077435330");
+			
 			jPanel = new JPanel();
 			jPanel.setLayout(null);
 			
@@ -313,8 +325,8 @@ public class GppAbout extends JDialog {
 			jPanel.add(jLabel1, null);
 			jPanel.add(jLabel2, null);
 			jPanel.add(jLabel3, null);
-//			jPanel.add(jLabel4, null);
-
+			jPanel.add(jLabel4, null);
+			jPanel.add(jLabel5, null);
 			
 		}
 		return jPanel;

@@ -4,7 +4,8 @@
 package com.gopawpaw.frame.ui;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.beans.PropertyVetoException;
@@ -16,6 +17,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDesktopPane;
@@ -25,6 +27,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 
 import com.gopawpaw.frame.GlobalParameter;
@@ -60,7 +63,7 @@ public class MainPanelTree extends JPanel implements ModulesListener{
 	/**
 	 * Ä£¿é±³¾°Í¼Æ¬
 	 */
-	private static final String BACKGROUND_MODULE_IMG_PATH = "bg_module.jpg";
+	private static final String BACKGROUND_MODULE_IMG_PATH = GlobalParameter.getCourrenPath()+"/images/bg_module.jpg";
 
 	/**
 	 * This is the default constructor
@@ -171,14 +174,43 @@ public class MainPanelTree extends JPanel implements ModulesListener{
 
 		DefaultMutableTreeNode menuroot = new DefaultMutableTreeNode(od
 				.getDmnd_det());
-
-		DefaultTreeModel menuTreeModel = new DefaultTreeModel(menuroot);
-
-		final JTree retJTree = new JTree(menuTreeModel);
-
-		retJTree.setFont(GlobalParameter.getGuiClient().getFontOfFunctionTreeNav());
-		retJTree.setBackground(GlobalParameter.getGuiClient().getBackgroundOfFunctionTreeNav());
 		
+		DefaultTreeModel menuTreeModel = new DefaultTreeModel(menuroot);
+		
+		final JTree retJTree = new JTree(menuTreeModel);
+		
+		retJTree.setFont(GlobalParameter.getGuiClient().getFontOfFunctionTreeNav());
+		retJTree.setBackground(new Color(0, 0, 0, 0));
+		
+		DefaultTreeCellRenderer cellRenderer = new DefaultTreeCellRenderer(){
+//			public   Component   getTreeCellRendererComponent(JTree   tree,   Object   value,   boolean   selected,   boolean   expanded,   boolean   leaf,   int   row,   boolean   hasFocus)   { 
+//
+//                super.getTreeCellRendererComponent(tree,   value,   selected,   expanded,   leaf,   row,   hasFocus); 
+//                Object   obj   =   ((DefaultMutableTreeNode)value).getUserObject(); 
+//                try {
+//        			Image backgroundImage = ImageIO.read(new File("green_empty.png"));
+//        			ImageIcon icon = new ImageIcon(backgroundImage);
+//        			if   (icon   !=   null) 
+//                        setIcon(icon); 
+//        		} catch (IOException e) {
+//        			// TODO Auto-generated catch block
+//        			e.printStackTrace();
+//        		}
+//                
+//                return   this; 
+//        } 
+			
+			
+		};
+		cellRenderer.setBackgroundNonSelectionColor(new Color(0, 0, 0, 0));
+		cellRenderer.setBackgroundSelectionColor(new Color(50, 50, 50, 30));
+		cellRenderer.setBorderSelectionColor(new Color(0, 0, 0, 0));
+		cellRenderer.setBackground(new Color(0, 0, 0, 0));
+		cellRenderer.setForeground(new Color(0, 0, 0, 0));
+		cellRenderer.setTextNonSelectionColor(Color.BLACK);
+		cellRenderer.setTextSelectionColor(Color.RED);
+		retJTree.setCellRenderer(cellRenderer);
+
 		if (dd.isHaveChild()) {
 //			DefaultMutableTreeNode temp = new DefaultMutableTreeNode("");
 //			menuroot.add(temp);
@@ -215,6 +247,7 @@ public class MainPanelTree extends JPanel implements ModulesListener{
 				.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
 					public void valueChanged(
 							javax.swing.event.TreeSelectionEvent e) {
+						
 						// DefaultMutableTreeNode sunroot =
 						// (DefaultMutableTreeNode) e
 						// .getPath().getLastPathComponent();
@@ -349,7 +382,7 @@ public class MainPanelTree extends JPanel implements ModulesListener{
 	public JGroupPanel getjGroupPanel() {
 		if (jGroupPanel == null) {
 			jGroupPanel = new JGroupPanel();
-
+			
 			Dmnd_det dd = new Dmnd_det();
 			dd.setMnd_nbr("");
 			dd.setMnd_select(2);
@@ -357,7 +390,7 @@ public class MainPanelTree extends JPanel implements ModulesListener{
 			od.updateDmnd_det();
 			od.updataVector();
 			Vector<Dmnd_det> vedd = od.getVectorDmnd_det();
-			GLog.d(TAG, "getjGroupPanel" + dd);
+			
 			Iterator<Dmnd_det> it = vedd.iterator();
 
 			// System.out.println(size);

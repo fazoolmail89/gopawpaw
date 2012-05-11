@@ -249,7 +249,7 @@ public class GlobalParameter {
 			@Override
 			public Color getBackgroundOfFunctionList() {
 
-				return Color.WHITE;
+				return null;
 			}
 
 			@Override
@@ -267,17 +267,17 @@ public class GlobalParameter {
 			@Override
 			public Color getBackgroundOfFunctionNav() {
 				
-				return Color.GRAY;
+				return Color.red;
 			}
 
 			@Override
 			public Color getBackgroundOfFunctionTreeNav() {
 				
-				return Color.gray;
+				return null;
 			}
 			@Override
 			public Font getFontOfFunctionTreeNav() {
-				return new   java.awt.Font( "宋体 ",java.awt.Font.PLAIN,12);
+				return new   java.awt.Font( "宋体 ",java.awt.Font.PLAIN,15);
 			}
 
 			@Override
@@ -287,7 +287,7 @@ public class GlobalParameter {
 
 			@Override
 			public Font getFontOfFunctionGruop() {
-				return new   java.awt.Font( "宋体 ",java.awt.Font.BOLD,14);
+				return new   java.awt.Font( "宋体 ",java.awt.Font.BOLD,16);
 			}
 			
 		};
@@ -498,5 +498,20 @@ public class GlobalParameter {
 		GlobalParameter.guiClient = guiClient;
 	}
 	
+	public static final int IMAGE_KEY_MODULE = 11;
 	
+	/**
+	 * 根据图片key获取图片路径
+	 * @version 2012-5-11
+	 * @author Jason
+	 * @param
+	 * @return String
+	 */
+	public static String getImagePath(int key){
+		if(key == IMAGE_KEY_MODULE){
+			return getCourrenPath()+"/images/bg_module.jpg";
+		}
+		
+		return "";
+	}
 }

@@ -5,7 +5,6 @@ package com.gopawpaw.kynb.module.oldprogram;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -18,6 +17,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -28,7 +28,6 @@ import javax.swing.SwingConstants;
 
 import com.gopawpaw.frame.widget.GJCheckBox;
 import com.gopawpaw.frame.widget.GJComboBox;
-import com.gopawpaw.frame.widget.GJDialog;
 import com.gopawpaw.kynb.bean.DefultData;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
@@ -43,7 +42,7 @@ import com.gopawpaw.kynb.utils.DateUtils;
  * @version 2011-12-17
  * @author Jason
  */
-public class DataExportDialog1 extends GJDialog {
+public class DataExportDialog1 extends JDialog {
 
 	/**
 	 * 
