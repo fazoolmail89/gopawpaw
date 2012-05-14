@@ -13,7 +13,7 @@ public final class ExcelFileFilter extends FileFilter {
 	public ExcelFileFilter() {
 		super();
 		list.add("xls");
-		list.add("xlsx");
+		//list.add("xlsx");
 	}
 	
 	@Override
