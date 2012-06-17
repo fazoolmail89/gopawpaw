@@ -20,7 +20,7 @@ public class PrintFrame extends BaseModuleFrame {
 	
 	private JPanel pnlOptBtn;
 	private JButton btnPrintOne;
-	private JButton btnPrintList;
+	//private JButton btnPrintList;
 	
 	public PrintFrame() {
 		
@@ -29,7 +29,7 @@ public class PrintFrame extends BaseModuleFrame {
 		
 		pnlOptBtn = new JPanel();
 		btnPrintOne = new JButton("打印");
-		btnPrintList = new JButton("打印列表");
+		//btnPrintList = new JButton("打印列表");
 		
 		btnPrintOne.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -42,7 +42,7 @@ public class PrintFrame extends BaseModuleFrame {
 		});
 		
 		pnlOptBtn.add(btnPrintOne);
-		pnlOptBtn.add(btnPrintList);
+		//pnlOptBtn.add(btnPrintList);
 		
 		setLayout(new BorderLayout());
 		add(pnlQuery, BorderLayout.NORTH);

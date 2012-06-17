@@ -13,6 +13,8 @@ import java.util.Map;
 
 
 public class License implements Printable{
+	//print.ini 标签常量
+	//-----------------------------------------------------------------
 	public static final String PAGER = "pager";
 	public static final String PAGER_W = "w";
 	public static final String PAGER_H = "h";
@@ -26,9 +28,22 @@ public class License implements Printable{
 	public static final String ACCOUNT_TYPE = "accountType";//户口性质
 	public static final String GRANT_DATE = "grantDate";//核发时间
 	public static final String GRANT_DPMT = "grantDpmt";//核发单位
+	//-----------------------------------------------------------------
 	
-	public static int PAGER_SIZE_W = 300; 
-	public static int PAGER_SIZE_H = 400;
+	/**
+	 * 核发单位默认值，值对应print.ini文件的“[grantDpmt].dpmt”的值 
+	 */
+	public static String GreantDpmtDV = "";
+	
+	/**
+	 * 默认打印页面宽度
+	 */
+	public static int PagerSize_W = 300; 
+	
+	/**
+	 * 默认打印界面长度
+	 */
+	public static int PagerSize_H = 400;
 	
 	private String name;//姓名
 	private String oldName;//曾用名
@@ -106,8 +121,13 @@ public class License implements Printable{
 		this.grantDate = grantDate;
 	}
 
+	/**
+	 * 
+	 * @return 默认核发单位 License.GRANT_DPMT_DV
+	 */
 	public String getGrantDpmt() {
-		return grantDpmt;
+		//return grantDpmt;
+		return License.GreantDpmtDV;
 	}
 
 	public void setGrantDpmt(String grantDpmt) {
@@ -174,8 +194,8 @@ public class License implements Printable{
 			try {
 				IniReader ir = new IniReader(iniFile.getPath());
 				
-				PAGER_SIZE_W = Integer.parseInt(ir.getValue(License.PAGER, License.PAGER_W));
-				PAGER_SIZE_H = Integer.parseInt(ir.getValue(License.PAGER, License.PAGER_H));
+				PagerSize_W = Integer.parseInt(ir.getValue(License.PAGER, License.PAGER_W));
+				PagerSize_H = Integer.parseInt(ir.getValue(License.PAGER, License.PAGER_H));
 				
 				print_point.put(License.NAME, 
 						new Coordinate(Integer.parseInt(ir.getValue(License.NAME, Coordinate.X)), 
@@ -204,6 +224,8 @@ public class License implements Printable{
 				print_point.put(License.GRANT_DPMT, 
 						new Coordinate(Integer.parseInt(ir.getValue(License.GRANT_DPMT, Coordinate.X)), 
 										Integer.parseInt(ir.getValue(License.GRANT_DPMT, Coordinate.Y))));
+				
+				GreantDpmtDV = ir.getValue(License.GRANT_DPMT, "dpmt");
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch(NumberFormatException e) {

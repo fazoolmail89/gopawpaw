@@ -17,7 +17,7 @@ import com.gopawpaw.kynb.widget.GppStyleTable;
 public class LicenseTable extends JScrollPane implements Printable{
 	private static final long serialVersionUID = -2609235147104011331L;
 	public static final Object[] columnNames = { "姓名", "身份证号", "曾用名", "出生年月日", "性别",
-									"社会保障号", "地址", "户口性质", "核发时间", "核发单位"};
+									"社会保障号", "地址", "户口性质", "所在村", "打印标记"};
 	public Object[][] data;
 	public JTable table;
 	private static DefaultTableModel dtm;
@@ -28,6 +28,17 @@ public class LicenseTable extends JScrollPane implements Printable{
 		table.setModel(new DefaultTableModel(data, columnNames));
 		table.setRowHeight(22);
 		setViewportView(table);
+	}
+	
+	/**
+	 * 刷新表格当前数据
+	 */
+	public void refreshTable(Object[][] data) {
+		this.data = data;
+		dtm = new DefaultTableModel(data, columnNames);
+		((GppStyleTable) table).updateModel(dtm);
+		table.repaint();
+		table.updateUI();
 	}
 	
 	public License getSelectLicense() {
