@@ -51,6 +51,38 @@ public class DBOpertor extends XXNCYLBXDBAccess {
 		StringBuffer sqlPre = new StringBuffer("insert into "
 				+ tableItem.getTableName() + " (");
 
+		//==========================拼接选择或默认的字段========start
+		StringBuffer defValuse = new StringBuffer();
+		List<String> list0 = tableItem.getTableFieldSelect();
+		for(String field:list0){
+			sqlPre.append(field);
+			sqlPre.append(" , ");
+			
+			Object obj = tableItem.getFiledDefValuse(field);
+			if(obj instanceof Integer){
+				defValuse.append(obj);
+			}else{
+				defValuse.append("'" + obj + "'" );				
+			}
+			defValuse.append(" ,");
+		}
+		
+		List<String> list1 = tableItem.getTableFieldDef();
+		for(String field:list1){
+			sqlPre.append(field);
+			sqlPre.append(" , ");
+			Object obj = tableItem.getFiledDefValuse(field);
+			if(obj instanceof Integer){
+				defValuse.append(obj);
+			}else{
+				defValuse.append("'" + obj + "'" );				
+			}
+			defValuse.append(" , ");
+		}
+		
+		//==========================拼接选择或默认的字段========end
+		
+		//==========================拼接导入的字段========start
 		HashMap<String, Integer> map = tableItem.getTableFieldToIndex();
 		List<String> list = tableItem.getTableFieldImport();
 		int size = list.size();
@@ -69,8 +101,12 @@ public class DBOpertor extends XXNCYLBXDBAccess {
 
 			excelIndex[i] = map.get(field);
 		}
+		//==========================拼接导入的字段========end
 
 		sqlPre.append(") values (");
+		//==========================拼接选择或默认的字段值========start
+		sqlPre.append(defValuse.toString());		
+		//==========================拼接选择或默认的字段值========end
 
 		if (commonsql.connect(user, password)) {
 
@@ -138,13 +174,13 @@ public class DBOpertor extends XXNCYLBXDBAccess {
 		DBTableItem table = new DBTableItem();
 		table.setTableName("villager");
 		table.setTableNameDisplay("居民基础数据");
-		table.addField(v_name, "姓名", true);
-		table.addField(v_sex, "性别", true);
-		table.addField(v_ic, "身份证号", true);
-		table.addField(v_nation, "民族", true);
-		table.addField(v_birthday, "出生日期", true);
-		table.addField(v_address_live, "现居住地址", true);
-		table.addField(v_householder_name, "户主姓名", true);
+		table.addField(v_name, "姓名");
+		table.addField(v_sex, "性别");
+		table.addField(v_ic, "身份证号");
+		table.addField(v_nation, "民族");
+		table.addField(v_birthday, "出生日期");
+		table.addField(v_address_live, "现居住地址");
+		table.addField(v_householder_name, "户主姓名");
 
 		importTableList.add(table);
 		// ====居民数据表导入字段=====end
@@ -153,14 +189,48 @@ public class DBOpertor extends XXNCYLBXDBAccess {
 		table = new DBTableItem();
 		table.setTableName("villager_error");
 		table.setTableNameDisplay("黑名单数据表");
-		table.addField("ve_name", "姓名", true);
-		table.addField("ve_ic", "身份证号", true);
-		table.addField("ve_type", "黑名单类型", true);
-		table.addField("ve_remark1", "备注信息一", true);
-		table.addField("ve_remark2", "备注信息二", true);
-		table.addField("ve_remark3", "备注信息三", true);
+		table.addField("ve_name", "姓名");
+		table.addField("ve_ic", "身份证号");
+		table.addField("ve_type", "黑名单类型");
+		table.addField("ve_remark1", "备注信息一");
+		table.addField("ve_remark2", "备注信息二");
+		table.addField("ve_remark3", "备注信息三");
 		importTableList.add(table);
 		// ====黑名单数据表导入字段=====end
+		
+		// ====打印数据表导入字段=====start
+		table = new DBTableItem();
+		table.setTableName("printData");
+		table.setTableNameDisplay("打印数据表");
+		table.addField("Area", "所属地区");
+		table.addField("ThorpId", "所属村", false,null);
+		table.addField("ThorpName", "所属机构编号");
+		table.addField("SerialNum", "个人编号");
+		table.addField("Name", "姓名");
+		table.addField("ICCode", "身份证号");
+		table.addField("Phone", "联系电话");
+		table.addField("FamilyCode", "家庭编号");
+		table.addField("J_Account", "缴费银行账号");
+		table.addField("J_AccountName", "缴费银行户名");
+		table.addField("Z_Account", "支付银行账号");
+		table.addField("Z_AccountName", "支付银行户名");
+		table.addField("Age", "年龄");
+		table.addField("Sex", "性别");
+		table.addField("AchieveDate", "到龄时间");
+		table.addField("BirthDate", "出生日期");
+		table.addField("Relationship", "与户主关系");
+		table.addField("PayGrade", "本年缴费档次");
+		table.addField("PersType", "本年人员类别");
+		table.addField("Address", "家庭住址");
+		table.addField("Remark", "备注");
+		table.addField("TotalAcct", "累计个人账户金额");
+		table.addField("TotalPay", "累计个人缴费金额");
+		table.addField("TotalSubs", "累计财政补助");
+		table.addField("PrintFlag", "打印标记",false,0);
+		table.addField("PrintDate", "打印日期",false);
+		
+		importTableList.add(table);
+		// ====打印数据表导入字段=====end
 
 		return importTableList;
 	}

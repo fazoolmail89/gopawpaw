@@ -17,4 +17,9 @@ public class BaseJInternalFrame extends JInternalFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Override
+	public void setVisible(boolean arg0) {
+		// TODO Auto-generated method stub
+		super.setVisible(arg0);
+	}
 }

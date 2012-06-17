@@ -107,6 +107,13 @@ public class GlobalParameter {
 	private static GUIclient guiClient = null;
 	
 	/**
+	 * 是否已经授权运行模块
+	 */
+	public static boolean isAuthModuls = false;
+	
+	
+	
+	/**
 	 * 
 	 */
 	public GlobalParameter() {
@@ -514,4 +521,6 @@ public class GlobalParameter {
 		
 		return "";
 	}
+	
+	
 }

@@ -43,6 +43,35 @@ public class StringUtils {
 		return String.valueOf(chs);
 	}
 	
+	/**
+	 * »ñÈ¡»ìÏý×Ö·û
+	 */
+	public static String getObfuscation(String str,String key){
+		
+		str = key + str;
+		
+		char[] ch = str.toCharArray();
+		char[] chs = new char[ch.length];
+
+		for (int i = 0; i < ch.length; i++) {
+			chs[i] = (char) (ch[i] ^ ((i+obfcode) * obfcode));
+		}
+		return String.valueOf(chs);
+	}
+	
+	/**
+	 * ½âÎö»ìÏý×Ö·û
+	 */
+	public static String unObfuscation(String str,String key) {
+		
+		char[] ch = str.toCharArray();
+		char[] chs = new char[ch.length];
+
+		for (int i = 0; i < ch.length; i++) {
+			chs[i] = (char) (ch[i] ^ ((i+obfcode) * obfcode));
+		}
+		return String.valueOf(chs).replace(key, "");
+	}
 	
 	public static void main(String[] args) {
 		GLog.d("", getObfuscation("y9TsnOMpG]#P"));

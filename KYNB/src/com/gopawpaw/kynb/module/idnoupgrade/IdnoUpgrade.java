@@ -23,12 +23,14 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import com.gopawpaw.frame.GlobalParameter;
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.common.Progress;
 import com.gopawpaw.kynb.common.ProgressBarPanel;
 import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
+import com.gopawpaw.kynb.utils.StringConstant;
 
 /**
  * @描述 身份证号码升级界面
@@ -65,6 +67,15 @@ public class IdnoUpgrade extends BaseModuleFrame {
 	 * @throws HeadlessException
 	 */
 	public IdnoUpgrade() throws HeadlessException {
+		
+		if(!GlobalParameter.isAuthModuls){
+			//非法授权
+			JOptionPane.showConfirmDialog(null, StringConstant.isNotAuthMsg,
+					"系统提示", JOptionPane.YES_NO_OPTION,
+					JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+		
 		setTitle("身份证号自动升级<一>");
 		
 		setSize(900, 600);

@@ -20,6 +20,9 @@ import java.awt.event.AdjustmentListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,6 +46,8 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
+import com.gopawpaw.frame.GlobalParameter;
+import com.gopawpaw.frame.log.GLog;
 import com.gopawpaw.frame.utils.GppCmdShell;
 import com.gopawpaw.frame.utils.GppJarRunableInterface;
 import com.gopawpaw.frame.widget.GJCheckBox;
@@ -59,6 +64,7 @@ import com.gopawpaw.kynb.module.BaseModuleFrame;
 import com.gopawpaw.kynb.utils.DateUtils;
 import com.gopawpaw.kynb.utils.GppConfiguration;
 import com.gopawpaw.kynb.utils.IDNumberChecker;
+import com.gopawpaw.kynb.utils.StringConstant;
 import com.gopawpaw.kynb.utils.Tools;
 import com.gopawpaw.kynb.widget.GppStyleTable;
 import com.gopawpaw.kynb.widget.MessageDialog;
@@ -170,6 +176,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 	
 	private String mBank2Account ="";
 	
+	private DefaultTableModel mVillagerModel;
 	/**
 	 * @throws HeadlessException
 	 */
@@ -204,11 +211,17 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 	 * @return void
 	 */
 	private void initialize() {
-		
+		if(!GlobalParameter.isAuthModuls){
+			//非法授权
+			JOptionPane.showConfirmDialog(null, StringConstant.isNotAuthMsg,
+					"系统提示", JOptionPane.YES_NO_OPTION,
+					JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
 		this.setSize(900, 600);
 		this.setLocation(200, 100);
 		this.setContentPane(getJContentPane());
-		this.setTitle("旧版程序");
+		this.setTitle("数据信息录入");
 		mGppConfiguration = new GppConfiguration("ini.ini");
 		// testDB();
 	}
@@ -264,13 +277,13 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 			jPanelRight.add(getJPanelRightTop(), BorderLayout.NORTH);
 
 			JSplitPane jSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
-					jPanelLeft, jPanelRight);
+					jPanelLeft, null);
 			jSplitPane.setDividerLocation(300);
 			jSplitPane.setOneTouchExpandable(true);
 			jSplitPane.setDividerSize(10);
 
 			jSplitPaneCenter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
-					getJScrollPaneCenterLeft(), jSplitPane);
+					getJScrollPaneCenterLeft(), jPanelLeft);
 			jSplitPaneCenter.setDividerLocation(350);
 
 		}
@@ -300,14 +313,28 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				int size = jTableVillager.getRowCount();
-				
-				for(int i=0;i<size;i++){
-					jTableVillager.getValueAt(i, 0).toString();
+				int indexSelect = 0;
+				int indexIC = 0;
+				int size = mVillagerTableTitle.size();
+				for(int i =0;i<size;i++){
+					String cname = mVillagerTableTitle.get(i);
+					if(Villager.tab_v_ic.equals(cname)){
+						indexIC = i;
+					}
 					
-					if("true".equals(jTableVillager.getValueAt(i, 0).toString())){
+					if("选择".equals(cname)){
+						indexSelect = i;
+					}
+				}
+				
+				
+				size = jTableVillager.getRowCount();
+				for(int i=0;i<size;i++){
+					String temp = jTableVillager.getValueAt(i, indexSelect).toString();
+					
+					if("true".equals(temp)){
 						try {
-							mXXDB.deleteVillager(jTableVillager.getValueAt(i, 4).toString());
+							mXXDB.deleteVillager(jTableVillager.getValueAt(i, indexIC).toString());
 						} catch (DBException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -398,7 +425,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 			jPanelTop.add(getJButtonDeleteThorp(), new GridBagConstraints());
 
 			jPanelTop.add(jLabel2, new GridBagConstraints());
-			jPanelTop.add(getJButtonImportVillager(), new GridBagConstraints());
+//			jPanelTop.add(getJButtonImportVillager(), new GridBagConstraints());
 //			jPanelTop.add(getJButtonImportVillagerError(),
 //					new GridBagConstraints());
 //			jPanelTop.add(getJButtonBankEidt(),
@@ -550,7 +577,17 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 																"系统提示",
 																JOptionPane.OK_OPTION,
 																JOptionPane.WARNING_MESSAGE);
-
+												int count = jComboBoxThorp.getItemCount();
+												for(int i=0;i<count;i++){
+													Thorp tho = (Thorp)jComboBoxThorp.getItemAt(i);
+													if(tho.getT_id() == thorp.getT_id()){
+														jComboBoxThorp.removeItem(tho);
+														
+														jComboBoxThorp.addItem(thorp);
+														
+														break;
+													}
+												}
 											} else {
 												String tempMSG = "修改失败！";
 												JOptionPane
@@ -1235,11 +1272,53 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 			mVillagerTableTitle.add(Villager.tab_v_mark);
 			mVillagerTableTitle.add(Villager.tab_v_mark2);
 			mVillagerTableTitle.add(Villager.tab_t_id);
+			
+			if(jComboBox_name == null){
+				getJPanelDataEdit();
+			}
+			//初始化表格对应的编辑框
+			mTableColumeEdit.put(Villager.tab_v_name, jComboBox_name);
+			mTableColumeEdit.put(Villager.tab_v_sex, jComboBox_sex);
+			mTableColumeEdit.put(Villager.tab_v_ic, jComboBox_ic);
+			mTableColumeEdit.put(Villager.tab_v_nation, jComboBox_nation);
+			mTableColumeEdit.put(Villager.tab_v_birthday, jComboBox_birthday);
+			mTableColumeEdit.put(Villager.tab_v_address_live, jComboBox_address_live);
+			mTableColumeEdit.put(Villager.tab_v_bank_name, jComboBox_bank_name);
+			mTableColumeEdit.put(Villager.tab_v_bank_account, jComboBox_bank_account);
+			mTableColumeEdit.put(Villager.tab_v_bank_account_name, jComboBox_bank_account_name);
+			mTableColumeEdit.put(Villager.tab_v_bank2_name, jComboBox_bank2_name);
+			mTableColumeEdit.put(Villager.tab_v_bank2_account, jComboBox_bank2_account);
+			mTableColumeEdit.put(Villager.tab_v_bank2_account_name, jComboBox_bank2_account_name);
+			mTableColumeEdit.put(Villager.tab_v_capture_expend_calss, jComboBox_capture_expend_calss);
+			mTableColumeEdit.put(Villager.tab_v_type, jComboBox_type);
+			mTableColumeEdit.put(Villager.tab_v_join_time, jComboBox_join_time);
+			mTableColumeEdit.put(Villager.tab_v_archival_location, jComboBox_archival_location);
+			mTableColumeEdit.put(Villager.tab_v_old_balance, jComboBox_old_balance);
+			mTableColumeEdit.put(Villager.tab_v_old_balance_flag, jComboBox_old_balance_flag);
+			mTableColumeEdit.put(Villager.tab_v_householder_name, jComboBox_householder_name);
+			mTableColumeEdit.put(Villager.tab_v_householder_ic, jComboBox_householder_ic);
+			mTableColumeEdit.put(Villager.tab_v_householder_relation, jComboBox_householder_relation);
+			mTableColumeEdit.put(Villager.tab_v_standard_culture, jComboBox_standard_culture);
+			mTableColumeEdit.put(Villager.tab_v_60not_enough15_flag, jComboBox_60not_enough15_flag);
+			mTableColumeEdit.put(Villager.tab_v_phone_num, jComboBox_phone_num);
+			mTableColumeEdit.put(Villager.tab_v_marital_status, jComboBox_marital_status);
+			mTableColumeEdit.put(Villager.tab_v_politics_status, jComboBox_politics_status);
+			mTableColumeEdit.put(Villager.tab_v_contact_name, jComboBox_contact_name);
+			mTableColumeEdit.put(Villager.tab_v_address_com, jComboBox_address_com);
+			mTableColumeEdit.put(Villager.tab_v_address_zip_code, jComboBox_address_zip_code);
+			mTableColumeEdit.put(Villager.tab_v_soldie_flag, jComboBox_soldie_flag);
+			mTableColumeEdit.put(Villager.tab_v_model_worker, jComboBox_model_worker);
+			mTableColumeEdit.put(Villager.tab_v_social_security_num, jComboBox_social_security_num);
+			mTableColumeEdit.put(Villager.tab_v_begin_get_date, jComboBox_begin_get_date);
+			mTableColumeEdit.put(Villager.tab_v_status, jComboBox_status);
+			mTableColumeEdit.put(Villager.tab_v_mark, jComboBox_mark);
+			mTableColumeEdit.put(Villager.tab_v_mark2, jComboBox_mark2);
+			
+			
 			// 初始化表格
-
-			DefaultTableModel model = new DefaultTableModel(mVillagerData,
+			mVillagerModel = new DefaultTableModel(mVillagerData,
 					mVillagerTableTitle);
-			jTableVillager = new GppStyleTable(model) {
+			jTableVillager = new GppStyleTable(mVillagerModel) {
 
 				/**
 				 * 
@@ -1289,14 +1368,48 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 
 			jTableVillager.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
-					// System.out.println("mouseClicked()"); // TODO
+//					 System.out.println("mouseClicked()"); // TODO
 					// Auto-generated Event stub mouseClicked()
 					int rowS = jTableVillager.getSelectedRow();
 					actionTableVillagerEdit(jTableVillager, rowS);
 					jLabelStatusInfo.setText(mStatusInfoTableNormal);
 				}
 			});
-
+			
+			jTableVillager.getTableHeader().addMouseListener(new MouseListener() {
+				boolean flag = false;
+				@Override
+				public void mouseReleased(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					 if(flag){
+						 //可能是拖动列了
+						 refreshTableTitleOrder();
+					 }
+					 flag = false;
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					 flag = true;
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+				}
+			});
+			
 			refreshTableVillager();
 		}
 		return jTableVillager;
@@ -1304,6 +1417,9 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 
 	private void refreshTableVillagerTop1() {
 		try {
+			if(mCurrentThorp == null){
+				return;
+			}
 			List<Villager> list = mXXDB.getVillagerByThorp(
 					mCurrentThorp.getT_id(), "b");
 
@@ -1328,7 +1444,9 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 	private void refreshTableVillager() {
 		try {
 			
-			
+			if(mCurrentThorp == null){
+				return;
+			}
 			List<Villager> list = mXXDB.getVillagerByThorp(
 					mCurrentThorp.getT_id(), "a");
 
@@ -1337,11 +1455,12 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 				mVillagerData.add(getVillagerVector(v));
 			}
 
-			DefaultTableModel model = new DefaultTableModel(mVillagerData,
-					mVillagerTableTitle);
-			((GppStyleTable) jTableVillager).updateModel(model);
-
+//			DefaultTableModel model = new DefaultTableModel(mVillagerData,
+//					mVillagerTableTitle);
+//			((GppStyleTable) jTableVillager).updateModel(model);
+			mVillagerModel.setDataVector(mVillagerData, mVillagerTableTitle);
 			jLabelVillagerNormalCount.setText("总数：" + list.size());
+			
 			jTableVillager.repaint();
 			jTableVillager.updateUI();
 			
@@ -1378,12 +1497,12 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 				@Override
 				public boolean actionEnter() {
 					// TODO Auto-generated method stub
+					super.actionEnter();
 					
 					String ic = getEditor().getItem().toString();
 
 					selectEditVillager(ic);
-
-					return super.actionEnter();
+					return true;
 				}
 
 			};
@@ -2826,48 +2945,149 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 
 	private Vector<Object> getVillagerVector(Villager v) {
 		Vector<Object> rowdata = new Vector<Object>(33);
-		rowdata.add(Boolean.FALSE);
-		rowdata.add("" + v.getV_id());
-		rowdata.add(v.getV_name());
-		rowdata.add(v.getV_sex());
-		rowdata.add(v.getV_ic());
-		rowdata.add(v.getV_nation());
-		rowdata.add(v.getV_birthday());
-		rowdata.add(v.getV_address_live());
-		rowdata.add(v.getV_bank_name());
-		rowdata.add(v.getV_bank_account());
-		rowdata.add(v.getV_bank_account_name());
-		rowdata.add(v.getV_bank2_name());
-		rowdata.add(v.getV_bank2_account());
-		rowdata.add(v.getV_bank2_account_name());
-		rowdata.add(v.getV_capture_expend_calss());
-		rowdata.add(v.getV_type());
-		rowdata.add(v.getV_join_time());
-		rowdata.add(v.getV_archival_location());
-		rowdata.add(v.getV_old_balance());
-		rowdata.add(v.getV_old_balance_flag());
-		rowdata.add(v.getV_householder_name());
-		rowdata.add(v.getV_householder_ic());
-		rowdata.add(v.getV_householder_relation());
-		rowdata.add(v.getV_standard_culture());
-		rowdata.add(v.getV_60not_enough15_flag());
-		rowdata.add(v.getV_phone_num());
-		rowdata.add(v.getV_marital_status());
-		rowdata.add(v.getV_politics_status());
-		rowdata.add(v.getV_contact_name());
-		rowdata.add(v.getV_address_com());
-		rowdata.add(v.getV_address_zip_code());
-		rowdata.add(v.getV_soldie_flag());
-		rowdata.add(v.getV_model_worker());
-		rowdata.add(v.getV_social_security_num());
-		rowdata.add(v.getV_begin_get_date());
-		rowdata.add(v.getV_status());
-		rowdata.add(v.getV_mark());
-		rowdata.add(v.getV_mark2());
-		rowdata.add("" + v.getT_id());
+		
+		int size = mVillagerTableTitle.size();
+		for(int i =0;i<size;i++){
+			String cname = mVillagerTableTitle.get(i);
+			if("选择".equals(cname)){
+				rowdata.add(Boolean.FALSE);
+			}else if(Villager.tab_v_id.equals(cname)){
+				rowdata.add("" + v.getV_id());
+			}else if(Villager.tab_v_name.equals(cname)){
+				rowdata.add(v.getV_name());
+			}else if(Villager.tab_v_sex.equals(cname)){
+				rowdata.add(v.getV_sex());
+			}else if(Villager.tab_v_ic.equals(cname)){
+				rowdata.add(v.getV_ic());
+				
+			}else if(Villager.tab_v_nation.equals(cname)){
+				rowdata.add(v.getV_nation());
+				
+			}else if(Villager.tab_v_birthday.equals(cname)){
+				rowdata.add(v.getV_birthday());
+				
+			}else if(Villager.tab_v_address_live.equals(cname)){
+				rowdata.add(v.getV_address_live());
+				
+			}else if(Villager.tab_v_bank_name.equals(cname)){
+				rowdata.add(v.getV_bank_name());
+				
+			}else if(Villager.tab_v_bank_account.equals(cname)){
+				rowdata.add(v.getV_bank_account());
+				
+			}else if(Villager.tab_v_bank_account_name.equals(cname)){
+				rowdata.add(v.getV_bank_account_name());
+				
+			}else if(Villager.tab_v_bank2_name.equals(cname)){
+				rowdata.add(v.getV_bank2_name());
+				
+			}else if(Villager.tab_v_bank2_account.equals(cname)){
+				
+				rowdata.add(v.getV_bank2_account());
+			}else if(Villager.tab_v_bank2_account_name.equals(cname)){
+				
+				rowdata.add(v.getV_bank2_account_name());
+			}else if(Villager.tab_v_capture_expend_calss.equals(cname)){
+				
+				rowdata.add(v.getV_capture_expend_calss());
+			}else if(Villager.tab_v_type.equals(cname)){
+				
+				rowdata.add(v.getV_type());
+			}else if(Villager.tab_v_join_time.equals(cname)){
+				
+				rowdata.add(v.getV_join_time());
+			}else if(Villager.tab_v_archival_location.equals(cname)){
+				
+				rowdata.add(v.getV_archival_location());
+			}else if(Villager.tab_v_old_balance.equals(cname)){
+				
+				rowdata.add(v.getV_old_balance());
+			}else if(Villager.tab_v_old_balance_flag.equals(cname)){
+				
+				rowdata.add(v.getV_old_balance_flag());
+			}else if(Villager.tab_v_householder_name.equals(cname)){
+				
+				rowdata.add(v.getV_householder_name());
+			}else if(Villager.tab_v_householder_ic.equals(cname)){
+				
+				rowdata.add(v.getV_householder_ic());
+			}else if(Villager.tab_v_householder_relation.equals(cname)){
+				
+				rowdata.add(v.getV_householder_relation());
+			}else if(Villager.tab_v_standard_culture.equals(cname)){
+				
+				rowdata.add(v.getV_standard_culture());
+			}else if(Villager.tab_v_60not_enough15_flag.equals(cname)){
+				
+				rowdata.add(v.getV_60not_enough15_flag());
+			}else if(Villager.tab_v_phone_num.equals(cname)){
+				rowdata.add(v.getV_phone_num());
+				
+			}else if(Villager.tab_v_marital_status.equals(cname)){
+				rowdata.add(v.getV_marital_status());
+				
+			}else if(Villager.tab_v_politics_status.equals(cname)){
+				
+				rowdata.add(v.getV_politics_status());
+			}else if(Villager.tab_v_contact_name.equals(cname)){
+				rowdata.add(v.getV_contact_name());
+				
+			}else if(Villager.tab_v_address_com.equals(cname)){
+				
+				rowdata.add(v.getV_address_com());
+			}else if(Villager.tab_v_address_zip_code.equals(cname)){
+				rowdata.add(v.getV_address_zip_code());
+				
+			}else if(Villager.tab_v_soldie_flag.equals(cname)){
+				
+				rowdata.add(v.getV_soldie_flag());
+			}else if(Villager.tab_v_model_worker.equals(cname)){
+				rowdata.add(v.getV_model_worker());
+				
+			}else if(Villager.tab_v_social_security_num.equals(cname)){
+				rowdata.add(v.getV_social_security_num());
+				
+			}else if(Villager.tab_v_begin_get_date.equals(cname)){
+				
+				rowdata.add(v.getV_begin_get_date());
+			}else if(Villager.tab_v_status.equals(cname)){
+				
+				rowdata.add(v.getV_status());
+			}else if(Villager.tab_v_mark.equals(cname)){
+				
+				rowdata.add(v.getV_mark());
+			}else if(Villager.tab_v_mark2.equals(cname)){
+				
+				rowdata.add(v.getV_mark2());
+			}else if(Villager.tab_t_id.equals(cname)){
+				rowdata.add("" + v.getT_id());
+			}
+		}
 		return rowdata;
 	}
 
+	/**
+	 * 刷新表头顺序
+	 * @version 2012-5-22
+	 * @author Jason
+	 * @param
+	 * @return void
+	 */
+	private void refreshTableTitleOrder(){
+		
+		int size = jTableVillager.getColumnCount();
+		Vector<String>  tt = new Vector<String>();
+		
+		for(int ii=0;ii<size;ii++){
+			String cname = jTableVillager.getColumnName(ii);
+			tt.add(cname);
+			
+		}
+		
+		mVillagerTableTitle = tt;
+	}
+	
+	
 	private void actionSaveToExcel0() {
 
 		Date date = new Date();
@@ -2992,72 +3212,99 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 	}
 
 	private void actionTableVillagerEdit(JTable jTableVillager, int rowS) {
-		jComboBox_ic.setSelectedItem(jTableVillager.getValueAt(rowS, 4));
-		jComboBox_name.setSelectedItem(jTableVillager.getValueAt(rowS, 2));
-		jComboBox_sex.setSelectedItem(jTableVillager.getValueAt(rowS, 3));
-		jComboBox_birthday.setSelectedItem(jTableVillager.getValueAt(rowS, 6));
-		jComboBox_address_live.setSelectedItem(jTableVillager.getValueAt(rowS,
-				7));
-		jComboBox_nation.setSelectedItem(jTableVillager.getValueAt(rowS, 5));
-		jComboBox_bank_name.setSelectedItem(jTableVillager.getValueAt(rowS, 8));
-		jComboBox_bank_account.setSelectedItem(jTableVillager.getValueAt(rowS,
-				9));
-		jComboBox_bank_account_name.setSelectedItem(jTableVillager.getValueAt(rowS,
-				10));
-		jComboBox_bank2_name.setSelectedItem(jTableVillager.getValueAt(rowS, 11));
-		jComboBox_bank2_account.setSelectedItem(jTableVillager.getValueAt(rowS,
-				12));
-		jComboBox_bank2_account_name.setSelectedItem(jTableVillager.getValueAt(rowS,
-				13));
-		jComboBox_capture_expend_calss.setSelectedItem(jTableVillager
-				.getValueAt(rowS, 14));
-		jComboBox_type.setSelectedItem(jTableVillager.getValueAt(rowS, 15));
-		jComboBox_join_time
-				.setSelectedItem(jTableVillager.getValueAt(rowS, 16));
-		jComboBox_archival_location.setSelectedItem(jTableVillager.getValueAt(
-				rowS, 17));
-		jComboBox_old_balance.setSelectedItem(jTableVillager.getValueAt(rowS,
-				18));
-		jComboBox_old_balance_flag.setSelectedItem(jTableVillager.getValueAt(
-				rowS, 19));
-		jComboBox_householder_name.setSelectedItem(jTableVillager.getValueAt(
-				rowS, 20));
-		jComboBox_householder_ic.setSelectedItem(jTableVillager.getValueAt(
-				rowS, 21));
-		jComboBox_householder_relation.setSelectedItem(jTableVillager
-				.getValueAt(rowS, 22));
-		jComboBox_standard_culture.setSelectedItem(jTableVillager.getValueAt(
-				rowS, 23));
-		jComboBox_60not_enough15_flag.setSelectedItem(jTableVillager
-				.getValueAt(rowS, 24));
-		jComboBox_phone_num
-				.setSelectedItem(jTableVillager.getValueAt(rowS, 25));
-		jComboBox_marital_status.setSelectedItem(jTableVillager.getValueAt(
-				rowS, 26));
-		jComboBox_politics_status.setSelectedItem(jTableVillager.getValueAt(
-				rowS, 27));
-		jComboBox_contact_name.setSelectedItem(jTableVillager.getValueAt(rowS,
-				28));
-		jComboBox_address_com.setSelectedItem(jTableVillager.getValueAt(rowS,
-				29));
-		jComboBox_address_zip_code.setSelectedItem(jTableVillager.getValueAt(
-				rowS, 30));
-		jComboBox_soldie_flag.setSelectedItem(jTableVillager.getValueAt(rowS,
-				31));
-		jComboBox_model_worker.setSelectedItem(jTableVillager.getValueAt(rowS,
-				32));
-		jComboBox_social_security_num.setSelectedItem(jTableVillager
-				.getValueAt(rowS, 33));
-		jComboBox_begin_get_date.setSelectedItem(jTableVillager.getValueAt(
-				rowS, 34));
-		jComboBox_status.setSelectedItem(jTableVillager.getValueAt(rowS, 35));
-		jComboBox_mark.setSelectedItem(jTableVillager.getValueAt(rowS, 36));
-		jComboBox_mark2.setSelectedItem(jTableVillager.getValueAt(rowS, 37));
-		mCurrentVillager.setT_id(Integer.parseInt(jTableVillager.getValueAt(
-				rowS, 38).toString()));
-		mCurrentVillager.setV_id(Integer.parseInt(jTableVillager.getValueAt(
-				rowS, 1).toString()));
+//		jComboBox_ic.setSelectedItem(jTableVillager.getValueAt(rowS, 4));
+//		jComboBox_name.setSelectedItem(jTableVillager.getValueAt(rowS, 2));
+//		jComboBox_sex.setSelectedItem(jTableVillager.getValueAt(rowS, 3));
+//		jComboBox_birthday.setSelectedItem(jTableVillager.getValueAt(rowS, 6));
+//		jComboBox_address_live.setSelectedItem(jTableVillager.getValueAt(rowS,
+//				7));
+//		jComboBox_nation.setSelectedItem(jTableVillager.getValueAt(rowS, 5));
+//		jComboBox_bank_name.setSelectedItem(jTableVillager.getValueAt(rowS, 8));
+//		jComboBox_bank_account.setSelectedItem(jTableVillager.getValueAt(rowS,
+//				9));
+//		jComboBox_bank_account_name.setSelectedItem(jTableVillager.getValueAt(rowS,
+//				10));
+//		jComboBox_bank2_name.setSelectedItem(jTableVillager.getValueAt(rowS, 11));
+//		jComboBox_bank2_account.setSelectedItem(jTableVillager.getValueAt(rowS,
+//				12));
+//		jComboBox_bank2_account_name.setSelectedItem(jTableVillager.getValueAt(rowS,
+//				13));
+//		jComboBox_capture_expend_calss.setSelectedItem(jTableVillager
+//				.getValueAt(rowS, 14));
+//		jComboBox_type.setSelectedItem(jTableVillager.getValueAt(rowS, 15));
+//		jComboBox_join_time
+//				.setSelectedItem(jTableVillager.getValueAt(rowS, 16));
+//		jComboBox_archival_location.setSelectedItem(jTableVillager.getValueAt(
+//				rowS, 17));
+//		jComboBox_old_balance.setSelectedItem(jTableVillager.getValueAt(rowS,
+//				18));
+//		jComboBox_old_balance_flag.setSelectedItem(jTableVillager.getValueAt(
+//				rowS, 19));
+//		jComboBox_householder_name.setSelectedItem(jTableVillager.getValueAt(
+//				rowS, 20));
+//		jComboBox_householder_ic.setSelectedItem(jTableVillager.getValueAt(
+//				rowS, 21));
+//		jComboBox_householder_relation.setSelectedItem(jTableVillager
+//				.getValueAt(rowS, 22));
+//		jComboBox_standard_culture.setSelectedItem(jTableVillager.getValueAt(
+//				rowS, 23));
+//		jComboBox_60not_enough15_flag.setSelectedItem(jTableVillager
+//				.getValueAt(rowS, 24));
+//		jComboBox_phone_num
+//				.setSelectedItem(jTableVillager.getValueAt(rowS, 25));
+//		jComboBox_marital_status.setSelectedItem(jTableVillager.getValueAt(
+//				rowS, 26));
+//		jComboBox_politics_status.setSelectedItem(jTableVillager.getValueAt(
+//				rowS, 27));
+//		jComboBox_contact_name.setSelectedItem(jTableVillager.getValueAt(rowS,
+//				28));
+//		jComboBox_address_com.setSelectedItem(jTableVillager.getValueAt(rowS,
+//				29));
+//		jComboBox_address_zip_code.setSelectedItem(jTableVillager.getValueAt(
+//				rowS, 30));
+//		jComboBox_soldie_flag.setSelectedItem(jTableVillager.getValueAt(rowS,
+//				31));
+//		jComboBox_model_worker.setSelectedItem(jTableVillager.getValueAt(rowS,
+//				32));
+//		jComboBox_social_security_num.setSelectedItem(jTableVillager
+//				.getValueAt(rowS, 33));
+//		jComboBox_begin_get_date.setSelectedItem(jTableVillager.getValueAt(
+//				rowS, 34));
+//		jComboBox_status.setSelectedItem(jTableVillager.getValueAt(rowS, 35));
+//		jComboBox_mark.setSelectedItem(jTableVillager.getValueAt(rowS, 36));
+//		jComboBox_mark2.setSelectedItem(jTableVillager.getValueAt(rowS, 37));
+//		mCurrentVillager.setT_id(Integer.parseInt(jTableVillager.getValueAt(
+//				rowS, 38).toString()));
+//		
+//		mCurrentVillager.setV_id(Integer.parseInt(jTableVillager.getValueAt(
+//				rowS, 1).toString()));
+		
+		int size = jTableVillager.getColumnCount();
+		
+		for(int ii=0;ii<size;ii++){
+			String cname = jTableVillager.getColumnName(ii);
+			GppJComboBoxExp temp = mTableColumeEdit.get(cname);
+			
+			if(temp != null){
+				temp.setSelectedItem(jTableVillager.getValueAt(rowS, ii));
+			}
+			
+			if("序号".equals(cname)){
+				mCurrentVillager.setV_id(Integer.parseInt(""+jTableVillager.getValueAt(
+						rowS, ii)));
+			}
+			
+			if(Villager.tab_t_id.equals(cname)){
+				mCurrentVillager.setT_id(Integer.parseInt(jTableVillager.getValueAt(
+						rowS, ii).toString()));
+			}
+		}
 	}
+	
+	/**
+	 * 列名编辑
+	 */
+	private HashMap<String,GppJComboBoxExp> mTableColumeEdit = new HashMap<String,GppJComboBoxExp>();
 
 	private boolean updateVillager(List<String> v_ics, String v_status) {
 		try {

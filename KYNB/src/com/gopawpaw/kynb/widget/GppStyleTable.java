@@ -189,6 +189,7 @@ public class GppStyleTable extends GJTable {
 				|| "false".equals(temp)) {
 			renderer = super.getDefaultRenderer(Boolean.class);
 		}
+		
 		return renderer;
 	}
 	
