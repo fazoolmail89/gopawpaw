@@ -15,6 +15,7 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -27,14 +28,20 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
+import com.gopawpaw.frame.GlobalParameter;
 import com.gopawpaw.frame.widget.GJComboBox;
 import com.gopawpaw.frame.widget.GJTable;
 import com.gopawpaw.kynb.GlobalUI;
+import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.common.ExcelExportListener;
+import com.gopawpaw.kynb.common.ExcelFileFilter;
 import com.gopawpaw.kynb.common.ExcelImportListener;
 import com.gopawpaw.kynb.common.ProgressExportExcel;
 import com.gopawpaw.kynb.common.ProgressImportExcel;
+import com.gopawpaw.kynb.db.DBException;
+import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
+import com.gopawpaw.kynb.utils.StringConstant;
 import com.gopawpaw.kynb.widget.GppStyleTable;
 
 /**
@@ -122,6 +129,13 @@ public class BasicDataImport extends BaseModuleFrame {
 	 * @return void
 	 */
 	private void initialize() {
+		if(!GlobalParameter.isAuthModuls){
+			//非法授权
+			JOptionPane.showConfirmDialog(null, StringConstant.isNotAuthMsg,
+					"系统提示", JOptionPane.YES_NO_OPTION,
+					JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
 		this.setSize(900, 600);
 		this.setLocation(200, 100);
 		this.setTitle("基础数据导入");
@@ -240,6 +254,7 @@ public class BasicDataImport extends BaseModuleFrame {
 				JFileChooser jFileChooser = new JFileChooser();
 
 				jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+				jFileChooser.setFileFilter(new ExcelFileFilter());
 				jFileChooser.showOpenDialog(null);
 
 				if (jFileChooser.getSelectedFile() != null) {
@@ -349,6 +364,9 @@ public class BasicDataImport extends BaseModuleFrame {
 	 * @return void
 	 */
 	private void actionSaveOK(String path){
+		if(!path.endsWith(".xls")){
+			path = path+".xls";
+		}
 		ProgressExportExcel pee = new ProgressExportExcel(progressBarImport,path);
 		pee.setExportListener(new ExcelExportListener() {
 			
@@ -374,6 +392,9 @@ public class BasicDataImport extends BaseModuleFrame {
 	 * @return void
 	 */
 	private void actionSaveError(String path){
+		if(!path.endsWith(".xls")){
+			path = path+".xls";
+		}
 		ProgressExportExcel pee = new ProgressExportExcel(progressBarImport,path);
 		pee.setExportListener(new ExcelExportListener() {
 			
@@ -476,6 +497,14 @@ public class BasicDataImport extends BaseModuleFrame {
 		JPanel jPanelC = new JPanel();
 		jPanelC.setLayout(new BoxLayout(jPanelC, BoxLayout.Y_AXIS));
 		jPanelCondition.removeAll();
+		
+		List<String> listS = mDBTableItem.getTableFieldSelect();
+		for(String name:listS){
+			
+			String display = mDBTableItem.getFieldDisplay(name);
+			jPanelC.add(getJPanelForFieldSelect(name,display));
+		}
+		
 		jPanelC.add(mJPanelSelectTop);
 		List<String> list = mDBTableItem.getTableFieldImport();
 		for(String name:list){
@@ -490,6 +519,33 @@ public class BasicDataImport extends BaseModuleFrame {
 		jPanelCondition.updateUI();
 	}
 	
+	/**
+	 * 获取选择条件面板
+	 * @version 2012-6-17
+	 * @author Jason
+	 * @param
+	 * @return JPanel
+	 */
+	private JPanel getJPanelForFieldSelect(String fieldName,String fieldDisplay){
+		JPanel jPanelC1 = new JPanel();
+		jPanelC1.setLayout(new BoxLayout(jPanelC1, BoxLayout.X_AXIS));
+		jPanelC1.add(new JLabel(fieldDisplay+" = "));
+		jPanelC1.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+		
+		if("printData".equals(mDBTableItem.getTableName())){
+			jPanelC1.add(getJComboBoxThorp(fieldName));
+		}
+		
+		return jPanelC1;
+	}
+	
+	/**
+	 * 获取导入对应数据面板
+	 * @version 2012-6-17
+	 * @author Jason
+	 * @param
+	 * @return JPanel
+	 */
 	private JPanel getJPanelForField(String fieldName,String fieldDisplay){
 		JPanel jPanelC1 = new JPanel();
 		jPanelC1.setLayout(new BoxLayout(jPanelC1, BoxLayout.X_AXIS));
@@ -550,6 +606,46 @@ public class BasicDataImport extends BaseModuleFrame {
 		DBOpertor db = new DBOpertor();
 		db.importToBasicData(mDBTableItem, mTableData, mDataImportListener);
 		
+	}
+	
+	/**
+	 * 选择村
+	 * 
+	 * @version 2011-11-14
+	 * @author Jason
+	 * @param
+	 * @return JComboBox
+	 */
+	private JComboBox getJComboBoxThorp(final String fieldName) {
+		final JComboBox	jComboBoxThorp = new GJComboBox();
+			// jComboBoxThorp.setPreferredSize(new Dimension(200,20));
+			// jComboBoxThorp.setMinimumSize(new Dimension(200,20));
+			jComboBoxThorp.setEditable(false);
+
+			jComboBoxThorp
+					.addActionListener(new java.awt.event.ActionListener() {
+						public void actionPerformed(java.awt.event.ActionEvent e) {
+							Thorp currThorp = (Thorp) jComboBoxThorp
+									.getSelectedItem();
+							mDBTableItem.putTableFiledDef(fieldName,currThorp.getT_id());
+
+						}
+					});
+
+			XXNCYLBXDBAccess mXXDB = new XXNCYLBXDBAccess();
+			List<Thorp> list = null;
+			try {
+				jComboBoxThorp.removeAllItems();
+				list = mXXDB.getThorpAll();
+				for (Thorp th : list) {
+					jComboBoxThorp.addItem(th);
+				}
+			} catch (DBException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+		return jComboBoxThorp;
 	}
 	
 	private DataImportListener mDataImportListener = new DataImportListener(){

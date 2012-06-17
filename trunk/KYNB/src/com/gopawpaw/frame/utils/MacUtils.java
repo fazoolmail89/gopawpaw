@@ -1,4 +1,4 @@
-package com.gopawpaw.kynb.utils;
+package com.gopawpaw.frame.utils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

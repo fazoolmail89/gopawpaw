@@ -29,11 +29,13 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 
 import com.gopawpaw.frame.GlobalParameter;
+import com.gopawpaw.frame.utils.GppAuthorization;
 import com.gopawpaw.frame.utils.MD5;
+import com.gopawpaw.frame.utils.MacUtils;
+import com.gopawpaw.frame.utils.Tools;
 import com.gopawpaw.frame.widget.GJComboBox;
 import com.gopawpaw.kynb.RegisterDialog;
 import com.gopawpaw.kynb.utils.GppConfiguration;
-import com.gopawpaw.kynb.utils.MacUtils;
 
 /**
  * 主程序入口类
@@ -74,7 +76,7 @@ public class MainFrame extends JFrame {
 	 */
 	private JLabel jLabelStatus = null;
 
-	private GppConfiguration mGppConfiguration;
+	private GppConfiguration mGppConfiguration = new GppConfiguration("ini.ini");
 
 	private static MainFrame thisClassMainFrame;
 
@@ -325,7 +327,7 @@ public class MainFrame extends JFrame {
 				});
 
 				if (thisClass.cheakRegister()) {
-					// if (true) {
+					GlobalParameter.isAuthModuls = true;
 					thisClass.setVisible(true);
 				} else {
 					System.exit(0);
@@ -360,8 +362,8 @@ public class MainFrame extends JFrame {
 
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
-		this.setTitle("藤县快译农保信息处理系统  V1.2");
-		mGppConfiguration = new GppConfiguration("ini.ini");
+		this.setTitle("藤县快译农保信息处理系统  V1.3");
+		
 
 	}
 
@@ -408,79 +410,121 @@ public class MainFrame extends JFrame {
 				}
 			});
 			jJMenuBar.add(jb);
+			
+			String mac = Tools.getHardwareCode();
+
+			String registerCode = mGppConfiguration.getValue("registerCode");
+
+			final String displayKey = genDisplayCode(mac);
+
+			final String regKey = genKeyCode(displayKey);
+			
+			if (registerCode == null || !registerCode.equals(regKey)) {
+				JButton jb2 = new JButton("注册");
+				jb2.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						showRegDialog(regKey,displayKey);
+					}
+				});
+				
+				jJMenuBar.add(jb2);
+			}
+			
 		}
 		return jJMenuBar;
 	}
 	
-	
-	
 
 	private boolean cheakRegister() {
 
-		String mac = MacUtils.getMACAddress();
+		String mac = Tools.getHardwareCode();
 
 		String registerCode = mGppConfiguration.getValue("registerCode");
 
 		String displayKey = genDisplayCode(mac);
 
 		final String regKey = genKeyCode(displayKey);
-
+		
 		if (registerCode == null || !registerCode.equals(regKey)) {
-			boolean regFlag = false;
-			RegisterDialog rd = new RegisterDialog(this) {
-				/**
-				 * 
-				 */
-				private static final long serialVersionUID = 1L;
-
-				@Override
-				protected void actionFinish(int option, String regCode) {
-					// TODO Auto-generated method stub
-					if (option == RegisterDialog.YES_OPTION) {
-						System.out.println(regCode);
-						if (regKey.equals(regCode)) {
-							// 注册成功
-							mGppConfiguration.setValue("registerCode", regCode);
-							mGppConfiguration.saveFile();
-
-							String tempMSG = "恭喜您注册成功，非常感谢您对快译软件的支持！\r\n请重新启动系统，即可生效。";
-							// 声音提示
-							Toolkit.getDefaultToolkit().beep();
-							JOptionPane.showConfirmDialog(null, tempMSG,
-									"系统提示", JOptionPane.YES_NO_OPTION,
-									JOptionPane.INFORMATION_MESSAGE);
-
-							super.actionFinish(option, regCode);
-						} else {
-							// 注册失败
-							String tempMSG = "该注册码不能在本机使用，或者您的注册码已经过期，请联系管理员获取注册码！\r\n"
-									+ mSupport;
-							// 声音提示
-							Toolkit.getDefaultToolkit().beep();
-							JOptionPane.showConfirmDialog(null, tempMSG,
-									"系统提示", JOptionPane.YES_NO_OPTION,
-									JOptionPane.INFORMATION_MESSAGE);
-						}
-
-					} else {
-						// 取消
-						super.actionFinish(option, regCode);
-					}
-
+			int t = GppAuthorization.getInstance().checkAuthTimes();
+			
+			if(t > 0){
+				String tempMSG = "您还可以免费试用："+t+" 次，是否需要现在注册？";
+				int op = JOptionPane.showConfirmDialog(null, tempMSG,
+						"系统提示", JOptionPane.YES_NO_OPTION,
+						JOptionPane.INFORMATION_MESSAGE);
+				if(op == JOptionPane.YES_OPTION){
+					return showRegDialog(regKey,displayKey);
+				}else{
+					return true;
 				}
-			};
-			rd.setTitle("您的支持，我们的动力！");
-			rd.setKeyCode(displayKey);
-			rd.setModal(true);
-			rd.setVisible(true);
-
-			return regFlag;
+			}else{
+				return showRegDialog(regKey,displayKey);
+			}
+			
+			
 		} else {
 			return true;
 		}
 
 		//
 		// return true;
+	}
+	
+	private boolean showRegDialog(final String regKey,String displayKey){
+
+		boolean regFlag = false;
+		RegisterDialog rd = new RegisterDialog(this) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected void actionFinish(int option, String regCode) {
+				// TODO Auto-generated method stub
+				if (option == RegisterDialog.YES_OPTION) {
+					System.out.println(regCode);
+					if (regKey.equals(regCode)) {
+						// 注册成功
+						mGppConfiguration.setValue("registerCode", regCode);
+						mGppConfiguration.saveFile();
+
+						String tempMSG = "恭喜您注册成功，非常感谢您对快译软件的支持！\r\n请重新启动软件。";
+						// 声音提示
+						Toolkit.getDefaultToolkit().beep();
+						JOptionPane.showConfirmDialog(null, tempMSG,
+								"系统提示", JOptionPane.YES_NO_OPTION,
+								JOptionPane.INFORMATION_MESSAGE);
+
+						super.actionFinish(option, regCode);
+					} else {
+						// 注册失败
+						String tempMSG = "该注册码不能在本机使用，或者您的注册码已经过期，请联系管理员获取注册码！\r\n"
+								+ mSupport;
+						// 声音提示
+						Toolkit.getDefaultToolkit().beep();
+						JOptionPane.showConfirmDialog(null, tempMSG,
+								"系统提示", JOptionPane.YES_NO_OPTION,
+								JOptionPane.INFORMATION_MESSAGE);
+					}
+
+				} else {
+					// 取消
+					super.actionFinish(option, regCode);
+				}
+
+			}
+		};
+		rd.setTitle("您的支持，我们的动力！");
+		rd.setKeyCode(displayKey);
+		rd.setModal(true);
+		rd.setVisible(true);
+
+		return regFlag;
+	
 	}
 
 	private String genDisplayCode(String diskID) {
@@ -490,7 +534,7 @@ public class MainFrame extends JFrame {
 	}
 
 	private String genKeyCode(String displayCode) {
-		String k3 = displayCode.substring(6, 21);
+		String k3 = displayCode.substring(3, 16);
 
 		MD5 md5 = new MD5();
 

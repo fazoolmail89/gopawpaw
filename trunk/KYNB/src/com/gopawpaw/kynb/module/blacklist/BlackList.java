@@ -39,6 +39,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
+import com.gopawpaw.frame.GlobalParameter;
 import com.gopawpaw.frame.utils.GppJarRunableInterface;
 import com.gopawpaw.frame.widget.GJButton;
 import com.gopawpaw.frame.widget.GJCheckBox;
@@ -48,6 +49,7 @@ import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.bean.DefultData;
 import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.common.DataDefultManager;
+import com.gopawpaw.kynb.common.ExcelFileFilter;
 import com.gopawpaw.kynb.common.PoiOperatXls2;
 import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
@@ -55,6 +57,7 @@ import com.gopawpaw.kynb.module.BaseModuleFrame;
 import com.gopawpaw.kynb.utils.IDNumberChecker;
 import com.gopawpaw.kynb.utils.KYHashMap;
 import com.gopawpaw.kynb.utils.KeyConstants;
+import com.gopawpaw.kynb.utils.StringConstant;
 import com.gopawpaw.kynb.utils.Tools;
 import com.gopawpaw.kynb.widget.GppStyleTable;
 import com.gopawpaw.kynb.widget.MessageDialog;
@@ -122,6 +125,14 @@ public class BlackList extends BaseModuleFrame implements ActionListener,
 	 * @return void
 	 */
 	private void initialize() {
+		if(!GlobalParameter.isAuthModuls){
+			//非法授权
+			JOptionPane.showConfirmDialog(null, StringConstant.isNotAuthMsg,
+					"系统提示", JOptionPane.YES_NO_OPTION,
+					JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+		
 		this.setSize(900, 600);
 		this.setLocation(200, 100);
 		this.setContentPane(getJContentPane());
@@ -164,6 +175,7 @@ public class BlackList extends BaseModuleFrame implements ActionListener,
 				JFileChooser jFileChooser = new JFileChooser();
 
 				jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+				jFileChooser.setFileFilter(new ExcelFileFilter());
 				jFileChooser.showOpenDialog(null);
 
 				if (jFileChooser.getSelectedFile() != null) {

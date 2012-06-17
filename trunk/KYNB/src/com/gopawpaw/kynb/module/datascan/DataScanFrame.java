@@ -15,8 +15,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import com.gopawpaw.frame.GlobalParameter;
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
+import com.gopawpaw.kynb.utils.StringConstant;
 import com.gopawpaw.kynb.common.*;
 
 public class DataScanFrame extends BaseModuleFrame {
@@ -44,7 +46,15 @@ public class DataScanFrame extends BaseModuleFrame {
 	}
 
 	public DataScanFrame() {
-		setTitle("数据扫描<一>");
+		if(!GlobalParameter.isAuthModuls){
+			//非法授权
+			JOptionPane.showConfirmDialog(null, StringConstant.isNotAuthMsg,
+					"系统提示", JOptionPane.YES_NO_OPTION,
+					JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+		
+		setTitle("数据扫描核对（户籍数据库）");
 
 		// 创建线形边框
 		LineBorder lineBorder = (LineBorder)BorderFactory.createLineBorder(Color.black);

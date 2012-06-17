@@ -35,14 +35,7 @@ public class GJFrame extends JFrame implements GppKeyActionListener,GppComponent
 	private static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 	private static Long l = Long.valueOf(GppObfuscation.unObfuscation("&$$$$$$$$$$"));
 	
-	protected static String productionName = GppObfuscation.unObfuscation("df{paw`}{z:s{ducduc:w{y");
-	protected static String dfisAuthorization = "YES";
-	protected static String dfdisplayMessage = "YES";
-	protected static String dfmessageTitle = GppObfuscation.unObfuscation("糯绋揄礮");
-	protected static String dfmessage = GppObfuscation.unObfuscation("~ubu:xuzs:Fazzuvxq4Qff{f5");
-	protected static String dfauthorizationTime = formatter.format(Calendar.getInstance().getTimeInMillis()+l);
-	protected static String dflockTime = "NO";
-	protected static String dfAuthOfTime = "YES";
+	
 	
 	/**
 	 * 存放自身的引用
@@ -96,25 +89,7 @@ public class GJFrame extends JFrame implements GppKeyActionListener,GppComponent
 		
 		this.initProductionName();
 		
-		GppAuthorization.setProductionName(productionName);
-		GppAuthorization.setDfAuthOfTime(dfAuthOfTime);
-		GppAuthorization.setDfauthorizationTime(dfauthorizationTime);
-		GppAuthorization.setDfdisplayMessage(dfdisplayMessage);
-		GppAuthorization.setDfisAuthorization(dfisAuthorization);
-		GppAuthorization.setDflockTime(dflockTime);
-		GppAuthorization.setDfmessage(dfmessage);
-		GppAuthorization.setDfmessageTitle(dfmessageTitle);
 		
-		if(!GppAuthorization.isAuthorization() && GppAuthorization.getGppAuthorization().isDisplayMessage()){
-			 String tempmsg = GppAuthorization.getGppAuthorization().getMessage();
-			String tempmsgt = GppAuthorization.getGppAuthorization().getMessageTitle();
-			 JOptionPane.showConfirmDialog(null,
-					tempmsg, tempmsgt, JOptionPane.OK_OPTION,
-						JOptionPane.QUESTION_MESSAGE);
-			System.exit(0);
-		}else if(!GppAuthorization.isAuthorization() && !GppAuthorization.getGppAuthorization().isDisplayMessage()){
-			System.exit(0);
-		}
 		
 	}
 	

@@ -9,14 +9,25 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import com.gopawpaw.frame.GlobalParameter;
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
+import com.gopawpaw.kynb.utils.StringConstant;
 
 public class IdnoUpgrade4 extends BaseModuleFrame {
 	private static final long serialVersionUID = -3660717367105367561L;
 	private JButton btnOpenExe = null;
 
 	public IdnoUpgrade4() {
+		
+		if(!GlobalParameter.isAuthModuls){
+			//非法授权
+			JOptionPane.showConfirmDialog(null, StringConstant.isNotAuthMsg,
+					"系统提示", JOptionPane.YES_NO_OPTION,
+					JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+		
 		btnOpenExe = new JButton("打开身份证号码升级批处理工具");
 		btnOpenExe.addActionListener(new ActionListener() {
 			@Override

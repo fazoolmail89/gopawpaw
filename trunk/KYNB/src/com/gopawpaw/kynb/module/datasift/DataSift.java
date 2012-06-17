@@ -26,16 +26,19 @@ import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
+import com.gopawpaw.frame.GlobalParameter;
 import com.gopawpaw.frame.log.GLog;
 import com.gopawpaw.frame.utils.GppJarRunableInterface;
 import com.gopawpaw.frame.widget.GJTable;
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.common.ExcelExportListener;
+import com.gopawpaw.kynb.common.ExcelFileFilter;
 import com.gopawpaw.kynb.common.ExcelImportListener;
 import com.gopawpaw.kynb.common.ProgressExportExcel;
 import com.gopawpaw.kynb.common.ProgressImportExcel;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
 import com.gopawpaw.kynb.utils.DateUtils;
+import com.gopawpaw.kynb.utils.StringConstant;
 import com.gopawpaw.kynb.widget.GppStyleTable;
 
 /**
@@ -121,9 +124,18 @@ public class DataSift extends BaseModuleFrame implements
 	 * @return void
 	 */
 	private void initialize() {
+		
+		if(!GlobalParameter.isAuthModuls){
+			//非法授权
+			JOptionPane.showConfirmDialog(null, StringConstant.isNotAuthMsg,
+					"系统提示", JOptionPane.YES_NO_OPTION,
+					JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+		
 		this.setSize(900, 600);
 		this.setLocation(200, 100);
-		this.setTitle("数据筛选");
+		this.setTitle("数据核对筛选");
 		this.setContentPane(getJContentPane());
 	}
 
@@ -291,6 +303,7 @@ public class DataSift extends BaseModuleFrame implements
 				JFileChooser jFileChooser = new JFileChooser();
 
 				jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+				jFileChooser.setFileFilter(new ExcelFileFilter());
 				jFileChooser.showOpenDialog(null);
 
 				if (jFileChooser.getSelectedFile() != null) {
@@ -314,6 +327,7 @@ public class DataSift extends BaseModuleFrame implements
 				JFileChooser jFileChooser = new JFileChooser();
 
 				jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+				jFileChooser.setFileFilter(new ExcelFileFilter());
 				jFileChooser.showOpenDialog(null);
 
 				if (jFileChooser.getSelectedFile() != null) {

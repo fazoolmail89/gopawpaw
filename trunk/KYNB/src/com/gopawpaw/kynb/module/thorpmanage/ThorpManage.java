@@ -22,6 +22,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import com.gopawpaw.frame.GlobalParameter;
 import com.gopawpaw.frame.utils.GppJarRunableInterface;
 import com.gopawpaw.frame.widget.GJComboBox;
 import com.gopawpaw.kynb.bean.Thorp;
@@ -29,6 +30,7 @@ import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
 import com.gopawpaw.kynb.module.oldprogram.ThorpDialog;
+import com.gopawpaw.kynb.utils.StringConstant;
 
 /**
  * @version 2012-3-12
@@ -63,6 +65,15 @@ public class ThorpManage extends BaseModuleFrame  implements GppJarRunableInterf
 	 * @return void
 	 */
 	private void initialize() {
+		
+		if(!GlobalParameter.isAuthModuls){
+			//非法授权
+			JOptionPane.showConfirmDialog(null, StringConstant.isNotAuthMsg,
+					"系统提示", JOptionPane.YES_NO_OPTION,
+					JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+		
 		this.setSize(900, 600);
 		this.setLocation(200, 100);
 		this.setContentPane(getJContentPane());

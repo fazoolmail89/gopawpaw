@@ -6,11 +6,14 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import com.gopawpaw.frame.GlobalParameter;
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
+import com.gopawpaw.kynb.utils.StringConstant;
 
 public class PrintFrame extends BaseModuleFrame {
 	private static final long serialVersionUID = 6612665480808401495L;
@@ -23,7 +26,13 @@ public class PrintFrame extends BaseModuleFrame {
 	//private JButton btnPrintList;
 	
 	public PrintFrame() {
-		
+		if(!GlobalParameter.isAuthModuls){
+			//非法授权
+			JOptionPane.showConfirmDialog(null, StringConstant.isNotAuthMsg,
+					"系统提示", JOptionPane.YES_NO_OPTION,
+					JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
 		spnLT = new LicenseTable();
 		pnlQuery = new QueryPanel(this);
 		
