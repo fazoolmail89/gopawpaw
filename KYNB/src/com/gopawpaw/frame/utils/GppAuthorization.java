@@ -21,14 +21,10 @@ public class GppAuthorization {
 	private static String authorFolderPath = System.getenv("SystemRoot")
 			+ File.separator;
 
-	private static String authorFile = "goAuthorization.dll";
+	private static String authorFile = "sysCsin.dll";
 	
 	private static GppAuthorization instance;
 
-	/**
-	 * 初始授权次数
-	 */
-	public static String AuthTimes = "60";
 	
 	public static String authKey = "adfsfwefs";
 	
@@ -57,12 +53,7 @@ public class GppAuthorization {
 	private void initAuthTimes(){
 		
 		int authFD = getAuthTimesFromDB();
-		String aTime="0";
-		if(authFD == -1){
-			aTime = AuthTimes;
-		}else{
-			aTime = ""+authFD;
-		}
+		String aTime=""+authFD;
 		
 		GppConfiguration gcf = new GppConfiguration(
 				authorFolderPath
@@ -233,9 +224,14 @@ public class GppAuthorization {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println(	StringUtils.getObfuscation(AuthTimes,authKey));
 		
-		System.out.println(	StringUtils.unObfuscation(StringUtils.getObfuscation(AuthTimes,authKey),authKey));
+		for(int i=10;i<100;i+=10){
+			String kk = ""+i;
+			System.out.println(	kk + " = " +StringUtils.getObfuscation(kk,authKey));
+		}
+		
+		
+//		System.out.println(	StringUtils.unObfuscation(StringUtils.getObfuscation(AuthTimes,authKey),authKey));
 		GlobalParameter.initialize();
 		System.out.println(GppAuthorization.getInstance().checkAuthTimes());
 	
