@@ -37,9 +37,6 @@ public class TableScrollPane extends JScrollPane {
 
 	/**
 	 * 刷新表格当前数据
-	 * 
-	 * @param haveTitleData
-	 *            含有表头的二维数组
 	 */
 	public void refreshTable(Object[][] data) {
 		this.data = data;
