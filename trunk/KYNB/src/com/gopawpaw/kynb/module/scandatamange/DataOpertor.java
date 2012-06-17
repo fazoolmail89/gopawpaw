@@ -87,7 +87,7 @@ public class DataOpertor extends XXNCYLBXDBAccess {
 	private String getIOrUSQL(OtherData odata) {
 		String sql = "";
 		if(odata != null) {
-			if(!"".equals(odata.getId())) {
+			if(odata.getId() != null && !"".equals(odata.getId())) {
 				sql = "update OtherData set " + " A = '"
 						+ odata.getAcol().trim() + "'," + " B = '"
 						+ odata.getBcol().trim() + "'," + " C = '"
