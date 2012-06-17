@@ -455,10 +455,10 @@ public class MainFrame extends JFrame {
 				int op = JOptionPane.showConfirmDialog(null, tempMSG,
 						"系统提示", JOptionPane.YES_NO_OPTION,
 						JOptionPane.INFORMATION_MESSAGE);
-				if(op == JOptionPane.YES_OPTION){
-					return showRegDialog(regKey,displayKey);
-				}else{
+				if(op == JOptionPane.NO_OPTION){
 					return true;
+				}else{
+					return showRegDialog(regKey,displayKey);
 				}
 			}else{
 				return showRegDialog(regKey,displayKey);
