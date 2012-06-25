@@ -73,12 +73,31 @@ public class QueryPanel extends JPanel {
 		btnQuery.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Map<String,String> parames = new HashMap<String, String>();
-				parames.put(DataOperator.NAME, ttfName.getText().toString().trim());
-				parames.put(DataOperator.ICCODE, ttfICCode.getText().toString().trim());
-				mainFrame.getSpnLT().refreshTable(new DataOperator().findByParams(parames));
+				executQuery();
 			}
 		});
-		
+	}
+	
+	/**
+	 * 执行查询操作
+	 */
+	public void executQuery() {
+		if(mainFrame != null) {
+			Map<String,String> parames = new HashMap<String, String>();
+			parames.put(DataOperator.THORPNAME, 
+					cbbThorp.getSelectedItem().toString().trim());
+			parames.put(DataOperator.NAME, ttfName.getText().toString().trim());
+			parames.put(DataOperator.ICCODE, ttfICCode.getText().toString().trim());
+			
+			String temp = cbbPrint.getSelectedItem().toString().trim();
+			if("未打印".equals(temp))
+				parames.put(DataOperator.PRINTFLAG, "0");
+			else if("已打印".equals(temp))
+				parames.put(DataOperator.PRINTFLAG, "1");
+			else
+				parames.put(DataOperator.PRINTFLAG, "");
+			
+			mainFrame.getSpnLT().refreshTable(new DataOperator().findByParams(parames));				
+		}
 	}
 }

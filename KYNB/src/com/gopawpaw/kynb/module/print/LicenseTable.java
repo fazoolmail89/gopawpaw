@@ -16,8 +16,10 @@ import com.gopawpaw.kynb.widget.GppStyleTable;
 
 public class LicenseTable extends JScrollPane implements Printable{
 	private static final long serialVersionUID = -2609235147104011331L;
-	public static final Object[] columnNames = { "姓名", "身份证号", "曾用名", "出生年月日", "性别",
-									"社会保障号", "地址", "户口性质", "所在村", "打印标记"};
+	public static final Object[] columnNames = {
+		"序号","姓名", "身份证号",
+		"曾用名", "出生年月日", "性别",
+		"社会保障号", "地址", "所在村", "打印标记"};
 	public Object[][] data;
 	public JTable table;
 	private static DefaultTableModel dtm;
@@ -41,18 +43,27 @@ public class LicenseTable extends JScrollPane implements Printable{
 		table.updateUI();
 	}
 	
-	public License getSelectLicense() {
-		License license = null;
+	public LicenseDto getSelectLicenseDto() {
+		LicenseDto licenseDto = null;
 		int selIndex = table.getSelectedRow();
 		if(selIndex > -1) {
-			license = new License();
-			license.setName(table.getValueAt(selIndex, 1).toString());
-			license.setCode(table.getValueAt(selIndex, 2).toString());
-			license.setSex(table.getValueAt(selIndex, 3).toString());
-			license.setBirthday(table.getValueAt(selIndex, 4).toString());
-			license.setAddress(table.getValueAt(selIndex, 5).toString());
+			licenseDto = new LicenseDto();
+			licenseDto.setId(table.getValueAt(selIndex, 0).toString());
+			licenseDto.setName(table.getValueAt(selIndex, 1).toString());
+			licenseDto.setIcCode(table.getValueAt(selIndex, 2).toString());
+			licenseDto.setOldName(table.getValueAt(selIndex, 3).toString());
+			licenseDto.setBirthday(table.getValueAt(selIndex, 4).toString());
+			licenseDto.setSex(table.getValueAt(selIndex, 5).toString());
+			licenseDto.setCode(table.getValueAt(selIndex, 6).toString());
+			licenseDto.setAddress(table.getValueAt(selIndex, 7).toString());
+			
+			if("已打印".equals(table.getValueAt(selIndex, 8).toString()))
+				licenseDto.setPrintFlag(1);
+			else 
+				licenseDto.setPrintFlag(0);
+	
 		}
-		return license;
+		return licenseDto;
 	}
 
 	public int print(Graphics graphics, PageFormat pageFormat, int pageIndex)
