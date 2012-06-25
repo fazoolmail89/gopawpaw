@@ -1,6 +1,7 @@
 package com.gopawpaw.kynb.module.print;
 
 import java.awt.BorderLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -33,6 +34,7 @@ public class PrintFrame extends BaseModuleFrame {
 					JOptionPane.INFORMATION_MESSAGE);
 			return;
 		}
+		setTitle("证件打印");
 		spnLT = new LicenseTable();
 		pnlQuery = new QueryPanel(this);
 		
@@ -42,11 +44,33 @@ public class PrintFrame extends BaseModuleFrame {
 		
 		btnPrintOne.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				License.readInitFile();
+				LicenseDto licenseDto = spnLT.getSelectLicenseDto();
+				if(licenseDto != null) {
+					if(licenseDto.getPrintFlag() == 1) {
+						Toolkit.getDefaultToolkit().beep();
+						int rv = JOptionPane.showConfirmDialog(PrintFrame.this,
+								"该记录标记为已打印，是否重新打印？", "打印提示！", JOptionPane.OK_CANCEL_OPTION,
+								JOptionPane.WARNING_MESSAGE);
+						if (rv == 0) {
+							//创建打印预备按钮
+							new PrintReviseDialog(PrintFrame.this, licenseDto);
+						}						
+					} else {
+						//创建打印预备按钮
+						new PrintReviseDialog(PrintFrame.this, licenseDto);
+					}
+				} else {
+					Toolkit.getDefaultToolkit().beep();
+					JOptionPane.showMessageDialog(null, "请选择相应记录，再进行打印操作！", "操作提示！",
+							JOptionPane.WARNING_MESSAGE);
+				}
+				
+				
+/*				License.readInitFile();
 				License license = spnLT.getSelectLicense();
 				if(license != null) {
 					new PreviewDialog(PrintFrame.this, license);
-				}
+				}*/
 			}
 		});
 		
@@ -62,8 +86,9 @@ public class PrintFrame extends BaseModuleFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-	
 	public static void main(String[] args) {
+		com.gopawpaw.frame.GlobalParameter.isAuthModuls = true;
+
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				GlobalUI.initUI();
@@ -75,5 +100,9 @@ public class PrintFrame extends BaseModuleFrame {
 	
 	public LicenseTable getSpnLT() {
 		return spnLT;
+	}
+	
+	public QueryPanel getQP() {
+		return pnlQuery;
 	}
 }
