@@ -121,8 +121,8 @@ public class DataOperator extends XXNCYLBXDBAccess {
 		boolean result = false;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		if(licenseDto != null) {
-			String sql = "update PrintData a set a.PrintFlag = 1 " 
-					+ " and a.PrintDate = " + StringUtil.getQuotStr(sdf.format(new Date())) 
+			String sql = "update PrintData a set a.PrintFlag = 1, " 
+					+ " a.PrintDate = " + StringUtil.getQuotStr(sdf.format(new Date())) 
 					+ " where a.Id = " + licenseDto.getId()
 					+ " and a.ICCode = " + StringUtil.getQuotStr(licenseDto.getIcCode());
 			System.out.println("---------------");
