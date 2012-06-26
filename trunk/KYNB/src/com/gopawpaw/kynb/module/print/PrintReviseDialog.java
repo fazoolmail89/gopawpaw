@@ -174,12 +174,12 @@ public class PrintReviseDialog extends JDialog {
 						dispose();
 					} else {
 						Toolkit.getDefaultToolkit().beep();
-						JOptionPane.showMessageDialog(null, "´òÓ¡Ê§°Ü£¡", "´íÎóÌáÊ¾£¡",
+						JOptionPane.showMessageDialog(null, "´òÓ¡Ê§°Ü£¬E1£¡", "´íÎóÌáÊ¾£¡",
 								JOptionPane.ERROR_MESSAGE);
 					}
 				} catch (Exception ex) {
 					Toolkit.getDefaultToolkit().beep();
-					JOptionPane.showMessageDialog(null, "´òÓ¡Ê§°Ü£¡", "´íÎóÌáÊ¾£¡",
+					JOptionPane.showMessageDialog(null, "´òÓ¡Ê§°Ü£¬E2£¡", "´íÎóÌáÊ¾£¡",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
