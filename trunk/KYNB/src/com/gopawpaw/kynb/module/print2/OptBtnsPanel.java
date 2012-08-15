@@ -1,9 +1,3 @@
-/**     
-* @{#} OptBtnsPanel.java Create on 2012-8-15 ионГ1:52:52     
-*     
-* Copyright (c) 2012 by luxiangqi.     
-*/   
-
 package com.gopawpaw.kynb.module.print2;
 
 import java.awt.event.ActionEvent;
