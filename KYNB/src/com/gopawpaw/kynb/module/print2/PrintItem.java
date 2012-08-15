@@ -1,9 +1,3 @@
-/**     
-* @{#} PrintItem.java Create on 2012-8-15 ÉÏÎç3:07:55     
-*     
-* Copyright (c) 2012 by Â¬Ïòç÷.     
-*/   
-
 package com.gopawpaw.kynb.module.print2;
 /**     
  * @author Â¬Ïòç÷ luxiangqi521@gmail.com    
