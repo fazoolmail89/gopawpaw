@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
+import com.gopawpaw.kynb.common.StringUtil;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 
 public class DataOperator extends XXNCYLBXDBAccess {
