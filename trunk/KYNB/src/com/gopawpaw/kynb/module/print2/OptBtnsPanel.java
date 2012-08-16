@@ -1,5 +1,6 @@
 package com.gopawpaw.kynb.module.print2;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,6 +15,7 @@ import javax.swing.JPanel;
 
 public class OptBtnsPanel extends JPanel {
 	private static final long serialVersionUID = -1375038623430954359L;
+	private Dimension dim = new Dimension(100, 22);
 	private MainFrame mainFrame;
 	private JButton btnExport = new JButton("µ¼Èë");
 	private JButton btnClear = new JButton("Çå¿Õ");
@@ -25,6 +27,20 @@ public class OptBtnsPanel extends JPanel {
 	
 	public OptBtnsPanel(MainFrame mf) {
 		this.mainFrame = mf;
+/*		btnExport.setSize(dim);
+		btnClear.setSize(dim);
+		btnAdd.setSize(dim);
+		btnUpd.setSize(dim);
+		btnDel.setSize(dim);
+		btnPrint.setSize(dim);
+		btnPtSet.setSize(dim);*/
+		
+		btnPrint.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new PrintDialog(mainFrame);
+			}
+		});
 		
 		btnPtSet.addActionListener(new ActionListener() {
 			@Override

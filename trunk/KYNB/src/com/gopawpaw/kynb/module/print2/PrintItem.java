@@ -9,7 +9,7 @@ public class PrintItem {
 	private String code;
 	private String name;
 	private int mapIndex;
-	private int defValue;
+	private String defValue;
 	private int x;
 	private int y;
 	private boolean disAble;
@@ -37,10 +37,10 @@ public class PrintItem {
 	public void setMapIndex(int mapIndex) {
 		this.mapIndex = mapIndex;
 	}
-	public int getDefValue() {
+	public String getDefValue() {
 		return defValue;
 	}
-	public void setDefValue(int defValue) {
+	public void setDefValue(String defValue) {
 		this.defValue = defValue;
 	}
 	public int getX() {

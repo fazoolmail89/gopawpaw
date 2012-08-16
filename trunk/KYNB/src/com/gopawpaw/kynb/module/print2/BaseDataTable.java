@@ -45,10 +45,10 @@ public class BaseDataTable extends JScrollPane {
 		dataTable.getTableHeader().setReorderingAllowed(false);
 		
 		//隐藏列
-		for(int i = 0; i < BaseDataTable.DEF_HIDDEN_COL_INDEX.length; i++) {
+/*		for(int i = 0; i < BaseDataTable.DEF_HIDDEN_COL_INDEX.length; i++) {
 			dataTable.getTableHeader().getColumnModel().getColumn(DEF_HIDDEN_COL_INDEX[i]).setMinWidth(0);
 			dataTable.getTableHeader().getColumnModel().getColumn(DEF_HIDDEN_COL_INDEX[i]).setWidth(0);			
-		}
+		}*/
 		
 		//给面板加水平滚动条
 		setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -64,5 +64,46 @@ public class BaseDataTable extends JScrollPane {
 		((GppStyleTable) dataTable).updateModel(dataModel);
 		dataTable.repaint();
 		dataTable.updateUI();
+	}
+	
+	public PrintData getSelectRow() {
+		PrintData printData = null;
+		int selIndex = dataTable.getSelectedRow();
+		if(selIndex > -1) {
+			printData = new PrintData();
+			printData.setId(dataTable.getValueAt(selIndex, 0).toString());
+			printData.setArea(dataTable.getValueAt(selIndex, 1).toString());
+			printData.setThorp_N(dataTable.getValueAt(selIndex, 2).toString());
+			printData.setThorpName(dataTable.getValueAt(selIndex, 3).toString());
+			printData.setSerialNum(dataTable.getValueAt(selIndex, 4).toString());
+			printData.setName(dataTable.getValueAt(selIndex, 5).toString());
+			printData.setIcCode(dataTable.getValueAt(selIndex, 6).toString());
+			printData.setPhone(dataTable.getValueAt(selIndex, 7).toString());
+			printData.setFamilyCode(dataTable.getValueAt(selIndex, 8).toString());
+			printData.setJaccount(dataTable.getValueAt(selIndex, 9).toString());
+			printData.setJaccountName(dataTable.getValueAt(selIndex, 10).toString());
+			printData.setZaccount(dataTable.getValueAt(selIndex, 11).toString());
+			printData.setZaccountName(dataTable.getValueAt(selIndex, 12).toString());
+			printData.setAge(dataTable.getValueAt(selIndex, 13).toString());
+			printData.setSex(dataTable.getValueAt(selIndex, 14).toString());
+			printData.setAchieveDate(dataTable.getValueAt(selIndex, 15).toString());
+			printData.setBirthDate(dataTable.getValueAt(selIndex, 16).toString());
+			printData.setRelationship(dataTable.getValueAt(selIndex, 17).toString());
+			printData.setPayGrade(dataTable.getValueAt(selIndex, 18).toString());
+			printData.setPersType(dataTable.getValueAt(selIndex, 19).toString());
+			printData.setAddress(dataTable.getValueAt(selIndex, 20).toString());
+			printData.setRemark(dataTable.getValueAt(selIndex, 21).toString());
+			printData.setTotalAcct(dataTable.getValueAt(selIndex, 22).toString());
+			printData.setTotalPay(dataTable.getValueAt(selIndex, 23).toString());
+			printData.setTotalSubs(dataTable.getValueAt(selIndex, 24).toString());
+			printData.setPrintFlag(dataTable.getValueAt(selIndex, 25).toString());
+			printData.setPrintDate(dataTable.getValueAt(selIndex, 26).toString());
+			
+			String thorpId = dataTable.getValueAt(selIndex, 27).toString(); 
+			if(thorpId != null && !"".equals(thorpId))
+				printData.setThorpId(Integer.parseInt(thorpId));
+	
+		}
+		return printData;
 	}
 }

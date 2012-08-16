@@ -20,7 +20,7 @@ public class DataOperator extends XXNCYLBXDBAccess {
 	 * @return
 	 */
 	public Object[][] findByParams(Map params) {
-		 String sql = "select * from PrintData a left join Thorp b on a.ThorpID = b.t_id where 1 = 1 ";
+		 String sql = "select * from PrintData a left join printThorp b on a.ThorpID = b.t_id where 1 = 1 ";
 
 		if (params != null && params.size() > 0) {
 			if (params.get(DataOperator.THORPNAME) != null
@@ -109,7 +109,7 @@ public class DataOperator extends XXNCYLBXDBAccess {
 
 	public String[] findThorpArray() {
 		String[] thorpArray = {};
-		String sql = "select * from Thorp";
+		String sql = "select * from printThorp";
 		if (commonsql.connect(user, password)) {
 			if (commonsql.query(sql)) {
 				thorpArray = new String[(int) commonsql.getrowcount() + 1];
@@ -123,24 +123,6 @@ public class DataOperator extends XXNCYLBXDBAccess {
 			}
 		}
 		return thorpArray;
-	}
-	
-	public List<Throp> findThrops() {
-		List<Throp> throps = new ArrayList<Throp>();
-		String sql = "select * from Thorp";
-		if (commonsql.connect(user, password)) {
-			if (commonsql.query(sql)) {
-				Throp throp = null;
-				while (commonsql.nextrecord()) {
-					throp = new Throp();
-					throp.setId(commonsql.getString("t_id"));
-					throp.setName(commonsql.getString("t_name"));
-					throps.add(throp);
-				}
-				commonsql.close();
-			}
-		}		
-		return throps;
 	}
 	
 	/**
