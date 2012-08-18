@@ -496,7 +496,6 @@ public class DataExportDialog1 extends JDialog {
 						progressBar.setString("进度："+current+"/"+total);
 						progressBar.setValue(1); // 进度值
 						
-						System.out.println(current);
 					}
 					
 				};

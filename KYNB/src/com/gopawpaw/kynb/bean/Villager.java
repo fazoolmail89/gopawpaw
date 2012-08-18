@@ -13,6 +13,7 @@ public class Villager {
 	
 	public final static String tab_v_id = "序号";
 	public final static String tab_t_id = "村ID";
+	public final static String tab_t_name = "村名";
 	public final static String tab_v_name = "姓名";
 	public final static String tab_v_sex = "性别";
 	public final static String tab_v_ic = "身份证号";

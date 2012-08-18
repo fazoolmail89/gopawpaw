@@ -33,7 +33,9 @@ public class ExcelAccess {
 	
 	private static String outputPath = "OutPut\\";
 	
-	private static String excelTempPath = "DBCenter\\VillagerFormatTemp.xls";
+//	private static String excelTempPath = "DBCenter\\VillagerFormatTemp.xls";
+	
+	private static String excelTempPath = "DBCenter\\VillagerFormatTemp.v2.xls";
 	
 	private static String excelTempPathBank = "DBCenter\\广西新农保参保人员银行信息导入表.xls";
 	
