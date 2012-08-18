@@ -63,7 +63,7 @@ public class ExcelUpgradeFrame extends BaseModuleFrame {
 		
 		this.setSize(900, 600);
 		this.setLocation(200, 100);
-		this.setTitle("Excel升级");
+		this.setTitle("Excel格式升级");
 		this.setContentPane(getJContentPane());
 	}
 
@@ -193,8 +193,23 @@ public class ExcelUpgradeFrame extends BaseModuleFrame {
 	
 	private void actionSwitch(){
 		
-//		JOptionPane.showConfirmDialog(jButton, "请输入保存文件名！");
+		if(mInputPath == null || "".equals(mInputPath) || fileList.isEmpty()){
+			
+			JOptionPane.showConfirmDialog(this, "该目录下没有符合条件的Excel，请重新选择目录。","系统提示",JOptionPane.OK_OPTION);
+			return;
+		}
 		
+		if(mOutputPath == null || "".equals(mOutputPath)){
+			
+			JOptionPane.showConfirmDialog(this, "您没有选择输出目录，请选择一个转换后输出的目录。","系统提示",JOptionPane.OK_OPTION);
+			return;
+		}
+
+		if(mOutputPath.equals(mInputPath)){
+			JOptionPane.showConfirmDialog(this, "输入目录和输出目录不能相同，请重新选择。","系统提示",JOptionPane.OK_OPTION);
+			return;
+		}
+
 		UpgradeExcelThread uet = new UpgradeExcelThread();
 		uet.start();
 	}
@@ -289,9 +304,9 @@ public class ExcelUpgradeFrame extends BaseModuleFrame {
 			for(int i = 0;i<size;i++){
 				String filename= fileList.get(i);
 				
-				String result = "转换失败";
+				String result = "升级失败";
 				if(actionUpgrade(mInputPath+"\\"+filename,mOutputPath+"\\"+filename)){
-					result = "转换成功";
+					result = "升级成功";
 				}
 				
 				String temp = mJTextExcelOutput.getText();
