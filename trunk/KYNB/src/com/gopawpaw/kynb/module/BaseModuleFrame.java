@@ -55,7 +55,7 @@ public class BaseModuleFrame extends BaseJInternalFrame{
 		
 		JFrame jf = new JFrame();
 		jf.setSize(new Dimension(1000,600));
-		jf.setTitle("快译农保-独立模块测试");
+		jf.setTitle("快译农保-独立模块");
 		jf.add(desktopPane);
 		jf.addWindowListener(new WindowAdapter(){
 			@Override
