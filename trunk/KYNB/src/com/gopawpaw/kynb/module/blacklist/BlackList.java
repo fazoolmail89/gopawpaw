@@ -125,13 +125,7 @@ public class BlackList extends BaseModuleFrame implements ActionListener,
 	 * @return void
 	 */
 	private void initialize() {
-		if(!GlobalParameter.isAuthModuls){
-			//非法授权
-			JOptionPane.showConfirmDialog(null, StringConstant.isNotAuthMsg,
-					"系统提示", JOptionPane.YES_NO_OPTION,
-					JOptionPane.INFORMATION_MESSAGE);
-			return;
-		}
+		
 		
 		this.setSize(900, 600);
 		this.setLocation(200, 100);

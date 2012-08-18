@@ -211,13 +211,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 	 * @return void
 	 */
 	private void initialize() {
-		if(!GlobalParameter.isAuthModuls){
-			//非法授权
-			JOptionPane.showConfirmDialog(null, StringConstant.isNotAuthMsg,
-					"系统提示", JOptionPane.YES_NO_OPTION,
-					JOptionPane.INFORMATION_MESSAGE);
-			return;
-		}
+		
 		this.setSize(900, 600);
 		this.setLocation(200, 100);
 		this.setContentPane(getJContentPane());
@@ -804,7 +798,8 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 				.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						
-					String tempMSG = "是否确认删除所有档案数据？\r\n该操作将不可恢复数据，请谨慎使用！！";
+				String tempMSG = "是否真的确认删除所有档案数据？\r\n" +
+				"所有村的档案数据将会被清空；并且该操作将不可恢复数据，请谨慎使用！！\r\n";
 				MessageDialog gmd = new MessageDialog(XXNCYLBXMain.this) {
 					/**
 					 * 
@@ -817,20 +812,45 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 
 						super.actionFinish(option);
 						if (option == MessageDialog.YES_OPTION) {
-							// 确认删除
-							try {
-								mXXDB.deleteVillagerAll();
-								
-							} catch (DBException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							clearEditVillager(false, false);
-							jComboBox_ic.requestFocus();
-							jScrollPaneCenterLeft.getVerticalScrollBar()
-									.setValue(0);
-							refreshTableVillager();
-							refreshTableVillagerTop1();
+							// 第一次确认删除
+							
+							MessageDialog gmd2 = new MessageDialog(XXNCYLBXMain.this) {
+								/**
+								 * 
+								 */
+								private static final long serialVersionUID = 1L;
+
+								@Override
+								protected void actionFinish(int option) {
+									// TODO Auto-generated method stub
+
+									super.actionFinish(option);
+									if (option == MessageDialog.YES_OPTION) {
+										// 第二次确认删除
+										try {
+											mXXDB.deleteVillagerAll();
+											
+										} catch (DBException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+										clearEditVillager(false, false);
+										jComboBox_ic.requestFocus();
+										jScrollPaneCenterLeft.getVerticalScrollBar()
+												.setValue(0);
+										refreshTableVillager();
+										refreshTableVillagerTop1();
+									}
+								}
+							};
+							String temp = "！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！\r\n" +
+									"是否真的确认删除所有档案数据？\r\n" +
+									"所有村的档案数据将会被清空；并且该操作将不可恢复数据，请谨慎使用！！\r\n" +
+									"！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！";
+							gmd2.setTitle("系统提示");
+							gmd2.setModal(true);
+							gmd2.setMessage(temp);
+							gmd2.setVisible(true);
 						}
 					}
 				};

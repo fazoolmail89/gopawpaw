@@ -321,7 +321,7 @@ public class MessageDialog extends JDialog implements ActionListener{
 	@Override
 	public void setVisible(boolean arg0) {
 		super.setTitle(this.title);
-		this.setSize(300, 150);
+		this.setSize(300, 200);
 		
 		if(mJInternalFrame != null){
 			this.setLocation(mJInternalFrame.getLocation().x+mJInternalFrame.getSize().width/3,mJInternalFrame.getLocation().y+mJInternalFrame.getSize().height/4);
