@@ -1,13 +1,13 @@
 package com.gopawpaw.kynb.module.print2;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import com.gopawpaw.kynb.common.StringUtil;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 
-public class DataOperator extends XXNCYLBXDBAccess {
+public class PrintDataDAO extends XXNCYLBXDBAccess {
 
 	public static final String THORPNAME = "thorpName";
 	public static final String NAME = "name";
@@ -19,34 +19,35 @@ public class DataOperator extends XXNCYLBXDBAccess {
 	 * @param params
 	 * @return
 	 */
+	@SuppressWarnings("rawtypes")
 	public Object[][] findByParams(Map params) {
 		 String sql = "select * from PrintData a left join printThorp b on a.ThorpID = b.t_id where 1 = 1 ";
 
 		if (params != null && params.size() > 0) {
-			if (params.get(DataOperator.THORPNAME) != null
-					&& !"".equals(params.get(DataOperator.THORPNAME))) {
+			if (params.get(PrintDataDAO.THORPNAME) != null
+					&& !"".equals(params.get(PrintDataDAO.THORPNAME))) {
 				sql = sql
 						+ " and b.t_name = "
 						+ StringUtil.getQuotStr(params
-								.get(DataOperator.THORPNAME));
+								.get(PrintDataDAO.THORPNAME));
 			}
 
-			if (params.get(DataOperator.NAME) != null) {
+			if (params.get(PrintDataDAO.NAME) != null) {
 				sql = sql + " and a.Name like "
-						+ StringUtil.getDLikeStr(params.get(DataOperator.NAME));
+						+ StringUtil.getDLikeStr(params.get(PrintDataDAO.NAME));
 			}
 
-			if (params.get(DataOperator.ICCODE) != null) {
+			if (params.get(PrintDataDAO.ICCODE) != null) {
 				sql = sql
 						+ " and a.ICCode like "
 						+ StringUtil.getDLikeStr(params
-								.get(DataOperator.ICCODE));
+								.get(PrintDataDAO.ICCODE));
 			}
 
-			if (params.get(DataOperator.PRINTFLAG) != null
-					&& !"".equals(params.get(DataOperator.PRINTFLAG))) {
+			if (params.get(PrintDataDAO.PRINTFLAG) != null
+					&& !"".equals(params.get(PrintDataDAO.PRINTFLAG))) {
 				sql = sql + " and a.PrintFlag = "
-						+ params.get(DataOperator.PRINTFLAG);
+						+ params.get(PrintDataDAO.PRINTFLAG);
 			}
 		}
 
@@ -62,7 +63,7 @@ public class DataOperator extends XXNCYLBXDBAccess {
 				data = new Object[(int) commonsql.getrowcount()][];
 				int i = 0;
 				while (commonsql.nextrecord()) {
-//========================================
+					//========================================
 					Object[] row = new Object[BaseDataTable.columnNames.length];
 					row[0] = commonsql.getString("Id");//
 					row[1] = commonsql.getString("Area");//所属地区
@@ -107,6 +108,10 @@ public class DataOperator extends XXNCYLBXDBAccess {
 		return data;
 	}
 
+	/**
+	 * 查询所有村名称
+	 * @return 村名称字符串数组
+	 */
 	public String[] findThorpArray() {
 		String[] thorpArray = {};
 		String sql = "select * from printThorp";
@@ -126,26 +131,66 @@ public class DataOperator extends XXNCYLBXDBAccess {
 	}
 	
 	/**
-	 * 将数据库对应记录的打印标记改为1：已打印
-	 * @param licenseDto
-	 * @return
+	 * 将数据库对应记录的打印标记改为1：已打印，printData为空时返回true
+	 * @param printData 需要更新的PrintData对象
+	 * @return true：成功，false：失败
 	 */
-	
-/*	public boolean updatePrintFlag(LicenseDto licenseDto) {
-		boolean result = false;
+	public boolean updatePrintFlag(int id) {
+		boolean result = true;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		if(licenseDto != null) {
+		if(id != 0) {
 			String sql = "update PrintData a set a.PrintFlag = 1, " 
 					+ " a.PrintDate = " + StringUtil.getQuotStr(sdf.format(new Date())) 
-					+ " where a.Id = " + licenseDto.getId()
-					+ " and a.ICCode = " + StringUtil.getQuotStr(licenseDto.getIcCode());
-			System.out.println("---------------");
-			System.out.print(sql);
+					+ " where a.Id = " + id;
 			if (commonsql.connect(user, password)) {
 				result = commonsql.executesql(sql);
+			} else {
+				result = false;
 			}
 			commonsql.close();
 		}
 		return result;
-	}*/
+	}
+	
+	/**
+	 * 新增或者修改数据
+	 * @param printData
+	 * @return
+	 */
+	public boolean saveOrUpdate(PrintData printData) {
+		if(printData == null) return false;
+		boolean result = false;
+		String sql = "";
+		if (commonsql.connect(user, password)) {
+			sql = getSql(printData);
+			if(sql != null && !"".equals(sql))
+				result = commonsql.executesql(sql);
+		}
+		return result;
+	}
+	
+	private String getSql(PrintData printData) {
+		String sql = "";
+		if(printData != null) {
+			if(printData.getId() != null && !"".equals(printData.getId()))
+				sql = "";
+			else
+				;
+		}
+		return sql;
+	}
+	
+	/**
+	 * 删除数据
+	 * @param printData
+	 * @return
+	 */
+	private boolean delete(int id) {
+		boolean result = false;
+		String sql = "delete from PrintData where Id = " + id;
+		if (commonsql.connect(user, password)) {
+			result = commonsql.executesql(sql);
+		}
+		return result;
+	}
 }
