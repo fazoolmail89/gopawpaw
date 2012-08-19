@@ -20,6 +20,16 @@ import javax.swing.SwingUtilities;
 
 import jxl.Cell;
 import jxl.Workbook;
+import jxl.format.Alignment;
+import jxl.format.Border;
+import jxl.format.BorderLineStyle;
+import jxl.format.CellFormat;
+import jxl.format.Colour;
+import jxl.format.Font;
+import jxl.format.Format;
+import jxl.format.Orientation;
+import jxl.format.Pattern;
+import jxl.format.VerticalAlignment;
 import jxl.read.biff.BiffException;
 import jxl.write.Label;
 import jxl.write.WritableSheet;
@@ -226,38 +236,75 @@ public class ExcelUpgradeFrame extends BaseModuleFrame {
 			
 			WritableWorkbook wwb = Workbook.createWorkbook(targetFile, mWorkbook);
 			
-			WritableSheet wws = wwb.getSheet("农村居民");
+			WritableSheet wws = wwb.getSheet(0);
 			
 			//取出表头
 			Cell cA1 = wws.getCell(0, 0);
 			Cell cA3 = wws.getCell(0, 2);
 			
-			//移除第一列
+			
+			//移除列
+			wws.removeColumn(19);
+			wws.removeColumn(13);
+			wws.removeColumn(5);
 			wws.removeColumn(0);
+			
+			wws.removeRow(2);
+			wws.insertRow(2);
 			
 			Label labA1 = new Label(0,0,cA1.getContents());
 			labA1.setCellFormat(cA1.getCellFormat());
 			Label labA3 = new Label(0,2,cA3.getContents());
 			labA3.setCellFormat(cA3.getCellFormat());
 			
+			
 			//重新添加表头
 			wws.addCell(labA1);
 			wws.addCell(labA3);
 			
+			wws.mergeCells(0, 2, 2, 2);
+			
 			//插入新的两列
-			wws.insertColumn(10);
-			wws.insertColumn(11);
+			wws.insertColumn(5);
+			wws.insertColumn(6);
+			wws.insertColumn(7);
+			wws.insertColumn(12);
+			wws.insertColumn(13);
 			
-			Cell cJ4 = wws.getCell(9, 3);
+			Cell cC4 = wws.getCell(2, 3);
 			
-			Label labK4 = new Label(10,3,"村干任职年限");
-			labK4.setCellFormat(cJ4.getCellFormat());
-			Label labL4 = new Label(11,3,"村干任职类型");
-			labL4.setCellFormat(cJ4.getCellFormat());
+			Label lab54 = new Label(5,3,"缴费银行名称");
+			lab54.setCellFormat(cC4.getCellFormat());
+			Label lab64 = new Label(6,3,"缴费银行账号");
+			lab64.setCellFormat(cC4.getCellFormat());
+			Label lab74 = new Label(7,3,"缴费银行户名");
+			lab74.setCellFormat(cC4.getCellFormat());
 			
+			Label labK4 = new Label(12,3,"村干任职年限");
+			labK4.setCellFormat(cC4.getCellFormat());
+			Label labL4 = new Label(13,3,"村干任职类型");
+			labL4.setCellFormat(cC4.getCellFormat());
+			
+			wws.addCell(lab54);
+			wws.addCell(lab64);
+			wws.addCell(lab74);
 			wws.addCell(labK4);
 			wws.addCell(labL4);
 			
+			//重命名
+			Cell cBankName = wws.getCell(8, 3);
+			Cell cBankAcc = wws.getCell(9, 3);
+			
+			Label lab83 = new Label(8,3,"支付银行名称");
+			lab83.setCellFormat(cBankName.getCellFormat());
+			Label lab93 = new Label(9,3,"支付银行账号");
+			lab93.setCellFormat(cBankAcc.getCellFormat());
+			Label lab163 = new Label(16,3,"是否参加老农保");
+			lab163.setCellFormat(cBankAcc.getCellFormat());
+			
+			wws.addCell(lab83);
+			wws.addCell(lab93);
+			wws.addCell(lab163);
 			//写入
 			wwb.write();
 			
