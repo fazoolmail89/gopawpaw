@@ -41,7 +41,7 @@ public class QueryPanel extends JPanel {
 
 		lblThorp.setPreferredSize(dsLbl);
 		lblThorp.setHorizontalAlignment(SwingConstants.RIGHT); 
-		cbbThorp = new JComboBox(new DataOperator().findThorpArray());
+		cbbThorp = new JComboBox(new PrintDataDAO().findThorpArray());
 		cbbThorp.setPreferredSize(dsTtf);
 		
 		lblName.setPreferredSize(dsLbl);
@@ -84,20 +84,20 @@ public class QueryPanel extends JPanel {
 	public void executQuery() {
 		if(mainFrame != null) {
 			Map<String,String> parames = new HashMap<String, String>();
-			parames.put(DataOperator.THORPNAME, 
+			parames.put(PrintDataDAO.THORPNAME, 
 					cbbThorp.getSelectedItem().toString().trim());
-			parames.put(DataOperator.NAME, ttfName.getText().toString().trim());
-			parames.put(DataOperator.ICCODE, ttfICCode.getText().toString().trim());
+			parames.put(PrintDataDAO.NAME, ttfName.getText().toString().trim());
+			parames.put(PrintDataDAO.ICCODE, ttfICCode.getText().toString().trim());
 			
 			String temp = cbbPrint.getSelectedItem().toString().trim();
 			if("Œ¥¥Ú”°".equals(temp))
-				parames.put(DataOperator.PRINTFLAG, "0");
+				parames.put(PrintDataDAO.PRINTFLAG, "0");
 			else if("“—¥Ú”°".equals(temp))
-				parames.put(DataOperator.PRINTFLAG, "1");
+				parames.put(PrintDataDAO.PRINTFLAG, "1");
 			else
-				parames.put(DataOperator.PRINTFLAG, "");
+				parames.put(PrintDataDAO.PRINTFLAG, "");
 			
-			mainFrame.getSpnBDT().refreshTable(new DataOperator().findByParams(parames));				
+			mainFrame.getSpnBDT().refreshTable(new PrintDataDAO().findByParams(parames));				
 		}
 	}
 }

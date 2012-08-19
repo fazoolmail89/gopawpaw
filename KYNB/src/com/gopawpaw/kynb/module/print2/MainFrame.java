@@ -16,6 +16,9 @@ public class MainFrame extends BaseModuleFrame {
 	private OptBtnsPanel pnlOptBtns;
 	
 	public MainFrame() {
+		//读取打印配置文件
+		MyPrintable.readInitFile();
+		
 		setTitle("打印管理");
 		
 		pnlQuery = new QueryPanel(this);
@@ -50,5 +53,9 @@ public class MainFrame extends BaseModuleFrame {
 	
 	public BaseDataTable getSpnBDT() {
 		return spnBDT;
+	}
+	
+	public QueryPanel getPnlQuery() {
+		return pnlQuery;
 	}
 }

@@ -1,6 +1,5 @@
 package com.gopawpaw.kynb.module.print2;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,30 +14,60 @@ import javax.swing.JPanel;
 
 public class OptBtnsPanel extends JPanel {
 	private static final long serialVersionUID = -1375038623430954359L;
-	private Dimension dim = new Dimension(100, 22);
 	private MainFrame mainFrame;
 	private JButton btnExport = new JButton("导入");
 	private JButton btnClear = new JButton("清空");
 	private JButton btnAdd = new JButton("新增");
 	private JButton btnUpd = new JButton("修改");
 	private JButton btnDel = new JButton("删除");
+	private JButton btnView = new JButton("查看");
 	private JButton btnPrint = new JButton("打印");
 	private JButton btnPtSet = new JButton("设置");
 	
 	public OptBtnsPanel(MainFrame mf) {
 		this.mainFrame = mf;
-/*		btnExport.setSize(dim);
-		btnClear.setSize(dim);
-		btnAdd.setSize(dim);
-		btnUpd.setSize(dim);
-		btnDel.setSize(dim);
-		btnPrint.setSize(dim);
-		btnPtSet.setSize(dim);*/
+		
+		btnAdd.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new PrintDataEditDialog(mainFrame,
+						"新增数据",
+						null, 
+						PrintDataEditDialog.ADD_OPT);				
+			}
+		});
+		
+		btnUpd.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new PrintDataEditDialog(mainFrame, 
+						"修改数据",
+						mainFrame.getSpnBDT().getSelectPrintData(),
+						PrintDataEditDialog.UPTD_OPT);
+			}
+		});
+		
+		btnView.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new PrintDataEditDialog(mainFrame, 
+						"查看数据",
+						mainFrame.getSpnBDT().getSelectPrintData(),
+						PrintDataEditDialog.VIEW_OPT);
+			}
+		});		
+
+		btnExport.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.getSpnBDT().getSelectNextRow();
+			}
+		});
 		
 		btnPrint.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new PrintDialog(mainFrame);
+				new PrintDialog(mainFrame, mainFrame.getSpnBDT().getSelectRow());
 			}
 		});
 		
@@ -52,6 +81,7 @@ public class OptBtnsPanel extends JPanel {
 		Box box = Box.createVerticalBox();
 		box.add(btnExport);
 		box.add(btnClear);
+		box.add(btnView);
 		box.add(btnAdd);
 		box.add(btnUpd);
 		box.add(btnDel);

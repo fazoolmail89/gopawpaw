@@ -2,6 +2,7 @@ package com.gopawpaw.kynb.module.print2;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import com.gopawpaw.kynb.widget.GppStyleTable;
@@ -14,8 +15,6 @@ import com.gopawpaw.kynb.widget.GppStyleTable;
 public class BaseDataTable extends JScrollPane {
 	private static final long serialVersionUID = -1138977648779912371L;
 	
-	private static final int[] DEF_HIDDEN_COL_INDEX = {0,27};
-	
 	/**
 	 * 表头(0-27)
 	 */
@@ -23,12 +22,20 @@ public class BaseDataTable extends JScrollPane {
 			"身份证号", "联系电话", "家庭编号", "缴费银行账号", "缴费银行户名", "支付银行账号", "支付银行户名",
 			"年龄", "性别", "到龄时间", "出生日期", "与户主关系", "本年缴费档次", "本年人员类别", "家庭住址",
 			"备注", "累计个人账户金额", "累计个人缴费金额", "累计财政补助", "打印标记", "打印日期","村ID" };
+	
+	/**
+	 * 列表数据，只有执行查询的时候才会刷新
+	 */
 	private Object[][] data;
 	
 	private DefaultTableModel dataModel;
 	
 	private JTable dataTable;
 	
+	public JTable getDataTable() {
+		return dataTable;
+	}
+
 	public BaseDataTable() {
 		dataModel = new DefaultTableModel(data, columnNames);
 		dataTable = new GppStyleTable(dataModel) {
@@ -43,6 +50,8 @@ public class BaseDataTable extends JScrollPane {
 		dataTable.setRowHeight(22);
 		//锁定表头
 		dataTable.getTableHeader().setReorderingAllowed(false);
+		//设置只能禁止同时选中多行
+		dataTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		//隐藏列
 /*		for(int i = 0; i < BaseDataTable.DEF_HIDDEN_COL_INDEX.length; i++) {
@@ -66,10 +75,89 @@ public class BaseDataTable extends JScrollPane {
 		dataTable.updateUI();
 	}
 	
-	public PrintData getSelectRow() {
-		PrintData printData = null;
+	/**
+	 * 刷新表格当前数据
+	 */
+	private void refreshTable() {
+		((GppStyleTable) dataTable).updateModel(dataModel);
+		dataTable.repaint();
+		dataTable.updateUI();
+	}
+	
+	/**
+	 * 移除已打印记录，获取下一行记录，到列表尽头自动回选
+	 * @return
+	 */
+	public Object[] getSelectNextRow() {
+		if(dataTable == null) return null;
+		if(dataTable.getRowCount() == 0) return null;
 		int selIndex = dataTable.getSelectedRow();
-		if(selIndex > -1) {
+		if(selIndex > -1 && selIndex < dataTable.getRowCount()) {
+			//删除选中行
+			dataModel.removeRow(selIndex);
+			//刷新表格
+			refreshTable();
+			//重新选中行，如果达到最后一行，自动回选
+			if(selIndex >= dataTable.getRowCount())
+				selIndex--;
+			dataTable.changeSelection(selIndex, 0, false, false);
+			return getRowData(selIndex);	
+		} else {
+			return null;
+		}		
+	}
+	
+	/**
+	 * 获取选中行
+	 * @return
+	 */
+	public Object[] getSelectRow() {
+		if(dataTable == null) return null;
+		if(dataTable.getRowCount() == 0) return null;
+		int selIndex = dataTable.getSelectedRow();
+		if(selIndex > -1 && selIndex < dataTable.getRowCount()) {
+			return getRowData(selIndex);	
+		} else {
+			return null;
+		}
+	}
+	
+	public PrintDataDto getSelectPrintDataDto() {
+		PrintDataDto pddto = new PrintDataDto();
+		int selIndex = dataTable.getSelectedRow();
+		pddto.setRowIndex(selIndex);
+		pddto.setPrintData(getSelectPrintData(selIndex));
+		return pddto;
+	}
+	
+	public PrintData getSelectPrintData() {
+		int selIndex = dataTable.getSelectedRow();
+		return getSelectPrintData(selIndex);
+	}
+	
+	/**
+	 * 获取选中行
+	 * @param selIndex
+	 * @return
+	 */	
+	private Object[] getRowData(int selIndex) {
+		Object[] rowData = new Object[columnNames.length];
+		if(selIndex > -1 && selIndex < dataTable.getRowCount()) {
+			for(int i = 0; i < columnNames.length; i++) {
+				rowData[i] = dataTable.getValueAt(selIndex, i).toString().trim();
+			}
+		}
+		return rowData;
+	}
+	
+	/**
+	 * 获取选中行
+	 * @param selIndex
+	 * @return
+	 */
+	private PrintData getSelectPrintData(int selIndex) {
+		PrintData printData = null;
+		if(selIndex > -1 && selIndex < dataTable.getRowCount() - 1) {
 			printData = new PrintData();
 			printData.setId(dataTable.getValueAt(selIndex, 0).toString());
 			printData.setArea(dataTable.getValueAt(selIndex, 1).toString());

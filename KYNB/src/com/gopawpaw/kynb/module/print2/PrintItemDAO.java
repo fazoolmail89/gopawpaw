@@ -17,10 +17,19 @@ import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
  * @version 1.0     
  */
 
-public class PrintItemDBOpt extends XXNCYLBXDBAccess {
+public class PrintItemDAO extends XXNCYLBXDBAccess {
 	public List<PrintItem> findAll() {
-		List<PrintItem> pis = new ArrayList<PrintItem>();
 		String sql = "select * from printItem";
+		return findBySql(sql);
+	}
+	
+	public List<PrintItem> findAvailables() {
+		String sql = "select * from printItem where EnAble = 1";
+		return findBySql(sql);		
+	}
+	
+	private List<PrintItem> findBySql(String sql) {
+		List<PrintItem> pis = new ArrayList<PrintItem>();
 		if (commonsql.connect(user, password)) {
 			if (commonsql.query(sql)) {
 				PrintItem pi = null;
@@ -33,15 +42,15 @@ public class PrintItemDBOpt extends XXNCYLBXDBAccess {
 					pi.setDefValue(commonsql.getString("DefValue"));
 					pi.setX(commonsql.getInt("X"));
 					pi.setY(commonsql.getInt("Y"));
-					if(commonsql.getInt("disAble") == 1)
-						pi.setDisAble(true);
+					if(commonsql.getInt("EnAble") == 1)
+						pi.setEnAble(true);
 					else
-						pi.setDisAble(false);
+						pi.setEnAble(false);
 					pis.add(pi);
 				}
 			}
 		}
-		commonsql.close();
+		commonsql.close();		
 		return pis;
 	}
 	
@@ -51,7 +60,7 @@ public class PrintItemDBOpt extends XXNCYLBXDBAccess {
 			if (commonsql.connect(user, password)) {
 				for(PrintItem pi: pis) {
 					int disAble = 0;
-					if(pi.isDisAble())
+					if(pi.isEnAble())
 						disAble = 1;
 						
 					String sql = "update printItem set " 
@@ -60,7 +69,7 @@ public class PrintItemDBOpt extends XXNCYLBXDBAccess {
 							+ " ,DefValue = " + StringUtil.getQuotStr(pi.getDefValue())
 							+ " ,X = " + pi.getX()
 							+ " ,Y = " + pi.getY()
-							+ " ,disAble = " + disAble
+							+ " ,EnAble = " + disAble
 							+ " where Code = " + StringUtil.getQuotStr(pi.getCode());
 					result = commonsql.executesql(sql);
 				}

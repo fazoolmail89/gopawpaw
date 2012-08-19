@@ -12,7 +12,7 @@ public class PrintItem {
 	private String defValue;
 	private int x;
 	private int y;
-	private boolean disAble;
+	private boolean enAble;
 	public String getId() {
 		return id;
 	}
@@ -55,10 +55,10 @@ public class PrintItem {
 	public void setY(int y) {
 		this.y = y;
 	}
-	public boolean isDisAble() {
-		return disAble;
+	public boolean isEnAble() {
+		return enAble;
 	}
-	public void setDisAble(boolean disAble) {
-		this.disAble = disAble;
+	public void setEnAble(boolean enAble) {
+		this.enAble = enAble;
 	}
 }

@@ -28,9 +28,9 @@ import com.gopawpaw.kynb.common.DialogUtil;
 
 public class PtSetDialog extends JDialog {
 	private static final long serialVersionUID = 2373365918782990387L;
-	private static Dimension dim_1 = new Dimension(50, 20);
-	private static Dimension dim_2 = new Dimension(100, 20);
-	private static Dimension dim_3 = new Dimension(200, 20);
+	private Dimension dim_1 = new Dimension(50, 20);
+	private Dimension dim_2 = new Dimension(100, 20);
+	private Dimension dim_3 = new Dimension(200, 20);
 
 	private MainFrame mainFrame;
 
@@ -39,52 +39,17 @@ public class PtSetDialog extends JDialog {
 	private List<PrintItem> piList;
 
 	private JScrollPane spnBody;
-	private ItemPanel[] itmePanels = new ItemPanel[26];
+	private ItemPanel[] itmePanels;
 
-	private JPanel pnlBottom = new JPanel();
-	private JButton btnOk = new JButton("确定");
-	private JButton btnQuit = new JButton("取消");
+	private JPanel pnlBottom;
 
 	public PtSetDialog(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
+
 		initPiList();
-		pnlHeader = getPnlHeader();
-		spnBody = getSpnBody();
-		btnOk.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Toolkit.getDefaultToolkit().beep();
-				int rv = JOptionPane.showConfirmDialog(PtSetDialog.this,
-						"是否确认更新？", "退出提示！", JOptionPane.OK_CANCEL_OPTION,
-						JOptionPane.OK_CANCEL_OPTION);
-				if (rv == 0) {
-					PrintItemDBOpt pdbopt = new PrintItemDBOpt();
-					if (pdbopt.updateAll(getUpdPiList())) {
-						JOptionPane.showMessageDialog(null, "保存成功！", "操作提示！",
-								JOptionPane.PLAIN_MESSAGE);
-						dispose();
-					} else
-						JOptionPane.showMessageDialog(null, "保存失败！", "保存文件提示！",
-								JOptionPane.ERROR_MESSAGE);
-				}
-			}
-		});
-
-		btnQuit.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Toolkit.getDefaultToolkit().beep();
-				int rv = JOptionPane.showConfirmDialog(PtSetDialog.this,
-						"是否取消操作？", "退出提示！", JOptionPane.OK_CANCEL_OPTION,
-						JOptionPane.OK_CANCEL_OPTION);
-				if (rv == 0) {
-					dispose();
-				}
-			}
-		});
-
-		pnlBottom.add(btnOk);
-		pnlBottom.add(btnQuit);
+		createPnlHeader();
+		createSpnBody();
+		createPnlButtom();
 
 		Box box = Box.createVerticalBox();
 		box.setBorder(BorderFactory.createTitledBorder("打印设置"));
@@ -93,10 +58,10 @@ public class PtSetDialog extends JDialog {
 		box.add(pnlBottom);
 
 		add(box);
-		
+
 		setTitle("打印设置");
 		DialogUtil.setDialogLocaltion(this.mainFrame, this);
-		setLocation(this.getLocation().x, 0);
+		setLocation(this.getLocation().x, 30);
 		setSize(800, 700);
 		// 固定大小
 		setResizable(false);
@@ -104,8 +69,11 @@ public class PtSetDialog extends JDialog {
 		setVisible(true);
 	}
 
-	private JPanel getPnlHeader() {
-		JPanel pnlHeader = new JPanel();
+	/**
+	 * 创建头部面板
+	 */
+	private void createPnlHeader() {
+		pnlHeader = new JPanel();
 		JLabel lbl_1 = new JLabel("编号");
 		JLabel lbl_2 = new JLabel("是否可用");
 		JLabel lbl_3 = new JLabel("名称");
@@ -127,42 +95,48 @@ public class PtSetDialog extends JDialog {
 		pnlHeader.add(lbl_5);
 		pnlHeader.add(lbl_6);
 		pnlHeader.add(lbl_7);
-
-		return pnlHeader;
 	}
-
-	private JScrollPane getSpnBody() {
-		JScrollPane spnBody = new JScrollPane();
-		Box boxBody = Box.createVerticalBox();
-		ItemPanel itemP = null;
-		String code;
-		for (int i = 0; i < itmePanels.length; i++) {
-			code = String.valueOf((char) (65 + i));
-			itemP = new ItemPanel();
-			for (PrintItem pi : piList) {
-				if (code.equals(pi.getCode())) {
-					itemP.getCkbDisAble().setSelected(pi.isDisAble());
-					itemP.getLblCode().setText(pi.getCode());
-					itemP.getTtfName().setText(pi.getName());
-					itemP.getCbbMapIndex().setSelectedIndex(pi.getMapIndex());
-					itemP.getTtfDefValue().setText(pi.getDefValue());
-					itemP.getTtfX().setText(String.valueOf(pi.getX()));
-					itemP.getTtfY().setText(String.valueOf(pi.getY()));
-				}
-			}
-			boxBody.add(itemP);
-			itmePanels[i] = itemP;
-		}
-		spnBody.setViewportView(boxBody);
-		return spnBody;
-	}
-
+	
+	/**
+	 * 初始化PrintItem列表(piList)
+	 */
 	private void initPiList() {
 		piList = new ArrayList<PrintItem>();
-		PrintItemDBOpt pdbopt = new PrintItemDBOpt();
-		piList = pdbopt.findAll();
+		PrintItemDAO piDao = new PrintItemDAO();
+		piList = piDao.findAll();
 	}
 
+	/**
+	 * 创建中部滚动面板
+	 */
+	private void createSpnBody() {
+		spnBody = new JScrollPane();
+		itmePanels = new ItemPanel[piList.size()];
+		Box box = Box.createVerticalBox();
+
+		ItemPanel itemP = null;
+		int i = 0;
+		for (PrintItem pi : piList) {
+			itemP = new ItemPanel();
+			itemP.getCkbEnAble().setSelected(pi.isEnAble());
+			itemP.getLblCode().setText(pi.getCode());
+			itemP.getTtfName().setText(pi.getName());
+			itemP.getCbbMapIndex().setSelectedIndex(pi.getMapIndex());
+			itemP.getTtfDefValue().setText(pi.getDefValue());
+			itemP.getTtfX().setText(String.valueOf(pi.getX()));
+			itemP.getTtfY().setText(String.valueOf(pi.getY()));
+
+			box.add(itemP);
+			itmePanels[i] = itemP;
+			i++;
+		}
+		spnBody.setViewportView(box);
+	}
+
+	/**
+	 * 获取需要更新的的PrintItem列表
+	 * @return
+	 */
 	private List<PrintItem> getUpdPiList() {
 		List<PrintItem> updPiList = new ArrayList<PrintItem>();
 		ItemPanel itemP = null;
@@ -185,15 +159,101 @@ public class PtSetDialog extends JDialog {
 			else
 				pi.setY(0);
 
-			pi.setDisAble(itemP.getCkbDisAble().isSelected());
+			pi.setEnAble(itemP.getCkbEnAble().isSelected());
 			updPiList.add(pi);
 		}
 		return updPiList;
 	}
 
+	/**
+	 *  创建底部面板
+	 */
+	private void createPnlButtom() {
+		pnlBottom = new JPanel();
+		JButton btnOk = new JButton("确定");
+		JButton btnQuit = new JButton("取消");
+		JButton btnPreview = new JButton("预览");
+		
+		btnPreview.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (itmePanels.length == 0)
+					return;
+				new PreviewDialog(new MyPrintable(getPrintAtomList()));
+			}
+		});		
+		
+		btnOk.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Toolkit.getDefaultToolkit().beep();
+				int rv = JOptionPane.showConfirmDialog(PtSetDialog.this,
+						"是否确认更新？", "退出提示！", 
+						JOptionPane.OK_CANCEL_OPTION,
+						JOptionPane.OK_CANCEL_OPTION);
+				if (rv == 0) {
+					PrintItemDAO piDao = new PrintItemDAO();
+					if (piDao.updateAll(getUpdPiList())) {
+						JOptionPane.showMessageDialog(null, "保存成功！", "操作提示！",
+								JOptionPane.PLAIN_MESSAGE);
+						dispose();
+					} else
+						JOptionPane.showMessageDialog(null, "保存失败！", "保存文件提示！",
+								JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+
+		btnQuit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Toolkit.getDefaultToolkit().beep();
+				int rv = JOptionPane.showConfirmDialog(PtSetDialog.this,
+						"是否取消操作？", "退出提示！", JOptionPane.OK_CANCEL_OPTION,
+						JOptionPane.OK_CANCEL_OPTION);
+				if (rv == 0) {
+					dispose();
+				}
+			}
+		});
+		
+		pnlBottom.add(btnPreview);
+		pnlBottom.add(btnOk);
+		pnlBottom.add(btnQuit);
+	}
+	
+	/**
+	 * 获取打印原子列表
+	 * @return
+	 */
+	private List<PrintAtom> getPrintAtomList() {
+		List<PrintAtom> printAtoms = new ArrayList<PrintAtom>();
+		ItemPanel itemP = null;
+		PrintAtom printAtom = null;
+		for (int i = 0; i < itmePanels.length; i++) {
+			itemP = itmePanels[i];
+			if(itemP.getCkbEnAble().isSelected()) {
+				printAtom = new PrintAtom();
+				printAtom.setValue(itemP.getTtfName().getText().trim());
+				
+				int cordinate = 0;
+				String temp = itemP.getTtfX().getText().trim();
+				if(!"".equals(temp)) cordinate = Integer.parseInt(temp);
+				printAtom.setX(cordinate);
+				
+				temp = itemP.getTtfY().getText().trim();
+				if(!"".equals(temp)) cordinate = Integer.parseInt(temp);
+				printAtom.setY(cordinate);
+				
+				printAtoms.add(printAtom);				
+			}
+		}
+		return printAtoms;
+	}
+
 	class ItemPanel extends JPanel {
 		private static final long serialVersionUID = -1033772509486847170L;
-		private JCheckBox ckbDisAble;
+		private JCheckBox ckbEnAble;
 		private JLabel lblCode;
 		private JTextField ttfName;
 		private JComboBox cbbMapIndex;
@@ -202,8 +262,8 @@ public class PtSetDialog extends JDialog {
 		private JTextField ttfY;
 
 		public ItemPanel() {
-			ckbDisAble = new JCheckBox();
-			ckbDisAble.setPreferredSize(dim_1);
+			ckbEnAble = new JCheckBox();
+			ckbEnAble.setPreferredSize(dim_1);
 
 			lblCode = new JLabel();
 			lblCode.setPreferredSize(dim_1);
@@ -225,7 +285,7 @@ public class PtSetDialog extends JDialog {
 
 			Box box = Box.createHorizontalBox();
 			box.add(lblCode);
-			box.add(ckbDisAble);
+			box.add(ckbEnAble);
 			box.add(ttfName);
 			box.add(cbbMapIndex);
 			box.add(ttfDefValue);
@@ -234,12 +294,12 @@ public class PtSetDialog extends JDialog {
 			add(box);
 		}
 
-		public JCheckBox getCkbDisAble() {
-			return ckbDisAble;
+		public JCheckBox getCkbEnAble() {
+			return ckbEnAble;
 		}
 
-		public void setCkbDisAble(JCheckBox ckbDisAble) {
-			this.ckbDisAble = ckbDisAble;
+		public void setCkbEnAble(JCheckBox ckbEnAble) {
+			this.ckbEnAble = ckbEnAble;
 		}
 
 		public JLabel getLblCode() {
