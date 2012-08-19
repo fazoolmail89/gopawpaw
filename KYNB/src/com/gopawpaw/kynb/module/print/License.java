@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.gopawpaw.kynb.common.IniReader;
+
 
 public class License implements Printable{
 	//print.ini ±Í«©≥£¡ø
