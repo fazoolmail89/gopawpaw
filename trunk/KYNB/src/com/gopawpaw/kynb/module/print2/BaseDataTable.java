@@ -122,14 +122,6 @@ public class BaseDataTable extends JScrollPane {
 		}
 	}
 	
-	public PrintDataDto getSelectPrintDataDto() {
-		PrintDataDto pddto = new PrintDataDto();
-		int selIndex = dataTable.getSelectedRow();
-		pddto.setRowIndex(selIndex);
-		pddto.setPrintData(getSelectPrintData(selIndex));
-		return pddto;
-	}
-	
 	public PrintData getSelectPrintData() {
 		int selIndex = dataTable.getSelectedRow();
 		return getSelectPrintData(selIndex);
@@ -159,7 +151,7 @@ public class BaseDataTable extends JScrollPane {
 		PrintData printData = null;
 		if(selIndex > -1 && selIndex < dataTable.getRowCount() - 1) {
 			printData = new PrintData();
-			printData.setId(dataTable.getValueAt(selIndex, 0).toString());
+			printData.setId(dataTable.getValueAt(selIndex, 0).toString().trim());
 			printData.setArea(dataTable.getValueAt(selIndex, 1).toString());
 			printData.setThorp_N(dataTable.getValueAt(selIndex, 2).toString());
 			printData.setThorpName(dataTable.getValueAt(selIndex, 3).toString());

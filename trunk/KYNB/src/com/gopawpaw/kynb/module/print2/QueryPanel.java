@@ -41,7 +41,7 @@ public class QueryPanel extends JPanel {
 
 		lblThorp.setPreferredSize(dsLbl);
 		lblThorp.setHorizontalAlignment(SwingConstants.RIGHT); 
-		cbbThorp = new JComboBox(new PrintDataDAO().findThorpArray());
+		cbbThorp = new JComboBox(new PrintThorpDAO().findNameArray());
 		cbbThorp.setPreferredSize(dsTtf);
 		
 		lblName.setPreferredSize(dsLbl);
@@ -79,7 +79,7 @@ public class QueryPanel extends JPanel {
 	}
 	
 	/**
-	 * 执行查询操作
+	 * 执行查询操作，刷新主界面
 	 */
 	public void executQuery() {
 		if(mainFrame != null) {

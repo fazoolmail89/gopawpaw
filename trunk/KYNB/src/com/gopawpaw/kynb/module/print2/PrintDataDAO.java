@@ -108,30 +108,9 @@ public class PrintDataDAO extends XXNCYLBXDBAccess {
 		return data;
 	}
 
-	/**
-	 * 查询所有村名称
-	 * @return 村名称字符串数组
-	 */
-	public String[] findThorpArray() {
-		String[] thorpArray = {};
-		String sql = "select * from printThorp";
-		if (commonsql.connect(user, password)) {
-			if (commonsql.query(sql)) {
-				thorpArray = new String[(int) commonsql.getrowcount() + 1];
-				thorpArray[0] = "";
-				int i = 1;
-				while (commonsql.nextrecord()) {
-					thorpArray[i] = commonsql.getString("t_name");
-					i++;
-				}
-				commonsql.close();
-			}
-		}
-		return thorpArray;
-	}
 	
 	/**
-	 * 将数据库对应记录的打印标记改为1：已打印，printData为空时返回true
+	 * 将数据库对应记录的打印标记改为1：已打印，除执行数据操作出现异常，其他情况返回true
 	 * @param printData 需要更新的PrintData对象
 	 * @return true：成功，false：失败
 	 */
@@ -172,11 +151,73 @@ public class PrintDataDAO extends XXNCYLBXDBAccess {
 	private String getSql(PrintData printData) {
 		String sql = "";
 		if(printData != null) {
-			if(printData.getId() != null && !"".equals(printData.getId()))
-				sql = "";
-			else
-				;
+			if(printData.getId() != null && !"".equals(printData.getId())) {
+				sql = "update PrintData set " +
+					" Area = " + StringUtil.getQuotStr(printData.getArea()) +
+					" ,ThorpId = " + printData.getThorpId() +
+					" ,ThorpName = " + StringUtil.getQuotStr(printData.getThorpName()) +
+					" ,SerialNum = " + StringUtil.getQuotStr(printData.getSerialNum()) +
+					" ,Name = " + StringUtil.getQuotStr(printData.getName()) +
+					" ,ICCode = " + StringUtil.getQuotStr(printData.getIcCode()) +
+					" ,Phone = " + StringUtil.getQuotStr(printData.getPhone()) +
+					" ,FamilyCode = " + StringUtil.getQuotStr(printData.getFamilyCode()) +
+					" ,J_Account = " + StringUtil.getQuotStr(printData.getJaccount()) +
+					" ,J_AccountName = " + StringUtil.getQuotStr(printData.getJaccountName()) +
+					" ,Z_Account = " + StringUtil.getQuotStr(printData.getZaccount()) +
+					" ,Z_AccountName = " + StringUtil.getQuotStr(printData.getZaccountName()) +
+					" ,Age = " + StringUtil.getQuotStr(printData.getAge()) +
+					" ,Sex = " + StringUtil.getQuotStr(printData.getSex()) +
+					" ,AchieveDate = " + StringUtil.getQuotStr(printData.getAchieveDate()) +
+					" ,BirthDate = " + StringUtil.getQuotStr(printData.getBirthDate()) +
+					" ,Relationship = " + StringUtil.getQuotStr(printData.getRelationship()) +
+					" ,PayGrade = " + StringUtil.getQuotStr(printData.getPayGrade()) +
+					" ,PersType = " + StringUtil.getQuotStr(printData.getPersType()) +
+					" ,Address = " + StringUtil.getQuotStr(printData.getAddress()) +
+					" ,Remark = " + StringUtil.getQuotStr(printData.getRemark()) +
+					" ,TotalAcct = " + StringUtil.getQuotStr(printData.getTotalAcct()) +
+					" ,TotalPay = " + StringUtil.getQuotStr(printData.getTotalPay()) +
+					" ,TotalSubs = " + StringUtil.getQuotStr(printData.getTotalSubs()) +
+					" ,PrintFlag = 0 "+
+					" ,PrintDate = " + StringUtil.getQuotStr(printData.getPrintDate()) +
+					" where Id = " + printData.getId();
+			} else {
+				sql = " insert into PrintData(Area, ThorpId, ThorpName, SerialNum, Name, " +
+						" ICCode, Phone, FamilyCode, J_Account, J_AccountName, " +
+						" Z_Account, Z_AccountName, Age, Sex, AchieveDate, " +
+						" BirthDate, Relationship, PayGrade, PersType, Address, " +
+						" Remark, TotalAcct, TotalPay, TotalSubs, PrintFlag, PrintDate) " +
+						" values( " + StringUtil.getQuotStr(printData.getArea()) +
+						" , " + printData.getThorpId() +
+						" , " + StringUtil.getQuotStr(printData.getThorpName()) +
+						" , " + StringUtil.getQuotStr(printData.getSerialNum()) +
+						" , " + StringUtil.getQuotStr(printData.getName()) +
+						" , " + StringUtil.getQuotStr(printData.getIcCode()) +
+						" , " + StringUtil.getQuotStr(printData.getPhone()) +
+						" , " + StringUtil.getQuotStr(printData.getFamilyCode()) +
+						" , " + StringUtil.getQuotStr(printData.getJaccount()) +
+						" , " + StringUtil.getQuotStr(printData.getJaccountName()) +
+						" , " + StringUtil.getQuotStr(printData.getZaccount()) +
+						" , " + StringUtil.getQuotStr(printData.getZaccountName()) +
+						" , " + StringUtil.getQuotStr(printData.getAge()) +
+						" , " + StringUtil.getQuotStr(printData.getSex()) +
+						" , " + StringUtil.getQuotStr(printData.getAchieveDate()) +
+						" , " + StringUtil.getQuotStr(printData.getBirthDate()) +
+						" , " + StringUtil.getQuotStr(printData.getRelationship()) +
+						" , " + StringUtil.getQuotStr(printData.getPayGrade()) +
+						" , " + StringUtil.getQuotStr(printData.getPersType()) +
+						" , " + StringUtil.getQuotStr(printData.getAddress()) +
+						" , " + StringUtil.getQuotStr(printData.getRemark()) +
+						" , " + StringUtil.getQuotStr(printData.getTotalAcct()) +
+						" , " + StringUtil.getQuotStr(printData.getTotalPay()) +
+						" , " + StringUtil.getQuotStr(printData.getTotalSubs()) +
+						" , " + 0 +
+						" , '' " 
+						+ " ) ";
+			
+			}
 		}
+		System.out.println(printData.getId());
+		System.out.println(sql);
 		return sql;
 	}
 	
@@ -185,9 +226,22 @@ public class PrintDataDAO extends XXNCYLBXDBAccess {
 	 * @param printData
 	 * @return
 	 */
-	private boolean delete(int id) {
+	public boolean delete(String id) {
 		boolean result = false;
 		String sql = "delete from PrintData where Id = " + id;
+		if (commonsql.connect(user, password)) {
+			result = commonsql.executesql(sql);
+		}
+		return result;
+	}
+	
+	/**
+	 * 清空数据
+	 * @return
+	 */
+	public boolean cleare() {
+		boolean result = false;
+		String sql = "delete from PrintData";
 		if (commonsql.connect(user, password)) {
 			result = commonsql.executesql(sql);
 		}

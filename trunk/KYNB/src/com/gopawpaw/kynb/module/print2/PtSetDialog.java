@@ -198,7 +198,7 @@ public class PtSetDialog extends JDialog {
 								JOptionPane.PLAIN_MESSAGE);
 						dispose();
 					} else
-						JOptionPane.showMessageDialog(null, "保存失败！", "保存文件提示！",
+						JOptionPane.showMessageDialog(null, "保存失败！", "操作提示！",
 								JOptionPane.ERROR_MESSAGE);
 				}
 			}
