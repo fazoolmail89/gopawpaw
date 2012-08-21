@@ -207,6 +207,4 @@ public class PrintData {
 	public void setPrintDate(String printDate) {
 		this.printDate = printDate;
 	}
-	
-	
 }
