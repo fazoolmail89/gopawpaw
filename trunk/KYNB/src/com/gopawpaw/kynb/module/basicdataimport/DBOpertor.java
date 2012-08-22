@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.gopawpaw.frame.log.GLog;
+import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 
@@ -233,6 +234,40 @@ public class DBOpertor extends XXNCYLBXDBAccess {
 		// ====打印数据表导入字段=====end
 
 		return importTableList;
+	}
+	
+	public List<Thorp> getPrintThorpAll() throws DBException{
+		if (commonsql.connect(user, password)) {
+			
+			String sql = "select * from thorpPrint ";
+			
+			if(!commonsql.query(sql)){
+				
+				return null;
+			}
+			
+			List<Thorp> list = new ArrayList<Thorp>();
+			Thorp thorp = null;
+			
+			while (commonsql.nextrecord()) {
+				thorp = new Thorp();
+				thorp.setT_name(commonsql.getString("t_name"));
+				thorp.setT_id(commonsql.getInt("t_id"));
+				
+				list.add(thorp);
+			}
+			
+			commonsql.close();
+			return list;
+			
+		} else {
+			
+			System.err.println("connect failed!");
+			
+			throw new DBException(DBException.DB_OPEN_FALSE);
+			
+		}
+		
 	}
 }
 

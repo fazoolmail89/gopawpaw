@@ -56,6 +56,22 @@ public class BasicDataImport extends BaseModuleFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 居民基础数据
+	 */
+	public static final int TABLE_VILLAGER = 0;
+	
+	/**
+	 * 黑名单数据表
+	 */
+	public static final int TABLE_VILLAGER_ERROR = 1;
+	
+	/**
+	 * 打印数据表
+	 */
+	public static final int TABLE_PRINTDATA = 2;
+	
+	private int tableSelect = -1;
 	
 	/**
 	 * 执行导入进度
@@ -120,6 +136,11 @@ public class BasicDataImport extends BaseModuleFrame {
 	private Object[][] okData;
 	
 	public BasicDataImport() {
+		initialize();
+	}
+	
+	public BasicDataImport(int tableSelect) {
+		this.tableSelect = tableSelect;
 		initialize();
 	}
 
@@ -464,7 +485,16 @@ public class BasicDataImport extends BaseModuleFrame {
 			List<DBTableItem> list = DBOpertor.getImportTableItem();
 			for(DBTableItem table:list){
 				
-				jComboBoxDBTable.addItem(table);
+				if((tableSelect == TABLE_VILLAGER && "villager".equals(table.getTableName()))
+						|| (tableSelect == TABLE_VILLAGER_ERROR && "villager_error".equals(table.getTableName()))
+						|| (tableSelect == TABLE_PRINTDATA && "printData".equals(table.getTableName()))){
+					jComboBoxDBTable.addItem(table);
+					break;
+				}else if(tableSelect == -1){
+					jComboBoxDBTable.addItem(table);
+				}
+				
+				
 			}
 		}
 		return jComboBoxDBTable;
@@ -625,11 +655,11 @@ public class BasicDataImport extends BaseModuleFrame {
 						}
 					});
 
-			XXNCYLBXDBAccess mXXDB = new XXNCYLBXDBAccess();
+			DBOpertor mXXDB = new DBOpertor();
 			List<Thorp> list = null;
 			try {
 				jComboBoxThorp.removeAllItems();
-				list = mXXDB.getThorpAll();
+				list = mXXDB.getPrintThorpAll();
 				for (Thorp th : list) {
 					jComboBoxThorp.addItem(th);
 				}
@@ -721,4 +751,8 @@ public class BasicDataImport extends BaseModuleFrame {
 		}
 		
 	};
+
+	public void setTableSelect(int tableSelect) {
+		this.tableSelect = tableSelect;
+	}
 }
