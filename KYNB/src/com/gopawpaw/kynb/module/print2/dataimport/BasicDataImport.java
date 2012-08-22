@@ -16,7 +16,9 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -46,7 +48,7 @@ import com.gopawpaw.kynb.widget.GppStyleTable;
  * @version 2012-5-9
  * @author Jason
  */
-public class BasicDataImport extends BaseModuleFrame {
+public class BasicDataImport extends JDialog {
 
 	/**
 	 * 
@@ -448,23 +450,6 @@ public class BasicDataImport extends BaseModuleFrame {
 		
 	}
 	
-	/**
-	 * @version 2012-5-9
-	 * @author Jason
-	 * @param
-	 * @return void
-	 */
-	public static void main(String[] args) {
-
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				GlobalUI.initUI();
-				
-				BasicDataImport thisClass = new BasicDataImport(TABLE_PRINTDATA);
-				thisClass.showWithFrame();
-			}
-		});
-	}
 
 	public GJComboBox getjComboBoxDBTable() {
 		

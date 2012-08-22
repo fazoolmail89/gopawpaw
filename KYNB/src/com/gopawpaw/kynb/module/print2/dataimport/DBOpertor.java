@@ -238,7 +238,7 @@ public class DBOpertor extends XXNCYLBXDBAccess {
 	public List<Thorp> getPrintThorpAll() throws DBException{
 		if (commonsql.connect(user, password)) {
 			
-			String sql = "select * from thorpPrint ";
+			String sql = "select * from printthorp ";
 			
 			if(!commonsql.query(sql)){
 				
