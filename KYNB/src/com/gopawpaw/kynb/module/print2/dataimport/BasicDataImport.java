@@ -18,7 +18,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
-import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -27,12 +26,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 import com.gopawpaw.frame.widget.GJComboBox;
 import com.gopawpaw.frame.widget.GJTable;
-import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.common.ExcelExportListener;
 import com.gopawpaw.kynb.common.ExcelFileFilter;
@@ -40,7 +37,6 @@ import com.gopawpaw.kynb.common.ExcelImportListener;
 import com.gopawpaw.kynb.common.ProgressExportExcel;
 import com.gopawpaw.kynb.common.ProgressImportExcel;
 import com.gopawpaw.kynb.db.DBException;
-import com.gopawpaw.kynb.module.BaseModuleFrame;
 import com.gopawpaw.kynb.widget.GppStyleTable;
 
 /**
