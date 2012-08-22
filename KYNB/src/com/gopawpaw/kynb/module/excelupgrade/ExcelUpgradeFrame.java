@@ -305,6 +305,8 @@ public class ExcelUpgradeFrame extends BaseModuleFrame {
 			wws.addCell(lab83);
 			wws.addCell(lab93);
 			wws.addCell(lab163);
+			
+			
 			//–¥»Î
 			wwb.write();
 			

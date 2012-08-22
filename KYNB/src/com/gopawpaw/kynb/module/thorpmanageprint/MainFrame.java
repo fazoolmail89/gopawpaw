@@ -1,11 +1,10 @@
 /**
  * 
  */
-package com.gopawpaw.kynb.module.thorpmanage;
+package com.gopawpaw.kynb.module.thorpmanageprint;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GraphicsConfiguration;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
@@ -19,24 +18,19 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
-import com.gopawpaw.frame.GlobalParameter;
 import com.gopawpaw.frame.utils.GppJarRunableInterface;
 import com.gopawpaw.frame.widget.GJComboBox;
+import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.db.DBException;
-import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
-import com.gopawpaw.kynb.module.oldprogram.ThorpDialog;
-import com.gopawpaw.kynb.utils.StringConstant;
 
 /**
  * @version 2012-3-12
  * @author Jason
  */
-public class ThorpManage extends BaseModuleFrame  implements GppJarRunableInterface{
+public class MainFrame extends BaseModuleFrame  implements GppJarRunableInterface{
 
 	/**
 	 * 
@@ -49,12 +43,12 @@ public class ThorpManage extends BaseModuleFrame  implements GppJarRunableInterf
 	
 	private Thorp mCurrentThorp = new Thorp();
 	
-	private XXNCYLBXDBAccess mXXDB = new XXNCYLBXDBAccess();
+	private DBOpertor mXXDB = new DBOpertor();
 	
 	/**
 	 * @throws HeadlessException
 	 */
-	public ThorpManage() throws HeadlessException {
+	public MainFrame() throws HeadlessException {
 		initialize();
 	}
 
@@ -66,16 +60,9 @@ public class ThorpManage extends BaseModuleFrame  implements GppJarRunableInterf
 	 */
 	private void initialize() {
 		
-		if(!GlobalParameter.isAuthModuls){
-			//非法授权
-			JOptionPane.showConfirmDialog(null, StringConstant.isNotAuthMsg,
-					"系统提示", JOptionPane.YES_NO_OPTION,
-					JOptionPane.INFORMATION_MESSAGE);
-			return;
-		}
-		
 		this.setSize(900, 600);
 		this.setLocation(200, 100);
+		this.setTitle("打印模块村名管理");
 		this.setContentPane(getJContentPane());
 	}
 	
@@ -163,7 +150,7 @@ public class ThorpManage extends BaseModuleFrame  implements GppJarRunableInterf
 		List<Thorp> list = null;
 		try {
 			jComboBoxThorp.removeAllItems();
-			list = mXXDB.getThorpAll();
+			list = mXXDB.getThorpAllPrint();
 			for (Thorp th : list) {
 				jComboBoxThorp.addItem(th);
 			}
@@ -206,7 +193,7 @@ public class ThorpManage extends BaseModuleFrame  implements GppJarRunableInterf
 
 							if (option == ThorpDialog.YES_OPTION) {
 								try {
-									if (mXXDB.isExistThorp(thorp.getT_name())) {
+									if (mXXDB.isExistThorpPrint(thorp.getT_name())) {
 										String tempMSG = "该村名已经存在，请重新输入！";
 										//声音提示
 										Toolkit.getDefaultToolkit().beep();
@@ -218,7 +205,7 @@ public class ThorpManage extends BaseModuleFrame  implements GppJarRunableInterf
 										return;
 									}
 
-									if (mXXDB.insertThorp(thorp)) {
+									if (mXXDB.insertThorpPrint(thorp)) {
 										// 创建成功
 										String tempMSG = "创建成功！";
 										//声音提示
@@ -278,7 +265,7 @@ public class ThorpManage extends BaseModuleFrame  implements GppJarRunableInterf
 
 									if (option == ThorpDialog.YES_OPTION) {
 										try {
-											if (mXXDB.updateThorp(thorp)) {
+											if (mXXDB.updateThorpPrint(thorp)) {
 												// 创建成功
 												String tempMSG = "修改成功！";
 												JOptionPane
@@ -342,7 +329,7 @@ public class ThorpManage extends BaseModuleFrame  implements GppJarRunableInterf
 
 									if (option == ThorpDialog.YES_OPTION) {
 										try {
-											if (mXXDB.deleteThorp(thorp)) {
+											if (mXXDB.deleteThorpPrint(thorp)) {
 												// 创建成功
 												String tempMSG = "删除成功！";
 												JOptionPane
@@ -389,46 +376,16 @@ public class ThorpManage extends BaseModuleFrame  implements GppJarRunableInterf
 	
 	@Override
 	public boolean runJar(String[] args) {
-		ThorpManage.main(args);
+		MainFrame.main(args);
 		return false;
 	}
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				try {
-
-					// UIManager.setLookAndFeel("com.jgoodies.looks.plastic.Plastic3DLookAndFeel");
-					UIManager.setLookAndFeel(
-					// UIManager.getCrossPlatformLookAndFeelClassName()
-					// UIManager.getSystemLookAndFeelClassName()
-					// new com.sun.java.swing.plaf.motif.MotifLookAndFeel()
-					// "com.jgoodies.looks.windows.WindowsLookAndFeel"
-					// "com.jgoodies.looks.plastic.PlasticLookAndFeel"
-							"com.jgoodies.looks.plastic.Plastic3DLookAndFeel"
-							// "com.jgoodies.looks.plastic.PlasticXPLookAndFeel"
-
-							);
-
-				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (InstantiationException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IllegalAccessException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (UnsupportedLookAndFeelException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
-				ThorpManage thisClass = new ThorpManage();
-				thisClass.setVisible(true);
-
+				GlobalUI.initUI();
+				MainFrame thisClass = new MainFrame();
+				thisClass.showWithFrame();
 			}
 		});
 	}
