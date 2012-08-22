@@ -37,7 +37,7 @@ public class OptBtnsPanel extends JPanel {
 				//µ¼Èë²Ù×÷
 				BasicDataImport thisClass = new BasicDataImport(BasicDataImport.TABLE_PRINTDATA);
 				thisClass.setModal(true);
-				thisClass.show();
+				thisClass.setVisible(true);
 			}
 		});
 		
