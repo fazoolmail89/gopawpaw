@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.gopawpaw.kynb.module.print2.dataimport.BasicDataImport;
+
 /**     
  * @author luxiangqi luxiangqi521@gmail.com    
  * @version 1.0     
@@ -33,6 +35,8 @@ public class OptBtnsPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//µ¼Èë²Ù×÷
+				BasicDataImport thisClass = new BasicDataImport(BasicDataImport.TABLE_PRINTDATA);
+				thisClass.showWithFrame();
 			}
 		});
 		
