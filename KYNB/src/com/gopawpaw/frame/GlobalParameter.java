@@ -22,6 +22,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.gopawpaw.frame.database.DatabaseInfo;
 import com.gopawpaw.frame.database.Dmnd_det;
 import com.gopawpaw.frame.database.Omnd_det;
+import com.gopawpaw.frame.http.NetworkManagement;
 import com.gopawpaw.frame.ui.GUIclient;
 import com.gopawpaw.frame.ui.GppAbout;
 import com.gopawpaw.frame.ui.LoginSession;
@@ -112,6 +113,7 @@ public class GlobalParameter {
 	public static boolean isAuthModuls = false;
 	
 	
+	public static final String SOFT_VERSION = "1.4.0";
 	
 	/**
 	 * 
@@ -229,6 +231,9 @@ public class GlobalParameter {
 	 * 初始化全局变量
 	 */
 	public static void initialize() {
+		
+		NetworkManagement.getInstance();
+		
 		updateFromConfig();
 		updateFromUserConfig();
 		

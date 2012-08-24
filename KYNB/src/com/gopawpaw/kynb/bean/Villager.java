@@ -123,7 +123,8 @@ public class Villager {
 	}
 
 	public String getV_name() {
-		return v_name;
+		
+		return dealNull(v_name);
 	}
 
 	public void setV_name(String v_name) {
@@ -131,7 +132,7 @@ public class Villager {
 	}
 
 	public String getV_sex() {
-		return v_sex;
+		return dealNull(v_sex);
 	}
 
 	public void setV_sex(String v_sex) {
@@ -139,7 +140,7 @@ public class Villager {
 	}
 
 	public String getV_ic() {
-		return v_ic;
+		return dealNull(v_ic);
 	}
 
 	public void setV_ic(String v_ic) {
@@ -147,7 +148,7 @@ public class Villager {
 	}
 
 	public String getV_nation() {
-		return v_nation;
+		return dealNull(v_nation);
 	}
 
 	public void setV_nation(String v_nation) {
@@ -155,7 +156,7 @@ public class Villager {
 	}
 
 	public String getV_birthday() {
-		return v_birthday;
+		return dealNull(v_birthday);
 	}
 
 	public void setV_birthday(String v_birthday) {
@@ -163,7 +164,7 @@ public class Villager {
 	}
 
 	public String getV_address_live() {
-		return v_address_live;
+		return dealNull(v_address_live);
 	}
 
 	public void setV_address_live(String v_address_live) {
@@ -171,7 +172,7 @@ public class Villager {
 	}
 
 	public String getV_bank_name() {
-		return v_bank_name;
+		return dealNull(v_bank_name);
 	}
 
 	public void setV_bank_name(String v_bank_name) {
@@ -179,7 +180,7 @@ public class Villager {
 	}
 
 	public String getV_bank_account() {
-		return v_bank_account;
+		return dealNull(v_bank_account);
 	}
 
 	public void setV_bank_account(String v_bank_account) {
@@ -187,7 +188,7 @@ public class Villager {
 	}
 
 	public String getV_capture_expend_calss() {
-		return v_capture_expend_calss;
+		return dealNull(v_capture_expend_calss);
 	}
 
 	public void setV_capture_expend_calss(String v_capture_expend_calss) {
@@ -195,7 +196,7 @@ public class Villager {
 	}
 
 	public String getV_type() {
-		return v_type;
+		return dealNull(v_type);
 	}
 
 	public void setV_type(String v_type) {
@@ -203,7 +204,7 @@ public class Villager {
 	}
 
 	public String getV_join_time() {
-		return v_join_time;
+		return dealNull(v_join_time);
 	}
 
 	public void setV_join_time(String v_join_time) {
@@ -211,7 +212,7 @@ public class Villager {
 	}
 
 	public String getV_archival_location() {
-		return v_archival_location;
+		return dealNull(v_archival_location);
 	}
 
 	public void setV_archival_location(String v_archival_location) {
@@ -219,7 +220,7 @@ public class Villager {
 	}
 
 	public String getV_old_balance() {
-		return v_old_balance;
+		return dealNull(v_old_balance);
 	}
 
 	public void setV_old_balance(String v_old_balance) {
@@ -227,7 +228,7 @@ public class Villager {
 	}
 
 	public String getV_old_balance_flag() {
-		return v_old_balance_flag;
+		return dealNull(v_old_balance_flag);
 	}
 
 	public void setV_old_balance_flag(String v_old_balance_flag) {
@@ -235,7 +236,7 @@ public class Villager {
 	}
 
 	public String getV_householder_name() {
-		return v_householder_name;
+		return dealNull(v_householder_name);
 	}
 
 	public void setV_householder_name(String v_householder_name) {
@@ -243,7 +244,7 @@ public class Villager {
 	}
 
 	public String getV_householder_ic() {
-		return v_householder_ic;
+		return dealNull(v_householder_ic);
 	}
 
 	public void setV_householder_ic(String v_householder_ic) {
@@ -251,7 +252,7 @@ public class Villager {
 	}
 
 	public String getV_householder_relation() {
-		return v_householder_relation;
+		return dealNull(v_householder_relation);
 	}
 
 	public void setV_householder_relation(String v_householder_relation) {
@@ -259,7 +260,7 @@ public class Villager {
 	}
 
 	public String getV_standard_culture() {
-		return v_standard_culture;
+		return dealNull(v_standard_culture);
 	}
 
 	public void setV_standard_culture(String v_standard_culture) {
@@ -267,7 +268,7 @@ public class Villager {
 	}
 
 	public String getV_60not_enough15_flag() {
-		return v_60not_enough15_flag;
+		return dealNull(v_60not_enough15_flag);
 	}
 
 	public void setV_60not_enough15_flag(String v_60not_enough15_flag) {
@@ -275,7 +276,7 @@ public class Villager {
 	}
 
 	public String getV_phone_num() {
-		return v_phone_num;
+		return dealNull(v_phone_num);
 	}
 
 	public void setV_phone_num(String v_phone_num) {
@@ -283,7 +284,7 @@ public class Villager {
 	}
 
 	public String getV_marital_status() {
-		return v_marital_status;
+		return dealNull(v_marital_status);
 	}
 
 	public void setV_marital_status(String v_marital_status) {
@@ -291,7 +292,7 @@ public class Villager {
 	}
 
 	public String getV_politics_status() {
-		return v_politics_status;
+		return dealNull(v_politics_status);
 	}
 
 	public void setV_politics_status(String v_politics_status) {
@@ -299,7 +300,7 @@ public class Villager {
 	}
 
 	public String getV_contact_name() {
-		return v_contact_name;
+		return dealNull(v_contact_name);
 	}
 
 	public void setV_contact_name(String v_contact_name) {
@@ -307,7 +308,7 @@ public class Villager {
 	}
 
 	public String getV_address_com() {
-		return v_address_com;
+		return dealNull(v_address_com);
 	}
 
 	public void setV_address_com(String v_address_com) {
@@ -315,7 +316,7 @@ public class Villager {
 	}
 
 	public String getV_address_zip_code() {
-		return v_address_zip_code;
+		return dealNull(v_address_zip_code);
 	}
 
 	public void setV_address_zip_code(String v_address_zip_code) {
@@ -323,7 +324,7 @@ public class Villager {
 	}
 
 	public String getV_soldie_flag() {
-		return v_soldie_flag;
+		return dealNull(v_soldie_flag);
 	}
 
 	public void setV_soldie_flag(String v_soldie_flag) {
@@ -331,7 +332,7 @@ public class Villager {
 	}
 
 	public String getV_model_worker() {
-		return v_model_worker;
+		return dealNull(v_model_worker);
 	}
 
 	public void setV_model_worker(String v_model_worker) {
@@ -339,7 +340,7 @@ public class Villager {
 	}
 
 	public String getV_social_security_num() {
-		return v_social_security_num;
+		return dealNull(v_social_security_num);
 	}
 
 	public void setV_social_security_num(String v_social_security_num) {
@@ -347,7 +348,7 @@ public class Villager {
 	}
 
 	public String getV_begin_get_date() {
-		return v_begin_get_date;
+		return dealNull(v_begin_get_date);
 	}
 
 	public void setV_begin_get_date(String v_begin_get_date) {
@@ -355,7 +356,7 @@ public class Villager {
 	}
 
 	public String getV_status() {
-		return v_status;
+		return dealNull(v_status);
 	}
 
 	public void setV_status(String v_status) {
@@ -363,7 +364,7 @@ public class Villager {
 	}
 
 	public String getV_mark() {
-		return v_mark;
+		return dealNull(v_mark);
 	}
 
 	public void setV_mark(String v_mark) {
@@ -415,7 +416,7 @@ public class Villager {
 	}
 
 	public String getV_bank_account_name() {
-		return v_bank_account_name;
+		return dealNull(v_bank_account_name);
 	}
 
 	public void setV_bank_account_name(String v_bank_account_name) {
@@ -423,7 +424,7 @@ public class Villager {
 	}
 
 	public String getV_bank2_name() {
-		return v_bank2_name;
+		return dealNull(v_bank2_name);
 	}
 
 	public void setV_bank2_name(String v_bank2_name) {
@@ -431,7 +432,7 @@ public class Villager {
 	}
 
 	public String getV_bank2_account() {
-		return v_bank2_account;
+		return dealNull(v_bank2_account);
 	}
 
 	public void setV_bank2_account(String v_bank2_account) {
@@ -439,7 +440,7 @@ public class Villager {
 	}
 
 	public String getV_bank2_account_name() {
-		return v_bank2_account_name;
+		return dealNull(v_bank2_account_name);
 	}
 
 	public void setV_bank2_account_name(String v_bank2_account_name) {
@@ -478,7 +479,7 @@ public class Villager {
 	}
 
 	public String getV_mark2() {
-		return v_mark2;
+		return dealNull(v_mark2);
 	}
 
 	public void setV_mark2(String v_mark2) {
@@ -486,13 +487,18 @@ public class Villager {
 	}
 
 	public String getV_old_ic() {
-		return v_old_ic;
+		return dealNull(v_old_ic);
 	}
 
 	public void setV_old_ic(String v_old_ic) {
 		this.v_old_ic = v_old_ic;
 	}
 
-	
+	private String dealNull(String v){
+		if(v == null || "null".equalsIgnoreCase(v)){
+			v = "";
+		}
+		return v;
+	}
 	
 }

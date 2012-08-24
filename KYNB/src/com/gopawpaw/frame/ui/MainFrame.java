@@ -14,6 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.HashMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -29,12 +30,18 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 
 import com.gopawpaw.frame.GlobalParameter;
-import com.gopawpaw.frame.utils.GppAuthorization;
+import com.gopawpaw.frame.database.BaseSQL;
+import com.gopawpaw.frame.http.URLResource;
+import com.gopawpaw.frame.http.action.HttpActionBase;
+import com.gopawpaw.frame.http.action.HttpActionListener;
+import com.gopawpaw.frame.log.APPLog;
+import com.gopawpaw.frame.struct.AppKeyConstants;
+import com.gopawpaw.frame.struct.DataHashMap;
 import com.gopawpaw.frame.utils.MD5;
-import com.gopawpaw.frame.utils.MacUtils;
 import com.gopawpaw.frame.utils.Tools;
 import com.gopawpaw.frame.widget.GJComboBox;
 import com.gopawpaw.kynb.RegisterDialog;
+import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.utils.GppConfiguration;
 
 /**
@@ -44,8 +51,13 @@ import com.gopawpaw.kynb.utils.GppConfiguration;
  * @author 李锦华
  * 
  */
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements HttpActionListener{
 
+	/**
+	 * TAG
+	 */
+	private static final String TAG = MainFrame.class.getSimpleName();
+	
 	private static final long serialVersionUID = 1L;
 
 	private String mLiyeqin = "\r\n技术支持：李业钦\r\n QQ:1483695671";
@@ -80,6 +92,10 @@ public class MainFrame extends JFrame {
 
 	private static MainFrame thisClassMainFrame;
 
+	private HttpActionBase mAction;
+	
+	private JPanel mJContentPanel;
+	
 	public MainFrame() {
 		// TODO Auto-generated constructor stub
 		super();
@@ -326,12 +342,12 @@ public class MainFrame extends JFrame {
 
 				});
 
-				if (thisClass.cheakRegister()) {
+//				if (thisClass.cheakRegister()) {
 					GlobalParameter.isAuthModuls = true;
 					thisClass.setVisible(true);
-				} else {
-					System.exit(0);
-				}
+//				} else {
+//					System.exit(0);
+//				}
 			}
 		});
 	}
@@ -359,14 +375,30 @@ public class MainFrame extends JFrame {
 
 		// this.setSize(GlobalParameter.getGuiClient().getSizeOfMainFrame());
 		// this.setLocation(GlobalParameter.getGuiClient().getLocationOfMainFrame());
-
-		this.setJMenuBar(getJJMenuBar());
-		this.setContentPane(getJContentPane());
-		this.setTitle("藤县快译农保信息处理系统  V1.3");
 		
-
+		mJContentPanel = getJContentPane();
+		this.setJMenuBar(getJJMenuBar());
+		this.setContentPane(mJContentPanel);
+		this.setTitle("藤县快译农保信息处理系统  V"+GlobalParameter.SOFT_VERSION);
+		mJContentPanel.setVisible(false);
+		mAction = new HttpActionBase(this,this);
+		sendCheckProduct();
 	}
 
+	private void sendCheckProduct(){
+		String version = GlobalParameter.SOFT_VERSION;
+		
+		String hardwareCode = Tools.getHardwareCode();
+		String hardwareCodeDisplay = genDisplayCode(hardwareCode);
+		HashMap<String,String> pMap = new HashMap<String,String>();
+		
+		pMap.put(URLResource.KEY_VERSION, version);
+		pMap.put(URLResource.KEY_HARDWARECODE, hardwareCode);
+		pMap.put(URLResource.KEY_HARDWARECODEDISPLAY, hardwareCodeDisplay);
+		
+		mAction.sendRequest(URLResource.URL_CHECKPRODUCT,0,pMap,true);
+		
+	}
 	/**
 	 * This method initializes jContentPane
 	 * 
@@ -448,23 +480,23 @@ public class MainFrame extends JFrame {
 		final String regKey = genKeyCode(displayKey);
 		
 		if (registerCode == null || !registerCode.equals(regKey)) {
-			int t = GppAuthorization.getInstance().checkAuthTimes();
+//			int t = GppAuthorization.getInstance().checkAuthTimes();
+//			
+//			if(t > 0){
+//				String tempMSG = "您还可以免费试用："+t+" 次，是否需要现在注册？";
+//				int op = JOptionPane.showConfirmDialog(null, tempMSG,
+//						"系统提示", JOptionPane.YES_NO_OPTION,
+//						JOptionPane.INFORMATION_MESSAGE);
+//				if(op == JOptionPane.NO_OPTION){
+//					return true;
+//				}else{
+//					return showRegDialog(regKey,displayKey);
+//				}
+//			}else{
+//				return showRegDialog(regKey,displayKey);
+//			}
 			
-			if(t > 0){
-				String tempMSG = "您还可以免费试用："+t+" 次，是否需要现在注册？";
-				int op = JOptionPane.showConfirmDialog(null, tempMSG,
-						"系统提示", JOptionPane.YES_NO_OPTION,
-						JOptionPane.INFORMATION_MESSAGE);
-				if(op == JOptionPane.NO_OPTION){
-					return true;
-				}else{
-					return showRegDialog(regKey,displayKey);
-				}
-			}else{
-				return showRegDialog(regKey,displayKey);
-			}
-			
-			
+			return false;
 		} else {
 			return true;
 		}
@@ -543,6 +575,115 @@ public class MainFrame extends JFrame {
 
 	public static Point getMainFrameLocation() {
 		return thisClassMainFrame.getLocation();
+	}
+
+	@Override
+	public void onHttpActionResponse(int state, Object data, int urlId,
+			int connectionId) {
+		// TODO Auto-generated method stub
+		APPLog.e(TAG,"state="+state+" data="+data+" urlId="+urlId);
+		
+		BaseSQL bs = new BaseSQL();
+		String isOffline = "0";
+		try {
+			isOffline = bs.getConfig("isOffline");
+		} catch (DBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		boolean isOfflineOperation = false;
+		String overdueType = "";
+		String overdueMsg = "";
+		String regCode = "";
+		
+		if("1".equals(isOffline.trim())){
+			isOfflineOperation = true;
+		}
+		
+		if(HttpActionListener.STATE_SUCCESS == state ){
+			
+			DataHashMap<String, Object> dataMap = (DataHashMap<String, Object>)data;
+			
+			String operation = dataMap.getStringBykey(Tools.getKey(
+					AppKeyConstants.DATA,
+					AppKeyConstants.RESPONSE_BODY,
+					AppKeyConstants.IS_OFFLINE_OPERATION));
+			overdueType = dataMap.getStringBykey(Tools.getKey(
+					AppKeyConstants.DATA,
+					AppKeyConstants.RESPONSE_BODY,
+					AppKeyConstants.OVERDUE_TYPE));
+			overdueMsg = dataMap.getStringBykey(Tools.getKey(
+					AppKeyConstants.DATA,
+					AppKeyConstants.RESPONSE_BODY,
+					AppKeyConstants.OVERDUE_MSG));
+			regCode = dataMap.getStringBykey(Tools.getKey(
+					AppKeyConstants.DATA,
+					AppKeyConstants.RESPONSE_BODY,
+					AppKeyConstants.REG_CODE));
+			
+			if("1".equals(operation)){
+				isOfflineOperation = true;
+			}else{
+				isOfflineOperation = false;
+			}
+			
+			if(regCode != null && !"".equals(regCode.trim())){
+				//有注册码，则更新本地注册信息
+				mGppConfiguration.setValue("registerCode", regCode);
+				mGppConfiguration.saveFile();
+			}
+		}
+		APPLog.d(TAG, "overdueType="+overdueType);
+		APPLog.d(TAG, "overdueMsg="+overdueMsg);
+		APPLog.d(TAG, "regCode="+regCode);
+		try {
+			//重新更新数据库
+			bs.updateConfig("isOffline", (isOfflineOperation ? "1":"0"));
+		} catch (DBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(cheakRegister() && isOfflineOperation){
+			//已经注册，可离线使用，则不用检测
+			mJContentPanel.setVisible(true);
+			return;
+		}
+		
+		if(HttpActionListener.STATE_NETWORK_ENABLE == state){
+			String errMsg = "您的网络好像有问题，请检查网络是否正常，再启动软件！\r\n 试用版本必须联网使用，购买使用权后可离线使用。";
+			JOptionPane.showConfirmDialog(this, errMsg,"",JOptionPane.OK_OPTION);
+			
+			return;
+		}else if(HttpActionListener.STATE_SUCCESS == state){
+			//返回成功，则根据服务器返回的情况作处理
+			if("0".equals(overdueType)){
+				//未过期，不提示
+				mJContentPanel.setVisible(true);
+			}else if("1".equals(overdueType)){
+				//提示到期信息
+				mJContentPanel.setVisible(true);
+				JOptionPane.showConfirmDialog(this, overdueMsg,"",JOptionPane.OK_OPTION);
+			}else{
+				//禁止使用，必须注册
+				mJContentPanel.setVisible(false);
+				JOptionPane.showConfirmDialog(this, overdueMsg,"",JOptionPane.OK_OPTION);
+			}
+			return;
+		}else{
+			String errMsg = "服务器连接失败，是否进行重新请求？";
+			int option = JOptionPane.showConfirmDialog(this, errMsg,"",JOptionPane.OK_OPTION);
+			
+			if(option == JOptionPane.OK_OPTION){
+				sendCheckProduct();
+			}
+			
+			return;
+		}
+		
+		
+		
 	}
 
 } // @jve:decl-index=0:visual-constraint="8,5"
