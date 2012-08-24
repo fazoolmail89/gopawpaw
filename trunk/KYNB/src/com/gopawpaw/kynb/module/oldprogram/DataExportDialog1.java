@@ -204,8 +204,8 @@ public class DataExportDialog1 extends JDialog {
 		 hashMap.put(Villager.tab_v_name,
 		 getGppJCheckBoxNew(Villager.tab_v_name));
 		hashMap.put(Villager.tab_v_sex, getGppJCheckBoxNew(Villager.tab_v_sex));
-		hashMap.put(Villager.tab_v_birthday,
-				getGppJCheckBoxNew(Villager.tab_v_birthday));
+//		hashMap.put(Villager.tab_v_birthday,
+//				getGppJCheckBoxNew(Villager.tab_v_birthday));
 		
 		hashMap.put(Villager.tab_v_address_live,
 				getGppJCheckBoxNew(Villager.tab_v_address_live));
@@ -215,12 +215,12 @@ public class DataExportDialog1 extends JDialog {
 				getGppJCheckBoxNew(Villager.tab_v_bank2_name));
 		hashMap.put(Villager.tab_v_bank2_account,
 				getGppJCheckBoxNew(Villager.tab_v_bank2_account));
-//		hashMap.put(Villager.tab_v_bank_account_name,
-//				getGppJCheckBoxNew(Villager.tab_v_bank_account_name));
-//		hashMap.put(Villager.tab_v_bank2_name,
-//				getGppJCheckBoxNew(Villager.tab_v_bank2_name));
-//		hashMap.put(Villager.tab_v_bank2_account,
-//				getGppJCheckBoxNew(Villager.tab_v_bank2_account));
+		hashMap.put(Villager.tab_v_bank_account_name,
+				getGppJCheckBoxNew(Villager.tab_v_bank_account_name));
+		hashMap.put(Villager.tab_v_bank_name,
+				getGppJCheckBoxNew(Villager.tab_v_bank_name));
+		hashMap.put(Villager.tab_v_bank_account,
+				getGppJCheckBoxNew(Villager.tab_v_bank_account));
 //		hashMap.put(Villager.tab_v_bank2_account_name,
 //				getGppJCheckBoxNew(Villager.tab_v_bank2_account_name));
 		hashMap.put(Villager.tab_v_capture_expend_calss,
@@ -231,8 +231,8 @@ public class DataExportDialog1 extends JDialog {
 				getGppJCheckBoxNew(Villager.tab_v_join_time));
 		hashMap.put(Villager.tab_v_archival_location,
 				getGppJCheckBoxNew(Villager.tab_v_archival_location));
-		hashMap.put(Villager.tab_v_old_balance,
-				getGppJCheckBoxNew(Villager.tab_v_old_balance));
+//		hashMap.put(Villager.tab_v_old_balance,
+//				getGppJCheckBoxNew(Villager.tab_v_old_balance));
 		hashMap.put(Villager.tab_v_old_balance_flag,
 				getGppJCheckBoxNew(Villager.tab_v_old_balance_flag));
 		hashMap.put(Villager.tab_v_householder_name,
@@ -243,8 +243,8 @@ public class DataExportDialog1 extends JDialog {
 				getGppJCheckBoxNew(Villager.tab_v_householder_relation));
 		hashMap.put(Villager.tab_v_standard_culture,
 				getGppJCheckBoxNew(Villager.tab_v_standard_culture));
-		hashMap.put(Villager.tab_v_60not_enough15_flag,
-				getGppJCheckBoxNew(Villager.tab_v_60not_enough15_flag));
+//		hashMap.put(Villager.tab_v_60not_enough15_flag,
+//				getGppJCheckBoxNew(Villager.tab_v_60not_enough15_flag));
 		hashMap.put(Villager.tab_v_phone_num,
 				getGppJCheckBoxNew(Villager.tab_v_phone_num));
 		hashMap.put(Villager.tab_v_marital_status,
@@ -328,10 +328,10 @@ public class DataExportDialog1 extends JDialog {
 				v.setV_sex("");
 			}
 			
-			obj = hashMap.get(Villager.tab_v_birthday);
-			if(!((GJCheckBox)obj).isSelected()){
-				v.setV_birthday("");
-			}
+//			obj = hashMap.get(Villager.tab_v_birthday);
+//			if(!((GJCheckBox)obj).isSelected()){
+//				v.setV_birthday("");
+//			}
 			
 			obj = hashMap.get(Villager.tab_v_address_live);
 			if(!((GJCheckBox)obj).isSelected()){
@@ -341,6 +341,21 @@ public class DataExportDialog1 extends JDialog {
 			obj = hashMap.get(Villager.tab_v_nation);
 			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_nation("");
+			}
+			
+			obj = hashMap.get(Villager.tab_v_bank_account_name);
+			if(!((GJCheckBox)obj).isSelected()){
+				v.setV_bank_account_name("");
+			}
+			
+			obj = hashMap.get(Villager.tab_v_bank_name);
+			if(!((GJCheckBox)obj).isSelected()){
+				v.setV_bank_name("");
+			}
+			
+			obj = hashMap.get(Villager.tab_v_bank_account);
+			if(!((GJCheckBox)obj).isSelected()){
+				v.setV_bank_account("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_bank2_name);
@@ -373,10 +388,10 @@ public class DataExportDialog1 extends JDialog {
 				v.setV_archival_location("");
 			}
 			
-			obj = hashMap.get(Villager.tab_v_old_balance);
-			if(!((GJCheckBox)obj).isSelected()){
-				v.setV_old_balance("");
-			}
+//			obj = hashMap.get(Villager.tab_v_old_balance);
+//			if(!((GJCheckBox)obj).isSelected()){
+//				v.setV_old_balance("");
+//			}
 			
 			obj = hashMap.get(Villager.tab_v_old_balance_flag);
 			if(!((GJCheckBox)obj).isSelected()){
@@ -403,10 +418,10 @@ public class DataExportDialog1 extends JDialog {
 				v.setV_standard_culture("");
 			}
 			
-			obj = hashMap.get(Villager.tab_v_60not_enough15_flag);
-			if(!((GJCheckBox)obj).isSelected()){
-				v.setV_60not_enough15_flag("");
-			}
+//			obj = hashMap.get(Villager.tab_v_60not_enough15_flag);
+//			if(!((GJCheckBox)obj).isSelected()){
+//				v.setV_60not_enough15_flag("");
+//			}
 			
 			obj = hashMap.get(Villager.tab_v_phone_num);
 			if(!((GJCheckBox)obj).isSelected()){

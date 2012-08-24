@@ -14,6 +14,8 @@ import javax.swing.JDialog;
 import java.awt.Dimension;
 import javax.swing.JLabel;
 
+import com.gopawpaw.frame.GlobalParameter;
+
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -293,7 +295,7 @@ public class GppAbout extends JDialog {
 			
 			jLabel1 = new JLabel();
 			jLabel1.setBounds(new Rectangle(22, 48, 333, 22));
-			jLabel1.setText("°æ    ±¾£ºV1.2");
+			jLabel1.setText("°æ    ±¾£ºV"+GlobalParameter.SOFT_VERSION);
 			
 			
 			jLabel2 = new JLabel();

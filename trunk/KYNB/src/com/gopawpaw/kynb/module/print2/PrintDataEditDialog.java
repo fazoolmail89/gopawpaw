@@ -309,7 +309,7 @@ public class PrintDataEditDialog extends JDialog {
 			}
 		});
 
-		pnlBottom.add(btnTest);
+//		pnlBottom.add(btnTest);
 
 		if (opt == PrintDataEditDialog.VIEW_OPT) {
 			pnlBottom.add(btnClose);
