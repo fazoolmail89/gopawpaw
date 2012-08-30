@@ -211,6 +211,8 @@ public class HttpHelper {
 		if (!hasProtocol(sendURL)) {
 			//不存在协议时，添加地址前缀
 			ret = getHostUrl() + sendURL;
+		}else{
+			ret = sendURL;
 		}
 		
 		if(param != null && !"".equals(param)){
