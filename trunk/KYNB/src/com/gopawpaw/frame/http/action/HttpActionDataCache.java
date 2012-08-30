@@ -51,7 +51,7 @@ public class HttpActionDataCache {
 	/**
 	 * 需要缓存数据的ID数组 ID = urlId + connectionId
 	 */
-	private static int[] cacheIds = new int[]{URLResource.URL_APPCONFIG};
+	private static int[] cacheIds = new int[]{URLResource.URL_PROCONFIG};
 
 	/**
 	 * 根据urlId判断数据是否需要缓存

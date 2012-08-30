@@ -108,14 +108,6 @@ public class AppKeyConstants
 	 */
 	public static final String ERRCODE = "errCode";
 	
-	/**
-	 * 收款帐户标志位 | 0:行内帐户 1:同城它行帐户 2:异地它行帐户 3:信用卡帐户 4:他行帐户
-	 */
-	public static final String REC_FLAG = "recFlag";
-	/**
-	 * 信用卡返回码
-	 */
-	public static final String RESULTCODE = "resultCode";
 	
 	/**
 	 * 返回信息
@@ -133,6 +125,16 @@ public class AppKeyConstants
 	 * 获取系统时间
 	 */
 	public static final String SYS_TIME = "sysTime";
+	
+	/**
+	 * 
+	 */
+	public static final String PRODUCT = "Product";
+	
+	/**
+	 * 
+	 */
+	public static final String CHECKURL = "checkUrl";
 	
 	
     /**

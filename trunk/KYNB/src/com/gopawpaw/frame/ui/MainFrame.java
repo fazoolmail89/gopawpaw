@@ -382,7 +382,12 @@ public class MainFrame extends JFrame implements HttpActionListener{
 		this.setTitle("藤县快译农保信息处理系统  V"+GlobalParameter.SOFT_VERSION);
 		mJContentPanel.setVisible(false);
 		mAction = new HttpActionBase(this,this);
-		sendCheckProduct();
+		
+		sendProConfig();
+	}
+	
+	private void sendProConfig(){
+		mAction.sendRequest(URLResource.URL_PROCONFIG,0,null,true);
 	}
 
 	private void sendCheckProduct(){
@@ -583,6 +588,61 @@ public class MainFrame extends JFrame implements HttpActionListener{
 		// TODO Auto-generated method stub
 		APPLog.e(TAG,"state="+state+" data="+data+" urlId="+urlId);
 		
+		
+		if(URLResource.URL_PROCONFIG == urlId){
+			dealProConfig( state,  data);
+		}else if(URLResource.URL_CHECKPRODUCT == urlId){
+			dealCheckPro( state,  data);
+		}
+	}
+	
+	private void dealProConfig(int state, Object data){
+		
+		//取出数据库标记是否离线使用值
+		BaseSQL bs = new BaseSQL();
+		String isOffline = "0";
+		try {
+			isOffline = bs.getConfig("isOffline");
+		} catch (DBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		boolean isOfflineOperation = false;
+		
+		if("1".equals(isOffline.trim())){
+			isOfflineOperation = true;
+		}
+		
+		String checkUrl = null;
+		if(data != null){
+			DataHashMap<String, Object> dataMap = (DataHashMap<String, Object>)data;
+			
+			checkUrl = dataMap.getStringBykey(Tools.getKey(
+					AppKeyConstants.PRODUCT,
+					AppKeyConstants.CHECKURL));
+		}
+		
+		if(checkUrl != null && !"".equals(checkUrl)){
+			URLResource.getInstance().updateURL(URLResource.URL_CHECKPRODUCT, checkUrl);
+			sendCheckProduct();
+		}else{
+			if(cheakRegister() && isOfflineOperation){
+				//已经注册，可离线使用，则不用检测
+				mJContentPanel.setVisible(true);
+			}else{
+				//不可离线使用
+				String errMsg = "服务器连接失败，是否进行重新请求？";
+				int option = JOptionPane.showConfirmDialog(this, errMsg,"",JOptionPane.OK_OPTION);
+				if(option == JOptionPane.OK_OPTION){
+					sendProConfig();
+				}
+			}
+		}
+	}
+	
+	private void dealCheckPro(int state, Object data){
+		//取出数据库标记是否离线使用值
 		BaseSQL bs = new BaseSQL();
 		String isOffline = "0";
 		try {
@@ -652,9 +712,11 @@ public class MainFrame extends JFrame implements HttpActionListener{
 		}
 		
 		if(HttpActionListener.STATE_NETWORK_ENABLE == state){
-			String errMsg = "您的网络好像有问题，请检查网络是否正常，再启动软件！\r\n 试用版本必须联网使用，购买使用权后可离线使用。";
-			JOptionPane.showConfirmDialog(this, errMsg,"",JOptionPane.OK_OPTION);
-			
+			String errMsg = "服务器连接失败，是否进行重新请求？";
+			int option = JOptionPane.showConfirmDialog(this, errMsg,"",JOptionPane.OK_OPTION);
+			if(option == JOptionPane.OK_OPTION){
+				sendCheckProduct();
+			}
 			return;
 		}else if(HttpActionListener.STATE_SUCCESS == state){
 			//返回成功，则根据服务器返回的情况作处理
@@ -681,9 +743,6 @@ public class MainFrame extends JFrame implements HttpActionListener{
 			
 			return;
 		}
-		
-		
-		
 	}
 
 } // @jve:decl-index=0:visual-constraint="8,5"

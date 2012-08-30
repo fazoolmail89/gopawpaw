@@ -11,11 +11,11 @@ import java.util.HashMap;
  */
 public class URLResource {
 
-	private static final String HOST = "http://android.gopawpaw.com";
+	private static final String HOST = "http://kynb.gopawpaw.com";
 	
-	private static final String DOWNLOAD_URL = "http://www.gopawpaw.com/";
+	private static final String DOWNLOAD_URL = "http://kynb.gopawpaw.com/";
 	
-	public static final int URL_APPCONFIG = 10000001;
+	public static final int URL_PROCONFIG = 10000001;
 	public static final int URL_CHECKPRODUCT = 10000002;
 	
 	public static final String KEY_VERSION = "version";
@@ -53,8 +53,10 @@ public class URLResource {
 	}
 
 	private void initURL(){
-		mURLMap.put(URL_APPCONFIG, "/app_config.xml");
-		mURLMap.put(URL_CHECKPRODUCT, "/kynb/checkProduct.php");
-		
+		mURLMap.put(URL_PROCONFIG, "http://kynb.gopawpaw.com/product_config.xml");
+	}
+	
+	public void updateURL(int key,String urlString){
+		mURLMap.put(key, urlString);
 	}
 }
