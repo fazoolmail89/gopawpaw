@@ -36,25 +36,25 @@ public class QueryPanel extends JPanel {
 	public QueryPanel(MainFrame mf) {
 		this.mainFrame = mf;
 		
-		Dimension dsLbl = new Dimension(60, 20);
-		Dimension dsTtf = new Dimension(150, 20);
+		Dimension dsLbl = new Dimension(50, 20);
+		Dimension dsTtf = new Dimension(100, 20);
 
 		lblThorp.setPreferredSize(dsLbl);
 		lblThorp.setHorizontalAlignment(SwingConstants.RIGHT); 
 		cbbThorp = new JComboBox(new PrintThorpDAO().findNameArray());
-		cbbThorp.setPreferredSize(dsTtf);
+		cbbThorp.setPreferredSize(new Dimension(80, 20));
 		
 		lblName.setPreferredSize(dsLbl);
 		lblName.setHorizontalAlignment(SwingConstants.RIGHT); 
-		ttfName.setPreferredSize(dsTtf);
+		ttfName.setPreferredSize(new Dimension(100, 20));
 		
 		lblICCode.setPreferredSize(dsLbl);
 		lblICCode.setHorizontalAlignment(SwingConstants.RIGHT); 
-		ttfICCode.setPreferredSize(dsTtf);
+		ttfICCode.setPreferredSize(new Dimension(100, 20));
 		
 		lblPrint.setPreferredSize(dsLbl);
 		lblPrint.setHorizontalAlignment(SwingConstants.RIGHT); 
-		cbbPrint.setPreferredSize(dsTtf);
+		cbbPrint.setPreferredSize(new Dimension(80, 20));
 		
 		add(lblThorp);
 		add(cbbThorp);
