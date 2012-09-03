@@ -71,37 +71,6 @@ public class AppKeyConstants
      */
     public static final String HINT_MSG = "hintMsg";
     
-    
-	/**
-	 * 为帮助向导功能  获取被帮助的版本号
-	 */
-	public static final String SHARED_APP_VERSION_FOR_HELPER = "app_version";
-	/**
-	 * 如果获取不到值 所取的默认值
-	 */
-	public static final int SHARED_INITEGER_DEFAULT = -1;
-	
-	/**
-	 * 新浪微薄
-	 */
-	public static class SinaWeibo{
-		/**
-		 * 分配给每个第三方应用的app key。用于鉴权身份，显示来源等功能。
-		 */
-		public static final String CONSUMER_KEY = "3470059481";
-		
-		/**
-		 * 生成请求request Token的secret，与consumer key一起分配。
-		 */
-		public static final String CONSUMER_SECRET = "77f27466a3dae6f31208080fc8b6b507";
-		
-		/**
-		 * 应用回调页
-		 */
-		public static final String REDIRECT_URL = "http://www.pingan.com";
-	}
-	
-	public static final String ANDROID_IS_SOCIAL_INSURANCE_OPENED = "Android_IsSocialInsuranceOpened";
 	
 	/**
 	 * 返回码
@@ -113,14 +82,6 @@ public class AppKeyConstants
 	 * 返回信息
 	 */
 	public static final String ERRMSG = "errMsg";
-	/**
-	 * 是否刷新
-	 */
-	public static final String REFRESH = "refresh";
-	/**
-	 * appconfig配置
-	 */
-	public static final String APPLICATION = "Application";
 	/**
 	 * 获取系统时间
 	 */
@@ -136,6 +97,10 @@ public class AppKeyConstants
 	 */
 	public static final String CHECKURL = "checkUrl";
 	
+	/**
+	 * 
+	 */
+	public static final String LOGURL = "logUrl";
 	
     /**
      * 元素节点名
@@ -159,41 +124,12 @@ public class AppKeyConstants
      */
     public static final String DATA = "data";
     
-    /**
-     * 每页的数量
-     */
-    public static final String PAGE_SIZE = "pageSize";
-    
-    /**
-     * 总页数
-     */
-    public static final String TOTAL_PAGE = "totalPage";
-    
-    /**
-     * 查询页码
-     */
-    public static final String PAGE_INDEX = "pageIndex";
-    
-    public static final String PROVINCE = "province";
-    public static final String PROVINCE_CODE = "provinceCode";
-    public static final String PROVINCE_NAME = "provinceName";
-    public static final String CITY_LIST = "cityList";
-    public static final String RECCITY_ID = "recCityId";
-    public static final String RECCITY_NAME = "recCityName";
-    
-    /**
-     * 城市代码
-     */
-    public static final String CITY_CODE = "cityCode";
-    /**
-     * 城市（县）
-     */
-    public static final String CITY_NAME = "cityName";
     
     public static final String OVERDUE_TYPE = "overdueType";
     public static final String OVERDUE_VALUSE = "overdueValuse";
     public static final String OVERDUE_MSG = "overdueMsg";
     public static final String IS_OFFLINE_OPERATION = "isOfflineOperation";
     public static final String REG_CODE = "regCode";
+    public static final String DID = "did";
     
 }

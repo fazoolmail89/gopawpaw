@@ -31,9 +31,11 @@ public class ExcelAccess {
 	
 	public final static int SAVE_BANK = 2;
 	
+	public final static int SAVE_VILLAGER_OLD = 3;
+	
 	private static String outputPath = "OutPut\\";
 	
-//	private static String excelTempPath = "DBCenter\\VillagerFormatTemp.xls";
+	private static String excelTempPathOld = "DBCenter\\VillagerFormatTemp.xls";
 	
 	private static String excelTempPath = "DBCenter\\VillagerFormatTemp.v2.xls";
 	
@@ -72,6 +74,9 @@ public class ExcelAccess {
 			if(type == SAVE_VILLAGER){
 				//获取指定的表
 				tempPath = excelTempPath;
+			}else if(type == SAVE_VILLAGER_OLD){
+				//获取指定的表
+				tempPath = excelTempPathOld;
 			}else if(type == SAVE_BANK){
 				//获取指定的表
 				tempPath = excelTempPathBank;
@@ -92,6 +97,10 @@ public class ExcelAccess {
 				//获取指定的表
 				WritableSheet wws = wwb.getSheet("农村居民");
 				writeDataVillager(wws);
+			}else if(type == SAVE_VILLAGER_OLD){
+				//获取指定的表
+				WritableSheet wws = wwb.getSheet("农村居民");
+				writeDataVillagerOld(wws);
 			}else if(type == SAVE_BANK){
 				//获取指定的表
 				WritableSheet wws = wwb.getSheet("Sheet1");
@@ -177,6 +186,65 @@ public class ExcelAccess {
 				wws.addCell(new Label(27,writeRow,""+villager.getV_soldie_flag()));
 				wws.addCell(new Label(28,writeRow,""+villager.getV_model_worker()));
 				wws.addCell(new Label(29,writeRow,""+villager.getV_mark()));
+				
+				if(exportExcelListener != null){
+					exportExcelListener.onExportProgress(size, i+1, true);
+				}
+			}
+		}
+	}
+	
+	/**
+	 * 写入数据,老表
+	 * @author 李锦华
+	 * @since:2011-11-14
+	 * @param wws
+	 * @throws RowsExceededException
+	 * @throws WriteException
+	 */
+	private void writeDataVillagerOld(WritableSheet wws) throws RowsExceededException, WriteException{
+		
+		//创建单元格并添加数据
+		
+		if(villagerList != null){
+			Villager villager = null;
+			
+			int beginRow = 4;
+			int writeRow = 0;
+			int size = villagerList.size();
+			for(int i=0;i<size;i++){
+				villager = villagerList.get(i);
+				writeRow = beginRow+i;
+				
+				wws.addCell(new Label(0,writeRow,""+villager.getV_id()));
+				wws.addCell(new Label(1,writeRow,""+villager.getV_name()));
+				wws.addCell(new Label(2,writeRow,""+villager.getV_sex()));
+				wws.addCell(new Label(3,writeRow,""+villager.getV_ic()));
+				wws.addCell(new Label(4,writeRow,""+villager.getV_nation()));
+				wws.addCell(new Label(5,writeRow,""+villager.getV_birthday()));
+				wws.addCell(new Label(6,writeRow,""+villager.getV_address_live()));
+				wws.addCell(new Label(7,writeRow,""+villager.getV_bank2_name()));
+				wws.addCell(new Label(8,writeRow,""+villager.getV_bank2_account()));
+				wws.addCell(new Label(9,writeRow,""+villager.getV_capture_expend_calss()));
+				wws.addCell(new Label(10,writeRow,""+villager.getV_type()));
+				wws.addCell(new Label(11,writeRow,""+villager.getV_join_time()));
+				wws.addCell(new Label(12,writeRow,""+villager.getV_archival_location()));
+				wws.addCell(new Label(13,writeRow,""+villager.getV_old_balance()));
+				wws.addCell(new Label(14,writeRow,""+villager.getV_old_balance_flag()));
+				wws.addCell(new Label(15,writeRow,""+villager.getV_householder_name()));
+				wws.addCell(new Label(16,writeRow,""+villager.getV_householder_ic()));
+				wws.addCell(new Label(17,writeRow,""+villager.getV_householder_relation()));
+				wws.addCell(new Label(18,writeRow,""+villager.getV_standard_culture()));
+				wws.addCell(new Label(19,writeRow,""+villager.getV_60not_enough15_flag()));
+				wws.addCell(new Label(20,writeRow,""+villager.getV_phone_num()));
+				wws.addCell(new Label(21,writeRow,""+villager.getV_marital_status()));
+				wws.addCell(new Label(22,writeRow,""+villager.getV_politics_status()));
+				wws.addCell(new Label(23,writeRow,""+villager.getV_contact_name()));
+				wws.addCell(new Label(24,writeRow,""+villager.getV_address_com()));
+				wws.addCell(new Label(25,writeRow,""+villager.getV_address_zip_code()));
+				wws.addCell(new Label(26,writeRow,""+villager.getV_soldie_flag()));
+				wws.addCell(new Label(27,writeRow,""+villager.getV_model_worker()));
+				wws.addCell(new Label(28,writeRow,""+villager.getV_mark()));
 				
 				if(exportExcelListener != null){
 					exportExcelListener.onExportProgress(size, i+1, true);

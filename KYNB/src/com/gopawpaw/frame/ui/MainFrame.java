@@ -34,9 +34,11 @@ import com.gopawpaw.frame.database.BaseSQL;
 import com.gopawpaw.frame.http.URLResource;
 import com.gopawpaw.frame.http.action.HttpActionBase;
 import com.gopawpaw.frame.http.action.HttpActionListener;
+import com.gopawpaw.frame.http.action.LogHttpAction;
 import com.gopawpaw.frame.log.APPLog;
 import com.gopawpaw.frame.struct.AppKeyConstants;
 import com.gopawpaw.frame.struct.DataHashMap;
+import com.gopawpaw.frame.utils.GppAuthorization;
 import com.gopawpaw.frame.utils.MD5;
 import com.gopawpaw.frame.utils.Tools;
 import com.gopawpaw.frame.widget.GJComboBox;
@@ -95,6 +97,8 @@ public class MainFrame extends JFrame implements HttpActionListener{
 	private HttpActionBase mAction;
 	
 	private JPanel mJContentPanel;
+	
+	private JButton mJButtonDevicesCode;
 	
 	public MainFrame() {
 		// TODO Auto-generated constructor stub
@@ -392,18 +396,36 @@ public class MainFrame extends JFrame implements HttpActionListener{
 
 	private void sendCheckProduct(){
 		String version = GlobalParameter.SOFT_VERSION;
-		
+		String divicesId = ""+GppAuthorization.getInstance().getDivicesId();
 		String hardwareCode = Tools.getHardwareCode();
-		String hardwareCodeDisplay = genDisplayCode(hardwareCode);
+		String hardwareCodeDisplay = GppAuthorization.genDisplayCode(divicesId);
 		HashMap<String,String> pMap = new HashMap<String,String>();
 		
+		pMap.put(URLResource.KEY_DID, divicesId);
+		pMap.put(URLResource.KEY_PRODUCT, GlobalParameter.PRODUCT_ID);
 		pMap.put(URLResource.KEY_VERSION, version);
-		pMap.put(URLResource.KEY_HARDWARECODE, hardwareCode);
-		pMap.put(URLResource.KEY_HARDWARECODEDISPLAY, hardwareCodeDisplay);
-		
+		pMap.put(URLResource.KEY_DSERIAL, hardwareCode);
+		pMap.put(URLResource.KEY_DREGDISPLAY, hardwareCodeDisplay);
+		APPLog.e(TAG, "sendCheckProduct divicesId="+divicesId+",genDisplayCode:"+hardwareCodeDisplay);
 		mAction.sendRequest(URLResource.URL_CHECKPRODUCT,0,pMap,true);
 		
 	}
+	
+	private void sendLogProduct(String overduetype,String overdueValuse,String overduemsg){
+		
+		String mpackage = this.getClass().getName();
+		String mmenu = "0";
+		String mname = "首页";
+		
+		LogHttpAction.getInstance().setRegister(cheakRegister());
+		LogHttpAction.getInstance().setOverduetype(overduetype);
+		LogHttpAction.getInstance().setOverduemsg(overduemsg);
+		LogHttpAction.getInstance().setOverduevaluse(overdueValuse);
+		
+		LogHttpAction.getInstance().Log(mpackage, mmenu, mname);
+		
+	}
+	
 	/**
 	 * This method initializes jContentPane
 	 * 
@@ -448,135 +470,54 @@ public class MainFrame extends JFrame implements HttpActionListener{
 			});
 			jJMenuBar.add(jb);
 			
-			String mac = Tools.getHardwareCode();
-
-			String registerCode = mGppConfiguration.getValue("registerCode");
-
-			final String displayKey = genDisplayCode(mac);
-
-			final String regKey = genKeyCode(displayKey);
 			
-			if (registerCode == null || !registerCode.equals(regKey)) {
-				JButton jb2 = new JButton("注册");
-				jb2.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						// TODO Auto-generated method stub
-						showRegDialog(regKey,displayKey);
-					}
-				});
-				
-				jJMenuBar.add(jb2);
-			}
+			mJButtonDevicesCode = new JButton("查看机器码");
+			mJButtonDevicesCode.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					DivicesIDDialog dd = new DivicesIDDialog(MainFrame.this);
+					dd.setModal(true);
+					dd.setVisible(true);
+				}
+			});
+			
+			jJMenuBar.add(mJButtonDevicesCode);
+			mJButtonDevicesCode.setEnabled(false);
 			
 		}
 		return jJMenuBar;
 	}
 	
 
+	/**
+	 * 检查是否注册
+	 * @version 2012-9-1
+	 * @author Jason
+	 * @param
+	 * @return boolean
+	 */
 	private boolean cheakRegister() {
 
-		String mac = Tools.getHardwareCode();
-
+		String divicesId = ""+GppAuthorization.getInstance().getDivicesId();
+		APPLog.d(TAG, "divicesId"+divicesId);
 		String registerCode = mGppConfiguration.getValue("registerCode");
 
-		String displayKey = genDisplayCode(mac);
+		String displayKey = GppAuthorization.genDisplayCode(divicesId);
 
-		final String regKey = genKeyCode(displayKey);
+		final String regKey = GppAuthorization.genKeyCode(displayKey);
+		
 		
 		if (registerCode == null || !registerCode.equals(regKey)) {
-//			int t = GppAuthorization.getInstance().checkAuthTimes();
-//			
-//			if(t > 0){
-//				String tempMSG = "您还可以免费试用："+t+" 次，是否需要现在注册？";
-//				int op = JOptionPane.showConfirmDialog(null, tempMSG,
-//						"系统提示", JOptionPane.YES_NO_OPTION,
-//						JOptionPane.INFORMATION_MESSAGE);
-//				if(op == JOptionPane.NO_OPTION){
-//					return true;
-//				}else{
-//					return showRegDialog(regKey,displayKey);
-//				}
-//			}else{
-//				return showRegDialog(regKey,displayKey);
-//			}
 			
 			return false;
 		} else {
 			return true;
 		}
-
-		//
-		// return true;
 	}
 	
-	private boolean showRegDialog(final String regKey,String displayKey){
 
-		boolean regFlag = false;
-		RegisterDialog rd = new RegisterDialog(this) {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			protected void actionFinish(int option, String regCode) {
-				// TODO Auto-generated method stub
-				if (option == RegisterDialog.YES_OPTION) {
-					System.out.println(regCode);
-					if (regKey.equals(regCode)) {
-						// 注册成功
-						mGppConfiguration.setValue("registerCode", regCode);
-						mGppConfiguration.saveFile();
-
-						String tempMSG = "恭喜您注册成功，非常感谢您对快译软件的支持！\r\n请重新启动软件。";
-						// 声音提示
-						Toolkit.getDefaultToolkit().beep();
-						JOptionPane.showConfirmDialog(null, tempMSG,
-								"系统提示", JOptionPane.YES_NO_OPTION,
-								JOptionPane.INFORMATION_MESSAGE);
-
-						super.actionFinish(option, regCode);
-					} else {
-						// 注册失败
-						String tempMSG = "该注册码不能在本机使用，或者您的注册码已经过期，请联系管理员获取注册码！\r\n"
-								+ mSupport;
-						// 声音提示
-						Toolkit.getDefaultToolkit().beep();
-						JOptionPane.showConfirmDialog(null, tempMSG,
-								"系统提示", JOptionPane.YES_NO_OPTION,
-								JOptionPane.INFORMATION_MESSAGE);
-					}
-
-				} else {
-					// 取消
-					super.actionFinish(option, regCode);
-				}
-
-			}
-		};
-		rd.setTitle("您的支持，我们的动力！");
-		rd.setKeyCode(displayKey);
-		rd.setModal(true);
-		rd.setVisible(true);
-
-		return regFlag;
 	
-	}
-
-	private String genDisplayCode(String diskID) {
-		MD5 md5 = new MD5();
-
-		return md5.getMD5ofStr(diskID);
-	}
-
-	private String genKeyCode(String displayCode) {
-		String k3 = displayCode.substring(3, 16);
-
-		MD5 md5 = new MD5();
-
-		return md5.getMD5ofStr(k3);
-	}
 
 	public static Point getMainFrameLocation() {
 		return thisClassMainFrame.getLocation();
@@ -598,21 +539,9 @@ public class MainFrame extends JFrame implements HttpActionListener{
 	
 	private void dealProConfig(int state, Object data){
 		
-		//取出数据库标记是否离线使用值
-		BaseSQL bs = new BaseSQL();
-		String isOffline = "0";
-		try {
-			isOffline = bs.getConfig("isOffline");
-		} catch (DBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//取出本地标记是否离线使用值
+		boolean isOfflineOperation = GppAuthorization.getInstance().isOffline();
 		
-		boolean isOfflineOperation = false;
-		
-		if("1".equals(isOffline.trim())){
-			isOfflineOperation = true;
-		}
 		
 		String checkUrl = null;
 		if(data != null){
@@ -621,6 +550,14 @@ public class MainFrame extends JFrame implements HttpActionListener{
 			checkUrl = dataMap.getStringBykey(Tools.getKey(
 					AppKeyConstants.PRODUCT,
 					AppKeyConstants.CHECKURL));
+			
+			String logUrl = dataMap.getStringBykey(Tools.getKey(
+					AppKeyConstants.PRODUCT,
+					AppKeyConstants.LOGURL));
+			
+			URLResource.getInstance().updateURL(URLResource.URL_LOGPRODUCT, logUrl);
+			
+			
 		}
 		
 		if(checkUrl != null && !"".equals(checkUrl)){
@@ -632,34 +569,26 @@ public class MainFrame extends JFrame implements HttpActionListener{
 				mJContentPanel.setVisible(true);
 			}else{
 				//不可离线使用
-				String errMsg = "服务器连接失败，是否进行重新请求？";
+				String errMsg = "您当前的授权不可离线使用。\r\n服务器连接失败，是否进行重新请求？";
 				int option = JOptionPane.showConfirmDialog(this, errMsg,"",JOptionPane.OK_OPTION);
 				if(option == JOptionPane.OK_OPTION){
 					sendProConfig();
 				}
 			}
+			
 		}
 	}
 	
 	private void dealCheckPro(int state, Object data){
-		//取出数据库标记是否离线使用值
-		BaseSQL bs = new BaseSQL();
-		String isOffline = "0";
-		try {
-			isOffline = bs.getConfig("isOffline");
-		} catch (DBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
-		boolean isOfflineOperation = false;
+		//取出本地标记是否离线使用值
+		boolean isOfflineOperation = GppAuthorization.getInstance().isOffline();
+		
 		String overdueType = "";
+		String overdueValuse = "";
 		String overdueMsg = "";
 		String regCode = "";
-		
-		if("1".equals(isOffline.trim())){
-			isOfflineOperation = true;
-		}
+		String divicesId = "";
 		
 		if(HttpActionListener.STATE_SUCCESS == state ){
 			
@@ -673,6 +602,11 @@ public class MainFrame extends JFrame implements HttpActionListener{
 					AppKeyConstants.DATA,
 					AppKeyConstants.RESPONSE_BODY,
 					AppKeyConstants.OVERDUE_TYPE));
+			overdueValuse= dataMap.getStringBykey(Tools.getKey(
+					AppKeyConstants.DATA,
+					AppKeyConstants.RESPONSE_BODY,
+					AppKeyConstants.OVERDUE_VALUSE));
+			
 			overdueMsg = dataMap.getStringBykey(Tools.getKey(
 					AppKeyConstants.DATA,
 					AppKeyConstants.RESPONSE_BODY,
@@ -681,8 +615,12 @@ public class MainFrame extends JFrame implements HttpActionListener{
 					AppKeyConstants.DATA,
 					AppKeyConstants.RESPONSE_BODY,
 					AppKeyConstants.REG_CODE));
+			divicesId = dataMap.getStringBykey(Tools.getKey(
+					AppKeyConstants.DATA,
+					AppKeyConstants.RESPONSE_BODY,
+					AppKeyConstants.DID));
 			
-			if("1".equals(operation)){
+			if("y".equals(operation)){
 				isOfflineOperation = true;
 			}else{
 				isOfflineOperation = false;
@@ -693,26 +631,53 @@ public class MainFrame extends JFrame implements HttpActionListener{
 				mGppConfiguration.setValue("registerCode", regCode);
 				mGppConfiguration.saveFile();
 			}
+			int did = 0;
+			try{
+				if(divicesId == null || "".equals(divicesId)){
+					divicesId = "0";
+				}
+				did = Integer.parseInt(divicesId);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			
+			//更新设备ID
+			GppAuthorization.getInstance().updateDivicesId(did);
+			//重新更新本地离线使用值
+			GppAuthorization.getInstance().setOffline(isOfflineOperation);
+			
+			sendLogProduct(overdueType,overdueValuse,overdueMsg);
+			
+			mJButtonDevicesCode.setEnabled(true);
 		}
-		APPLog.d(TAG, "overdueType="+overdueType);
-		APPLog.d(TAG, "overdueMsg="+overdueMsg);
-		APPLog.d(TAG, "regCode="+regCode);
-		try {
-			//重新更新数据库
-			bs.updateConfig("isOffline", (isOfflineOperation ? "1":"0"));
-		} catch (DBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		if(cheakRegister() && isOfflineOperation){
-			//已经注册，可离线使用，则不用检测
-			mJContentPanel.setVisible(true);
+		APPLog.d(TAG, "cheakRegister():"+cheakRegister());
+		if(cheakRegister()){
+			//已经注册，则可使用
+			if(isOfflineOperation){
+				//可离线使用，则不用检测,网络状态
+				mJContentPanel.setVisible(true);
+			}else{
+				//不可离线使用
+				if(HttpActionListener.STATE_NETWORK_ENABLE == state){
+					//网络不通畅时，提示信息，并不允许使用
+					String errMsg = "您当前的授权不可离线使用。服务器连接失败，是否进行重新请求？";
+					int option = JOptionPane.showConfirmDialog(this, errMsg,"",JOptionPane.OK_OPTION);
+					if(option == JOptionPane.OK_OPTION){
+						sendCheckProduct();
+					}
+					mJContentPanel.setVisible(false);
+				}else{
+					//网络通畅时，不提示任何信息
+					mJContentPanel.setVisible(true);
+				}
+			}
+			
 			return;
 		}
 		
 		if(HttpActionListener.STATE_NETWORK_ENABLE == state){
-			String errMsg = "服务器连接失败，是否进行重新请求？";
+			String errMsg = "您当前的授权不可离线使用。\r\n服务器连接失败，是否进行重新请求？";
 			int option = JOptionPane.showConfirmDialog(this, errMsg,"",JOptionPane.OK_OPTION);
 			if(option == JOptionPane.OK_OPTION){
 				sendCheckProduct();
@@ -720,21 +685,25 @@ public class MainFrame extends JFrame implements HttpActionListener{
 			return;
 		}else if(HttpActionListener.STATE_SUCCESS == state){
 			//返回成功，则根据服务器返回的情况作处理
-			if("0".equals(overdueType)){
-				//未过期，不提示
+			if("3".equals(overdueType)){
+				//未过期，可以使用，但不提示
 				mJContentPanel.setVisible(true);
-			}else if("1".equals(overdueType)){
+			}else if("1".equals(overdueType) || "2".equals(overdueType)){
 				//提示到期信息
 				mJContentPanel.setVisible(true);
 				JOptionPane.showConfirmDialog(this, overdueMsg,"",JOptionPane.OK_OPTION);
+			}else if("4".equals(overdueType)){
+				//试用到期，禁止使用，必须注册
+				mJContentPanel.setVisible(false);
+				JOptionPane.showConfirmDialog(this, overdueMsg,"",JOptionPane.OK_OPTION);
 			}else{
-				//禁止使用，必须注册
+				//未登记，限制使用
 				mJContentPanel.setVisible(false);
 				JOptionPane.showConfirmDialog(this, overdueMsg,"",JOptionPane.OK_OPTION);
 			}
 			return;
 		}else{
-			String errMsg = "服务器连接失败，是否进行重新请求？";
+			String errMsg = "您当前的授权不可离线使用。\r\n服务器连接失败，是否进行重新请求？";
 			int option = JOptionPane.showConfirmDialog(this, errMsg,"",JOptionPane.OK_OPTION);
 			
 			if(option == JOptionPane.OK_OPTION){

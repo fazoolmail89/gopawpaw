@@ -254,7 +254,8 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 			jPanelLeft1.setLayout(new BoxLayout(jPanelLeft1, BoxLayout.X_AXIS));
 			jPanelLeft1.add(getJButtonResetNormalID());
 			jPanelLeft1.add(getJButtonSaveToExcel0());
-			jPanelLeft1.add(getJButtonSaveToExcel());
+			jPanelLeft1.add(getJButtonSaveToExcelOld());
+			jPanelLeft1.add(getJButtonSaveToExcelNew());
 			jPanelLeft.add(getJScrollPaneCenterRight(), BorderLayout.CENTER);
 			jPanelLeft.add(jPanelLeft1, BorderLayout.SOUTH);
 			jPanelLeft.add(getJPanelLeftTop(), BorderLayout.NORTH);
@@ -1051,10 +1052,10 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 	 * @param
 	 * @return JButton
 	 */
-	private JButton getJButtonSaveToExcel() {
+	private JButton getJButtonSaveToExcelNew() {
 		if (jButtonSaveToExcel == null) {
 			jButtonSaveToExcel = new JButton();
-			jButtonSaveToExcel.setText("导出参保表");
+			jButtonSaveToExcel.setText("导出参保表（新表）");
 
 			jButtonSaveToExcel
 					.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1068,6 +1069,24 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 						}
 					});
 		}
+		return jButtonSaveToExcel;
+	}
+	
+	private JButton getJButtonSaveToExcelOld() {
+		JButton jButtonSaveToExcel = new JButton();
+			jButtonSaveToExcel.setText("导出参保表（旧表）");
+
+			jButtonSaveToExcel
+					.addMouseListener(new java.awt.event.MouseAdapter() {
+						public void mouseClicked(java.awt.event.MouseEvent e) {
+//							actionSaveToExcel();
+							DataExportDialogOld ded = new DataExportDialogOld(mCurrentThorp);
+							
+							ded.setDataType("a");
+							ded.setVisible(true);
+							
+						}
+					});
 		return jButtonSaveToExcel;
 	}
 

@@ -119,7 +119,7 @@ public class HttpHelper {
 			}
 			queryBuffer.append(key);
 			queryBuffer.append("=");
-			queryBuffer.append(valuse);
+			queryBuffer.append(HttpHelper.urlEncode(valuse));
 
 		}
 

@@ -63,7 +63,9 @@ public class StringUtils {
 	 * ½âÎö»ìÏı×Ö·û
 	 */
 	public static String unObfuscation(String str,String key) {
-		
+		if(str == null){
+			str = "";
+		}
 		char[] ch = str.toCharArray();
 		char[] chs = new char[ch.length];
 

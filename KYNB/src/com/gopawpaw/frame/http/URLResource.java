@@ -17,11 +17,21 @@ public class URLResource {
 	
 	public static final int URL_PROCONFIG = 10000001;
 	public static final int URL_CHECKPRODUCT = 10000002;
+	public static final int URL_LOGPRODUCT = 10000003;
 	
+	public static final String KEY_DID = "did";
 	public static final String KEY_VERSION = "version";
-	public static final String KEY_HARDWARECODE = "hardwareCode";
-	public static final String KEY_HARDWARECODEDISPLAY = "hardwareCodeDisplay";
+	public static final String KEY_DSERIAL = "dserial";
+	public static final String KEY_DREGDISPLAY = "dregdisplay";
+	public static final String KEY_PRODUCT = "product";
 	
+	public static final String KEY_MPACKAGE = "mpackage";
+	public static final String KEY_MMENU = "mmenu";
+	public static final String KEY_MNAME = "mname";
+	public static final String KEY_ISREG = "isreg";
+	public static final String KEY_OVERDUETYPE = "overduetype";
+	public static final String KEY_OVERDUEVALUSE = "overduevaluse";
+	public static final String KEY_OVERDUEMSG= "overduemsg";
 	
 	private static URLResource mURLResource;
 	
