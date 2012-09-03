@@ -17,7 +17,7 @@ public class MainFrame extends BaseModuleFrame {
 	
 	public MainFrame() {
 		//读取打印配置文件
-		MyPrintable.readInitFile();
+		PrintInit.readInitFile();
 		
 		setTitle("打印管理");
 		

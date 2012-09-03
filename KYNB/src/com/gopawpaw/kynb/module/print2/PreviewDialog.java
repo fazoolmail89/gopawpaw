@@ -13,7 +13,7 @@ public class PreviewDialog extends JDialog {
 	
 	public PreviewDialog(Printable pa) {
 		JpdViewer viewer = new JpdViewer();
-		Jpd jpd = new Jpd(MyPrintable.pagerSize_W, MyPrintable.pagerSize_H);
+		Jpd jpd = new Jpd(PrintInit.pagerSize_W, PrintInit.pagerSize_H);
 		jpd.setTitle("¥Ú”°");
 		try {
 			jpd.addPage(pa);

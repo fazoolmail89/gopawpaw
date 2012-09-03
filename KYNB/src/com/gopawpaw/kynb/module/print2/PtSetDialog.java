@@ -43,10 +43,12 @@ public class PtSetDialog extends JDialog {
 
 	private JPanel pnlBottom;
 
+	private String[] cbbItem;
 	public PtSetDialog(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
 
 		initPiList();
+		createCbbItem();
 		createPnlHeader();
 		createSpnBody();
 		createPnlButtom();
@@ -121,7 +123,11 @@ public class PtSetDialog extends JDialog {
 			itemP.getCkbEnAble().setSelected(pi.isEnAble());
 			itemP.getLblCode().setText(pi.getCode());
 			itemP.getTtfName().setText(pi.getName());
-			itemP.getCbbMapIndex().setSelectedIndex(pi.getMapIndex());
+			if(pi.getMapIndex() < 0) 
+				itemP.getCbbMapIndex().setSelectedIndex(0);
+			else
+				itemP.getCbbMapIndex().setSelectedIndex(pi.getMapIndex() + 1);//下拉框选项0位置值为空字符，与table对应的index从1开始
+			
 			itemP.getTtfDefValue().setText(pi.getDefValue());
 			itemP.getTtfX().setText(String.valueOf(pi.getX()));
 			itemP.getTtfY().setText(String.valueOf(pi.getY()));
@@ -146,7 +152,8 @@ public class PtSetDialog extends JDialog {
 			pi = new PrintItem();
 			pi.setCode(itemP.getLblCode().getText().trim());
 			pi.setName(itemP.getTtfName().getText().trim());
-			pi.setMapIndex(itemP.getCbbMapIndex().getSelectedIndex());
+			//下拉框选项0位置值为空字符，与table对应的index从1开始
+			pi.setMapIndex(itemP.getCbbMapIndex().getSelectedIndex() - 1);
 			pi.setDefValue(itemP.getTtfDefValue().getText().trim());
 
 			if (!"".equals(itemP.getTtfX().getText().trim()))
@@ -250,6 +257,15 @@ public class PtSetDialog extends JDialog {
 		}
 		return printAtoms;
 	}
+	
+	private String[] createCbbItem() {
+		cbbItem = new String[BaseDataTable.columnNames.length + 1];
+		cbbItem[0] = "";
+		for(int i = 0; i < BaseDataTable.columnNames.length; i++) {
+			cbbItem[i + 1] = (String) BaseDataTable.columnNames[i];
+		}
+		return cbbItem;
+	}
 
 	class ItemPanel extends JPanel {
 		private static final long serialVersionUID = -1033772509486847170L;
@@ -271,7 +287,7 @@ public class PtSetDialog extends JDialog {
 			ttfName = new JTextField();
 			ttfName.setPreferredSize(dim_2);
 
-			cbbMapIndex = new JComboBox(BaseDataTable.columnNames);
+			cbbMapIndex = new JComboBox(cbbItem);
 			cbbMapIndex.setPreferredSize(dim_2);
 
 			ttfDefValue = new JTextField();
@@ -293,7 +309,7 @@ public class PtSetDialog extends JDialog {
 			box.add(ttfY);
 			add(box);
 		}
-
+		
 		public JCheckBox getCkbEnAble() {
 			return ckbEnAble;
 		}
