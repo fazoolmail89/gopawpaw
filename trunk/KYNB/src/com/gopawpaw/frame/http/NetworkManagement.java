@@ -78,7 +78,7 @@ public class NetworkManagement implements Runnable {
                     this.isPrintMessage(this.isSpontaneousNotice);
                     Thread.sleep(this.sleepMillisecondWhenNetWorkUnLinked);
                 }
-                System.out.println(NetworkManagement.IsNetWordLinking());
+//                System.out.println(NetworkManagement.IsNetWordLinking());
                 Thread.sleep(this.sleepMillisecond);
             } catch (Exception e) {
             }

@@ -12,6 +12,7 @@ import java.util.Map;
 
 import com.gopawpaw.frame.GlobalParameter;
 import com.gopawpaw.frame.database.Dmnd_det;
+import com.gopawpaw.frame.http.action.LogHttpAction;
 import com.gopawpaw.frame.utils.GppDynamicJar;
 import com.gopawpaw.frame.widget.BaseJInternalFrame;
 
@@ -107,6 +108,12 @@ public class Modules {
 			actionModulesMessage = "执行程序命令:" + dd.getMnd_exec();
 			//回调监听器
 			modulesListener.onModulesAction(true, actionModulesMessage, retb);
+			
+			//添加日志
+			String mpackage = retb.getClass().getName();
+			String mmenu = dd.getMnd_nbr()+"."+dd.getMnd_select();
+			String mname = dd.getMnd_label();
+			LogHttpAction.getInstance().Log(mpackage, mmenu, mname);
 			return;
 		}
 

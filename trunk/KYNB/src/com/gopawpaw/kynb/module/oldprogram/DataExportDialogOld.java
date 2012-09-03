@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.gopawpaw.kynb.module.oldprogram;
 
 import java.awt.BorderLayout;
@@ -36,13 +33,10 @@ import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.ExcelAccess;
 import com.gopawpaw.kynb.db.ExportExcelListener;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
+import com.gopawpaw.kynb.module.oldprogram.DataExportDialog1.Progress;
 import com.gopawpaw.kynb.utils.DateUtils;
 
-/**
- * @version 2011-12-17
- * @author Jason
- */
-public class DataExportDialog1 extends JDialog {
+public class DataExportDialogOld extends JDialog{
 
 	/**
 	 * 
@@ -63,7 +57,7 @@ public class DataExportDialog1 extends JDialog {
 	
 	private String dataType = "a";
 
-	public DataExportDialog1(Thorp currentThorp) {
+	public DataExportDialogOld(Thorp currentThorp) {
 		this.mCurrentThorp = currentThorp;
 		init();
 	}
@@ -71,7 +65,7 @@ public class DataExportDialog1 extends JDialog {
 	private void init() {
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				DataExportDialog1.this.setVisible(false);
+				DataExportDialogOld.this.setVisible(false);
 			}
 		});
 
@@ -156,7 +150,7 @@ public class DataExportDialog1 extends JDialog {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
 							mCurrentThorp = (Thorp) jComboBoxThorp
 									.getSelectedItem();
-							DataExportDialog1.this.setTitle("导出：" + mCurrentThorp.getT_name());
+							DataExportDialogOld.this.setTitle("导出：" + mCurrentThorp.getT_name());
 						}
 					});
 
@@ -204,8 +198,8 @@ public class DataExportDialog1 extends JDialog {
 		 hashMap.put(Villager.tab_v_name,
 		 getGppJCheckBoxNew(Villager.tab_v_name));
 		hashMap.put(Villager.tab_v_sex, getGppJCheckBoxNew(Villager.tab_v_sex));
-//		hashMap.put(Villager.tab_v_birthday,
-//				getGppJCheckBoxNew(Villager.tab_v_birthday));
+		hashMap.put(Villager.tab_v_birthday,
+				getGppJCheckBoxNew(Villager.tab_v_birthday));
 		
 		hashMap.put(Villager.tab_v_address_live,
 				getGppJCheckBoxNew(Villager.tab_v_address_live));
@@ -215,14 +209,6 @@ public class DataExportDialog1 extends JDialog {
 				getGppJCheckBoxNew(Villager.tab_v_bank2_name));
 		hashMap.put(Villager.tab_v_bank2_account,
 				getGppJCheckBoxNew(Villager.tab_v_bank2_account));
-		hashMap.put(Villager.tab_v_bank_account_name,
-				getGppJCheckBoxNew(Villager.tab_v_bank_account_name));
-		hashMap.put(Villager.tab_v_bank_name,
-				getGppJCheckBoxNew(Villager.tab_v_bank_name));
-		hashMap.put(Villager.tab_v_bank_account,
-				getGppJCheckBoxNew(Villager.tab_v_bank_account));
-//		hashMap.put(Villager.tab_v_bank2_account_name,
-//				getGppJCheckBoxNew(Villager.tab_v_bank2_account_name));
 		hashMap.put(Villager.tab_v_capture_expend_calss,
 				getGppJCheckBoxNew(Villager.tab_v_capture_expend_calss));
 		hashMap.put(Villager.tab_v_type,
@@ -231,8 +217,8 @@ public class DataExportDialog1 extends JDialog {
 				getGppJCheckBoxNew(Villager.tab_v_join_time));
 		hashMap.put(Villager.tab_v_archival_location,
 				getGppJCheckBoxNew(Villager.tab_v_archival_location));
-//		hashMap.put(Villager.tab_v_old_balance,
-//				getGppJCheckBoxNew(Villager.tab_v_old_balance));
+		hashMap.put(Villager.tab_v_old_balance,
+				getGppJCheckBoxNew(Villager.tab_v_old_balance));
 		hashMap.put(Villager.tab_v_old_balance_flag,
 				getGppJCheckBoxNew(Villager.tab_v_old_balance_flag));
 		hashMap.put(Villager.tab_v_householder_name,
@@ -243,8 +229,8 @@ public class DataExportDialog1 extends JDialog {
 				getGppJCheckBoxNew(Villager.tab_v_householder_relation));
 		hashMap.put(Villager.tab_v_standard_culture,
 				getGppJCheckBoxNew(Villager.tab_v_standard_culture));
-//		hashMap.put(Villager.tab_v_60not_enough15_flag,
-//				getGppJCheckBoxNew(Villager.tab_v_60not_enough15_flag));
+		hashMap.put(Villager.tab_v_60not_enough15_flag,
+				getGppJCheckBoxNew(Villager.tab_v_60not_enough15_flag));
 		hashMap.put(Villager.tab_v_phone_num,
 				getGppJCheckBoxNew(Villager.tab_v_phone_num));
 		hashMap.put(Villager.tab_v_marital_status,
@@ -328,10 +314,10 @@ public class DataExportDialog1 extends JDialog {
 				v.setV_sex("");
 			}
 			
-//			obj = hashMap.get(Villager.tab_v_birthday);
-//			if(!((GJCheckBox)obj).isSelected()){
-//				v.setV_birthday("");
-//			}
+			obj = hashMap.get(Villager.tab_v_birthday);
+			if(!((GJCheckBox)obj).isSelected()){
+				v.setV_birthday("");
+			}
 			
 			obj = hashMap.get(Villager.tab_v_address_live);
 			if(!((GJCheckBox)obj).isSelected()){
@@ -341,21 +327,6 @@ public class DataExportDialog1 extends JDialog {
 			obj = hashMap.get(Villager.tab_v_nation);
 			if(!((GJCheckBox)obj).isSelected()){
 				v.setV_nation("");
-			}
-			
-			obj = hashMap.get(Villager.tab_v_bank_account_name);
-			if(!((GJCheckBox)obj).isSelected()){
-				v.setV_bank_account_name("");
-			}
-			
-			obj = hashMap.get(Villager.tab_v_bank_name);
-			if(!((GJCheckBox)obj).isSelected()){
-				v.setV_bank_name("");
-			}
-			
-			obj = hashMap.get(Villager.tab_v_bank_account);
-			if(!((GJCheckBox)obj).isSelected()){
-				v.setV_bank_account("");
 			}
 			
 			obj = hashMap.get(Villager.tab_v_bank2_name);
@@ -388,10 +359,10 @@ public class DataExportDialog1 extends JDialog {
 				v.setV_archival_location("");
 			}
 			
-//			obj = hashMap.get(Villager.tab_v_old_balance);
-//			if(!((GJCheckBox)obj).isSelected()){
-//				v.setV_old_balance("");
-//			}
+			obj = hashMap.get(Villager.tab_v_old_balance);
+			if(!((GJCheckBox)obj).isSelected()){
+				v.setV_old_balance("");
+			}
 			
 			obj = hashMap.get(Villager.tab_v_old_balance_flag);
 			if(!((GJCheckBox)obj).isSelected()){
@@ -418,10 +389,10 @@ public class DataExportDialog1 extends JDialog {
 				v.setV_standard_culture("");
 			}
 			
-//			obj = hashMap.get(Villager.tab_v_60not_enough15_flag);
-//			if(!((GJCheckBox)obj).isSelected()){
-//				v.setV_60not_enough15_flag("");
-//			}
+			obj = hashMap.get(Villager.tab_v_60not_enough15_flag);
+			if(!((GJCheckBox)obj).isSelected()){
+				v.setV_60not_enough15_flag("");
+			}
 			
 			obj = hashMap.get(Villager.tab_v_phone_num);
 			if(!((GJCheckBox)obj).isSelected()){
@@ -486,7 +457,7 @@ public class DataExportDialog1 extends JDialog {
 			Date date = new Date();
 
 			if("a".equals(dataType)){
-				excelFile = mCurrentThorp.getT_name() + "-正常数据（新表）-"
+				excelFile = mCurrentThorp.getT_name() + "-正常数据（旧表）-"
 				+ DateUtils.DATA_FORMAT.format(date) + ".xls";
 			}else{
 				excelFile = mCurrentThorp.getT_name() + "-黑名单数据-"
@@ -522,7 +493,7 @@ public class DataExportDialog1 extends JDialog {
 				ea.setExportExcelListener(mExportExcelListener);
 				ea.setThorp(mCurrentThorp);
 				ea.setVillagerList(list);
-				if (ea.saveExcel(ExcelAccess.SAVE_VILLAGER)) {
+				if (ea.saveExcel(ExcelAccess.SAVE_VILLAGER_OLD)) {
 					// 导出成功
 					String tempMSG = "成功导出到文件:" + excelFile + " ";
 					//声音提示

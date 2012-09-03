@@ -15,6 +15,7 @@ import java.awt.Component;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
+import java.util.Random;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -55,6 +56,11 @@ public class HttpActionBase implements HttpListener {
 	 */
 	public static final int MSG_SHOW_ALERTDIALOG = 101;
 
+	/**
+	 * 随机数，用于生成log的connectionId
+	 */
+	private static final Random sRandom = new Random();
+	
 	/**
 	 * 发送请求的JInternalFrame
 	 */
@@ -102,6 +108,21 @@ public class HttpActionBase implements HttpListener {
 	 * @param paramObj 请求参数字典
 	 */
 	public void sendRequest(int urlId,int connectionId,Object paramObj) {
+		sendRequest(urlId, connectionId, this, paramObj, false);
+	}
+	
+	/**
+	 * 发送URL请求
+	 * @param urlId 请求UrlId
+	 * @param connectionId 请求链接Id
+	 * @param paramObj 请求参数字典
+	 * @param isLog true:connectionId随机生成；false:connectionId=0
+	 */
+	public void sendRequest(int urlId,Object paramObj,boolean isLog) {
+		int connectionId =  0;
+		if(isLog){
+			connectionId = sRandom.nextInt();
+		}
 		sendRequest(urlId, connectionId, this, paramObj, false);
 	}
 	
