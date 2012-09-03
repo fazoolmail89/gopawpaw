@@ -28,8 +28,6 @@ public class Prenter {
 		attributes = new HashPrintRequestAttributeSet();
 		
 		Paper paper = new Paper();
-		//paper.setSize(354, 510);
-		//paper.setImageableArea(0, 0, 354.0, 510.0);
 		paper.setSize(PrintInit.pagerSize_W, PrintInit.pagerSize_H);
 		paper.setImageableArea(0, 0, PrintInit.pagerSize_W, PrintInit.pagerSize_H);
 		PageFormat pageFormat = new PageFormat();
