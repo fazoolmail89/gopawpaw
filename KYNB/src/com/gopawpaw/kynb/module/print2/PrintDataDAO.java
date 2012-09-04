@@ -8,7 +8,8 @@ import com.gopawpaw.kynb.common.StringUtil;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 
 public class PrintDataDAO extends XXNCYLBXDBAccess {
-
+	//查询关键字定义
+	public static final String THORP_ID = "t_id";
 	public static final String THORPNAME = "thorpName";
 	public static final String NAME = "name";
 	public static final String ICCODE = "icCode";
@@ -21,17 +22,20 @@ public class PrintDataDAO extends XXNCYLBXDBAccess {
 	 */
 	@SuppressWarnings("rawtypes")
 	public Object[][] findByParams(Map params) {
-		 String sql = "select * from PrintData a left join printThorp b on a.ThorpID = b.t_id where 1 = 1 ";
+		 String sql = "select * from PrintData a " +
+		 		" left join printThorp b on a.ThorpID = b.t_id where 1 = 1 ";
 
 		if (params != null && params.size() > 0) {
-			if (params.get(PrintDataDAO.THORPNAME) != null
-					&& !"".equals(params.get(PrintDataDAO.THORPNAME))) {
-				sql = sql
-						+ " and b.t_name = "
-						+ StringUtil.getQuotStr(params
-								.get(PrintDataDAO.THORPNAME));
+			if (params.get(PrintDataDAO.THORP_ID) != null
+					&& !"".equals(params.get(PrintDataDAO.THORP_ID))) {
+				sql = sql + " and b.t_id = " + params.get(PrintDataDAO.THORP_ID);
 			}
-
+			
+			if (params.get(PrintDataDAO.THORPNAME) != null) {
+				sql = sql + " and a.ThorpName like "
+						+ StringUtil.getDLikeStr(params.get(PrintDataDAO.THORPNAME));
+			}
+			
 			if (params.get(PrintDataDAO.NAME) != null) {
 				sql = sql + " and a.Name like "
 						+ StringUtil.getDLikeStr(params.get(PrintDataDAO.NAME));
