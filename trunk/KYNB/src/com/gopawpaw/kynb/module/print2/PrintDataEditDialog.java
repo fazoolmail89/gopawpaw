@@ -151,9 +151,9 @@ public class PrintDataEditDialog extends JDialog {
 		add(pnlBottom, BorderLayout.SOUTH);
 
 		setTitle(title);
+		setSize(800, 500);
 		DialogUtil.setDialogLocaltion(this.mainFrame, this);
 		setLocation(this.getLocation().x, 30);
-		setSize(800, 500);
 		// 固定大小
 		setResizable(false);
 		setModal(true);
@@ -435,7 +435,7 @@ public class PrintDataEditDialog extends JDialog {
 	}
 
 	/**
-	 * 初始化村信息列表
+	 * 初始化所属机构列表
 	 */
 	private void initPtArray() {
 		ptArray = new PrintThorpDAO().findObjArray();

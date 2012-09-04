@@ -62,9 +62,9 @@ public class PtSetDialog extends JDialog {
 		add(box);
 
 		setTitle("打印设置");
+		setSize(800, 700);
 		DialogUtil.setDialogLocaltion(this.mainFrame, this);
 		setLocation(this.getLocation().x, 30);
-		setSize(800, 700);
 		// 固定大小
 		setResizable(false);
 		setModal(true);

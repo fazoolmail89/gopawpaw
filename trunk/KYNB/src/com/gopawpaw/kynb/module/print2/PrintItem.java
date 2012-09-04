@@ -5,6 +5,9 @@ package com.gopawpaw.kynb.module.print2;
  */
 
 public class PrintItem {
+	
+	public static final String SYSDATE_FLAG = "系统时间";
+	
 	private String id;
 	private String code;
 	private String name;

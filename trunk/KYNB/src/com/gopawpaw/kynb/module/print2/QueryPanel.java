@@ -18,9 +18,12 @@ public class QueryPanel extends JPanel {
 	private MainFrame mainFrame;
 	
 	private static final String[] PRINT_STATS = {"未打印", "已打印","所有"};
+	//所属机构列表
+	private PrintThorp[] ptArray = {};
 	
-	private JLabel lblThorp = new JLabel("所在村");
+	private JLabel lblThorp = new JLabel("所属机构");
 	private JComboBox cbbThorp  = null;
+	private JTextField ttfThorpName = new JTextField();
 	
 	private JLabel lblName = new JLabel("姓名");
 	private JTextField ttfName = new JTextField();
@@ -35,14 +38,17 @@ public class QueryPanel extends JPanel {
 	
 	public QueryPanel(MainFrame mf) {
 		this.mainFrame = mf;
+		// 初始化数据
+		initPtArray();
 		
 		Dimension dsLbl = new Dimension(50, 20);
-		Dimension dsTtf = new Dimension(100, 20);
+		//Dimension dsTtf = new Dimension(100, 20);
 
 		lblThorp.setPreferredSize(dsLbl);
 		lblThorp.setHorizontalAlignment(SwingConstants.RIGHT); 
-		cbbThorp = new JComboBox(new PrintThorpDAO().findNameArray());
+		cbbThorp = new JComboBox(ptArray);
 		cbbThorp.setPreferredSize(new Dimension(80, 20));
+		ttfThorpName.setPreferredSize(new Dimension(100, 20));
 		
 		lblName.setPreferredSize(dsLbl);
 		lblName.setHorizontalAlignment(SwingConstants.RIGHT); 
@@ -58,6 +64,7 @@ public class QueryPanel extends JPanel {
 		
 		add(lblThorp);
 		add(cbbThorp);
+		add(ttfThorpName);
 		
 		add(lblName);
 		add(ttfName);
@@ -83,9 +90,14 @@ public class QueryPanel extends JPanel {
 	 */
 	public void executQuery() {
 		if(mainFrame != null) {
-			Map<String,String> parames = new HashMap<String, String>();
-			parames.put(PrintDataDAO.THORPNAME, 
-					cbbThorp.getSelectedItem().toString().trim());
+			Map<String,Object> parames = new HashMap<String, Object>();
+			// 获取所在村下拉框ID值，index=0时PrintThorp对象为空
+			if(cbbThorp.getSelectedIndex() > 0) {
+				PrintThorp pt = (PrintThorp) cbbThorp.getItemAt(cbbThorp.getSelectedIndex());
+				parames.put(PrintDataDAO.THORP_ID, pt.getId());				
+			}
+			
+			parames.put(PrintDataDAO.THORPNAME, ttfThorpName.getText().toString().trim());
 			parames.put(PrintDataDAO.NAME, ttfName.getText().toString().trim());
 			parames.put(PrintDataDAO.ICCODE, ttfICCode.getText().toString().trim());
 			
@@ -98,6 +110,19 @@ public class QueryPanel extends JPanel {
 				parames.put(PrintDataDAO.PRINTFLAG, "");
 			
 			mainFrame.getSpnBDT().refreshTable(new PrintDataDAO().findByParams(parames));				
+		}
+	}
+	
+	/**
+	 * 初始化所属机构列表
+	 */
+	private void initPtArray() {
+		PrintThorp[] temp = new PrintThorpDAO().findObjArray();
+		ptArray = new PrintThorp[temp.length + 1];
+		//将ptArray列表第一个对象赋空值
+		ptArray[0] = new PrintThorp();
+		for(int i = 0; i < temp.length; i++) {
+			ptArray[i+1] = temp[i];
 		}
 	}
 }

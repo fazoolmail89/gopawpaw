@@ -12,7 +12,9 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -74,9 +76,9 @@ public class PrintDialog extends JDialog {
 		add(pnlBottom, BorderLayout.SOUTH);
 
 		setTitle("打印准备");
+		setSize(500, spnBody.getPreferredSize().height + 100);
 		DialogUtil.setDialogLocaltion(this.mainFrame, this);
 		setLocation(this.getLocation().x, 50);
-		setSize(500, spnBody.getPreferredSize().height + 100);
 		// 固定大小
 		setResizable(false);
 		setModal(true);
@@ -101,7 +103,11 @@ public class PrintDialog extends JDialog {
 			itemP.getLblMapIndex().setText(String.valueOf(pi.getMapIndex()));
 			itemP.getLblCode().setText(pi.getCode());
 			itemP.getLblName().setText(pi.getName());
-			itemP.getTtfValue().setText(pi.getDefValue());
+			if(PrintItem.SYSDATE_FLAG.equals(pi.getDefValue())) {
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+				itemP.getTtfValue().setText(sdf.format(new Date()));
+			} else
+				itemP.getTtfValue().setText(pi.getDefValue());
 
 			box.add(itemP);
 			itmePanels[i] = itemP;
