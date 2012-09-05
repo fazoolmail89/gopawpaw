@@ -149,7 +149,7 @@ public class BaseDataTable extends JScrollPane {
 	 */
 	private PrintData getSelectPrintData(int selIndex) {
 		PrintData printData = null;
-		if(selIndex > -1 && selIndex < dataTable.getRowCount() - 1) {
+		if(selIndex > -1 && selIndex < dataTable.getRowCount()) {
 			printData = new PrintData();
 			printData.setId(dataTable.getValueAt(selIndex, 0).toString().trim());
 			printData.setArea(dataTable.getValueAt(selIndex, 1).toString());

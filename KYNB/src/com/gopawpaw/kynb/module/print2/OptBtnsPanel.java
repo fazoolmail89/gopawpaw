@@ -67,7 +67,7 @@ public class OptBtnsPanel extends JPanel {
 						//删除成功，刷新界面
 						mainFrame.getPnlQuery().executQuery();
 					} else
-						JOptionPane.showMessageDialog(null, "清除失败！", "保存文件提示！",
+						JOptionPane.showMessageDialog(null, "清除失败！", "操作提示！",
 								JOptionPane.ERROR_MESSAGE);
 				}
 					
@@ -98,7 +98,7 @@ public class OptBtnsPanel extends JPanel {
 					Toolkit.getDefaultToolkit().beep();
 					JOptionPane.showMessageDialog(null, 
 							"请先在列表中选择对应的数据！", 
-							"保存文件提示！",
+							"操作提示！",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -117,7 +117,7 @@ public class OptBtnsPanel extends JPanel {
 					Toolkit.getDefaultToolkit().beep();
 					JOptionPane.showMessageDialog(null, 
 							"请先在列表中选择对应的数据！", 
-							"保存文件提示！",
+							"操作提示！",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
