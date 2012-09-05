@@ -46,9 +46,10 @@ public class TableScrollPane extends JScrollPane {
 			 */
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				fdialog.getPnlQuery().getTtfName().setText(
-						dataTable.getModel().getValueAt(
-								dataTable.getSelectedRow(), 1).toString());
+				int rowIndex = dataTable.getSelectedRow();
+				if(rowIndex > -1) 
+					fdialog.getPnlQuery().getTtfName().setText(
+						dataTable.getModel().getValueAt(rowIndex, 1).toString());
 			}
 		});
 		
@@ -79,9 +80,10 @@ public class TableScrollPane extends JScrollPane {
 	 * @return
 	 */
 	public PrintThorp getSelectRow() {
-		PrintThorp pt = new PrintThorp();
+		PrintThorp pt = null;
 		int rowIndex = dataTable.getSelectedRow();
-		if(rowIndex > -1) {		
+		if(rowIndex > -1) {	
+			pt = new PrintThorp();
 			pt.setId(Integer.parseInt(dataTable.getModel().getValueAt(rowIndex, 0).toString()));
 			pt.setName(dataTable.getModel().getValueAt(rowIndex, 1).toString());
 		}

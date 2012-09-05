@@ -8,7 +8,6 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.plaf.ButtonUI;
 
 import com.gopawpaw.kynb.module.print2.dataimport.BasicDataImport;
 import com.gopawpaw.kynb.module.print2.dpmtmng.ThorpMngDialog;

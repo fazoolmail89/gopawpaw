@@ -91,13 +91,48 @@ public class PrintThorpDAO extends XXNCYLBXDBAccess {
 	}
 	
 	/**
+	 * 为校验机构名称是否重复提供查询 
+	 * @param name
+	 * @return
+	 */
+	public PrintThorp findByNameToValidate(String name) {
+		PrintThorp pt = null;
+		String sql = "select * from printThorp where t_name = " + StringUtil.getQuotStr(name);
+		if (commonsql.connect(user, password)) {
+			if (commonsql.query(sql)) {
+				while(commonsql.nextrecord()) {
+					pt = new PrintThorp();
+					pt.setId(commonsql.getInt("t_id"));
+					pt.setName(commonsql.getString("t_name"));
+					break;
+				}
+			}
+		}
+		return pt;
+	}
+	
+	public boolean beUse(int id) {
+		boolean result = false;
+		String sql = "select * from printData where ThorpId = " + id;
+		if (commonsql.connect(user, password)) {
+			if (commonsql.query(sql)) {
+				while(commonsql.nextrecord()) {
+					result = true;
+					break;
+				}
+			}
+		}
+		return result;
+	}
+	
+	/**
 	 * 新增机构信息
 	 * @param pt printThorp对象
 	 * @return
 	 */
 	public boolean save(PrintThorp pt) {
 		boolean result = false;
-		String sql = "inster into printThorp(t_name) values(" 
+		String sql = "insert into printThorp(t_name) values(" 
 			+ StringUtil.getQuotStr(pt.getName()) + ")";
 		if (commonsql.connect(user, password)) {
 			if(sql != null && !"".equals(sql))
@@ -129,7 +164,7 @@ public class PrintThorpDAO extends XXNCYLBXDBAccess {
 	 */
 	public boolean delete(int id) {
 		boolean result = false;
-		String sql = "update from printThorp where t_id = " + id;
+		String sql = "delete from printThorp where t_id = " + id;
 		if (commonsql.connect(user, password)) {
 			if(sql != null && !"".equals(sql))
 				result = commonsql.executesql(sql);
