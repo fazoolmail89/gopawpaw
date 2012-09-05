@@ -25,6 +25,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import com.gopawpaw.kynb.common.DialogUtil;
+import com.gopawpaw.kynb.module.print2.dpmtmng.PrintThorp;
+import com.gopawpaw.kynb.module.print2.dpmtmng.PrintThorpDAO;
 
 /**
  * Êý¾Ý±à¼­´°¿Ú

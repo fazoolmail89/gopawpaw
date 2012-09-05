@@ -220,8 +220,6 @@ public class PrintDataDAO extends XXNCYLBXDBAccess {
 			
 			}
 		}
-		System.out.println(printData.getId());
-		System.out.println(sql);
 		return sql;
 	}
 	

@@ -4,7 +4,7 @@
 * Copyright (c) 2012 by Â¬Ïòç÷.     
 */   
 
-package com.gopawpaw.kynb.module.print2;
+package com.gopawpaw.kynb.module.print2.dpmtmng;
 /**     
  * @author Â¬Ïòç÷ luxiangqi521@gmail.com    
  * @version 1.0     
