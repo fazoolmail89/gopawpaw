@@ -8,8 +8,10 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.plaf.ButtonUI;
 
 import com.gopawpaw.kynb.module.print2.dataimport.BasicDataImport;
+import com.gopawpaw.kynb.module.print2.dpmtmng.ThorpMngDialog;
 
 /**     
  * @author luxiangqi luxiangqi521@gmail.com    
@@ -27,9 +29,13 @@ public class OptBtnsPanel extends JPanel {
 	private JButton btnView = new JButton("查看");
 	private JButton btnPrint = new JButton("打印");
 	private JButton btnPtSet = new JButton("设置");
+	private JButton btnThorpMng = new JButton("机构管理");
 	
 	public OptBtnsPanel(MainFrame mf) {
 		this.mainFrame = mf;
+		
+		//javax.swing.plaf.ButtonUI bui = new ButtonUI() {};
+		//btnAdd.setUI(bui);
 		
 		btnExport.addActionListener(new ActionListener() {
 			@Override
@@ -163,6 +169,13 @@ public class OptBtnsPanel extends JPanel {
 			}
 		});
 		
+		btnThorpMng.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new ThorpMngDialog(mainFrame);
+			}
+		});
+		
 		Box box = Box.createVerticalBox();
 		box.add(btnExport);
 		box.add(btnClear);
@@ -172,6 +185,7 @@ public class OptBtnsPanel extends JPanel {
 		box.add(btnDel);
 		box.add(btnPrint);
 		box.add(btnPtSet);
+		box.add(btnThorpMng);
 		add(box);
 	}
 }

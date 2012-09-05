@@ -13,6 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import com.gopawpaw.kynb.module.print2.dpmtmng.PrintThorp;
+import com.gopawpaw.kynb.module.print2.dpmtmng.PrintThorpDAO;
+
 public class QueryPanel extends JPanel {
 	private static final long serialVersionUID = -1981810628043724422L;
 	private MainFrame mainFrame;
@@ -62,6 +65,13 @@ public class QueryPanel extends JPanel {
 		lblPrint.setHorizontalAlignment(SwingConstants.RIGHT); 
 		cbbPrint.setPreferredSize(new Dimension(80, 20));
 		
+		btnQuery.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				executQuery();
+			}
+		});		
+		
 		add(lblThorp);
 		add(cbbThorp);
 		add(ttfThorpName);
@@ -76,13 +86,6 @@ public class QueryPanel extends JPanel {
 		add(cbbPrint);
 		
 		add(btnQuery);
-		
-		btnQuery.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				executQuery();
-			}
-		});
 	}
 	
 	/**
