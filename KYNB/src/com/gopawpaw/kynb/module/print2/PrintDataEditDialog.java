@@ -238,8 +238,21 @@ public class PrintDataEditDialog extends JDialog {
 		JButton btnQuit = new JButton("取消");
 		JButton btnClose = new JButton("关闭");
 
-		JButton btnTest = new JButton("测试");
-
+		//设置按钮样式
+		//---------------------------------------
+		btnOk.setPreferredSize(MyStyle.BTN_DIM_2);
+		btnOk.setMaximumSize(MyStyle.BTN_DIM);
+		btnOk.setFont(MyStyle.BTN_FONT_PLAIN);	
+		
+		btnQuit.setPreferredSize(MyStyle.BTN_DIM_2);
+		btnQuit.setMaximumSize(MyStyle.BTN_DIM);
+		btnQuit.setFont(MyStyle.BTN_FONT_PLAIN);	
+		
+		btnClose.setPreferredSize(MyStyle.BTN_DIM_2);
+		btnClose.setMaximumSize(MyStyle.BTN_DIM);
+		btnClose.setFont(MyStyle.BTN_FONT_PLAIN);	
+		//---------------------------------------
+		
 		btnOk.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -302,16 +315,6 @@ public class PrintDataEditDialog extends JDialog {
 				dispose();
 			}
 		});
-
-		btnTest.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setPrintData();
-			}
-		});
-
-//		pnlBottom.add(btnTest);
 
 		if (opt == PrintDataEditDialog.VIEW_OPT) {
 			pnlBottom.add(btnClose);

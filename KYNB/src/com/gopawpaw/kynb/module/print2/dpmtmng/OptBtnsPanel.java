@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.gopawpaw.kynb.module.print2.MyStyle;
+
 /**	
  *  
  * @author 卢向琪 luxiangqi521@gmail.com
@@ -25,6 +27,17 @@ public class OptBtnsPanel extends JPanel {
 
 	public OptBtnsPanel(ThorpMngDialog f) {
 		this.fdialog = f;
+		
+		//设置按钮样式
+		//------------------------------------
+		btnAdd.setMaximumSize(MyStyle.BTN_DIM);
+		btnUpd.setMaximumSize(MyStyle.BTN_DIM);
+		btnDel.setMaximumSize(MyStyle.BTN_DIM);
+
+		btnAdd.setFont(MyStyle.BTN_FONT_PLAIN);
+		btnUpd.setFont(MyStyle.BTN_FONT_PLAIN);
+		btnDel.setFont(MyStyle.BTN_FONT_PLAIN);
+		//------------------------------------
 		
 		btnAdd.addActionListener(new ActionListener() {
 			@Override

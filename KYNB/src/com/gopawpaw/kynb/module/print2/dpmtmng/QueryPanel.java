@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import com.gopawpaw.kynb.module.print2.MyStyle;
+
 /**	
  *  
  * @author Â¬Ïòç÷ luxiangqi521@gmail.com
@@ -36,6 +38,8 @@ public class QueryPanel extends JPanel {
 		ttfName.setPreferredSize(new Dimension(100, 20));
 		
 		btnQuery = new JButton("²éÑ¯");
+		btnQuery.setMaximumSize(MyStyle.BTN_DIM);
+		btnQuery.setFont(MyStyle.BTN_FONT_PLAIN);
 		
 		btnQuery.addActionListener(new ActionListener() {
 			@Override

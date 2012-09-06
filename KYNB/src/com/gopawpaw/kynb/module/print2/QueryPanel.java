@@ -65,6 +65,8 @@ public class QueryPanel extends JPanel {
 		lblPrint.setHorizontalAlignment(SwingConstants.RIGHT); 
 		cbbPrint.setPreferredSize(new Dimension(80, 20));
 		
+		btnQuery.setMaximumSize(MyStyle.BTN_DIM);
+		btnQuery.setFont(MyStyle.BTN_FONT_PLAIN);
 		btnQuery.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
