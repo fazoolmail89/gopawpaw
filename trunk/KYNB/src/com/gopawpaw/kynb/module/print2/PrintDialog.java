@@ -148,6 +148,21 @@ public class PrintDialog extends JDialog {
 		JButton btnPreview = new JButton("预览");
 		JButton btnClose = new JButton("关闭");
 
+		//设置按钮样式
+		//---------------------------------------
+		btnPreview.setPreferredSize(MyStyle.BTN_DIM_1);
+		btnPreview.setMaximumSize(MyStyle.BTN_DIM);
+		btnPreview.setFont(MyStyle.BTN_FONT_PLAIN);		
+		
+		btnPrint.setPreferredSize(MyStyle.BTN_DIM_1);
+		btnPrint.setMaximumSize(MyStyle.BTN_DIM);
+		btnPrint.setFont(MyStyle.BTN_FONT_PLAIN);	
+		
+		btnClose.setPreferredSize(MyStyle.BTN_DIM_1);
+		btnClose.setMaximumSize(MyStyle.BTN_DIM);
+		btnClose.setFont(MyStyle.BTN_FONT_PLAIN);	
+		//---------------------------------------
+		
 		btnPrint.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

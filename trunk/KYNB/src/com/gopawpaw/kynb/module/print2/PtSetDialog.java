@@ -181,6 +181,21 @@ public class PtSetDialog extends JDialog {
 		JButton btnQuit = new JButton("取消");
 		JButton btnPreview = new JButton("预览");
 		
+		//设置按钮样式
+		//---------------------------------------
+		btnOk.setPreferredSize(MyStyle.BTN_DIM_2);
+		btnOk.setMaximumSize(MyStyle.BTN_DIM);
+		btnOk.setFont(MyStyle.BTN_FONT_PLAIN);	
+		
+		btnQuit.setPreferredSize(MyStyle.BTN_DIM_2);
+		btnQuit.setMaximumSize(MyStyle.BTN_DIM);
+		btnQuit.setFont(MyStyle.BTN_FONT_PLAIN);	
+		
+		btnPreview.setPreferredSize(MyStyle.BTN_DIM_2);
+		btnPreview.setMaximumSize(MyStyle.BTN_DIM);
+		btnPreview.setFont(MyStyle.BTN_FONT_PLAIN);	
+		//---------------------------------------
+		
 		btnPreview.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
