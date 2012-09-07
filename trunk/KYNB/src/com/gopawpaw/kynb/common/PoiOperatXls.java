@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -24,6 +26,9 @@ import org.apache.poi.ss.usermodel.FormulaEvaluator;
  * 
  */
 public class PoiOperatXls {
+	/** 通用样式（字体大小）*/
+	private static HSSFCellStyle style ;
+	
 	public static List<Map<Integer, String>> readExcelRLM(String path) {
 		return readExcelRLM(new File(path));
 	}
@@ -200,6 +205,10 @@ public class PoiOperatXls {
 		try {
 			// 创建新的Excel工作簿
 			workbook = new HSSFWorkbook();
+			
+			//初始化样式
+			initStyle(workbook);		
+			
 			// 在excel中新建一个工作表，起名字为工作表（一）
 			sheet = workbook.createSheet("工作表（一）");
 			
@@ -262,6 +271,10 @@ public class PoiOperatXls {
 		try {
 			// 创建新的Excel工作簿
 			workbook = new HSSFWorkbook();
+			
+			//初始化样式
+			initStyle(workbook);
+			
 			// 在excel中新建一个工作表，起名字为工作表（一）
 			sheet = workbook.createSheet("工作表（一）");
 			
@@ -272,6 +285,7 @@ public class PoiOperatXls {
 				Object[] temp = data[i];
 				for (int j = 0; j < temp.length; j++) {
 					HSSFCell cell = row.createCell(j);
+					cell.setCellStyle(style);
 					cell.setCellValue((String) data[i][j]);
 				}
 				listener.onExecute(i);
@@ -294,6 +308,16 @@ public class PoiOperatXls {
 			if(sheet != null) sheet = null;
 		}
 		return result;
+	}
+	
+	/**
+	 * 初始化字体样式
+	 */
+	private static void initStyle(HSSFWorkbook workbook) {
+		style = workbook.createCellStyle();
+		HSSFFont font = workbook.createFont();
+		font.setFontHeightInPoints((short)12);
+		style.setFont(font);
 	}
 	
 	/**
@@ -339,7 +363,7 @@ public class PoiOperatXls {
 		FileInputStream is;
 		try {
 			is = new FileInputStream(xlsFile);
-			HSSFWorkbook wbs = new HSSFWorkbook(is);
+			new HSSFWorkbook(is);
 		} catch (FileNotFoundException e) {
 			result = 2;
 			e.printStackTrace();

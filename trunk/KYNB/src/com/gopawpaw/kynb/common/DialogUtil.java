@@ -20,4 +20,22 @@ public class DialogUtil {
 		top = (top > 0) ? top : 0;
 		dialog.setLocation(left, top);
 	}
+	
+	public static void setDialogLocaltion(JDialog dialog) {
+		java.awt.Dimension scrSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+
+		int left = (int) ((scrSize.getWidth() - dialog.getWidth()) / 2) ;
+		int top = (int) ((scrSize.getHeight() - dialog.getHeight()) / 2);
+		left = (left > 0) ? left : 0;
+		top = (top > 0) ? top : 0;
+		dialog.setLocation(left, top);
+	}
+	
+	public static void setDialogXMid(JDialog dialog) {
+		java.awt.Dimension scrSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+
+		int left = (int) ((scrSize.getWidth() - dialog.getWidth()) / 2) ;
+		left = (left > 0) ? left : 0;
+		dialog.setLocation(left, 0);
+	}	
 }

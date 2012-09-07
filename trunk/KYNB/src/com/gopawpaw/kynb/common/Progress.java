@@ -30,7 +30,8 @@ public class Progress extends Thread {
 			public void onExecute(int n) {
 				pnlProgressBar.getProgressBar().setString("");
 				pnlProgressBar.getProgressBar().setValue(n);
-				pnlProgressBar.getProgressBar().setString("进度：" + n + "/" + pnlProgressBar.getProgressBar().getMaximum());
+				pnlProgressBar.getProgressBar().setString("进度：" + n + "/" 
+				+ String.valueOf(pnlProgressBar.getProgressBar().getMaximum() - 1));
 			}
 		};
 		return plistener;
