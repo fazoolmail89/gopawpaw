@@ -202,10 +202,10 @@ public class OptBtnsPanel extends JPanel {
 		box.add(btnView);
 		box.add(btnImport);
 		box.add(btnExport);
-		box.add(btnClear);
 		box.add(btnAdd);
 		box.add(btnUpd);
 		box.add(btnDel);
+		box.add(btnClear);
 		box.add(btnPtSet);
 		box.add(btnThorpMng);
 		add(box);
