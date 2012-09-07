@@ -20,8 +20,7 @@ public class PrintDataDAO extends XXNCYLBXDBAccess {
 	 * @param params
 	 * @return
 	 */
-	@SuppressWarnings({"unchecked" })
-	public Object[][] findByParams(Map params) {
+	public Object[][] findByParams(Map<String, Object> params) {
 		 String sql = "select * from PrintData a " +
 		 		" left join printThorp b on a.ThorpID = b.t_id where 1 = 1 ";
 
