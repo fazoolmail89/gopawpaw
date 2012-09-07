@@ -276,10 +276,9 @@ public class PrintDialog extends JDialog {
 
 		//获取打印信息
 		MyPrintable myPrintable = new MyPrintable(getPrintAtomList());
-		Prenter printer = new Prenter();
 
 		// 执行打印
-		boolean rs1 = printer.print(myPrintable);
+		boolean rs1 = mainFrame.getPrinter().print(myPrintable);
 		boolean rs2 = false;
 		if (rs1) {
 			PrintDataDAO pdDao = new PrintDataDAO();

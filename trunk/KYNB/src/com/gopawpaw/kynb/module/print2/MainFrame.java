@@ -19,6 +19,9 @@ import com.gopawpaw.kynb.module.BaseModuleFrame;
 public class MainFrame extends BaseModuleFrame {
 	private static final long serialVersionUID = -7850040792130935086L;
 	
+	//为提高打印速度，打开窗口时即加载打印类，连接打印机
+	private Printer printer;
+	
 	private QueryPanel pnlQuery;
 	private BaseDataTable spnBDT;
 	private OptBtnsPanel pnlOptBtns;
@@ -38,8 +41,8 @@ public class MainFrame extends BaseModuleFrame {
 	public MainFrame() {
 		//读取打印配置文件
 		PrintInit.readInitFile();
-		
-		setTitle("打印管理");
+		//初始化打印类
+		initPrinter();
 		
 		pnlQuery = new QueryPanel(this);
 		pnlQuery.setBorder(BorderFactory.createTitledBorder("查询条件"));
@@ -52,7 +55,8 @@ public class MainFrame extends BaseModuleFrame {
 
 		//创建进度条面板
 		pnlProgressBar = new ProgressBarPanel();
-				
+		
+		setTitle("打印管理");
 		setLayout(new BorderLayout());
 		add(pnlQuery, BorderLayout.NORTH);
 		add(spnBDT, BorderLayout.CENTER);
@@ -148,5 +152,17 @@ public class MainFrame extends BaseModuleFrame {
 
 	public JFileChooser getFilechooser() {
 		return fileChooser;
+	}
+	
+	/**
+	 * 初始化打印类
+	 */
+	private void initPrinter() {
+		printer = new Printer(); 
+	}
+	
+	public Printer getPrinter() {
+		if(printer == null) printer = new Printer(); 
+		return printer;
 	}
 }
