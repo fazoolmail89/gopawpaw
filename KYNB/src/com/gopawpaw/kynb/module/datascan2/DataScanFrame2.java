@@ -150,7 +150,7 @@ public class DataScanFrame2 extends BaseModuleFrame {
 	}
 
 	/**
-	 * 执行导入Excel文件
+	 * 执行扫描
 	 * 
 	 * @param file
 	 */
@@ -167,6 +167,16 @@ public class DataScanFrame2 extends BaseModuleFrame {
 	public void executExportExcel(File file) {
 		if (file == null)
 			return;
+		//如果文件名已被占用，提示用户是否覆盖文件
+		if(file.exists()) {
+			int rv = JOptionPane.showConfirmDialog(DataScanFrame2.this,
+					file.getName() + "文件已存在是否进行覆盖？",
+					"操作提示！",
+					JOptionPane.OK_CANCEL_OPTION,
+					JOptionPane.OK_CANCEL_OPTION);	
+			if(rv != 0) return;
+		}
+		
 		ExportExcelProgress eep = new ExportExcelProgress(pnlProgressBar, file);
 		eep.start();
 	}
