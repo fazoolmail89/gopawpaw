@@ -20,11 +20,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.bean.Villager;
 import com.gopawpaw.kynb.common.IProgressListener;
 import com.gopawpaw.kynb.db.DBException;
-import com.gopawpaw.kynb.db.ExcelAccess;
 import com.gopawpaw.kynb.db.ExcelWriter;
 import com.gopawpaw.kynb.db.ExportExcelListener;
 import com.gopawpaw.kynb.utils.DateUtils;
@@ -66,6 +64,7 @@ public class IdCardNoTablePanel extends JPanel {
 	/**
 	 * 持有主窗体引用
 	 */
+	@SuppressWarnings("unused")
 	private IdnoUpgrade mainFrame;
 	private JLabel title = new JLabel("需升级身份证号码列表(红色为错误身份证号码)：");
 	private Vector<String> mVillagerTableTitle = new Vector<String>(34);
@@ -193,6 +192,7 @@ public class IdCardNoTablePanel extends JPanel {
 		return mVillagerData;
 	}
 	
+	@SuppressWarnings("static-access")
 	public Vector<Vector<String>> getMVillagerDataFromDb() {
 		try {
 			List<Villager> list = icdAccess.findAllVillagers();
@@ -333,6 +333,7 @@ public class IdCardNoTablePanel extends JPanel {
 		ExcelWriter ew = new ExcelWriter(excelTempPath,excelFile);
 		ew.setmTableTitle(mVillagerTableTitle);
 		
+		@SuppressWarnings("unused")
 		Vector<Vector<String>> exportDate = mVillagerData;
 		
 		ew.setmTableData(mVillagerData);
