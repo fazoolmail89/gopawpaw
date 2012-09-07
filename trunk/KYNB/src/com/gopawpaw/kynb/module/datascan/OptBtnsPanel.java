@@ -8,7 +8,6 @@ import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -44,6 +43,7 @@ public class OptBtnsPanel extends JPanel {
 		return btnImportExcel;
 	}
 
+	@SuppressWarnings("static-access")
 	public OptBtnsPanel(DataScanFrame mf) {
 		this.mainFrame = mf;
 		btnImportExcel.addActionListener(new ActionListener() {
