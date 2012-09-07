@@ -81,11 +81,27 @@ public class OptBtnsPanel extends JPanel {
 		btnClear.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Toolkit.getDefaultToolkit().beep();
+				
+				try {
+					Toolkit.getDefaultToolkit().beep();
+					//弹出命令输入窗口
+					new DataClearPasswdDialog(mainFrame);
+					System.out.println(mainFrame.isClearDataPass());
+					if(mainFrame.isClearDataPass()) {
+						JOptionPane.showInputDialog("请输入命令");
+					} 
+				} finally {
+					mainFrame.setClearDataPass(false);
+				}
+				
+				/**
 				int rv = JOptionPane.showConfirmDialog(mainFrame,
 						"即将清空数据库中所有操作，是否确认执行此操作？", "操作警告！",
 						JOptionPane.OK_CANCEL_OPTION,
 						JOptionPane.OK_CANCEL_OPTION);
+				
+				JOptionPane.showInputDialog("请输入命令");
+				
 				if (rv == 0)
 					rv = JOptionPane.showConfirmDialog(mainFrame,
 							"即将清空数据库中所有操作，请再次确认？", "操作警告！",
@@ -102,7 +118,7 @@ public class OptBtnsPanel extends JPanel {
 						JOptionPane.showMessageDialog(null, "清除失败！", "操作提示！",
 								JOptionPane.ERROR_MESSAGE);
 				}
-
+				*/
 			}
 		});
 

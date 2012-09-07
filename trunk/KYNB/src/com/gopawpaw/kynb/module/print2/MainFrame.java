@@ -15,6 +15,8 @@ public class MainFrame extends BaseModuleFrame {
 	private BaseDataTable spnBDT;
 	private OptBtnsPanel pnlOptBtns;
 	
+	private boolean clearDataPass = false;
+	
 	public MainFrame() {
 		//读取打印配置文件
 		PrintInit.readInitFile();
@@ -58,4 +60,13 @@ public class MainFrame extends BaseModuleFrame {
 	public QueryPanel getPnlQuery() {
 		return pnlQuery;
 	}
+
+	public void setClearDataPass(boolean clearDataPass) {
+		this.clearDataPass = clearDataPass;
+	}
+
+	public boolean isClearDataPass() {
+		return clearDataPass;
+	}
+
 }
