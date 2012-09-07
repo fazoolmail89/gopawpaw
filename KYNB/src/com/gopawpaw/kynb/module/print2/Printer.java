@@ -10,12 +10,13 @@ import java.awt.print.PrinterJob;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 
-public class Prenter {
+public class Printer {
 	private PrintRequestAttributeSet attributes;
 	private PrinterJob job;
 	
-	public Prenter() {
-		job = PrinterJob.getPrinterJob();		
+	public Printer() {
+		job = PrinterJob.getPrinterJob();
+		attributes = new HashPrintRequestAttributeSet();
 	}
 
 	/**
@@ -25,7 +26,6 @@ public class Prenter {
 	 */
 	public boolean print(Printable printable) {
 		boolean result = false;
-		attributes = new HashPrintRequestAttributeSet();
 		
 		Paper paper = new Paper();
 		paper.setSize(PrintInit.pagerSize_W, PrintInit.pagerSize_H);
