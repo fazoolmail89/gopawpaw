@@ -14,14 +14,12 @@ import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
 
 import com.gopawpaw.frame.GlobalParameter;
 import com.gopawpaw.kynb.GlobalUI;
