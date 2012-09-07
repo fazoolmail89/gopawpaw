@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -129,5 +131,16 @@ public class QueryPanel extends JPanel {
 		for(int i = 0; i < temp.length; i++) {
 			ptArray[i+1] = temp[i];
 		}
+	}
+	
+	/**
+	 * 刷新机构下拉框
+	 */
+	public void refreshCbbDpmt() {
+		initPtArray();
+		ComboBoxModel cbbModel = new DefaultComboBoxModel(ptArray);
+		cbbThorp.setModel(cbbModel);
+		cbbThorp.repaint();
+		cbbThorp.updateUI();
 	}
 }
