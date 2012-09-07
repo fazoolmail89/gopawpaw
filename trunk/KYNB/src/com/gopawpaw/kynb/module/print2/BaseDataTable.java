@@ -186,4 +186,31 @@ public class BaseDataTable extends JScrollPane {
 		}
 		return printData;
 	}
+	
+	/**
+	 * 获取导出数据，含表头，并把两列ID去掉
+	 * @return
+	 */
+	public Object[][] getExportData() {
+		//导出数组，含表头，并把两列ID去掉
+		Object[][] exportData = new Object[data.length + 1][columnNames.length - 2];
+		
+		//为第一行赋值
+		Object[] header = { "所属地区", "村名", "所属机构编号", "个人编号", "姓名",
+				"身份证号", "联系电话", "家庭编号", "缴费银行账号", "缴费银行户名", "支付银行账号", "支付银行户名",
+				"年龄", "性别", "到龄时间", "出生日期", "与户主关系", "本年缴费档次", "本年人员类别", "家庭住址",
+				"备注", "累计个人账户金额", "累计个人缴费金额", "累计财政补助", "打印标记", "打印日期"};
+		exportData[0] = header;
+		
+		for(int i = 0; i < data.length; i++) {
+			for(int j = 1; j < data[0].length - 1; j++) {
+				exportData[i+1][j-1] = data[i][j];
+			}
+		}
+		return exportData;
+	}
+	
+	public Object[][] getData() {
+		return data;
+	}
 }
