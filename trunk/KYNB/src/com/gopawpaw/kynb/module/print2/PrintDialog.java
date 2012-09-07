@@ -274,6 +274,7 @@ public class PrintDialog extends JDialog {
 			}
 		}
 
+		//获取打印信息
 		MyPrintable myPrintable = new MyPrintable(getPrintAtomList());
 		Prenter printer = new Prenter();
 

@@ -22,7 +22,7 @@ public class OptBtnsPanel extends JPanel {
 	private MainFrame mainFrame;
 	private JButton btnImport = new JButton("导入");
 	private JButton btnExport = new JButton("导出");
-	private JButton btnClear = new JButton("清空");
+	private JButton btnClear = new JButton("批量删除");
 	private JButton btnAdd = new JButton("新增");
 	private JButton btnUpd = new JButton("修改");
 	private JButton btnDel = new JButton("删除");
@@ -81,44 +81,8 @@ public class OptBtnsPanel extends JPanel {
 		btnClear.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				try {
-					Toolkit.getDefaultToolkit().beep();
 					//弹出命令输入窗口
-					new DataClearPasswdDialog(mainFrame);
-					System.out.println(mainFrame.isClearDataPass());
-					if(mainFrame.isClearDataPass()) {
-						JOptionPane.showInputDialog("请输入命令");
-					} 
-				} finally {
-					mainFrame.setClearDataPass(false);
-				}
-				
-				/**
-				int rv = JOptionPane.showConfirmDialog(mainFrame,
-						"即将清空数据库中所有操作，是否确认执行此操作？", "操作警告！",
-						JOptionPane.OK_CANCEL_OPTION,
-						JOptionPane.OK_CANCEL_OPTION);
-				
-				JOptionPane.showInputDialog("请输入命令");
-				
-				if (rv == 0)
-					rv = JOptionPane.showConfirmDialog(mainFrame,
-							"即将清空数据库中所有操作，请再次确认？", "操作警告！",
-							JOptionPane.OK_CANCEL_OPTION,
-							JOptionPane.OK_CANCEL_OPTION);
-				if (rv == 0) {
-					PrintDataDAO pddao = new PrintDataDAO();
-					if (pddao.cleare()) {
-						JOptionPane.showMessageDialog(null, "清除成功！", "操作提示！",
-								JOptionPane.PLAIN_MESSAGE);
-						// 删除成功，刷新界面
-						mainFrame.getPnlQuery().executQuery();
-					} else
-						JOptionPane.showMessageDialog(null, "清除失败！", "操作提示！",
-								JOptionPane.ERROR_MESSAGE);
-				}
-				*/
+					new DataClearDialog(mainFrame); 
 			}
 		});
 
@@ -213,6 +177,7 @@ public class OptBtnsPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new ThorpMngDialog(mainFrame);
+				mainFrame.getPnlQuery().refreshCbbDpmt();
 			}
 		});
 		

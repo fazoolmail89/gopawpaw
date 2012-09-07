@@ -20,7 +20,7 @@ public class PrintDataDAO extends XXNCYLBXDBAccess {
 	 * @param params
 	 * @return
 	 */
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({"unchecked" })
 	public Object[][] findByParams(Map params) {
 		 String sql = "select * from PrintData a " +
 		 		" left join printThorp b on a.ThorpID = b.t_id where 1 = 1 ";
@@ -238,12 +238,16 @@ public class PrintDataDAO extends XXNCYLBXDBAccess {
 	}
 	
 	/**
-	 * 清空数据
+	 * 按机构ID删除数据
 	 * @return
 	 */
-	public boolean cleare() {
+	public boolean deleteByDpmtId(String id) {
 		boolean result = false;
-		String sql = "delete from PrintData";
+		String sql = "";
+		if(id == null || "".equals(id))
+			sql = "delete from PrintData";
+		else
+			sql = "delete from PrintData where ThorpID = " + id;
 		if (commonsql.connect(user, password)) {
 			result = commonsql.executesql(sql);
 		}
