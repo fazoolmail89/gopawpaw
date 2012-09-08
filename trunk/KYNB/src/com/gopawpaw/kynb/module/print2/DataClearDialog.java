@@ -154,7 +154,7 @@ public class DataClearDialog extends JDialog {
 			}
 			
 			if(step == 1) {
-				if(cbbDpmt.getSelectedIndex() > 0) {
+				if(cbbDpmt.getSelectedIndex() > -1) {
 					PrintThorp pt = (PrintThorp) cbbDpmt.getItemAt(cbbDpmt.getSelectedIndex());
 				
 					int rv = JOptionPane.showConfirmDialog(mainFrame,
