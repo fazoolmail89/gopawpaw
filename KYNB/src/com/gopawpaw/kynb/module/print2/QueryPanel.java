@@ -3,6 +3,7 @@ package com.gopawpaw.kynb.module.print2;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,9 +11,11 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
 import com.gopawpaw.kynb.module.print2.dpmtmng.PrintThorp;
@@ -66,6 +69,7 @@ public class QueryPanel extends JPanel {
 		lblPrint.setPreferredSize(dsLbl);
 		lblPrint.setHorizontalAlignment(SwingConstants.RIGHT); 
 		cbbPrint.setPreferredSize(new Dimension(80, 20));
+
 		
 		btnQuery.setMaximumSize(MyStyle.BTN_DIM);
 		btnQuery.setFont(MyStyle.BTN_FONT_PLAIN);
@@ -74,7 +78,17 @@ public class QueryPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				executQuery();
 			}
-		});		
+		});	
+		
+		//将enter设置为查询按钮快捷键
+		btnQuery.registerKeyboardAction(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// 执行查询
+				executQuery();
+			}
+		}, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0),
+				JComponent.WHEN_IN_FOCUSED_WINDOW);
 		
 		add(lblThorp);
 		add(cbbThorp);
