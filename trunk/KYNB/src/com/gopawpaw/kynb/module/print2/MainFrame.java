@@ -8,6 +8,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.border.TitledBorder;
 
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.common.ExcelFileFilter;
@@ -26,6 +27,8 @@ public class MainFrame extends BaseModuleFrame {
 	private BaseDataTable spnBDT;
 	private OptBtnsPanel pnlOptBtns;
 	private ProgressBarPanel pnlProgressBar;
+	
+	TitledBorder tbdDataList;
 	
 	// 文件选择控件
 	private static final JFileChooser fileChooser = new JFileChooser();
@@ -47,8 +50,9 @@ public class MainFrame extends BaseModuleFrame {
 		pnlQuery = new QueryPanel(this);
 		pnlQuery.setBorder(BorderFactory.createTitledBorder("查询条件"));
 		
-		spnBDT = new BaseDataTable();
-		spnBDT.setBorder(BorderFactory.createTitledBorder("数据列表"));
+		tbdDataList = BorderFactory.createTitledBorder("数据列表");
+		spnBDT = new BaseDataTable(this);
+		spnBDT.setBorder(tbdDataList);
 		
 		pnlOptBtns = new OptBtnsPanel(this);
 		pnlOptBtns.setBorder(BorderFactory.createTitledBorder("操作项"));
@@ -89,6 +93,10 @@ public class MainFrame extends BaseModuleFrame {
 	
 	public ProgressBarPanel getPnlProgressBar() {
 		return pnlProgressBar;
+	}
+
+	public TitledBorder getTbdDataList() {
+		return tbdDataList;
 	}
 	
 	/**

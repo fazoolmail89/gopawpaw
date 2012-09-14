@@ -58,6 +58,14 @@ public class PrintDialog extends JDialog {
 	private Object rowData[] = new Object[BaseDataTable.columnNames.length];
 
 	public PrintDialog(MainFrame mf, Object rowData[]) {
+		initialize(mf, rowData, true);
+	}
+	
+	public PrintDialog(MainFrame mf, Object rowData[], boolean hiddenCkbAutoNext) {
+		initialize(mf, rowData, hiddenCkbAutoNext);
+	}
+	
+	private void initialize(MainFrame mf, Object rowData[], boolean showCkbAutoNext) {
 		this.mainFrame = mf;
 		this.rowData = rowData;
 		// 相关初始化，顺序不可变
@@ -65,6 +73,10 @@ public class PrintDialog extends JDialog {
 		createSpnBody();
 		createPnlBottom();
 		refreshSpnBody();
+		
+		//设置是否隐藏自动加载下一条记录按钮
+		ckbAutoNext.setVisible(showCkbAutoNext);
+		ckbAutoNext.setSelected(showCkbAutoNext);
 
 		// ------------------------------------------------------------
 		// 界面排版
@@ -82,8 +94,10 @@ public class PrintDialog extends JDialog {
 		// 固定大小
 		setResizable(false);
 		setModal(true);
-		setVisible(true);
+		setVisible(true);		
 	}
+	
+	
 
 	/**
 	 * 创建中部滚动面板
