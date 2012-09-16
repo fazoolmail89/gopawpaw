@@ -131,5 +131,8 @@ public class AppKeyConstants
     public static final String IS_OFFLINE_OPERATION = "isOfflineOperation";
     public static final String REG_CODE = "regCode";
     public static final String DID = "did";
+    public static final String SUPASS_STATUS = "supassStatus";
+    public static final String SUPASS_START = "supassStart";
+    public static final String SUPASS_END = "supassEnd";
     
 }

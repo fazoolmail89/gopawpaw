@@ -12,10 +12,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 
 import com.gopawpaw.frame.widget.GJCheckBox;
@@ -43,11 +45,11 @@ public class ConditionSelectorDialog extends JDialog {
 	/**
 	 * 条件是否被启用
 	 */
-	private GJCheckBox checkBox1 = new GJCheckBox("条件一：");
-	private GJCheckBox checkBox2 = new GJCheckBox("条件二：");
-	private GJCheckBox checkBox3 = new GJCheckBox("条件三：");
-	private GJCheckBox checkBox4 = new GJCheckBox("条件四：");
-	private GJCheckBox checkBox5 = new GJCheckBox("条件五：");
+	private GJCheckBox checkBox1 = new GJCheckBox("相同条件一：");
+	private GJCheckBox checkBox2 = new GJCheckBox("相同条件二：");
+	private GJCheckBox checkBox3 = new GJCheckBox("相同条件三：");
+	private GJCheckBox checkBox4 = new GJCheckBox("相同条件四：");
+	private GJCheckBox checkBox5 = new GJCheckBox("相同条件五：");
 	
 	/**
 	 * 第一组条件
@@ -74,6 +76,14 @@ public class ConditionSelectorDialog extends JDialog {
 	 */
 	private GJComboBox comboBox51 = new GJComboBox();
 	
+	private JRadioButton radioButton1 = new JRadioButton("区分条件一");
+	private JRadioButton radioButton2 = new JRadioButton("区分条件二");
+	private JRadioButton radioButton3 = new JRadioButton("区分条件三");
+	private JRadioButton radioButton4 = new JRadioButton("区分条件四");
+	private JRadioButton radioButton5 = new JRadioButton("区分条件五");
+	
+	private ButtonGroup group = new ButtonGroup ();
+
 	
 	private Object[] titleA;
 	
@@ -81,12 +91,21 @@ public class ConditionSelectorDialog extends JDialog {
 	
 	private HashMap<Integer,String> contitionMap = new HashMap<Integer,String>();
 	
+	private int mDifferent = -1;
+	
+	private String mDifferentString = "";
 	public ConditionSelectorDialog() {
 		init();
 	}
 
 	
 	private void init() {
+		
+		group.add(radioButton1);
+		group.add(radioButton2);
+		group.add(radioButton3);
+		group.add(radioButton4);
+		group.add(radioButton5);
 		
 		jLabelConditionShow.setEditable(false);
 		
@@ -136,7 +155,7 @@ public class ConditionSelectorDialog extends JDialog {
 					contition[i] = key;
 					i++;
 				}
-				conditionSelectedListener.onConditionSelected(contition);
+				conditionSelectedListener.onConditionSelected(contition,mDifferent);
 			}
 		}
 		super.setVisible(arg0);
@@ -161,30 +180,36 @@ public class ConditionSelectorDialog extends JDialog {
 		jPanelX1.add(new JLabel("   "));
 		jPanelX1.add(checkBox1);
 		jPanelX1.add(comboBox11);
+		jPanelX1.add(radioButton1);
+		
 		
 		JPanel jPanelX2 = new JPanel();
 		jPanelX2.setLayout(new BoxLayout(jPanelX2, BoxLayout.X_AXIS));
 		jPanelX2.add(new JLabel("   "));
 		jPanelX2.add(checkBox2);
 		jPanelX2.add(comboBox21);
+		jPanelX2.add(radioButton2);
 		
 		JPanel jPanelX3 = new JPanel();
 		jPanelX3.setLayout(new BoxLayout(jPanelX3, BoxLayout.X_AXIS));
 		jPanelX3.add(new JLabel("   "));
 		jPanelX3.add(checkBox3);
 		jPanelX3.add(comboBox31);
+		jPanelX3.add(radioButton3);
 		
 		JPanel jPanelX4 = new JPanel();
 		jPanelX4.setLayout(new BoxLayout(jPanelX4, BoxLayout.X_AXIS));
 		jPanelX4.add(new JLabel("   "));
 		jPanelX4.add(checkBox4);
 		jPanelX4.add(comboBox41);
+		jPanelX4.add(radioButton4);
 		
 		JPanel jPanelX5 = new JPanel();
 		jPanelX5.setLayout(new BoxLayout(jPanelX5, BoxLayout.X_AXIS));
 		jPanelX5.add(new JLabel("   "));
 		jPanelX5.add(checkBox5);
 		jPanelX5.add(comboBox51);
+		jPanelX5.add(radioButton5);
 		
 		jPanelY.add(jPanelX0);
 		jPanelY.add(jPanelX1);
@@ -284,18 +309,45 @@ public class ConditionSelectorDialog extends JDialog {
 				contitionMap.put(jbi.index,jbi.toString());
 			}
 			
+			if(radioButton1.isSelected()){
+				jbi = (JComboBoxItem)comboBox11.getSelectedItem();
+				mDifferent = jbi.index;
+				mDifferentString = "区分条件：\n"+jbi.toString();
+			}else if(radioButton2.isSelected()){
+				jbi = (JComboBoxItem)comboBox21.getSelectedItem();
+				mDifferent = jbi.index;
+				mDifferentString = "区分条件：\n"+jbi.toString();
+			}else if(radioButton3.isSelected()){
+				jbi = (JComboBoxItem)comboBox31.getSelectedItem();
+				mDifferent = jbi.index;
+				mDifferentString = "区分条件：\n"+jbi.toString();
+			}else if(radioButton4.isSelected()){
+				jbi = (JComboBoxItem)comboBox41.getSelectedItem();
+				mDifferent = jbi.index;
+				mDifferentString = "区分条件：\n"+jbi.toString();
+			}else if(radioButton5.isSelected()){
+				jbi = (JComboBoxItem)comboBox51.getSelectedItem();
+				mDifferent = jbi.index;
+				mDifferentString = "区分条件：\n"+jbi.toString();
+			}else{
+				mDifferent = -1;
+				mDifferentString = "区分条件：\n 无";
+			}
+			
 			if(contitionMap.size()<=0){
 				jLabelConditionShow.setText("<无条件>");
 			}else{
 				Iterator<Integer> it = contitionMap.keySet().iterator();
 				
 				StringBuffer sb = new StringBuffer();
+				sb.append("相同条件：\n");
 				while(it.hasNext()){
 					Integer key = it.next();
 					String str = contitionMap.get(key);
 					sb.append(str);
 					sb.append("\n");
 				}
+				sb.append("\n\n"+mDifferentString);
 				
 				jLabelConditionShow.setText(sb.toString());
 				
@@ -347,5 +399,5 @@ interface ConditionSelectedListener{
 	 * @param
 	 * @return void
 	 */
-	public void onConditionSelected(int[] condition);
+	public void onConditionSelected(int[] condition,int different);
 }

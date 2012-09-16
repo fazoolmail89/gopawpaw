@@ -163,17 +163,17 @@ public class HttpActionBase implements HttpListener {
 
 		}
 
-		if (!NetworkManagement.IsNetWordLinking()) {
-			APPLog.e(TAG, "网络不可用");
-
-//			String errMsg = "当前网络不可用，请检查您的网络链接！";
-//			showErrorMsg(errMsg);
-
-			httpActionListener.onHttpActionResponse(
-					HttpActionListener.STATE_NETWORK_ENABLE, null, urlId, connectionId);
-
-			return;
-		}
+//		if (!NetworkManagement.IsNetWordLinking()) {
+//			APPLog.e(TAG, "网络不可用");
+//
+////			String errMsg = "当前网络不可用，请检查您的网络链接！";
+////			showErrorMsg(errMsg);
+//
+//			httpActionListener.onHttpActionResponse(
+//					HttpActionListener.STATE_NETWORK_ENABLE, null, urlId, connectionId);
+//
+//			return;
+//		}
 
 		int mode = HttpRequest.REQUEST_MODE_3;
 
@@ -305,10 +305,7 @@ public class HttpActionBase implements HttpListener {
 	 * @param connectionId
 	 */
 	private void actionResponse(int state, Object data, int urlId, int connectionId){
-		if(mComponent != null && mComponent.isVisible()){
-			//当前的页面还在显示时，则回调
-			httpActionListener.onHttpActionResponse(state, data, urlId, connectionId);
-		}
+		httpActionListener.onHttpActionResponse(state, data, urlId, connectionId);
 	}
 	
 	/**
