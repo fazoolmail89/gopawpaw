@@ -85,21 +85,28 @@ public class DBOpertor extends XXNCYLBXDBAccess {
 		//==========================拼接导入的字段========start
 		HashMap<String, Integer> map = tableItem.getTableFieldToIndex();
 		List<String> list = tableItem.getTableFieldImport();
+		//身份证号所在列索引
+		int iCCodeIndex = 0;
 		int size = list.size();
 		// excel对应的索引
 		int[] excelIndex = new int[size];
 		for (int i = 0; i < size; i++) {
 			// 遍历拼接导入的字段，同时得到对应字段所在data数组中列的索引
 			String field = list.get(i);
-
+			
+			
 			sqlPre.append(field);
 
 			if (i < (size - 1)) {
 				// 最后一个字段不需要添加，其他字段都需要
 				sqlPre.append(" , ");
 			}
-
+			
 			excelIndex[i] = map.get(field);
+			
+			if("ICCode".equals(field)){
+				iCCodeIndex = excelIndex[i];
+			}
 		}
 		//==========================拼接导入的字段========end
 
@@ -135,6 +142,19 @@ public class DBOpertor extends XXNCYLBXDBAccess {
 				sql.append(")");
 				// sql拼接结束
 				
+				if(existRowICCode(""+data[row][iCCodeIndex])){
+					//身份证号已存在，则跳过继续下一条
+					Object[] rowData = data[row];
+					Object[] rowDataRet = new Object[rowData.length+1];
+					for(int k=0;k<rowData.length;k++){
+						rowDataRet[k] = rowData[k];
+					}
+					rowDataRet[rowData.length] = "身份号已存在";
+					
+					listener.onImportProgress(row, rowDataRet, DataImportListener.STATE_FLASE);
+					continue;
+				}
+				
 				//执行SQL语句
 				boolean ret = commonsql.executesql(sql.toString());
 				
@@ -142,7 +162,13 @@ public class DBOpertor extends XXNCYLBXDBAccess {
 					//回调成功
 					listener.onImportProgress(row, data[row], DataImportListener.STATE_OK);
 				}else{
-					listener.onImportProgress(row, data[row], DataImportListener.STATE_FLASE);
+					Object[] rowData = data[row];
+					Object[] rowDataRet = new Object[rowData.length+1];
+					for(int k=0;k<rowData.length;k++){
+						rowDataRet[k] = rowData[k];
+					}
+					rowDataRet[rowData.length] = "未知";
+					listener.onImportProgress(row, rowDataRet, DataImportListener.STATE_FLASE);
 				}
 				
 				if(row % 5000 == 0){
@@ -159,6 +185,28 @@ public class DBOpertor extends XXNCYLBXDBAccess {
 			System.err.println("connect failed!");
 
 		}
+	}
+	
+	/**
+	 * 判断身份号是否存在
+	 * @version 2012-9-15
+	 * @author Jason
+	 * @param
+	 * @return boolean
+	 */
+	private boolean existRowICCode(String ICCode){
+		boolean retFlag = false;
+		String sql = "select 1 from printData where ICCode='"+ICCode+"'";
+		if(!commonsql.query(sql)){
+			
+			return false;
+		}
+		
+		while (commonsql.nextrecord()) {
+			retFlag = true;
+		}
+		
+		return retFlag;
 	}
 
 	private static List<DBTableItem> importTableList;
@@ -203,7 +251,7 @@ public class DBOpertor extends XXNCYLBXDBAccess {
 		table.setTableName("printData");
 		table.setTableNameDisplay("打印数据表");
 		table.addField("Area", "所属地区");
-		table.addField("ThorpId", "所属村", false,null);
+		table.addField("ThorpId", "所属机构", false,null);
 		table.addField("ThorpName", "所属机构编号");
 		table.addField("SerialNum", "个人编号");
 		table.addField("Name", "姓名");

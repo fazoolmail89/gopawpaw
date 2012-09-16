@@ -117,7 +117,7 @@ public class GlobalParameter {
 	 */
 	public static final String PRODUCT_ID = "100";
 	
-	public static final String SOFT_VERSION = "1.4.0";
+	public static final String SOFT_VERSION = "1.4.2";
 	/**
 	 * 
 	 */
@@ -234,8 +234,6 @@ public class GlobalParameter {
 	 * 初始化全局变量
 	 */
 	public static void initialize() {
-		
-		NetworkManagement.getInstance();
 		
 		updateFromConfig();
 		updateFromUserConfig();

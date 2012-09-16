@@ -103,6 +103,8 @@ public class BasicDataImport extends JDialog {
 	private Object[] mTableTitle ;
 	private Object[][] mTableData ;
 	
+	private Object[] mTableTitleError ;
+	
 	private HashMap<String,GJComboBox> mMap = new HashMap<String,GJComboBox>();
 	
 	/**
@@ -359,6 +361,13 @@ public class BasicDataImport extends JDialog {
 				table.updateUI();
 				initExcelFieldItemList();
 				refreshTablePanel();
+				
+				mTableTitleError = new Object[mTableTitle.length+1];
+				
+				for(int i = 0;i<mTableTitle.length;i++){
+					mTableTitleError[i] = mTableTitle[i];
+				}
+				mTableTitleError[mTableTitle.length] = "Ê§°ÜÔ­Òò";
 			}
 		});
 
@@ -416,7 +425,7 @@ public class BasicDataImport extends JDialog {
 						JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE);
 			}
 		});
-		pee.setTitle(mTableTitle);
+		pee.setTitle(mTableTitleError);
 		pee.setData(errorData);
 		pee.start();
 	}
@@ -720,7 +729,7 @@ public class BasicDataImport extends JDialog {
 			
 			jScrollPane11.setViewportView(jTableOK);
 			
-			DefaultTableModel model = new DefaultTableModel(errorData, mTableTitle);
+			DefaultTableModel model = new DefaultTableModel(errorData, mTableTitleError);
 			GppStyleTable jTable = new GppStyleTable(model);
 			jTable.setRowHeight(22);
 			

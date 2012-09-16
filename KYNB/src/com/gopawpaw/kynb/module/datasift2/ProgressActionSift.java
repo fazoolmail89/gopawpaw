@@ -20,15 +20,18 @@ public class ProgressActionSift extends Thread {// 自定义类progress,执行筛选用
 	private ProgressActionSiftListener progressActionSiftListener;
 	private JButton jButton;
 	private int[] conditionIndex;
-	public ProgressActionSift(Object[][] table1,int[] conditionIndex,ProgressActionSiftListener progressActionSiftListener) {
+	private int mDifferent = -1;
+	public ProgressActionSift(Object[][] table1,int[] conditionIndex,int different,ProgressActionSiftListener progressActionSiftListener) {
 		this.table1 = table1;
 		this.conditionIndex = conditionIndex;
+		this.mDifferent = different;
 		this.progressActionSiftListener = progressActionSiftListener;
 	}
 	
-	public ProgressActionSift(Object[][] table1,int[] conditionIndex,ProgressActionSiftListener progressActionSiftListener,JProgressBar progressBar) {
+	public ProgressActionSift(Object[][] table1,int[] conditionIndex,int different,ProgressActionSiftListener progressActionSiftListener,JProgressBar progressBar) {
 		this.table1 = table1;
 		this.conditionIndex = conditionIndex;
+		this.mDifferent = different;
 		this.progressActionSiftListener = progressActionSiftListener;
 		this.progressBar = progressBar;
 	}
@@ -38,11 +41,60 @@ public class ProgressActionSift extends Thread {// 自定义类progress,执行筛选用
 		if(jButton != null){
 			jButton.setEnabled(false);
 		}
-		if(conditionIndex != null){
-			actionSift(table1,conditionIndex);
-		}else{
-			
+		
+		if(progressBar != null){
+			progressBar.setMaximum(100);
+			progressBar.setStringPainted(true); // 显示提示信息
+			progressBar.setIndeterminate(false); // 确定进度的进度条
 		}
+		
+		
+		Object[][][] objs = null;
+		
+		//区分条件完全相同
+		Object[][] objDifferent = null;
+		if(conditionIndex != null){
+			if(mDifferent >= 0){
+				int[] condit = new int[conditionIndex.length+1];
+				for(int i=0;i<conditionIndex.length;i++){
+					condit[i] = conditionIndex[i];
+				}
+				condit[conditionIndex.length] = mDifferent;
+				
+				//先过滤区分条件
+				objs = actionSift(table1,condit);
+				
+				if(objs != null){
+					//把区分条件相同的出，再过减少一个区分条件过来相同条件
+					objDifferent = objs[1];
+					
+					objs = actionSift(objs[0],conditionIndex);
+				}
+			}else{
+				objs = actionSift(table1,conditionIndex);
+			}
+			
+		}else{
+			return;
+		}
+		if(objs[0] == null){
+			objs[0] = new Object[][]{};
+		}
+		
+		if(objs[1] == null){
+			objs[1] = new Object[][]{};
+		}
+		
+		if(objDifferent == null){
+			objDifferent = new Object[][]{};
+		}
+		
+		progressActionSiftListener.onProgressActionSiftFinish(objs[0], objs[1],objDifferent);
+		if(progressBar != null){
+			progressBar.setString("筛选进度：100 % ");
+			progressBar.setValue(100); // 进度值
+		}
+		
 		if(jButton != null){
 			jButton.setEnabled(true);
 		}
@@ -61,25 +113,26 @@ public class ProgressActionSift extends Thread {// 自定义类progress,执行筛选用
 	 * 				2:在table2中相同部分的数据；<br>
 	 * 				3:在table2中不同部分的数据；<br>
 	 */
-	private void actionSift(Object[][] table,
+	private Object[][][] actionSift(Object[][] table,
 			int[] conditionIndex){
 		
-		if(table1 == null){
-			return;
+		if(table == null){
+			return null;
 		}
 		
+		//唯一记录
 		ArrayList<Object[]> table11 = new ArrayList<Object[]>(); 
+		
+		//相同记录
 		ArrayList<Object[]> table12 = new ArrayList<Object[]>(); 
 		
 		HashMap<Integer,String> hasFindRow = new HashMap<Integer,String>();
 		
-		if(progressBar != null){
-			progressBar.setMaximum(100);
-			progressBar.setStringPainted(true); // 显示提示信息
-			progressBar.setIndeterminate(false); // 确定进度的进度条
-		}
 		
-		int size = table1.length;
+		//临时存放相同记录
+		ArrayList<Object[]> rowList = new ArrayList<Object[]>(); 
+		
+		int size = table.length;
 		for(int i=0;i<size;i++){
 			
 			if(progressBar != null){
@@ -98,6 +151,8 @@ public class ProgressActionSift extends Thread {// 自定义类progress,执行筛选用
 			if(row == null){
 				continue;
 			}
+			
+			rowList.clear();
 			
 			//存放相同的数量
 			int equalsNum = 0;
@@ -127,6 +182,8 @@ public class ProgressActionSift extends Thread {// 自定义类progress,执行筛选用
 				
 				if(flagEquals){
 					//找到与当前记录相等的行
+					rowList.add(rowNext);
+					
 					hasFindRow.put(n, ""+n);
 					equalsNum++;
 				}
@@ -138,6 +195,8 @@ public class ProgressActionSift extends Thread {// 自定义类progress,执行筛选用
 				table11.add(row);
 			}else{
 				//第i条记录存在equalsNum条相同，即共有equalsNum+1条
+				
+				//把当前记录添加到相同表中
 				Object[] rowD = new Object[row.length+1];
 				for(int kk=0;kk<row.length;kk++){
 					rowD[kk] = row[kk];
@@ -146,30 +205,40 @@ public class ProgressActionSift extends Thread {// 自定义类progress,执行筛选用
 				rowD[row.length] = ""+(equalsNum+1);
 				
 				table12.add(rowD);
+				
+				for(Object[] rowTemp : rowList){
+					//把与当前记录相同的都添加到相同表中
+					Object[] temp = new Object[rowTemp.length+1];
+					for(int tt=0;tt<rowTemp.length;tt++){
+						temp[tt] = rowTemp[tt];
+					}
+					
+					temp[rowTemp.length] = ""+(equalsNum+1);
+					
+					table12.add(temp);
+				}
 			}
 		}
 		
-		if(progressActionSiftListener != null){
-			Object[][] ok11 = new Object[table11.size()][];
+		//唯一记录
+		Object[][] ok11 = new Object[table11.size()][];
 			int ok11i = 0;
 			for (Object[] objects : table11) {
 				ok11[ok11i] = objects;
 				ok11i++;
 			};
-			
-			Object[][] ok12 = new Object[table12.size()][];
+		//相同记录
+		Object[][] ok12 = new Object[table12.size()][];
 			int ok12i = 0;
 			for (Object[] objects : table12) {
 				ok12[ok12i] = objects;
 				ok12i++;
 			};
 			
-			progressActionSiftListener.onProgressActionSiftFinish(ok11, ok12);
-			if(progressBar != null){
-				progressBar.setString("筛选进度：100 % ");
-				progressBar.setValue(100); // 进度值
-			}
-		}
+			
+		Object[][][] objret = new Object[][][]{ok11,ok12};
+		
+		return objret;
 		
 	}
 
@@ -182,11 +251,13 @@ public class ProgressActionSift extends Thread {// 自定义类progress,执行筛选用
 		ProgressActionSiftListener lis = new ProgressActionSiftListener() {
 			
 			@Override
-			public void onProgressActionSiftFinish(Object[][] table11,Object[][] table12) {
+			public void onProgressActionSiftFinish(Object[][] table11,Object[][] table12,Object[][] table13) {
 				
 				print(table11);
 				System.out.println("===============");
 				print(table12);
+				System.out.println("===============");
+				print(table13);
 			}
 		};
 		
@@ -204,12 +275,15 @@ public class ProgressActionSift extends Thread {// 自定义类progress,执行筛选用
 				 {"黄桂春3","234","555","565"}
 		 };
 		
-		 int[] mCondition = new int[]{0,2};
-		ProgressActionSift p = new ProgressActionSift(mTableData1,mCondition,lis);
+		 int[] mCondition = new int[]{0,3};
+		ProgressActionSift p = new ProgressActionSift(mTableData1,mCondition,2,lis);
 		p.start();
 	}
 	
 	private static void print(Object[][] table){
+		if(table == null){
+			return;
+		}
 		for(int i=0;i<table.length;i++){
 			Object[] row = table[i];
 			String strRow = "";

@@ -47,12 +47,14 @@ public class DataSift2 extends BaseModuleFrame implements
 	private JScrollPane jScrollPane1 = null;
 	private JScrollPane jScrollPane3 = null;
 	private JScrollPane jScrollPane4 = null;
+	private JScrollPane jScrollPane5 = null;
 
 	//导入excel进度条
 	private JProgressBar progressBar1 = new JProgressBar();
 
 	private JProgressBar progressBar3 = new JProgressBar();
 	private JProgressBar progressBar4 = new JProgressBar();
+	private JProgressBar progressBar5 = new JProgressBar();
 	
 	private JProgressBar progressBar7 = new JProgressBar();
 
@@ -81,9 +83,13 @@ public class DataSift2 extends BaseModuleFrame implements
 	 */
 	private Object[][] exportTable1 = null;
 	private Object[][] exportTable2 = null;
+	private Object[][] exportTable3 = null;
+	
+	private JLabel jLableExportCount0 = new JLabel();
 	
 	private JLabel jLableExportCount1 = new JLabel();
 	private JLabel jLableExportCount2 = new JLabel();
+	private JLabel jLableExportCount3 = new JLabel();
 
 	private JButton jButtonActionSift;
 	
@@ -91,6 +97,7 @@ public class DataSift2 extends BaseModuleFrame implements
 	 * 选择的条件
 	 */
 	private int[] mCondition;
+	private int mDifferent = -1;
 	
 	public DataSift2() {
 		initialize();
@@ -146,6 +153,7 @@ public class DataSift2 extends BaseModuleFrame implements
 		jScrollPane1 = new JScrollPane();
 		jScrollPane3 = new JScrollPane();
 		jScrollPane4 = new JScrollPane();
+		jScrollPane5 = new JScrollPane();
 
 
 		JPanel jPanel3 = new JPanel();
@@ -167,19 +175,38 @@ public class DataSift2 extends BaseModuleFrame implements
 		jPanel4.add(jScrollPane4, BorderLayout.CENTER);
 		jPanel4.add(jPanel41, BorderLayout.SOUTH);
 		jPanel4.add(jLableExportCount2, BorderLayout.NORTH);
+		
+		JPanel jPanel5 = new JPanel();
+		jPanel5.setLayout(new BorderLayout());
+		JPanel jPanel51 = new JPanel();
+		jPanel51.setLayout(new BoxLayout(jPanel51, BoxLayout.X_AXIS));
+		jPanel51.add(getJButtonExport3());
+		jPanel51.add(progressBar5);
+		jPanel5.add(jScrollPane5, BorderLayout.CENTER);
+		jPanel5.add(jPanel51, BorderLayout.SOUTH);
+		jPanel5.add(jLableExportCount3, BorderLayout.NORTH);
 
-
-
+		JPanel jPanelTop = new JPanel();
+		jPanelTop.setLayout(new BorderLayout());
+		jPanelTop.add(jScrollPane1, BorderLayout.CENTER);
+		jPanelTop.add(jLableExportCount0, BorderLayout.NORTH);
+		
 		// 左边三个面板============start
 
 		JSplitPane jSplitPane11 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
 				jPanel3, jPanel4);
-		jSplitPane11.setDividerLocation(450);
+		jSplitPane11.setDividerLocation(300);
 		jSplitPane11.setOneTouchExpandable(true);
 		jSplitPane11.setDividerSize(6);
-
+		
+		JSplitPane jSplitPane10 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+				jSplitPane11, jPanel5);
+		jSplitPane10.setDividerLocation(600);
+		jSplitPane10.setOneTouchExpandable(true);
+		jSplitPane10.setDividerSize(6);
+		
 		JSplitPane jSplitPane1 = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
-				jScrollPane1, jSplitPane11);
+				jPanelTop, jSplitPane10);
 		jSplitPane1.setDividerLocation(300);
 		jSplitPane1.setOneTouchExpandable(true);
 		jSplitPane1.setDividerSize(10);
@@ -226,9 +253,10 @@ public class DataSift2 extends BaseModuleFrame implements
 				ConditionSelectedListener c = new ConditionSelectedListener(){
 
 					@Override
-					public void onConditionSelected(int[] condition) {
+					public void onConditionSelected(int[] condition,int different) {
 						// TODO Auto-generated method stub
 						mCondition = condition;
+						mDifferent = different;
 						if(condition != null){
 							int size = condition.length;
 							for(int i=0;i<size;i++){
@@ -271,11 +299,11 @@ public class DataSift2 extends BaseModuleFrame implements
 	private JButton getJButtonExport1() {
 
 		final JButton jButton = new JButton();
-		jButton.setText("不重复数据Excel导出");
+		jButton.setText("唯一数据Excel导出");
 		jButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent e) {
 				actionSaveToExce(mTableTitle1, exportTable1, progressBar3,
-						"不重复数据Excel导出",jButton);
+						"唯一数据Excel导出",jButton);
 			}
 		});
 
@@ -285,17 +313,30 @@ public class DataSift2 extends BaseModuleFrame implements
 	private JButton getJButtonExport2() {
 
 		final JButton jButton = new JButton();
-		jButton.setText("重复数据Excel导出");
+		jButton.setText("条件相同数据Excel导出");
 		jButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent e) {
 				actionSaveToExce(mTableTitle2, exportTable2, progressBar4,
-						"重复数据Excel导出",jButton);
+						"条件相同数据Excel导出",jButton);
 			}
 		});
 
 		return jButton;
 	}
+	
+	private JButton getJButtonExport3() {
 
+		final JButton jButton = new JButton();
+		jButton.setText("区分相同数据Excel导出");
+		jButton.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent e) {
+				actionSaveToExce(mTableTitle2, exportTable3, progressBar5,
+						"区分相同数据Excel导出",jButton);
+			}
+		});
+
+		return jButton;
+	}
 
 	/**
 	 * 执行筛选
@@ -321,14 +362,25 @@ public class DataSift2 extends BaseModuleFrame implements
 		ProgressActionSiftListener lis = new ProgressActionSiftListener() {
 			
 			@Override
-			public void onProgressActionSiftFinish(Object[][] table11,Object[][] table12) {
+			public void onProgressActionSiftFinish(Object[][] table11,Object[][] table12,Object[][] table13) {
 				// TODO Auto-generated method stub
 				
 				exportTable1 = table11;
 				exportTable2 = table12;
+				exportTable3 = table13;
+				{// A
+					jLableExportCount1.setText("唯一数据："+exportTable1.length);
+					DefaultTableModel model = new DefaultTableModel(exportTable1,
+							mTableTitle1);
+					GppStyleTable jTable = new GppStyleTable(model);
+					jTable.setRowHeight(22);
+					
+					jScrollPane3.setViewportView(jTable);
+					jTable.updateUI();
+				}
 				
 				{// 
-					jLableExportCount2.setText("重复数据："+exportTable2.length);
+					jLableExportCount2.setText("条件相同数据："+exportTable2.length);
 					DefaultTableModel model = new DefaultTableModel(exportTable2,
 							mTableTitle2);
 					GppStyleTable jTable = new GppStyleTable(model);
@@ -338,17 +390,16 @@ public class DataSift2 extends BaseModuleFrame implements
 					jTable.updateUI();
 				}
 				
-				{// A
-					jLableExportCount1.setText("不重复数据："+exportTable1.length);
-					DefaultTableModel model = new DefaultTableModel(exportTable1,
-							mTableTitle1);
+				{// 
+					jLableExportCount3.setText("区分相同数据："+exportTable3.length);
+					DefaultTableModel model = new DefaultTableModel(exportTable3,
+							mTableTitle2);
 					GppStyleTable jTable = new GppStyleTable(model);
 					jTable.setRowHeight(22);
-
-					jScrollPane3.setViewportView(jTable);
+					
+					jScrollPane5.setViewportView(jTable);
 					jTable.updateUI();
 				}
-
 
 			}
 		};
@@ -356,7 +407,7 @@ public class DataSift2 extends BaseModuleFrame implements
 		if(jButtonActionSift.isEnabled()){
 			
 			ProgressActionSift p = new ProgressActionSift(mTableData1,
-					mCondition,lis,progressBar7);
+					mCondition,mDifferent,lis,progressBar7);
 			p.setButton(jButtonActionSift);
 			p.start();
 		}
@@ -423,6 +474,8 @@ public class DataSift2 extends BaseModuleFrame implements
 					mTableTitle2[i] = title[i];
 				}
 				mTableTitle2[title.length] = "重复数量";
+				
+				jLableExportCount0.setText("总记录数："+data.length);
 				
 				jScrollPane1.setViewportView(table);
 				table.updateUI();
