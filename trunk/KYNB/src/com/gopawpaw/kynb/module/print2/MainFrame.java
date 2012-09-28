@@ -3,6 +3,7 @@ package com.gopawpaw.kynb.module.print2;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.io.File;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
@@ -94,7 +95,7 @@ public class MainFrame extends BaseModuleFrame {
 	public ProgressBarPanel getPnlProgressBar() {
 		return pnlProgressBar;
 	}
-
+	
 	public TitledBorder getTbdDataList() {
 		return tbdDataList;
 	}
@@ -118,6 +119,14 @@ public class MainFrame extends BaseModuleFrame {
 		
 		ExportExcelProgress eep = new ExportExcelProgress(pnlProgressBar, file);
 		eep.start();
+	}
+	
+	/**
+	 * 执行查询，有进度条
+	 */
+	public void executQuery(Map<String,Object> parames) {		
+		QueryProgress query = new QueryProgress(pnlProgressBar, parames);
+		query.start();
 	}
 	
 	/**
@@ -155,6 +164,25 @@ public class MainFrame extends BaseModuleFrame {
 				JOptionPane.showMessageDialog(null, message, "保存文件提示！",
 						JOptionPane.ERROR_MESSAGE);
 			}
+		}
+	}
+
+	/**
+	 * 查询操作线程类，显示进度条
+	 * 
+	 * @author lxq
+	 * 
+	 */
+	class QueryProgress extends Progress {
+		private Map<String,Object> parames;
+		public QueryProgress(ProgressBarPanel pbp, Map<String,Object> parames) {
+			super(pbp);
+			this.parames = parames;
+		}
+
+		public void execut() {
+			getSpnBDT().refreshTable(
+					new PrintDataDAO().findByParams(parames, super.getListener()));
 		}
 	}
 
