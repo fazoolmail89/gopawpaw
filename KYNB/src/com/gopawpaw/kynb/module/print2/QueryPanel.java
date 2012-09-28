@@ -130,7 +130,7 @@ public class QueryPanel extends JPanel {
 			else
 				parames.put(PrintDataDAO.PRINTFLAG, "");
 			
-			mainFrame.getSpnBDT().refreshTable(new PrintDataDAO().findByParams(parames));				
+			mainFrame.executQuery(parames);
 		}
 	}
 	

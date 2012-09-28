@@ -88,12 +88,11 @@ public class BaseDataTable extends JScrollPane {
 	 */
 	public void refreshTable(Object[][] data) {
 		this.data = data;
+		mainFrame.getTbdDataList().setTitle("数据列表(共：" + data.length + " 条数据)");
 		dataModel = new DefaultTableModel(data, columnNames);
 		((GppStyleTable) dataTable).updateModel(dataModel);
 		dataTable.repaint();
 		dataTable.updateUI();
-		
-		mainFrame.getTbdDataList().setTitle("数据列表(共：" + data.length + " 条数据)");
 	}
 
 	/**

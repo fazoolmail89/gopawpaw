@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
+import com.gopawpaw.kynb.common.IProgressListener;
 import com.gopawpaw.kynb.common.StringUtil;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 
@@ -20,7 +21,7 @@ public class PrintDataDAO extends XXNCYLBXDBAccess {
 	 * @param params
 	 * @return
 	 */
-	public Object[][] findByParams(Map<String, Object> params) {
+	public Object[][] findByParams(Map<String, Object> params, IProgressListener listener) {
 		 String sql = "select * from PrintData a " +
 		 		" left join printThorp b on a.ThorpID = b.t_id where 1 = 1 ";
 
@@ -56,14 +57,18 @@ public class PrintDataDAO extends XXNCYLBXDBAccess {
 
 		// 排序村ID，户主身份证号，身份证号
 		sql = sql + " order by a.Id";
-		return findBySql(sql);
+		return findBySql(sql, listener);
 	}
 
-	private Object[][] findBySql(String sql) {
+	private Object[][] findBySql(String sql, IProgressListener listener) {
 		Object[][] data = null;
 		if (commonsql.connect(user, password)) {
 			if (commonsql.query(sql)) {
 				data = new Object[(int) commonsql.getrowcount()][];
+				
+				//设置进度条总记录数
+				listener.onBefore(data.length + 1); 
+				
 				int i = 0;
 				while (commonsql.nextrecord()) {
 					//========================================
@@ -103,6 +108,9 @@ public class PrintDataDAO extends XXNCYLBXDBAccess {
 					row[27] = commonsql.getString("ThorpId");//村ID
 					data[i] = row;
 					i++;
+					
+					//更新进度条进度
+					listener.onExecute(i);
 				}
 
 				commonsql.close();
