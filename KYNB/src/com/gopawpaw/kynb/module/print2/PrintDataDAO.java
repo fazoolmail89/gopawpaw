@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
-import com.gopawpaw.kynb.common.IProgressListener;
 import com.gopawpaw.kynb.common.StringUtil;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
 
@@ -21,7 +20,7 @@ public class PrintDataDAO extends XXNCYLBXDBAccess {
 	 * @param params
 	 * @return
 	 */
-	public Object[][] findByParams(Map<String, Object> params, IProgressListener listener) {
+	public Object[][] findByParams(Map<String, Object> params) {
 		 String sql = "select * from PrintData a " +
 		 		" left join printThorp b on a.ThorpID = b.t_id where 1 = 1 ";
 
@@ -57,17 +56,17 @@ public class PrintDataDAO extends XXNCYLBXDBAccess {
 
 		// 排序村ID，户主身份证号，身份证号
 		sql = sql + " order by a.Id";
-		return findBySql(sql, listener);
+		return findBySql(sql);
 	}
 
-	private Object[][] findBySql(String sql, IProgressListener listener) {
+	private Object[][] findBySql(String sql) {
 		Object[][] data = null;
 		if (commonsql.connect(user, password)) {
 			if (commonsql.query(sql)) {
 				data = new Object[(int) commonsql.getrowcount()][];
 				
 				//设置进度条总记录数
-				listener.onBefore(data.length + 1); 
+				//listener.onBefore(data.length + 1); 
 				
 				int i = 0;
 				while (commonsql.nextrecord()) {
@@ -104,13 +103,15 @@ public class PrintDataDAO extends XXNCYLBXDBAccess {
 					else
 						row[25] = "未打印";
 					
-					row[26] = commonsql.getString("PrintDate");//打印日期
-					row[27] = commonsql.getString("ThorpId");//村ID
+					row[26] = commonsql.getString("PrintUser");//打印操作员
+					row[27] = commonsql.getString("PrintDate");//打印日期
+					row[28] = commonsql.getString("PrintHistory");//打印历史记录
+					row[29] = commonsql.getString("ThorpId");//村ID
 					data[i] = row;
 					i++;
 					
 					//更新进度条进度
-					listener.onExecute(i);
+					//listener.onExecute(i);
 				}
 
 				commonsql.close();
@@ -125,12 +126,20 @@ public class PrintDataDAO extends XXNCYLBXDBAccess {
 	 * @param printData 需要更新的PrintData对象
 	 * @return true：成功，false：失败
 	 */
-	public boolean updatePrintFlag(int id) {
+	public boolean updatePrintFlag(int id, String username, String printHistory) {
 		boolean result = true;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		if(id != 0) {
-			String sql = "update PrintData a set a.PrintFlag = 1, " 
-					+ " a.PrintDate = " + StringUtil.getQuotStr(sdf.format(new Date())) 
+			String history;
+			String printDate = sdf.format(new Date());
+			if(printHistory == null || "".equals(printHistory))
+				history = username + "(" + printDate + ")";
+			else
+				history = printHistory + " || " + username + "(" + printDate + ")";
+			String sql = "update PrintData a set a.PrintFlag = 1 " 
+					+ " ,a.PrintUser = " + StringUtil.getQuotStr(username)
+					+ " ,a.PrintDate = " + StringUtil.getQuotStr(printDate) 
+					+ " ,a.printHistory = " + StringUtil.getQuotStr(history)
 					+ " where a.Id = " + id;
 			if (commonsql.connect(user, password)) {
 				result = commonsql.executesql(sql);
@@ -196,7 +205,8 @@ public class PrintDataDAO extends XXNCYLBXDBAccess {
 						" ICCode, Phone, FamilyCode, J_Account, J_AccountName, " +
 						" Z_Account, Z_AccountName, Age, Sex, AchieveDate, " +
 						" BirthDate, Relationship, PayGrade, PersType, Address, " +
-						" Remark, TotalAcct, TotalPay, TotalSubs, PrintFlag, PrintDate) " +
+						" Remark, TotalAcct, TotalPay, TotalSubs, PrintFlag, PrintDate, " +
+						" printUser, printHistory) " +
 						" values( " + StringUtil.getQuotStr(printData.getArea()) +
 						" , " + printData.getThorpId() +
 						" , " + StringUtil.getQuotStr(printData.getThorpName()) +
@@ -222,8 +232,10 @@ public class PrintDataDAO extends XXNCYLBXDBAccess {
 						" , " + StringUtil.getQuotStr(printData.getTotalPay()) +
 						" , " + StringUtil.getQuotStr(printData.getTotalSubs()) +
 						" , " + 0 +
-						" , '' " 
-						+ " ) ";
+						" , '' "  + //打印日期
+						" , '' "  + //打印操作员
+						" , '' "  + //打印历史记录
+						" ) ";
 			
 			}
 		}

@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -35,7 +36,8 @@ public class OptBtnsPanel extends JPanel {
 
 	public OptBtnsPanel(MainFrame mf) {
 		this.mainFrame = mf;
-		
+		setBorder(BorderFactory.createTitledBorder("常用操作"));	
+			
 		//设置按钮样式
 		//------------------------------------
 		btnImport.setMaximumSize(MyStyle.BTN_DIM);
@@ -64,6 +66,16 @@ public class OptBtnsPanel extends JPanel {
 		btnImport.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//检查用户是否登入
+				if(mainFrame.getLoginUser() == null) {
+					JOptionPane.showMessageDialog(
+							null, 
+							"请先登入才能执行操作！",
+							"文件保存提示！", 
+							JOptionPane.INFORMATION_MESSAGE);	
+					return;
+				}
+				
 				// 导入操作
 				BasicDataImport thisClass = new BasicDataImport(
 						BasicDataImport.TABLE_PRINTDATA);
@@ -75,6 +87,17 @@ public class OptBtnsPanel extends JPanel {
 		btnExport.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				//检查用户是否登入
+				if(mainFrame.getLoginUser() == null) {
+					JOptionPane.showMessageDialog(
+							null, 
+							"请先登入才能执行操作！",
+							"文件保存提示！", 
+							JOptionPane.INFORMATION_MESSAGE);	
+					return;
+				}
+				
 				Object[][] excelData = mainFrame.getSpnBDT().getData();
 				if (excelData != null && excelData.length > 0) {
 					// 打开文件保存视图
@@ -97,6 +120,16 @@ public class OptBtnsPanel extends JPanel {
 		btnClear.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//检查用户是否登入
+				if(mainFrame.getLoginUser() == null) {
+					JOptionPane.showMessageDialog(
+							null, 
+							"请先登入才能执行操作！",
+							"文件保存提示！", 
+							JOptionPane.INFORMATION_MESSAGE);	
+					return;
+				}
+				
 					//弹出命令输入窗口
 					new DataClearDialog(mainFrame); 
 			}
@@ -105,7 +138,20 @@ public class OptBtnsPanel extends JPanel {
 		btnAdd.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new PrintDataEditDialog(mainFrame, "新增数据", null,
+				//检查用户是否登入
+				if(mainFrame.getLoginUser() == null) {
+					JOptionPane.showMessageDialog(
+							null, 
+							"请先登入才能执行操作！",
+							"文件保存提示！", 
+							JOptionPane.INFORMATION_MESSAGE);	
+					return;
+				}
+				
+				new PrintDataEditDialog(
+						mainFrame, 
+						"新增数据", 
+						null,
 						PrintDataEditDialog.ADD_OPT);
 			}
 		});
@@ -113,6 +159,16 @@ public class OptBtnsPanel extends JPanel {
 		btnUpd.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//检查用户是否登入
+				if(mainFrame.getLoginUser() == null) {
+					JOptionPane.showMessageDialog(
+							null, 
+							"请先登入才能执行操作！",
+							"文件保存提示！", 
+							JOptionPane.INFORMATION_MESSAGE);	
+					return;
+				}
+				
 				PrintData pd = mainFrame.getSpnBDT().getSelectPrintData();
 				if (pd != null && pd.getId() != null && !"".equals(pd.getId())) {
 					new PrintDataEditDialog(mainFrame, "修改数据", pd,
@@ -128,6 +184,16 @@ public class OptBtnsPanel extends JPanel {
 		btnView.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//检查用户是否登入
+				if(mainFrame.getLoginUser() == null) {
+					JOptionPane.showMessageDialog(
+							null, 
+							"请先登入才能执行操作！",
+							"文件保存提示！", 
+							JOptionPane.INFORMATION_MESSAGE);	
+					return;
+				}
+				
 				PrintData pd = mainFrame.getSpnBDT().getSelectPrintData();
 				if (pd != null && pd.getId() != null && !"".equals(pd.getId())) {
 					new PrintDataEditDialog(mainFrame, "查看数据", pd,
@@ -143,6 +209,16 @@ public class OptBtnsPanel extends JPanel {
 		btnDel.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//检查用户是否登入
+				if(mainFrame.getLoginUser() == null) {
+					JOptionPane.showMessageDialog(
+							null, 
+							"请先登入才能执行操作！",
+							"文件保存提示！", 
+							JOptionPane.INFORMATION_MESSAGE);	
+					return;
+				}
+				
 				PrintData pd = mainFrame.getSpnBDT().getSelectPrintData();
 				if (pd != null && pd.getId() != null && !"".equals(pd.getId())) {
 					Toolkit.getDefaultToolkit().beep();
@@ -171,6 +247,16 @@ public class OptBtnsPanel extends JPanel {
 		btnExport.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//检查用户是否登入
+				if(mainFrame.getLoginUser() == null) {
+					JOptionPane.showMessageDialog(
+							null, 
+							"请先登入才能执行操作！",
+							"文件保存提示！", 
+							JOptionPane.INFORMATION_MESSAGE);	
+					return;
+				}
+				
 				mainFrame.getSpnBDT().getSelectNextRow();
 			}
 		});
@@ -178,6 +264,16 @@ public class OptBtnsPanel extends JPanel {
 		btnPrint.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//检查用户是否登入
+				if(mainFrame.getLoginUser() == null) {
+					JOptionPane.showMessageDialog(
+							null, 
+							"请先登入才能执行操作！",
+							"文件保存提示！", 
+							JOptionPane.INFORMATION_MESSAGE);	
+					return;
+				}
+				
 				new PrintDialog(mainFrame, mainFrame.getSpnBDT().getSelectRow());
 			}
 		});
@@ -185,6 +281,15 @@ public class OptBtnsPanel extends JPanel {
 		btnPtSet.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//检查用户是否登入
+				if(mainFrame.getLoginUser() == null) {
+					JOptionPane.showMessageDialog(
+							null, 
+							"请先登入才能执行操作！",
+							"文件保存提示！", 
+							JOptionPane.INFORMATION_MESSAGE);	
+					return;
+				}
 				new PtSetDialog(mainFrame);
 			}
 		});
@@ -192,6 +297,16 @@ public class OptBtnsPanel extends JPanel {
 		btnThorpMng.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//检查用户是否登入
+				if(mainFrame.getLoginUser() == null) {
+					JOptionPane.showMessageDialog(
+							null, 
+							"请先登入才能执行操作！",
+							"文件保存提示！", 
+							JOptionPane.INFORMATION_MESSAGE);	
+					return;
+				}
+				
 				new ThorpMngDialog(mainFrame);
 				mainFrame.getPnlQuery().refreshCbbDpmt();
 			}

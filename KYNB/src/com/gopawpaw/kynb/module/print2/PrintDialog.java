@@ -299,8 +299,12 @@ public class PrintDialog extends JDialog {
 			// data[0]为ID值 ,如果ID值为空，不执行数据库更新操作，直接提示打印成功
 			if (!"".equals(rowData[0].toString().trim())) {
 				// 更新数据库
-				rs2 = pdDao.updatePrintFlag(Integer.parseInt(rowData[0]
-						.toString().trim()));
+				rs2 = pdDao.updatePrintFlag(
+						Integer.parseInt(rowData[0].toString().trim()), 
+						mainFrame.getLoginUser().getUsername(), 
+						rowData[28].toString().trim()
+						);
+				
 				if (rs2) {
 					// 提示用户打印成功
 					JOptionPane.showMessageDialog(null, "打印成功！", "操作提示！",

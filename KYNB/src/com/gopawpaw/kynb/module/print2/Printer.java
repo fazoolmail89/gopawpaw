@@ -28,7 +28,9 @@ public class Printer {
 		boolean result = false;
 		
 		Paper paper = new Paper();
+		//设置页面大小
 		paper.setSize(PrintInit.pagerSize_W, PrintInit.pagerSize_H);
+		//设置边距
 		paper.setImageableArea(0, 0, PrintInit.pagerSize_W, PrintInit.pagerSize_H);
 		PageFormat pageFormat = new PageFormat();
 		pageFormat.setOrientation(PageFormat.PORTRAIT);
