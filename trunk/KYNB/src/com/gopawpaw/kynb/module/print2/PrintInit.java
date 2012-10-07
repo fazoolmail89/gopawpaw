@@ -44,7 +44,6 @@ public class PrintInit {
 				IniReader ir = new IniReader(iniFile.getPath());
 				pagerSize_W = Integer.parseInt(ir.getValue(PrintInit.PAGER, PrintInit.PAGER_W));
 				pagerSize_H = Integer.parseInt(ir.getValue(PrintInit.PAGER, PrintInit.PAGER_H));
-				System.out.println(ir.getValue(PrintInit.FONT, PrintInit.FONT_SIZE));
 				fontSize = Integer.parseInt(ir.getValue(PrintInit.FONT, PrintInit.FONT_SIZE));
 			} catch (IOException e) {
 				e.printStackTrace();

@@ -21,6 +21,9 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -109,9 +112,6 @@ public class PrintDataEditDialog extends JDialog {
 	private JLabel lblAddress = new JLabel("家庭住址");
 	private JTextField ttfAddress = new JTextField();
 
-	private JLabel lblRemark = new JLabel("备注");
-	private JTextField ttfRemark = new JTextField();
-
 	private JLabel lblTotalAcct = new JLabel("累计个人账户金额");
 	private JTextField ttfTotalAcct = new JTextField();
 
@@ -126,12 +126,33 @@ public class PrintDataEditDialog extends JDialog {
 
 	private JLabel lblPrintDate = new JLabel("打印日期");
 	private JTextField ttfPrintDate = new JTextField();
+	
+	private JLabel lblPrintUser = new JLabel("操作员");
+	private JTextField ttfPrintUser = new JTextField();
+	
+	private JLabel lblPrintHistory = new JLabel("打印历史");
+	private JTextArea ttaPrintHistory = new JTextArea();
+	
+	private JLabel lblRemark = new JLabel("备注");
+	private JTextArea ttaRemark = new JTextArea();
 
 	private JPanel pnlBottom;
 	private JCheckBox ckbContinue = new JCheckBox("连续添加");
 
 	public PrintDataEditDialog(MainFrame mainFrame, String title,
 			PrintData printData, int opt) {
+		
+		//检查用户是否登入
+		if(mainFrame.getLoginUser() == null) {
+			JOptionPane.showMessageDialog(
+					null, 
+					"请先登入才能执行操作！",
+					"文件保存提示！", 
+					JOptionPane.INFORMATION_MESSAGE);	
+			dispose();
+			return;
+		}
+		
 		this.mainFrame = mainFrame;
 		this.printData = printData;
 		this.opt = opt;
@@ -153,7 +174,7 @@ public class PrintDataEditDialog extends JDialog {
 		add(pnlBottom, BorderLayout.SOUTH);
 
 		setTitle(title);
-		setSize(800, 500);
+		setSize(800, 600);
 		DialogUtil.setDialogLocaltion(this.mainFrame, this);
 		setLocation(this.getLocation().x, 30);
 		// 固定大小
@@ -204,13 +225,29 @@ public class PrintDataEditDialog extends JDialog {
 		boxLeft.add(getLayoutPanel(lblTotalPay, ttfTotalPay));
 		boxRight.add(getLayoutPanel(lblTotalSubs, ttfTotalSubs));
 
-		boxRight.add(getLayoutPanel(lblAddress, ttfAddress));
-		boxLeft.add(getLayoutPanel(lblRemark, ttfRemark));
-
-		boxLeft.add(getLayoutPanel(lblPrintFlag, ttfPrintFlag));
+		boxLeft.add(getLayoutPanel(lblAddress, ttfAddress));
+		boxRight.add(getLayoutPanel(lblPrintFlag, ttfPrintFlag));
 		ttfPrintFlag.setEditable(false);
+		
+		boxLeft.add(getLayoutPanel(lblPrintUser, ttfPrintUser));
+		ttfPrintUser.setEditable(false);
 		boxRight.add(getLayoutPanel(lblPrintDate, ttfPrintDate));
 		ttfPrintDate.setEditable(false);
+		
+		
+		ttaPrintHistory.setEditable(false);
+		ttaPrintHistory.setRows(5);
+		ttaPrintHistory.setLineWrap(true);//激活自动换行功能 
+		ttaPrintHistory.setWrapStyleWord(true);//激活断行不断字功能 
+		ttaPrintHistory.setBorder(BorderFactory.createTitledBorder(""));
+		boxLeft.add(getLayoutPanel(lblPrintHistory, ttaPrintHistory));
+		
+		ttaRemark.setAutoscrolls(true);
+		ttaRemark.setRows(5);
+		ttaRemark.setLineWrap(true);//激活自动换行功能 
+		ttaRemark.setWrapStyleWord(true);//激活断行不断字功能 
+		ttaRemark.setBorder(BorderFactory.createTitledBorder(""));
+		boxRight.add(getLayoutPanel(lblRemark, ttaRemark));
 
 		boxBg.add(boxLeft);
 		boxBg.add(boxRight);
@@ -350,10 +387,9 @@ public class PrintDataEditDialog extends JDialog {
 
 		// 为所在村下拉框赋值
 		for (int i = 0; i < cbbThorpId.getItemCount(); i++) {
-			PrintThorp pt = (PrintThorp) cbbThorpId.getItemAt(cbbThorpId
-					.getSelectedIndex());
+			PrintThorp pt = (PrintThorp) cbbThorpId.getItemAt(i);
 			if (pt.getId() == printData.getThorpId()) {
-				cbbThorpId.setSelectedIndex(cbbThorpId.getSelectedIndex());
+				cbbThorpId.setSelectedIndex(i);
 				break;
 			}
 		}
@@ -376,12 +412,14 @@ public class PrintDataEditDialog extends JDialog {
 		ttfPayGrade.setText(printData.getPayGrade());
 		ttfPersType.setText(printData.getPersType());
 		ttfAddress.setText(printData.getAddress());
-		ttfRemark.setText(printData.getRemark());
 		ttfTotalAcct.setText(printData.getTotalAcct());
 		ttfTotalPay.setText(printData.getTotalPay());
 		ttfTotalSubs.setText(printData.getTotalSubs());
 		ttfPrintFlag.setText(printData.getPrintFlag());
 		ttfPrintDate.setText(printData.getPrintDate());
+		ttfPrintUser.setText(printData.getPrintUser());
+		ttaPrintHistory.setText(printData.getPrintHistory());
+		ttaRemark.setText(printData.getRemark());
 	}
 
 	/**
@@ -408,7 +446,7 @@ public class PrintDataEditDialog extends JDialog {
 		ttfPayGrade.setText("");
 		ttfPersType.setText("");
 		ttfAddress.setText("");
-		ttfRemark.setText("");
+		ttaRemark.setText("");
 		ttfTotalAcct.setText("");
 		ttfTotalPay.setText("");
 		ttfTotalSubs.setText("");
@@ -446,7 +484,7 @@ public class PrintDataEditDialog extends JDialog {
 		printData.setPayGrade(ttfPayGrade.getText().trim());
 		printData.setPersType(ttfPersType.getText().trim());
 		printData.setAddress(ttfAddress.getText().trim());
-		printData.setRemark(ttfRemark.getText().trim());
+		printData.setRemark(ttaRemark.getText().trim());
 		printData.setTotalAcct(ttfTotalAcct.getText().trim());
 		printData.setTotalPay(ttfTotalPay.getText().trim());
 		printData.setTotalSubs(ttfTotalSubs.getText().trim());

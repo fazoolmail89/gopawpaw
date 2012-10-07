@@ -39,6 +39,8 @@ public class PrintData {
 	private String totalSubs;//累计财政补助
 	private String printFlag;//打印标记
 	private String printDate;//打印日期
+	private String printUser;//打印操作员
+	private String PrintHistory;//打印历史记录
 	public String getId() {
 		return id;
 	}
@@ -206,5 +208,17 @@ public class PrintData {
 	}
 	public void setPrintDate(String printDate) {
 		this.printDate = printDate;
+	}
+	public String getPrintHistory() {
+		return PrintHistory;
+	}
+	public void setPrintHistory(String printHistory) {
+		PrintHistory = printHistory;
+	}
+	public String getPrintUser() {
+		return printUser;
+	}
+	public void setPrintUser(String printUser) {
+		this.printUser = printUser;
 	}
 }

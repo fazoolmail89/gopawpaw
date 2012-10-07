@@ -4,6 +4,7 @@ import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -27,8 +28,8 @@ public class BaseDataTable extends JScrollPane {
 	public static final Object[] columnNames = { "ID", "所属地区", "村名", "所属机构编号",
 			"个人编号", "姓名", "身份证号", "联系电话", "家庭编号", "缴费银行账号", "缴费银行户名", "支付银行账号",
 			"支付银行户名", "年龄", "性别", "到龄时间", "出生日期", "与户主关系", "本年缴费档次", "本年人员类别",
-			"家庭住址", "备注", "累计个人账户金额", "累计个人缴费金额", "累计财政补助", "打印标记", "打印日期",
-			"村ID" };
+			"家庭住址", "备注", "累计个人账户金额", "累计个人缴费金额", "累计财政补助", "打印标记", "操作员",
+			"打印日期", "打印记录", "村ID" };
 
 	/**
 	 * 列表数据，只有执行查询的时候才会刷新
@@ -77,10 +78,14 @@ public class BaseDataTable extends JScrollPane {
 				}
 			}
 		});
+		
+		//隐藏列
+		hiddenIDColumn();
 
 		// 给面板加水平滚动条
 		setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		setViewportView(dataTable);
+		setBorder(BorderFactory.createTitledBorder("数据列表"));
 	}
 
 	/**
@@ -88,11 +93,24 @@ public class BaseDataTable extends JScrollPane {
 	 */
 	public void refreshTable(Object[][] data) {
 		this.data = data;
-		mainFrame.getTbdDataList().setTitle("数据列表(共：" + data.length + " 条数据)");
+		//主界面显示数据条数
+		mainFrame.getSpnBDT().setBorder(
+				BorderFactory.createTitledBorder("数据列表(共：" + data.length + " 条数据)"));
 		dataModel = new DefaultTableModel(data, columnNames);
 		((GppStyleTable) dataTable).updateModel(dataModel);
 		dataTable.repaint();
 		dataTable.updateUI();
+		//隐藏列
+		hiddenIDColumn();
+	}
+	
+	/**
+	 * 隐藏两列ID
+	 */
+	private void hiddenIDColumn() {
+		//隐藏列
+		JTableCommUtil.hiddenColumn(dataTable, 0);
+		JTableCommUtil.hiddenColumn(dataTable, columnNames.length - 1);
 	}
 
 	/**
@@ -222,13 +240,16 @@ public class BaseDataTable extends JScrollPane {
 					.toString());
 			printData.setPrintFlag(dataTable.getValueAt(selIndex, 25)
 					.toString());
-			printData.setPrintDate(dataTable.getValueAt(selIndex, 26)
+			printData.setPrintUser(dataTable.getValueAt(selIndex, 26)
+					.toString());
+			printData.setPrintDate(dataTable.getValueAt(selIndex, 27)
+					.toString());
+			printData.setPrintHistory(dataTable.getValueAt(selIndex, 28)
 					.toString());
 
-			String thorpId = dataTable.getValueAt(selIndex, 27).toString();
+			String thorpId = dataTable.getValueAt(selIndex, 29).toString();
 			if (thorpId != null && !"".equals(thorpId))
 				printData.setThorpId(Integer.parseInt(thorpId));
-
 		}
 		return printData;
 	}
@@ -246,7 +267,8 @@ public class BaseDataTable extends JScrollPane {
 		Object[] header = { "所属地区", "村名", "所属机构编号", "个人编号", "姓名", "身份证号",
 				"联系电话", "家庭编号", "缴费银行账号", "缴费银行户名", "支付银行账号", "支付银行户名", "年龄",
 				"性别", "到龄时间", "出生日期", "与户主关系", "本年缴费档次", "本年人员类别", "家庭住址",
-				"备注", "累计个人账户金额", "累计个人缴费金额", "累计财政补助", "打印标记", "打印日期" };
+				"备注", "累计个人账户金额", "累计个人缴费金额", "累计财政补助", "打印标记", "操作员",
+				"打印日期", "打印记录"};
 		exportData[0] = header;
 
 		for (int i = 0; i < data.length; i++) {

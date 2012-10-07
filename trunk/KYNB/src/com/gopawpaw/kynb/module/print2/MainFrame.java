@@ -3,13 +3,10 @@ package com.gopawpaw.kynb.module.print2;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.io.File;
-import java.util.Map;
 
-import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import javax.swing.border.TitledBorder;
 
 import com.gopawpaw.kynb.GlobalUI;
 import com.gopawpaw.kynb.common.ExcelFileFilter;
@@ -17,6 +14,8 @@ import com.gopawpaw.kynb.common.PoiOperatXls;
 import com.gopawpaw.kynb.common.Progress;
 import com.gopawpaw.kynb.common.ProgressBarPanel;
 import com.gopawpaw.kynb.module.BaseModuleFrame;
+import com.gopawpaw.kynb.module.print2.usermng.User;
+import com.gopawpaw.kynb.module.print2.usermng.UserDAO;
 
 public class MainFrame extends BaseModuleFrame {
 	private static final long serialVersionUID = -7850040792130935086L;
@@ -28,8 +27,9 @@ public class MainFrame extends BaseModuleFrame {
 	private BaseDataTable spnBDT;
 	private OptBtnsPanel pnlOptBtns;
 	private ProgressBarPanel pnlProgressBar;
+	private UserMngPanel pnlUserMng;
 	
-	TitledBorder tbdDataList;
+	private User loginUser;
 	
 	// 文件选择控件
 	private static final JFileChooser fileChooser = new JFileChooser();
@@ -48,15 +48,16 @@ public class MainFrame extends BaseModuleFrame {
 		//初始化打印类
 		initPrinter();
 		
+		//测试用代码段，使用超级用户登录系统
+		//-----------------------------------------------
+		//UserDAO ud = new UserDAO();
+		//loginUser = ud.findByUsername(User.SUPER_ADMIN);
+		//-----------------------------------------------
+		
 		pnlQuery = new QueryPanel(this);
-		pnlQuery.setBorder(BorderFactory.createTitledBorder("查询条件"));
-		
-		tbdDataList = BorderFactory.createTitledBorder("数据列表");
 		spnBDT = new BaseDataTable(this);
-		spnBDT.setBorder(tbdDataList);
-		
 		pnlOptBtns = new OptBtnsPanel(this);
-		pnlOptBtns.setBorder(BorderFactory.createTitledBorder("操作项"));
+		pnlUserMng = new UserMngPanel(this);
 
 		//创建进度条面板
 		pnlProgressBar = new ProgressBarPanel();
@@ -64,6 +65,7 @@ public class MainFrame extends BaseModuleFrame {
 		setTitle("打印管理");
 		setLayout(new BorderLayout());
 		add(pnlQuery, BorderLayout.NORTH);
+		add(pnlUserMng, BorderLayout.WEST);
 		add(spnBDT, BorderLayout.CENTER);
 		add(pnlOptBtns, BorderLayout.EAST);
 		add(pnlProgressBar, BorderLayout.SOUTH);
@@ -96,9 +98,6 @@ public class MainFrame extends BaseModuleFrame {
 		return pnlProgressBar;
 	}
 	
-	public TitledBorder getTbdDataList() {
-		return tbdDataList;
-	}
 	
 	/**
 	 * 执行导出Excel文件
@@ -124,10 +123,10 @@ public class MainFrame extends BaseModuleFrame {
 	/**
 	 * 执行查询，有进度条
 	 */
-	public void executQuery(Map<String,Object> parames) {		
+/*	public void executQuery(Map<String,Object> parames) {		
 		QueryProgress query = new QueryProgress(pnlProgressBar, parames);
 		query.start();
-	}
+	}*/
 	
 	/**
 	 * 导出Excel线程类，显示进度条
@@ -173,7 +172,7 @@ public class MainFrame extends BaseModuleFrame {
 	 * @author lxq
 	 * 
 	 */
-	class QueryProgress extends Progress {
+/*	class QueryProgress extends Progress {
 		private Map<String,Object> parames;
 		public QueryProgress(ProgressBarPanel pbp, Map<String,Object> parames) {
 			super(pbp);
@@ -181,10 +180,9 @@ public class MainFrame extends BaseModuleFrame {
 		}
 
 		public void execut() {
-			getSpnBDT().refreshTable(
-					new PrintDataDAO().findByParams(parames, super.getListener()));
+			//getSpnBDT().refreshTable(new PrintDataDAO().findByParams(parames, super.getListener()));
 		}
-	}
+	}*/
 
 	public JFileChooser getFilechooser() {
 		return fileChooser;
@@ -200,5 +198,13 @@ public class MainFrame extends BaseModuleFrame {
 	public Printer getPrinter() {
 		if(printer == null) printer = new Printer(); 
 		return printer;
+	}
+
+	public User getLoginUser() {
+		return loginUser;
+	}
+
+	public void setLoginUser(User loginUser) {
+		this.loginUser = loginUser;
 	}
 }

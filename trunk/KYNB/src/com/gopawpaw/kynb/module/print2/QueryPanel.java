@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -46,6 +47,8 @@ public class QueryPanel extends JPanel {
 	
 	public QueryPanel(MainFrame mf) {
 		this.mainFrame = mf;
+		setBorder(BorderFactory.createTitledBorder("查询条件"));
+		
 		// 初始化数据
 		initPtArray();
 		
@@ -129,8 +132,10 @@ public class QueryPanel extends JPanel {
 				parames.put(PrintDataDAO.PRINTFLAG, "1");
 			else
 				parames.put(PrintDataDAO.PRINTFLAG, "");
-			
-			mainFrame.executQuery(parames);
+
+			mainFrame.getSpnBDT().refreshTable(
+					new PrintDataDAO().findByParams(parames));
+			//mainFrame.executQuery(parames);
 		}
 	}
 	
