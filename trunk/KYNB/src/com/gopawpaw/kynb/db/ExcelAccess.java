@@ -33,11 +33,15 @@ public class ExcelAccess {
 	
 	public final static int SAVE_VILLAGER_OLD = 3;
 	
+	public final static int SAVE_VILLAGER_TOWN = 4;
+	
 	private static String outputPath = "OutPut\\";
 	
 	private static String excelTempPathOld = "DBCenter\\VillagerFormatTemp.xls";
 	
 	private static String excelTempPath = "DBCenter\\VillagerFormatTemp.v2.xls";
+	
+	private static String excelTempPathTown = "DBCenter\\城镇居民新增导盘格式.xls";
 	
 	private static String excelTempPathBank = "DBCenter\\广西新农保参保人员银行信息导入表.xls";
 	
@@ -80,6 +84,9 @@ public class ExcelAccess {
 			}else if(type == SAVE_BANK){
 				//获取指定的表
 				tempPath = excelTempPathBank;
+			}else if(type == SAVE_VILLAGER_TOWN){
+				//获取指定的表
+				tempPath = excelTempPathTown;
 			}
 			
 			
@@ -105,6 +112,10 @@ public class ExcelAccess {
 				//获取指定的表
 				WritableSheet wws = wwb.getSheet("Sheet1");
 				writeDataBank(wws);
+			}if(type == SAVE_VILLAGER_TOWN){
+				//获取指定的表
+				WritableSheet wws = wwb.getSheet("城镇居民");
+				writeDataVillager(wws);
 			}
 			
 			

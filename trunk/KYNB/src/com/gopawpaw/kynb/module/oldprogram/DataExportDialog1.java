@@ -49,6 +49,15 @@ public class DataExportDialog1 extends JDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 农村
+	 */
+	public static final int VILLAGERTYPE_COUNTRY = 0;
+	
+	/**
+	 * 城镇
+	 */
+	public static final int VILLAGERTYPE_TOWN = 1;
 	private GJComboBox jComboBoxThorp;
 
 	private Thorp mCurrentThorp;
@@ -63,6 +72,7 @@ public class DataExportDialog1 extends JDialog {
 	
 	private String dataType = "a";
 
+	private int villagerType = 0;
 	public DataExportDialog1(Thorp currentThorp) {
 		this.mCurrentThorp = currentThorp;
 		init();
@@ -485,11 +495,16 @@ public class DataExportDialog1 extends JDialog {
 
 			Date date = new Date();
 
+			String name = "农村居民";
+			if(villagerType == VILLAGERTYPE_TOWN){
+				name = "城镇居民";
+			}
+			
 			if("a".equals(dataType)){
-				excelFile = mCurrentThorp.getT_name() + "-正常数据（新表）-"
+				excelFile = mCurrentThorp.getT_name() + "-"+name+"-正常数据-"
 				+ DateUtils.DATA_FORMAT.format(date) + ".xls";
 			}else{
-				excelFile = mCurrentThorp.getT_name() + "-黑名单数据-"
+				excelFile = mCurrentThorp.getT_name() + "-"+name+ "-黑名单数据-"
 				+ DateUtils.DATA_FORMAT.format(date) + ".xls";
 			}
 			
@@ -519,10 +534,14 @@ public class DataExportDialog1 extends JDialog {
 				list = selectExport(list);
 				
 				ExcelAccess ea = new ExcelAccess(excelFile);
+				int save = ExcelAccess.SAVE_VILLAGER;
+				if(villagerType == VILLAGERTYPE_TOWN){
+					save = ExcelAccess.SAVE_VILLAGER_TOWN;
+				}
 				ea.setExportExcelListener(mExportExcelListener);
 				ea.setThorp(mCurrentThorp);
 				ea.setVillagerList(list);
-				if (ea.saveExcel(ExcelAccess.SAVE_VILLAGER)) {
+				if (ea.saveExcel(save)) {
 					// 导出成功
 					String tempMSG = "成功导出到文件:" + excelFile + " ";
 					//声音提示
@@ -556,6 +575,10 @@ public class DataExportDialog1 extends JDialog {
 
 	public void setDataType(String dataType) {
 		this.dataType = dataType;
+	}
+
+	public void setVillagerType(int villagerType) {
+		this.villagerType = villagerType;
 	}
 
 }
