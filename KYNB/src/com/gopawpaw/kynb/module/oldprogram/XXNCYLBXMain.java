@@ -256,6 +256,7 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 			jPanelLeft1.add(getJButtonSaveToExcel0());
 			jPanelLeft1.add(getJButtonSaveToExcelOld());
 			jPanelLeft1.add(getJButtonSaveToExcelNew());
+			jPanelLeft1.add(getJButtonSaveToExcelNew2());
 			jPanelLeft.add(getJScrollPaneCenterRight(), BorderLayout.CENTER);
 			jPanelLeft.add(jPanelLeft1, BorderLayout.SOUTH);
 			jPanelLeft.add(getJPanelLeftTop(), BorderLayout.NORTH);
@@ -1055,14 +1056,14 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 	private JButton getJButtonSaveToExcelNew() {
 		if (jButtonSaveToExcel == null) {
 			jButtonSaveToExcel = new JButton();
-			jButtonSaveToExcel.setText("导出参保表（新表）");
+			jButtonSaveToExcel.setText("导出参保表（农村）");
 
 			jButtonSaveToExcel
 					.addMouseListener(new java.awt.event.MouseAdapter() {
 						public void mouseClicked(java.awt.event.MouseEvent e) {
 //							actionSaveToExcel();
 							DataExportDialog1 ded = new DataExportDialog1(mCurrentThorp);
-							
+							ded.setVillagerType(DataExportDialog1.VILLAGERTYPE_COUNTRY);
 							ded.setDataType("a");
 							ded.setVisible(true);
 							
@@ -1072,9 +1073,35 @@ public class XXNCYLBXMain extends BaseModuleFrame implements GppJarRunableInterf
 		return jButtonSaveToExcel;
 	}
 	
+	/**
+	 * 导出Excel
+	 * 
+	 * @version 2011-11-14
+	 * @author Jason
+	 * @param
+	 * @return JButton
+	 */
+	private JButton getJButtonSaveToExcelNew2() {
+		JButton	jButton = new JButton();
+		jButton.setText("导出参保表（城镇）");
+
+		jButton
+					.addMouseListener(new java.awt.event.MouseAdapter() {
+						public void mouseClicked(java.awt.event.MouseEvent e) {
+//							actionSaveToExcel();
+							DataExportDialog1 ded = new DataExportDialog1(mCurrentThorp);
+							ded.setVillagerType(DataExportDialog1.VILLAGERTYPE_TOWN);
+							ded.setDataType("a");
+							ded.setVisible(true);
+							
+						}
+					});
+		return jButton;
+	}
+	
 	private JButton getJButtonSaveToExcelOld() {
 		JButton jButtonSaveToExcel = new JButton();
-			jButtonSaveToExcel.setText("导出参保表（旧表）");
+			jButtonSaveToExcel.setText("导出参保表（农村旧表）");
 
 			jButtonSaveToExcel
 					.addMouseListener(new java.awt.event.MouseAdapter() {

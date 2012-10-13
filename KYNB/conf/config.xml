@@ -1,7 +1,7 @@
 ﻿<?xml version='1.0' encoding='UTF-8'?>
 
 <programs-configuration>
-	<database-config>
+	<database-config-m>
 		
 		<property name="connection.url">
 			jdbc:mysql://localhost:3306/DBCenter?useUnicode=true
@@ -14,9 +14,9 @@
 		<property name="dataBaseType">
 			mysql
 		</property>
-	</database-config>
+	</database-config-m>
 	
-	<database-config-a>
+	<database-config>
 		<property name="connection.url">
 			jdbc:odbc:Driver={MicroSoft Access Driver (*.mdb)};DBQ=DBCenter\DBCenter.mdb
 		</property>
@@ -28,7 +28,7 @@
 		<property name="dataBaseType">
 			accesss
 		</property>
-	</database-config-a>
+	</database-config>
 
 	<database-config-p>
 		<property name="connection.url">

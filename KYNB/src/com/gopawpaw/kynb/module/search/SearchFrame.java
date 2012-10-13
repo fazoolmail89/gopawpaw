@@ -134,7 +134,7 @@ public class SearchFrame extends BaseModuleFrame {
 		jPanel11.add(new JLabel("请输入查询内容："));
 		jPanel11.add(mJTextICEdit);
 		jPanel11.add(jLabelResultCount);
-		jPanel11.add(getJButtonExport());
+		jPanel11.add(getJButtonSearch());
 		
 		jPanel1.add(jScrollPane1, BorderLayout.CENTER);
 		jPanel1.add(jPanel11, BorderLayout.NORTH);
@@ -188,6 +188,18 @@ public class SearchFrame extends BaseModuleFrame {
 					actionSaveToExce(mVillagerTableTitle,mVillagerDataObj,progressBar,file.getPath(),jButton);
 				}
 				
+			}
+		});
+		return jButton;
+	}
+	
+	private JButton getJButtonSearch() {
+
+		final JButton jButton = new JButton();
+		jButton.setText("查询");
+		jButton.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent e) {
+				refreshTableVillager(mSelectItem,mJTextICEdit.getText());
 			}
 		});
 		return jButton;
