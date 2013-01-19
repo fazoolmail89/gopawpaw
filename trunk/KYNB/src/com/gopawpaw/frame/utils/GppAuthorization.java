@@ -23,10 +23,12 @@ public class GppAuthorization {
 	 * TAG
 	 */
 	private static final String TAG = GppAuthorization.class.getSimpleName();
-	private static String authorFolderPath = System.getenv("SystemRoot")
-			+ File.separator;
-
-	private static String authorFile = "sysCsin.dll";
+//	private static String authorFolderPath = System.getenv("SystemRoot")
+//			+ File.separator;
+//	private static String authorFolderPath = System.getenv("APPDATA")
+//	+ File.separator;
+//	
+//	private static String authorFile = "sysCsin.dll";
 	
 	private static GppAuthorization instance;
 
@@ -39,9 +41,9 @@ public class GppAuthorization {
 	 */
 	private GppAuthorization() {
 
-		if(!isExistAuthorizationFile()){
-			creatAuthorizationFile();
-		}
+//		if(!isExistAuthorizationFile()){
+//			creatAuthorizationFile();
+//		}
 	}
 
 	/**
@@ -57,28 +59,28 @@ public class GppAuthorization {
 	/**
 	 * 是否存在授权文件
 	 */
-	private boolean isExistAuthorizationFile() {
-
-		File tempf = new File(authorFolderPath + authorFile);
-
-		return tempf.exists();
-	}
+//	private boolean isExistAuthorizationFile() {
+//
+//		File tempf = new File(authorFolderPath + authorFile);
+//
+//		return tempf.exists();
+//	}
 
 	/**
 	 * 创建授权文件
 	 */
-	private boolean creatAuthorizationFile() {
-
-		File tempfile = new File(authorFolderPath + authorFile);
-		try {
-			tempfile.createNewFile();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-//			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
+//	private boolean creatAuthorizationFile() {
+//
+//		File tempfile = new File(authorFolderPath + authorFile);
+//		try {
+//			tempfile.createNewFile();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+////			e.printStackTrace();
+//			return false;
+//		}
+//		return true;
+//	}
 
 
 	
@@ -107,10 +109,11 @@ public class GppAuthorization {
 		int divicesIdF = 0;
 		
 		//取出配置文件中的设备ID
-		GppConfiguration gcf = new GppConfiguration(
-				authorFolderPath
-						+ authorFile);
-		String didF = gcf.getValue("divicesId");
+//		GppConfiguration gcf = new GppConfiguration(
+//				authorFolderPath
+//						+ authorFile);
+		
+		String didF = PreferencesUtils.getUserData().get("divicesId","");
 		didF = StringUtils.unObfuscation(didF,authKey);
 		
 		//取出数据库的设备ID
@@ -209,10 +212,10 @@ public class GppAuthorization {
 		}
 		
 		//取出配置文件中是否离线使用值
-		GppConfiguration gcf = new GppConfiguration(
-				authorFolderPath
-						+ authorFile);
-		String isOfflineF = gcf.getValue("isOffline");
+//		GppConfiguration gcf = new GppConfiguration(
+//				authorFolderPath
+//						+ authorFile);
+		String isOfflineF = PreferencesUtils.getUserData().get("isOffline","");
 		isOfflineF = StringUtils.unObfuscation(isOfflineF,authKey);
 		
 		
@@ -230,9 +233,9 @@ public class GppAuthorization {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			gcf.setValue("isOffline", temp);
-			gcf.saveFile();
+			PreferencesUtils.getUserData().put("isOffline", temp);
+//			gcf.setValue("isOffline", temp);
+//			gcf.saveFile();
 			
 			isOfflineOperation = false;
 		}
@@ -284,10 +287,10 @@ public class GppAuthorization {
 	public boolean isSupassOpen(){
 		
 		//取出配置文件中值
-		GppConfiguration gcf = new GppConfiguration(
-				authorFolderPath
-						+ authorFile);
-		String supassStatus = gcf.getValue("supassStatus");
+//		GppConfiguration gcf = new GppConfiguration(
+//				authorFolderPath
+//						+ authorFile);
+		String supassStatus = PreferencesUtils.getUserData().get("supassStatus","");
 		supassStatus = StringUtils.unObfuscation(supassStatus,authKey);
 		
 		boolean flag = false;
@@ -312,10 +315,10 @@ public class GppAuthorization {
 	public boolean hasSendSupass(){
 		
 		//取出配置文件中值
-		GppConfiguration gcf = new GppConfiguration(
-				authorFolderPath
-						+ authorFile);
-		String hasSend = gcf.getValue("hasSend");
+//		GppConfiguration gcf = new GppConfiguration(
+//				authorFolderPath
+//						+ authorFile);
+		String hasSend = PreferencesUtils.getUserData().get("hasSend","");
 		hasSend = StringUtils.unObfuscation(hasSend,authKey);
 		
 		boolean flag = false;
@@ -335,13 +338,14 @@ public class GppAuthorization {
 		String hasSend = flag ? "y":"n";
 		hasSend = StringUtils.getObfuscation(""+hasSend, authKey);
 		//保存配置文件中
-		GppConfiguration gcf = new GppConfiguration(
-				authorFolderPath
-						+ authorFile);
+//		GppConfiguration gcf = new GppConfiguration(
+//				authorFolderPath
+//						+ authorFile);
 		
-		gcf.setValue("hasSend", hasSend);
-		gcf.saveFile();
+//		gcf.setValue("hasSend", hasSend);
+//		gcf.saveFile();
 		
+		PreferencesUtils.getUserData().put("hasSend", hasSend);
 	}
 	/**
 	 * 获取密码加密开始
@@ -353,10 +357,10 @@ public class GppAuthorization {
 	public static int getSupassStart(){
 		
 		//取出配置文件中是否离线使用值
-		GppConfiguration gcf = new GppConfiguration(
-				authorFolderPath
-						+ authorFile);
-		String supassStart = gcf.getValue("supassStart");
+//		GppConfiguration gcf = new GppConfiguration(
+//				authorFolderPath
+//						+ authorFile);
+		String supassStart = PreferencesUtils.getUserData().get("supassStart","");
 		supassStart = StringUtils.unObfuscation(supassStart,authKey);
 		
 		int start = 3;
@@ -381,10 +385,10 @@ public class GppAuthorization {
 	public static  int getSupassEnd(){
 		
 		//取出配置文件中是否离线使用值
-		GppConfiguration gcf = new GppConfiguration(
-				authorFolderPath
-						+ authorFile);
-		String supassEnd = gcf.getValue("supassEnd");
+//		GppConfiguration gcf = new GppConfiguration(
+//				authorFolderPath
+//						+ authorFile);
+		String supassEnd = PreferencesUtils.getUserData().get("supassEnd","");
 		supassEnd = StringUtils.unObfuscation(supassEnd,authKey);
 		
 		int end = 26;
@@ -427,16 +431,15 @@ public class GppAuthorization {
 		}
 		
 		//保存配置文件中
-		GppConfiguration gcf = new GppConfiguration(
-				authorFolderPath
-						+ authorFile);
+//		GppConfiguration gcf = new GppConfiguration(
+//				authorFolderPath
+//						+ authorFile);
 		
-		gcf.setValue("divicesId", divices);
-		gcf.setValue("isOffline", isOffline);
-		gcf.setValue("supassStatus", supassStatus);
-		gcf.setValue("supassStart", supassStart);
-		gcf.setValue("supassEnd", supassEnd);
-		gcf.saveFile();
+		PreferencesUtils.getUserData().put("divicesId", divices);
+		PreferencesUtils.getUserData().put("isOffline", isOffline);
+		PreferencesUtils.getUserData().put("supassStatus", supassStatus);
+		PreferencesUtils.getUserData().put("supassStart", supassStart);
+		PreferencesUtils.getUserData().put("supassEnd", supassEnd);
 	}
 	
 	public void updateDivicesSupass(String isOffline,String supassStatus){
@@ -455,13 +458,12 @@ public class GppAuthorization {
 		}
 		
 		//保存配置文件中
-		GppConfiguration gcf = new GppConfiguration(
-				authorFolderPath
-						+ authorFile);
+//		GppConfiguration gcf = new GppConfiguration(
+//				authorFolderPath
+//						+ authorFile);
 		
-		gcf.setValue("isOffline", isOffline);
-		gcf.setValue("supassStatus", supassStatus);
-		gcf.saveFile();
+		PreferencesUtils.getUserData().put("isOffline", isOffline);
+		PreferencesUtils.getUserData().put("supassStatus", supassStatus);
 	}
 
 	public static String genDisplayCode(String diskID) {

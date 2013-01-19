@@ -28,6 +28,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import com.gopawpaw.frame.log.APPLog;
 import com.gopawpaw.frame.widget.GJComboBox;
 import com.gopawpaw.frame.widget.GJTable;
 import com.gopawpaw.kynb.bean.Thorp;
@@ -638,7 +639,7 @@ public class BasicDataImport extends JDialog {
 							Thorp currThorp = (Thorp) jComboBoxThorp
 									.getSelectedItem();
 							mDBTableItem.putTableFiledDef(fieldName,currThorp.getT_id());
-
+							APPLog.d("BasicDataImport", fieldName + "===="+currThorp.getT_id());
 						}
 					});
 

@@ -117,7 +117,7 @@ public class GlobalParameter {
 	 */
 	public static final String PRODUCT_ID = "100";
 	
-	public static final String SOFT_VERSION = "1.4.2";
+	public static final String SOFT_VERSION = "1.5.0";
 	/**
 	 * 
 	 */

@@ -291,7 +291,7 @@ public class GppAbout extends JDialog {
 			
 			jLabel = new JLabel();
 			jLabel.setBounds(new Rectangle(22, 18, 333, 24));
-			jLabel.setText("程序名称：藤县快译农保信息处理系统");
+			jLabel.setText("程序名称：农保信息处理系统");
 			
 			jLabel1 = new JLabel();
 			jLabel1.setBounds(new Rectangle(22, 48, 333, 22));

@@ -50,7 +50,7 @@ public class APPLog {
 	/**
 	 * 安全级别日志，true:则不输出和保存任何日志，false:可选择输出或保存日志
 	 */
-	public static boolean IS_SECURITY_LOG = false;
+	public static boolean IS_SECURITY_LOG = true;
 
 	/**
 	 * 是否为调试模式，true:在控制台输出；false:不在控制台输出
