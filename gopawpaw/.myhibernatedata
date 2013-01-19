@@ -1,0 +1,24 @@
+#MyEclipse Hibernate Properties
+#Sat Apr 03 19:14:36 CST 2010
+sessionFactoryName=com.gopawpaw.erp.dbOperation.hibernate.HibernateSessionFactory
+genBasicCompId=false
+profile=
+daoSFId=sessionFactory
+version=3.2
+jndiPath=
+detectM2M=false
+reStrategyClass=
+detectO2O=false
+springDaoFile=src/com/gopawpaw/erp/dbOperation/spring/applicationContext.xml
+useJavaTypes=true
+keyGenerator=native
+libInstallFolder=lib
+addLibs2Project=true
+genVersionTag=false
+sessionFactoryId=
+basePersistenceClass=
+genAnnotations=false
+reSettingsFile=/gopawpaw/hibernate.reveng.xml
+configFile=/gopawpaw/src/com/gopawpaw/erp/dbOperation/hibernate/hibernate.cfg.xml
+createConfigFile=false
+addLibs2Classpath=true

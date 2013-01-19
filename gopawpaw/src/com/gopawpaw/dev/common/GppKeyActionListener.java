@@ -117,4 +117,9 @@ public interface GppKeyActionListener {
 	 */
 	boolean actionDown();
 	
+	/**
+	 * ÏìÓ¦ Down ¼üÅÌ
+	 * @return
+	 */
+	boolean actionKey(int keyCode);
 }

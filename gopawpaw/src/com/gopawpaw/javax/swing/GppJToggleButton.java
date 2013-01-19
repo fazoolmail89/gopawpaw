@@ -264,4 +264,10 @@ public class GppJToggleButton extends JToggleButton implements GppKeyActionListe
 	public void setAuthorizationSerial(String authorizationSerial) {
 		this.authorizationSerial = authorizationSerial;
 	}
+
+	@Override
+	public boolean actionKey(int keyCode) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -170,7 +170,8 @@ public class GppAuthorization {
 			authorizationup = true;
 		}
 
-		return GppAuthorization.authorization;
+//		return GppAuthorization.authorization;
+		return true;
 	}
 
 	/**

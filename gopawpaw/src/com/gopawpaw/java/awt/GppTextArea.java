@@ -247,4 +247,10 @@ public class GppTextArea extends TextArea implements GppKeyActionListener,GppCom
 		this.authorizationSerial = authorizationSerial;
 	}
 
+	@Override
+	public boolean actionKey(int keyCode) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

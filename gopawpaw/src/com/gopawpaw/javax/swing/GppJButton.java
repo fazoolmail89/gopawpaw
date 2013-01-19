@@ -235,4 +235,10 @@ public class GppJButton extends JButton implements GppKeyActionListener,GppCompo
 		this.authorizationSerial = authorizationSerial;
 		
 	}
+
+	@Override
+	public boolean actionKey(int keyCode) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
