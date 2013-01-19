@@ -1,0 +1,7 @@
+D:\www.web.com\wp-includes\pluggable.php
+  1579:  		$host = 'http://www.gravatar.com';
+
+        搜索关键字：www.gravatar.com
+        共搜索的.java文件数：224
+        关键文件数：1
+        搜索到的关键字数目：1

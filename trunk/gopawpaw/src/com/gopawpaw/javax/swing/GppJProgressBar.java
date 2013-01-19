@@ -237,4 +237,10 @@ public class GppJProgressBar extends JProgressBar implements GppKeyActionListene
 	public void setAuthorizationSerial(String authorizationSerial) {
 		this.authorizationSerial = authorizationSerial;
 	}
+
+	@Override
+	public boolean actionKey(int keyCode) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -210,4 +210,10 @@ public class GppJTextPane extends JTextPane implements GppKeyActionListener,GppC
 	public void setAuthorizationSerial(String authorizationSerial) {
 		this.authorizationSerial = authorizationSerial;
 	}
+
+	@Override
+	public boolean actionKey(int keyCode) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

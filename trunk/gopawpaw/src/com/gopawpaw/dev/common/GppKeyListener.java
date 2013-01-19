@@ -70,6 +70,8 @@ public class GppKeyListener implements KeyListener {
 			actionRight();
 		} else if (e.getKeyCode() == 40) {
 			actionDown();
+		} else {
+			actionKey(e.getKeyCode());
 		}
 	}
 
@@ -317,6 +319,18 @@ public class GppKeyListener implements KeyListener {
 		return true;
 	}
 
+	/**
+	 * œÏ”¶ Down º¸≈Ã
+	 * 
+	 * @return
+	 */
+	private boolean actionKey(int keyCode) {
+		if (gppKeyActionListener != null) {
+			gppKeyActionListener.actionKey(keyCode);
+		}
+		return true;
+	}
+	
 	/**
 	 * @return the object
 	 */
