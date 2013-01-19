@@ -134,5 +134,5 @@ public class AppKeyConstants
     public static final String SUPASS_STATUS = "supassStatus";
     public static final String SUPASS_START = "supassStart";
     public static final String SUPASS_END = "supassEnd";
-    
+    public static final String IS_NEW = "isnew";
 }

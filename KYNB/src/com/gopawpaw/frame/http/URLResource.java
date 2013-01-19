@@ -17,7 +17,7 @@ public class URLResource {
 	
 	private static final String CONFIG_PRO = "http://kynb.gopawpaw.com/product_config.xml";
 	
-	private static final String CONFIG_STG = "http://192.168.0.107/~jinhua/dedecms/product_config.xml";
+	private static final String CONFIG_STG = "http://192.168.0.102/~jinhua/dedecms/product_config.xml";
 	
 	
 	private static boolean IS_PRO = true;
@@ -33,6 +33,7 @@ public class URLResource {
 	public static final String KEY_DREGKEY = "dregkey";
 	public static final String KEY_PRODUCT = "product";
 	public static final String KEY_ISSUPASS = "issupass";
+	public static final String KEY_ISUPDATENEW = "isupdatenew";
 	
 	public static final String KEY_MPACKAGE = "mpackage";
 	public static final String KEY_MMENU = "mmenu";

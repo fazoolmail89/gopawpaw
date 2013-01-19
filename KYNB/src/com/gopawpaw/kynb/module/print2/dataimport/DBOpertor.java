@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.gopawpaw.frame.log.APPLog;
 import com.gopawpaw.kynb.bean.Thorp;
 import com.gopawpaw.kynb.db.DBException;
 import com.gopawpaw.kynb.db.XXNCYLBXDBAccess;
@@ -59,6 +60,7 @@ public class DBOpertor extends XXNCYLBXDBAccess {
 			sqlPre.append(" , ");
 			
 			Object obj = tableItem.getFiledDefValuse(field);
+			APPLog.d("BasicDataImportOOOOOOOO", field + "===="+obj);
 			if(obj instanceof Integer){
 				defValuse.append(obj);
 			}else{

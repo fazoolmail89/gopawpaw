@@ -103,7 +103,7 @@ public class LogHttpAction {
 		
 		pMap.put(URLResource.KEY_OVERDUEMSG, overduemsg);
 		
-		sendRequest(URLResource.URL_LOGPRODUCT,pMap,true);
+		sendRequest(URLResource.URL_LOGPRODUCT,pMap,false);
 	}
 	
 	

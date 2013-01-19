@@ -13,7 +13,7 @@ package com.gopawpaw.frame.log;
  */
 public class GLog {
 
-	private static final boolean DEBUG = true;
+	private static final boolean DEBUG = false;
 
 	private static final String TAG = GLog.class.getSimpleName();
 

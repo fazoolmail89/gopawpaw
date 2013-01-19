@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import com.gopawpaw.frame.log.APPLog;
 import com.gopawpaw.kynb.common.DialogUtil;
 import com.gopawpaw.kynb.module.print2.MainFrame;
 
@@ -102,7 +103,15 @@ public class UserLoginDialog extends JDialog {
 		public void actionPerformed(ActionEvent e) {
 			UserDAO ud = new UserDAO();
 			User loginUser = null; 
-			loginUser = ud.Login(ttfUsername.getText().trim(), pwfPassword.getText());
+			if(APPLog.IS_DEBUG){
+				loginUser = new User();
+				loginUser.setId(1);
+				loginUser.setUsername("admin");
+				loginUser.setPassword("admin");
+				loginUser.setStatus(1);
+			}else{
+				loginUser = ud.Login(ttfUsername.getText().trim(), pwfPassword.getText());
+			}
 			
 			if(loginUser == null) {
 				JOptionPane.showMessageDialog(null, 

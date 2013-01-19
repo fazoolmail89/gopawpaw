@@ -63,11 +63,6 @@ public class MainFrame extends JFrame implements HttpActionListener{
 	
 	private static final long serialVersionUID = 1L;
 
-	private String mLiyeqin = "\r\n技术支持：李业钦\r\n QQ:1483695671";
-
-	private String mOffice = "联系快译支持：kuaiyi_support@163.com" + mLiyeqin;
-
-	private String mSupport = mLiyeqin;
 
 	private JPanel jContentPane = null;
 
@@ -399,7 +394,7 @@ public class MainFrame extends JFrame implements HttpActionListener{
 		mJContentPanel = getJContentPane();
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(mJContentPanel);
-		this.setTitle("藤县快译农保信息处理系统  V"+GlobalParameter.SOFT_VERSION);
+		this.setTitle("农保信息处理系统  V"+GlobalParameter.SOFT_VERSION);
 		mJContentPanel.setVisible(false);
 		mAction = new HttpActionBase(this,this);
 		
@@ -411,7 +406,6 @@ public class MainFrame extends JFrame implements HttpActionListener{
 	}
 
 	private void sendCheckProduct(){
-		String version = GlobalParameter.SOFT_VERSION;
 		String divicesId = ""+GppAuthorization.getInstance().getDivicesId();
 		String hardwareCode = Tools.getHardwareCode();
 		String hardwareCodeDisplay = GppAuthorization.genDisplayCode(divicesId);
@@ -419,7 +413,7 @@ public class MainFrame extends JFrame implements HttpActionListener{
 		
 		pMap.put(URLResource.KEY_DID, divicesId);
 		pMap.put(URLResource.KEY_PRODUCT, GlobalParameter.PRODUCT_ID);
-		pMap.put(URLResource.KEY_VERSION, version);
+		pMap.put(URLResource.KEY_VERSION, GlobalParameter.SOFT_VERSION);
 		pMap.put(URLResource.KEY_DSERIAL, hardwareCode);
 		pMap.put(URLResource.KEY_DREGDISPLAY, hardwareCodeDisplay);
 		pMap.put(URLResource.KEY_DREGKEY, mGppConfiguration.getValue("registerCode"));
@@ -431,6 +425,18 @@ public class MainFrame extends JFrame implements HttpActionListener{
 		APPLog.e(TAG, "sendCheckProduct divicesId="+divicesId+",genDisplayCode:"+hardwareCodeDisplay);
 		mAction.sendRequest(URLResource.URL_CHECKPRODUCT,0,pMap,true);
 		
+	}
+	
+	private void sendUpdateDisplayCode(String divicesId){
+		String hardwareCodeDisplay = GppAuthorization.genDisplayCode(divicesId);
+		HashMap<String,String> pMap = new HashMap<String,String>();
+		
+		pMap.put(URLResource.KEY_PRODUCT, GlobalParameter.PRODUCT_ID);
+		pMap.put(URLResource.KEY_VERSION, GlobalParameter.SOFT_VERSION);
+		pMap.put(URLResource.KEY_DID, divicesId);
+		pMap.put(URLResource.KEY_DREGDISPLAY, hardwareCodeDisplay);
+		pMap.put(URLResource.KEY_ISUPDATENEW, "true");
+		mAction.sendRequest(URLResource.URL_CHECKPRODUCT,1,pMap,false);
 	}
 	
 	private void sendLogProduct(String overduetype,String overdueValuse,String overduemsg){
@@ -560,7 +566,7 @@ public class MainFrame extends JFrame implements HttpActionListener{
 		
 		if(URLResource.URL_PROCONFIG == urlId){
 			dealProConfig( state,  data);
-		}else if(URLResource.URL_CHECKPRODUCT == urlId){
+		}else if(URLResource.URL_CHECKPRODUCT == urlId && connectionId == 0){
 			dealCheckPro( state,  data);
 		}
 	}
@@ -618,6 +624,7 @@ public class MainFrame extends JFrame implements HttpActionListener{
 		String supassStatus = "";
 		String supassStart = "";
 		String supassEnd = "";
+		String isupdatenew = "";
 		
 		if(HttpActionListener.STATE_SUCCESS == state ){
 			
@@ -663,6 +670,10 @@ public class MainFrame extends JFrame implements HttpActionListener{
 					AppKeyConstants.DATA,
 					AppKeyConstants.RESPONSE_BODY,
 					AppKeyConstants.SUPASS_END));
+			isupdatenew = dataMap.getStringBykey(Tools.getKey(
+					AppKeyConstants.DATA,
+					AppKeyConstants.RESPONSE_BODY,
+					AppKeyConstants.IS_NEW));
 			
 			if("y".equals(operation)){
 				isOfflineOperation = true;
@@ -689,10 +700,13 @@ public class MainFrame extends JFrame implements HttpActionListener{
 			if("y".equals(supassStatus)){
 				GppAuthorization.getInstance().setHasSendSupass(true);
 			}
+			APPLog.e("isupdatenew", ""+isupdatenew);
+			if("true".equals(isupdatenew)){
+				sendUpdateDisplayCode(divicesId);
+			}
 			
 			GppAuthorization.getInstance().updateDivicesConfig(did, operation,supassStatus,supassStart,supassEnd);
 			sendLogProduct(overdueType,overdueValuse,overdueMsg);
-			
 //			mJButtonDevicesCode.setEnabled(true);
 		}
 		APPLog.d(TAG, "cheakRegister():"+cheakSupassRegister());
