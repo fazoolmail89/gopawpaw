@@ -462,13 +462,17 @@ public class DragLayer extends LinearLayout implements DragController
                     }
                     else
                     {
-                        onDockEndListener.onDockEnd(-1);
+                    	if(onDockEndListener != null){
+                    		onDockEndListener.onDockEnd(-1);
+                    	}
                     }
 
                 }
                 else
                 {
-                    onDockEndListener.onDockEnd(-1);
+                	if(onDockEndListener != null){
+                		onDockEndListener.onDockEnd(-1);
+                	}
                 }
 
                 mLastMotionX = x;
