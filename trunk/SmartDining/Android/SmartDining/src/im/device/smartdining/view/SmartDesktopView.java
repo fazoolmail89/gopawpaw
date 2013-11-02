@@ -19,6 +19,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -36,7 +37,7 @@ import com.gopawpaw.droidcore.log.AppLog;
  * @author EX-LIJINHUA001
  * @date 2013-6-24
  */
-public class SmartDesktopView extends LinearLayout implements TabHost.TabContentFactory,OnSelectedFoodChangedListener{
+public class SmartDesktopView extends LinearLayout implements TabHost.TabContentFactory,OnSelectedFoodChangedListener,OnClickListener{
 	
 	protected static final String TAG = SmartDesktopView.class.getSimpleName();
 	
@@ -84,6 +85,8 @@ public class SmartDesktopView extends LinearLayout implements TabHost.TabContent
 	private OnLongClickListener dragViewOnLongClickListener;
 	
 	private OnClickListener onClickListener;
+	
+	private Button btn_top_fenlei,btn_top_jinrizhuda,btn_top_zhaopai,btn_top_jingdiantaocan,btn_top_zhekou,btn_top_fengwei,btn_top_tuijian;
 	
 	/**
 	 * @param context
@@ -187,6 +190,21 @@ public class SmartDesktopView extends LinearLayout implements TabHost.TabContent
 		LinearLayout view = (LinearLayout) inflater.inflate(R.layout.view_smartdesktop, null);
 		addView(view);
 		
+		btn_top_fenlei = (Button) view.findViewById(R.id.btn_top_fenlei);
+		btn_top_jingdiantaocan = (Button) view.findViewById(R.id.btn_top_jingdiantaocan);
+		btn_top_jinrizhuda = (Button) view.findViewById(R.id.btn_top_jinrizhuda);
+		btn_top_zhaopai = (Button) view.findViewById(R.id.btn_top_zhaopai);
+		btn_top_zhekou = (Button) view.findViewById(R.id.btn_top_zhekou);
+		btn_top_fengwei = (Button) view.findViewById(R.id.btn_top_fengwei);
+		btn_top_tuijian = (Button) view.findViewById(R.id.btn_top_tuijian);
+		
+		btn_top_fenlei.setOnClickListener(this);
+		btn_top_jingdiantaocan.setOnClickListener(this);
+		btn_top_jinrizhuda.setOnClickListener(this);
+		btn_top_zhaopai.setOnClickListener(this);
+		btn_top_zhekou.setOnClickListener(this);
+		btn_top_fengwei.setOnClickListener(this);
+		btn_top_tuijian.setOnClickListener(this);
 		
 		TextView ivIcon = (TextView) view.findViewById(R.id.tv_icon);
 		ivIcon.setOnLongClickListener(dragViewOnLongClickListener);
@@ -218,7 +236,6 @@ public class SmartDesktopView extends LinearLayout implements TabHost.TabContent
                     int position, long id) {
                 Toast.makeText(mContext, String.valueOf(position), Toast.LENGTH_SHORT).show();
             }
-            
         });
         galleryFlow.setSelection(4);
         
@@ -403,5 +420,60 @@ public class SmartDesktopView extends LinearLayout implements TabHost.TabContent
 
 	public int getDesktopType() {
 		return desktopType;
+	}
+
+	private int[] desktopIds = new int[]{R.id.layout_desktop_tuijian,
+			R.id.layout_destktop_fenlei,
+			R.id.layout_desktop_jingdantaocan,
+			R.id.layout_desktop_jinrizhuda,
+			R.id.layout_desktop_zhaopai,
+			R.id.layout_desktop_zhekou,
+			R.id.layout_desktop_fengwei};
+	
+	/**
+	 * 显示指定的desktop
+	 * @author LiJinHua
+	 * @modify 2013-11-2  下午2:22:02
+	 * @param desktopId
+	 */
+	private void showDesktop(int desktopId){
+		for(int id :desktopIds){
+			if(id != desktopId){
+				this.findViewById(id).setVisibility(View.GONE);
+			}else{
+				this.findViewById(id).setVisibility(View.VISIBLE);
+			}
+		}
+	}
+	
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.btn_top_tuijian:
+			showDesktop(R.id.layout_desktop_tuijian);
+			break;
+		case R.id.btn_top_fenlei:
+			showDesktop(R.id.layout_destktop_fenlei);
+			break;
+		case R.id.btn_top_jingdiantaocan:
+			showDesktop(R.id.layout_desktop_jingdantaocan);
+			break;
+		case R.id.btn_top_jinrizhuda:
+			showDesktop(R.id.layout_desktop_jinrizhuda);
+			break;
+		case R.id.btn_top_zhaopai:
+			showDesktop(R.id.layout_desktop_zhaopai);
+			break;
+		case R.id.btn_top_zhekou:
+			showDesktop(R.id.layout_desktop_zhekou);
+			break;
+		case R.id.btn_top_fengwei:
+			showDesktop(R.id.layout_desktop_fengwei);
+			break;
+		default:
+			break;
+		}
+		
 	}
 }
