@@ -2,417 +2,491 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="horizontal"
     android:layout_weight="1"
-    android:baselineAligned="false"
     android:background="@drawable/bg"
-    >
-    
-    <ScrollView 
+    android:baselineAligned="false"
+    android:orientation="horizontal" >
+
+    <!-- 左侧菜单start -->
+
+    <ScrollView
         android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"
-    	android:scrollbars="none"
-        >
-    <LinearLayout 
-    		android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"
-    		android:padding="8dip"
-    		android:orientation="vertical"
-    	>
-    		<Button 
-    			android:layout_width="wrap_content"
-    			android:layout_height="wrap_content"
-    			android:background="@drawable/selector_bg_btn_red"
-    			android:layout_marginTop="5dip"
-    			android:text="会员登陆"
-    		/>
-    		<Button 
-    			android:layout_width="wrap_content"
-    			android:layout_height="wrap_content"
-    			android:background="@drawable/selector_bg_btn_red"
-    			android:layout_marginTop="5dip"
-    			android:text="呼叫服务"
-    		/>
-    		<Button 
-    			android:layout_width="match_parent"
-    			android:layout_height="wrap_content"
-    			android:background="@drawable/selector_bg_btn_red"
-    			android:layout_marginTop="5dip"
-    			android:text="结帐"
-    		/>
-    		<Button 
-    			android:layout_width="match_parent"
-    			android:layout_height="wrap_content"
-    			android:background="@drawable/selector_bg_btn_red"
-    			android:layout_marginTop="5dip"
-    			android:text="相册风格"
-    		/>
-    		<Button 
-    			android:layout_width="match_parent"
-    			android:layout_height="wrap_content"
-    			android:background="@drawable/selector_bg_btn_red"
-    			android:layout_marginTop="5dip"
-    			android:text="格子风格"
-    		/>
-    		<Button 
-    			android:layout_width="match_parent"
-    			android:layout_height="wrap_content"
-    			android:background="@drawable/selector_bg_btn_red"
-    			android:layout_marginTop="5dip"
-    			android:text="列表风格"
-    		/>
-    		<Button 
-    			android:layout_width="match_parent"
-    			android:layout_height="wrap_content"
-    			android:background="@drawable/selector_bg_btn_red"
-    			android:layout_marginTop="5dip"
-    			android:text="留言"
-    		/>
-    		
-    		<Button android:id="@+id/btn_change_screem"
-    			android:layout_width="match_parent"
-    			android:layout_height="wrap_content"
-    			android:background="@drawable/selector_bg_btn_red"
-    			android:layout_marginTop="5dip"
-    			android:text="切屏"
-    		/>
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dip" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:background="@drawable/selector_bg_btn_red"
+                android:text="会员登陆" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:background="@drawable/selector_bg_btn_red"
+                android:text="呼叫服务" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:background="@drawable/selector_bg_btn_red"
+                android:text="结帐" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:background="@drawable/selector_bg_btn_red"
+                android:text="相册风格" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:background="@drawable/selector_bg_btn_red"
+                android:text="格子风格" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:background="@drawable/selector_bg_btn_red"
+                android:text="列表风格" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:background="@drawable/selector_bg_btn_red"
+                android:text="留言" />
+
+            <Button
+                android:id="@+id/btn_change_screem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:background="@drawable/selector_bg_btn_red"
+                android:text="切屏" />
+        </LinearLayout>
     </ScrollView>
-    <LinearLayout 
-    		android:layout_width="300dip"
-    		android:layout_height="wrap_content"
-    		android:layout_gravity="center_horizontal"
-    		android:gravity="center_horizontal"
-    		android:orientation="vertical" 
-    		android:visibility="gone"
-    	>
-    		 <LinearLayout 
-	    		android:layout_width="wrap_content"
-	    		android:layout_height="wrap_content"
-	    		android:orientation="horizontal"
-	    	>
-	    		<Button 
-	    			android:layout_width="wrap_content"
-	    			android:layout_height="wrap_content"
-	    			android:text="热门菜品"
-	    		/>
-	    		<Button 
-	    			android:layout_width="wrap_content"
-	    			android:layout_height="wrap_content"
-	    			android:text="历史排行"
-	    		/>
-    		</LinearLayout>
-    		
-    		 <LinearLayout 
-	    		android:layout_width="wrap_content"
-	    		android:layout_height="wrap_content"
-	    		android:orientation="vertical"
-	    		android:layout_weight="1"
-	    	>
-	    		<Button 
-	    			android:layout_width="wrap_content"
-	    			android:layout_height="wrap_content"
-	    			android:layout_gravity="center_horizontal"
-	    			android:background="@drawable/bg_btn_network"
-		    		/>
-	    		<ScrollView 
-	    		    android:layout_width="wrap_content"
-		    		android:layout_height="wrap_content"
-		    		android:layout_weight="1"
-	    		    >
-		    		<LinearLayout 
-		    		android:layout_width="wrap_content"
-		    		android:layout_height="wrap_content"
-		    		android:orientation="vertical"
-		    		android:layout_weight="1"
-		    	>
-		    		<ImageView 
-		    		    android:layout_width="wrap_content"
-		    			android:layout_height="wrap_content"
-		    			android:layout_gravity="center_horizontal"
-		    			android:src="@drawable/bg_img_icon_f"
-		    		    />
-		    		<ImageView 
-		    		    android:layout_width="wrap_content"
-		    			android:layout_height="wrap_content"
-		    			android:layout_gravity="center_horizontal"
-		    			android:src="@drawable/bg_img_icon_f"
-		    		    />
-		    		<ImageView 
-		    		    android:layout_width="wrap_content"
-		    			android:layout_height="wrap_content"
-		    			android:layout_gravity="center_horizontal"
-		    			android:src="@drawable/bg_img_icon_f"
-		    		    />
-		    		<ImageView 
-		    		    android:layout_width="wrap_content"
-		    			android:layout_height="wrap_content"
-		    			android:layout_gravity="center_horizontal"
-		    			android:src="@drawable/bg_img_icon_f"
-		    		    />
-		    		<ImageView 
-		    		    android:layout_width="wrap_content"
-		    			android:layout_height="wrap_content"
-		    			android:layout_gravity="center_horizontal"
-		    			android:src="@drawable/bg_img_icon_f"
-		    		    />
-		    		<ImageView 
-		    		    android:layout_width="wrap_content"
-		    			android:layout_height="wrap_content"
-		    			android:layout_gravity="center_horizontal"
-		    			android:src="@drawable/bg_img_icon_f"
-		    		    />
-		    		</LinearLayout>
-		    	</ScrollView>
-	    		<Button 
-	    			android:layout_width="wrap_content"
-	    			android:layout_height="wrap_content"
-	    			android:layout_gravity="center_horizontal"
-	    			android:background="@drawable/bg_btn_network"
-	    		/>
-    		</LinearLayout>
-    		
-    		 <LinearLayout 
-	    		android:layout_width="wrap_content"
-	    		android:layout_height="wrap_content"
-	    		android:orientation="horizontal"
-	    	>
-	    		<Button 
-	    			android:layout_width="wrap_content"
-	    			android:layout_height="wrap_content"
-	    			android:text="我的菜单"
-	    		/>
-	    		<Button 
-	    			android:layout_width="wrap_content"
-	    			android:layout_height="wrap_content"
-	    			android:text="收藏夹"
-	    		/>
-    		</LinearLayout>
-    	</LinearLayout>
-    	
-    <LinearLayout 
-    		android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"
-    		android:orientation="vertical"
-    		android:layout_weight="1"
-    	>
-    		 <HorizontalScrollView 
-    		    android:layout_width="wrap_content"
-    			android:layout_height="wrap_content"
-    			android:scrollbars="none"
-    		     >
-    		<LinearLayout 
-	    		android:layout_width="wrap_content"
-	    		android:layout_height="wrap_content"
-	    		android:orientation="horizontal"
-	    	>
-		    	<Button 
-	    			android:layout_width="wrap_content"
-	    			android:layout_height="wrap_content"
-	    			android:background="@drawable/selector_bg_btn_next"
-	    			android:text="分类点餐"
-	    		/>
-	    		<Button 
-	    			android:layout_width="wrap_content"
-	    			android:layout_height="wrap_content"
-	    			android:background="@drawable/selector_bg_btn_next"
-	    			android:text="今日主打"
-	    		/>
-	    		<Button 
-	    			android:layout_width="wrap_content"
-	    			android:layout_height="wrap_content"
-	    			android:background="@drawable/selector_bg_btn_next"
-	    			android:text="招牌菜"
-	    		/>
-	    		<Button 
-	    			android:layout_width="wrap_content"
-	    			android:layout_height="wrap_content"
-	    			android:background="@drawable/selector_bg_btn_next"
-	    			android:text="经典套餐"
-	    		/>
-	    		<Button 
-	    			android:layout_width="wrap_content"
-	    			android:layout_height="wrap_content"
-	    			android:background="@drawable/selector_bg_btn_next"
-	    			android:text="折扣优惠"
-	    		/>
-	    		<Button 
-	    			android:layout_width="wrap_content"
-	    			android:layout_height="wrap_content"
-	    			android:background="@drawable/selector_bg_btn_next"
-	    			android:text="风味分类"
-	    		/>
-	    		<Button 
-	    			android:layout_width="wrap_content"
-	    			android:layout_height="wrap_content"
-	    			android:background="@drawable/selector_bg_btn_next"
-	    			android:text="新菜推荐"
-	    		/>
-	    		<Button 
-	    			android:layout_width="wrap_content"
-	    			android:layout_height="wrap_content"
-	    			android:background="@drawable/selector_bg_btn_next"
-	    			android:text="随便看看"
-	    		/>
-	    		<Button 
-	    			android:layout_width="wrap_content"
-	    			android:layout_height="wrap_content"
-	    			android:background="@drawable/selector_bg_btn_next"
-	    			android:text="使用帮助1"
-	    		/>
-	    		<Button 
-	    			android:layout_width="wrap_content"
-	    			android:layout_height="wrap_content"
-	    			android:background="@drawable/selector_bg_btn_next"
-	    			android:text="使用帮助2"
-	    		/>
-	    		<Button 
-	    			android:layout_width="wrap_content"
-	    			android:layout_height="wrap_content"
-	    			android:background="@drawable/selector_bg_btn_next"
-	    			android:text="使用帮助3"
-	    		/>
-	    		<Button 
-	    			android:layout_width="wrap_content"
-	    			android:layout_height="wrap_content"
-	    			android:background="@drawable/selector_bg_btn_next"
-	    			android:text="使用帮助4"
-	    		/>
-	    		<Button 
-	    			android:layout_width="wrap_content"
-	    			android:layout_height="wrap_content"
-	    			android:background="@drawable/selector_bg_btn_next"
-	    			android:text="使用帮助5"
-	    		/>
-	    		<Button 
-	    			android:layout_width="wrap_content"
-	    			android:layout_height="wrap_content"
-	    			android:background="@drawable/selector_bg_btn_next"
-	    			android:text="使用帮助6"
-	    		/>
-	    </LinearLayout>
-	    </HorizontalScrollView>
-	    <LinearLayout android:id="@+id/layout_desktop"
-	        android:layout_width="fill_parent"
-	        android:layout_height="fill_parent"
-	        android:layout_weight="1"
+    <!-- 左侧菜单end -->
+
+    <LinearLayout
+        android:layout_width="300dip"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="热门菜品" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="历史排行" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/bg_btn_network" />
+
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/bg_img_icon_f" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/bg_img_icon_f" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/bg_img_icon_f" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/bg_img_icon_f" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/bg_img_icon_f" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/bg_img_icon_f" />
+                </LinearLayout>
+            </ScrollView>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/bg_btn_network" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的菜单" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="收藏夹" />
+        </LinearLayout>
+    </LinearLayout>
+    <!-- 右侧侧主显示区域start -->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="none" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+				
+                <Button android:id="@+id/btn_top_tuijian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_bg_btn_next"
+                    android:text="新菜推荐" />
+                
+                
+                <Button
+                    android:id="@+id/btn_top_fenlei"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_bg_btn_next"
+                    android:text="分类点餐" />
+
+                <Button
+                    android:id="@+id/btn_top_jinrizhuda"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_bg_btn_next"
+                    android:text="今日主打" />
+
+                <Button
+                    android:id="@+id/btn_top_zhaopai"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_bg_btn_next"
+                    android:text="招牌菜" />
+
+                <Button
+                    android:id="@+id/btn_top_jingdiantaocan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_bg_btn_next"
+                    android:text="经典套餐" />
+
+                <Button
+                    android:id="@+id/btn_top_zhekou"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_bg_btn_next"
+                    android:text="折扣优惠" />
+
+                <Button android:id="@+id/btn_top_fengwei"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_bg_btn_next"
+                    android:text="风味分类" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_bg_btn_next"
+                    android:text="随便看看" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_bg_btn_next"
+                    android:text="使用帮助1" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_bg_btn_next"
+                    android:text="使用帮助2" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_bg_btn_next"
+                    android:text="使用帮助3" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_bg_btn_next"
+                    android:text="使用帮助4" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_bg_btn_next"
+                    android:text="使用帮助5" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_bg_btn_next"
+                    android:text="使用帮助6" />
+            </LinearLayout>
+        </HorizontalScrollView>
+        <!-- 新菜推荐点餐面板start -->
+        <LinearLayout
+            android:id="@+id/layout_desktop_tuijian"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" >
+
+            <im.device.smartdining.view.GalleryFlow
+                android:id="@+id/gallery"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <!-- 新菜推荐点餐面板end -->
+        <!-- 分类点餐面板start -->
+        <LinearLayout
+            android:id="@+id/layout_destktop_fenlei"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal" 
+            android:visibility="gone"
+            >
+
+            <!-- 左面板 start -->
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" >
+
+                    <TabHost
+                        android:id="@+id/tabhost"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent" >
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="horizontal"
+                            android:paddingRight="5dip" >
+
+                            <ScrollView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:layout_marginBottom="15dip"
+                                android:layout_marginTop="6dip"
+                                android:scrollbars="none" >
+                                <TabWidget
+                                    android:id="@android:id/tabs"
+                                    android:layout_width="80dp"
+                                    android:layout_height="wrap_content" />
+                            </ScrollView>
+
+                            <LinearLayout
+                                android:layout_width="0dip"
+                                android:layout_height="fill_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_foods_list"
+                                android:orientation="vertical" >
+
+                                <FrameLayout
+                                    android:id="@android:id/tabcontent"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent" >
+                                </FrameLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </TabHost>
+                </LinearLayout>
+            </LinearLayout>
+            <!-- 左面板end -->
+
+            <!-- 右面板start -->
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical" 
+                android:layout_weight="1"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" >
+
+                    <ScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" >
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_gg"
+                            android:orientation="vertical" >
+                        </LinearLayout>
+                    </ScrollView>
+
+                    <TextView
+                        android:id="@+id/tv_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_eatery_icon"
+                        android:text="长按" />
+                </LinearLayout>
+            </LinearLayout>
+            <!-- 右面板end -->
+        </LinearLayout>
+        <!-- 分类点餐面板end -->
+        <!-- 经典套餐点餐面板start -->
+        <LinearLayout
+            android:id="@+id/layout_desktop_jingdantaocan"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" 
+            android:visibility="gone"
 	        >
-	        <im.device.smartdining.view.GalleryFlow android:id="@+id/gallery"
-	            android:layout_width="fill_parent"
-	        	android:layout_height="fill_parent"
-	        	android:layout_weight="1"
-	            />
-	        
-	    </LinearLayout>
+			<TextView 
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:text="经典套餐面板"
+			    />
+        </LinearLayout>
+        <!-- 经典套餐点餐面板end -->
+        <!-- 今日推荐点餐面板start -->
+        <LinearLayout
+            android:id="@+id/layout_desktop_jinrizhuda"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" 
+            android:visibility="gone"
+	        >
+			<TextView 
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:text="今日推荐面板"
+			    />
+        </LinearLayout>
+        <!-- 今日推荐点餐面板end -->
+        <!-- 招牌点餐面板start -->
+        <LinearLayout
+            android:id="@+id/layout_desktop_zhaopai"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" 
+            android:visibility="gone"
+	        >
+			<TextView 
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:text="招牌面板"
+			    />
+        </LinearLayout>
+        <!-- 招牌点餐面板end -->
+        <!-- 折扣点餐面板start -->
+        <LinearLayout
+            android:id="@+id/layout_desktop_zhekou"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" 
+            android:visibility="gone"
+	        >
+			<TextView 
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:text="折扣面板"
+			    />
+        </LinearLayout>
+        <!-- 折扣点餐面板end -->
+        <!-- 风味点餐面板start -->
+        <LinearLayout
+            android:id="@+id/layout_desktop_fengwei"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" 
+            android:visibility="gone"
+	        >
+			<TextView 
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:text="风味面板"
+			    />
+        </LinearLayout>
+        <!-- 风味点餐面板end -->
     </LinearLayout>
-    <!-- 左面板 start -->
-    <LinearLayout 
-    	android:layout_width="fill_parent"
-    	android:layout_height="fill_parent"
-    	android:layout_weight="1"
-    	android:orientation="vertical"
-    	android:visibility="gone"
-    >
-    	<LinearLayout 
-    		android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"
-    		android:orientation="horizontal"
-    	>
-    		<Button 
-    			android:layout_width="wrap_content"
-    			android:layout_height="wrap_content"
-    			android:text="功能1"
-    		/>
-    		<Button 
-    			android:layout_width="wrap_content"
-    			android:layout_height="wrap_content"
-    			android:text="功能2"
-    		/>
-    		<Button 
-    			android:layout_width="wrap_content"
-    			android:layout_height="wrap_content"
-    			android:text="功能3"
-    		/>
-    	</LinearLayout>
-    	<LinearLayout 
-    		android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"
-    		android:layout_weight="1"
-    	>
-    		<TabHost android:id="@+id/tabhost" android:layout_width="fill_parent"
-				android:layout_height="fill_parent">
-				<LinearLayout android:layout_width="fill_parent"
-					android:layout_height="fill_parent" android:orientation="horizontal"
-					android:paddingRight="5dip">
-					<ScrollView android:layout_width="wrap_content"
-						android:layout_height="fill_parent" android:scrollbars="none"
-						android:layout_marginTop="6dip"
-						android:layout_marginBottom="15dip"
-						>
-						<TabWidget android:id="@android:id/tabs"
-							android:layout_width="80dp" android:layout_height="wrap_content" 
-							/>
-					</ScrollView>
-					<LinearLayout android:layout_width="0dip"
-						android:layout_height="fill_parent" android:layout_weight="1"
-						android:orientation="vertical" android:background="@drawable/bg_foods_list">
-						<FrameLayout android:id="@android:id/tabcontent"
-							android:layout_width="fill_parent" android:layout_height="fill_parent">
-						</FrameLayout>
-					</LinearLayout>
-				</LinearLayout>
-			</TabHost>
-    	</LinearLayout>
-    </LinearLayout>
-    <!-- 左面板end -->
-    
-    <!-- 右面板start -->
-    <LinearLayout 
-    	android:layout_width="fill_parent"
-    	android:layout_height="fill_parent"
-    	android:orientation="vertical"
-    	android:visibility="gone"
-    >
-    	<LinearLayout 
-    		android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"
-    		android:orientation="horizontal"
-    		android:background="@color/col_pa02"
-    	>
-    		<Button android:id="@+id/btn_4"
-    			android:layout_width="wrap_content"
-    			android:layout_height="wrap_content"
-    			android:text="功能4"
-    		/>
-    	</LinearLayout>
-    	<LinearLayout 
-    		android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"
-    		android:layout_weight="1"
-    		
-    	>
-    		<ScrollView 
-    		    android:layout_width="wrap_content"
-    			android:layout_height="wrap_content"
-    			android:layout_weight="1"
-    		    >
-    		    <LinearLayout 
-    		        android:layout_width="wrap_content"
-    				android:layout_height="wrap_content"
-    				android:orientation="vertical"
-    				android:background="@drawable/bg_gg"
-    		        >
-    		        
-    		    </LinearLayout>
-    		    
-    		</ScrollView>
-    		<TextView android:id="@+id/tv_icon"
-    			android:layout_width="wrap_content"
-    			android:layout_height="wrap_content"
-    			android:background="@drawable/bg_eatery_icon"
-    			android:text="长按"
-    		/>
-    	</LinearLayout>
-    </LinearLayout>
-    <!-- 右面板end -->
+    <!-- 右侧侧主显示区域end -->
+
 </LinearLayout>
