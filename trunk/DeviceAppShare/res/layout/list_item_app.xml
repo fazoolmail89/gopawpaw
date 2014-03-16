@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:layout_gravity="center_vertical"
+  android:orientation="horizontal"
+  android:gravity="left|center_vertical"
+  android:paddingTop="5dip"
+  >
+	  <ImageView
+	  	android:id="@+id/iv_icon"
+	  	android:layout_width="80dip"
+	  	android:layout_height="70dip"
+	  	android:layout_gravity="center_vertical"
+	  	android:background="@drawable/selector_eatery_icon_left_bg"
+	  />
+	<View 
+	    android:layout_width="2dip"
+  		android:layout_height="fill_parent"
+  		android:background="@drawable/selector_eatery_icon_split"
+	    />
+	<LinearLayout 
+		android:layout_width="0dip"
+  		android:layout_height="fill_parent"
+  		android:layout_gravity="left|center_vertical"
+  		android:layout_weight="1"
+  		android:orientation="horizontal"
+  		android:background="@drawable/selector_eatery_icon_right_bg"
+	>
+	<LinearLayout 
+		android:layout_width="0dip"
+  		android:layout_height="fill_parent"
+  		android:layout_gravity="left|center_vertical"
+  		android:layout_weight="1"
+  		android:orientation="vertical"
+	>
+		<TextView android:id="@+id/tv_name"
+  			android:layout_width="wrap_content"
+  			android:layout_height="wrap_content"
+  			android:layout_gravity="left|top"
+  			android:singleLine="true"
+  			android:ellipsize="end"
+  			android:textSize="16sp"
+  			android:textColor="@color/col_pa05"
+  		/>
+  		<TextView android:id="@+id/tv_package" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" 
+			android:singleLine="true"
+  			android:ellipsize="middle"
+  			android:textColor="@color/lr_color_blue"
+			/>
+		<TextView android:id="@+id/tv_vname" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" 
+			android:singleLine="true"
+  			android:ellipsize="middle"
+  			android:textColor="@color/lr_color_blue"
+			/>
+		<TextView android:id="@+id/tv_vcode" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" 
+			android:visibility="gone"
+			/>
+  	</LinearLayout>
+  	</LinearLayout>
+</LinearLayout>

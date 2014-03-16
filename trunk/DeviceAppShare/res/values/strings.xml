@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, DeviceAppsActivity!</string>
+    <string name="app_name">App分享</string>
+    
+    <string name="select_share_title">您将分享《%1s》</string>
+    <string name="select_share_apk">分享APK安装包</string>
+    <string name="select_share_link">分享下载链接</string>
+    
+    <string name="select_option_title">请选择操作《%1s》</string>
+    <string name="select_option_open">打开</string>
+    <string name="select_option_manage">管理</string>
+    <string name="select_option_uninstall">卸载</string>
+    
+    
+    <string name="about_content1">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+        App分享 是一款能快速将本设备已安装应用提取出安装包分享给另一台Android设备的软件。界面简洁，使用简单，免费使用，无广告，是您首选的常用工具。
+        </string>
+      <string name="about_content2">
+        使用说明：\n\n &#160;&#160;&#160;&#160;
+        1.启动App分享 \n &#160;&#160;&#160;&#160;
+        2.点击您要分享的应用 \n &#160;&#160;&#160;&#160;
+        3.选择分享APK \n &#160;&#160;&#160;&#160;
+        4.选择蓝牙分享 \n &#160;&#160;&#160;&#160;
+        5.配对蓝牙发送给对方 \n &#160;&#160;&#160;&#160;
+        6.等待传输成功 \n &#160;&#160;&#160;&#160;
+        7.分享结束 \n &#160;&#160;&#160;&#160;
+        8.另外还可打开、管理、卸载应用 \n
+        </string>
+     <string name="about_content3">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+        非常感谢您对App分享的支持。
+        若对本应用有建议或意见，您可通过以下方式联系我们。\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+        客服邮箱：service@device.im \n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+        官方网址：http://www.device.im\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+        当前版本：%1s
+        </string>
+     <string name="check_version">检查新版本</string>
+</resources>
