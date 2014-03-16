@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, DroidCoreActivity!</string>
+    <string name="app_name">DroidCore</string>
+    <string name="sure">确定</string>
+	<string name="submit">提交</string>
+	<string name="cancel">取消</string>
+	<string name="delete">删除</string>
+	<string name="next">下一步</string>
+	<string name="exit">退出</string>
+	<string name="dialog_title_tip_defalut">温馨提示</string>
+	<string name="msg_exit">您确定要退出应用吗？</string>
+</resources>
