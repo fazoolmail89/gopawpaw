@@ -1,0 +1,824 @@
+com.gopawpaw.droid.AppConfig -> com.gopawpaw.droid.a:
+    java.lang.String TAG -> g
+    boolean IS_PRODUCT -> a
+    java.lang.String CACHE_FILE -> b
+    java.lang.String SDCARD_ROOT -> c
+    java.lang.String DOWNLOAD_PATH -> d
+    java.lang.String URL_ID_HOST_PRD -> e
+    java.lang.String URL_ID_HOST_STG -> f
+    void init(android.content.Context) -> a
+com.gopawpaw.droid.DroidCoreActivity -> com.gopawpaw.droid.DroidCoreActivity:
+    void onCreate(android.os.Bundle) -> onCreate
+com.gopawpaw.droid.R -> com.gopawpaw.droid.b:
+com.gopawpaw.droid.R$anim -> com.gopawpaw.droid.c:
+    int loading_dialog -> a
+com.gopawpaw.droid.R$id -> com.gopawpaw.droid.d:
+    int btn2 -> a
+    int btn3 -> b
+    int btn1 -> c
+    int fl_content -> d
+    int tv_title -> e
+    int tv_message -> f
+com.gopawpaw.droid.R$layout -> com.gopawpaw.droid.e:
+    int app_widget_common_dialog -> a
+    int app_widget_message_dialog -> b
+    int main -> c
+com.gopawpaw.droid.R$string -> com.gopawpaw.droid.f:
+    int dialog_title_tip_defalut -> a
+com.gopawpaw.droid.activity.BaseActivity -> com.gopawpaw.droid.activity.BaseActivity:
+    java.lang.String TAG -> a
+    int EXITAPP_DIALOG -> b
+    com.gopawpaw.droid.dialog.LoadingDialog mLoadingDialog -> c
+    com.gopawpaw.droid.dialog.MessageDialog mMessageDialog -> d
+    com.gopawpaw.droid.dialog.LoadingDialog$OnLoadingCancleListener mOnLoadingCancleListener -> e
+    void onCreate(android.os.Bundle) -> onCreate
+    void onDestroy() -> onDestroy
+    void onLoadingDialogCancle() -> a
+    void showMessageDialog$6ef37c42(java.lang.String,java.lang.String) -> a
+    void showMessageDialog(int,java.lang.String,java.lang.String,java.lang.String) -> a
+    void showMessageDialog$2be57ac2(int,java.lang.String,java.lang.String,java.lang.String) -> b
+    void onMessageDialogBtn1Click(int) -> a
+    void onMessageDialogBtn2Click(int) -> b
+    void onMessageDialogCancel(int) -> c
+com.gopawpaw.droid.activity.BaseActivity$1 -> com.gopawpaw.droid.activity.a:
+    com.gopawpaw.droid.activity.BaseActivity this$0 -> a
+    void onLoadingCancle() -> a
+com.gopawpaw.droid.activity.BaseActivity$2 -> com.gopawpaw.droid.activity.b:
+    com.gopawpaw.droid.activity.BaseActivity this$0 -> a
+    int val$id -> b
+    void onClick(android.view.View) -> onClick
+com.gopawpaw.droid.activity.BaseActivity$3 -> com.gopawpaw.droid.activity.c:
+    com.gopawpaw.droid.activity.BaseActivity this$0 -> a
+    int val$id -> b
+    void onClick(android.view.View) -> onClick
+com.gopawpaw.droid.activity.BaseActivity$4 -> com.gopawpaw.droid.activity.d:
+    com.gopawpaw.droid.activity.BaseActivity this$0 -> a
+    int val$id -> b
+    void onCancel(android.content.DialogInterface) -> onCancel
+com.gopawpaw.droid.dialog.BaseDialog -> com.gopawpaw.droid.a.a:
+    android.widget.TextView tvTitle -> a
+    android.widget.FrameLayout mContent -> b
+    android.widget.Button btn1 -> c
+    android.widget.Button btn2 -> d
+    android.widget.Button btn3 -> e
+    android.view.View$OnClickListener mBtn1ClickListener -> f
+    android.view.View$OnClickListener mBtn2ClickListener -> g
+    android.view.View$OnClickListener mBtn3ClickListener -> h
+    boolean isAutoDismiss1 -> i
+    boolean isAutoDismiss2 -> j
+    boolean isAutoDismiss3 -> k
+    void onCreate(android.os.Bundle) -> onCreate
+    void setTitle(java.lang.String) -> a
+    void setTitle(int) -> setTitle
+    android.view.View createContentView() -> a
+    void setContentView(android.view.View) -> setContentView
+    void setBtn1Text(java.lang.String) -> b
+    void setBtn2Text(java.lang.String) -> c
+    void setBtn2Visible(boolean) -> a
+    void setBtn1ClickListener(android.view.View$OnClickListener) -> a
+    void setBtn2ClickListener(android.view.View$OnClickListener) -> b
+    void onClick(android.view.View) -> onClick
+com.gopawpaw.droid.dialog.LoadingDialog -> com.gopawpaw.droid.a.b:
+    android.graphics.drawable.AnimationDrawable loadingAnimation -> a
+    boolean canNotCancel -> b
+    java.lang.String tipMsg -> c
+    android.widget.ImageView ivLoading -> d
+    com.gopawpaw.droid.dialog.LoadingDialog$OnLoadingCancleListener onLoadingCancleListener -> e
+    int mWindowWidth -> f
+    void onWindowFocusChanged(boolean) -> onWindowFocusChanged
+    void onBackPressed() -> onBackPressed
+    boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
+com.gopawpaw.droid.dialog.LoadingDialog$OnLoadingCancleListener -> com.gopawpaw.droid.a.c:
+    void onLoadingCancle() -> a
+com.gopawpaw.droid.dialog.MessageDialog -> com.gopawpaw.droid.a.d:
+    android.widget.TextView tvMessage -> f
+    android.view.View contentView -> g
+    android.view.View createContentView() -> a
+    void setMessage$505cbf4b(java.lang.String) -> d
+    void setTextViewGravity$13462e() -> b
+com.gopawpaw.droid.http.HttpConnector -> com.gopawpaw.droid.b.a:
+    java.lang.String TAG -> a
+    com.gopawpaw.droid.http.HttpConnector instance -> b
+    java.lang.Object object -> c
+    java.util.Vector mRequestQueue -> d
+    java.util.Vector mRequestQueueCurr -> e
+    java.util.ArrayList mThreadList -> f
+    com.gopawpaw.droid.http.HttpThreadListener mHttpThreadAction -> g
+    com.gopawpaw.droid.http.HttpThreadListener mHttpThreadDown -> h
+    void sendHttpRequest(com.gopawpaw.droid.http.HttpRequest) -> a
+    void requestThread(int) -> a
+    java.lang.Object access$0() -> a
+    java.util.Vector access$1(com.gopawpaw.droid.http.HttpConnector) -> a
+    java.util.Vector access$2(com.gopawpaw.droid.http.HttpConnector) -> b
+    java.lang.String access$3() -> b
+com.gopawpaw.droid.http.HttpConnector$1 -> com.gopawpaw.droid.b.b:
+    com.gopawpaw.droid.http.HttpConnector this$0 -> a
+    com.gopawpaw.droid.http.HttpRequest getHttpRequest() -> a
+    void finishHttpRequest(com.gopawpaw.droid.http.HttpRequest) -> a
+    void requestWait(com.gopawpaw.droid.http.HttpThread) -> a
+com.gopawpaw.droid.http.HttpConnector$2 -> com.gopawpaw.droid.b.c:
+    com.gopawpaw.droid.http.HttpConnector this$0 -> a
+    com.gopawpaw.droid.http.HttpRequest getHttpRequest() -> a
+    void finishHttpRequest(com.gopawpaw.droid.http.HttpRequest) -> a
+    void requestWait(com.gopawpaw.droid.http.HttpThread) -> a
+com.gopawpaw.droid.http.HttpCookie -> com.gopawpaw.droid.b.d:
+    java.lang.String TAG -> a
+    java.util.HashMap cookieMap -> b
+    java.util.Map cookieStore -> c
+    java.lang.Object getRequestCookies(java.lang.String) -> a
+    void getResponseCookies(java.net.HttpURLConnection) -> a
+    java.lang.String getUrlHost(java.lang.String) -> b
+com.gopawpaw.droid.http.HttpHelper -> com.gopawpaw.droid.b.e:
+    java.lang.String TAG -> c
+    android.content.res.Resources res -> a
+    javax.net.ssl.HostnameVerifier DO_NOT_VERIFY -> b
+    void setResources(android.content.Context) -> a
+    java.lang.String getUrlById$47921032() -> a
+    java.lang.String getRequestURLParam$12787dce(java.lang.Object) -> a
+    java.lang.String getRequestURLParam$7a1ba7c4(java.lang.String) -> c
+    void trustAllHosts() -> b
+    java.lang.String initURL(java.lang.String) -> a
+    java.lang.String initURL(java.lang.String,java.lang.String) -> a
+    boolean hasProtocol(java.lang.String) -> d
+    java.lang.String urlEncode(java.lang.String) -> b
+    java.lang.String converURLParamValuse(java.lang.String) -> e
+com.gopawpaw.droid.http.HttpHelper$1 -> com.gopawpaw.droid.b.f:
+    boolean verify(java.lang.String,javax.net.ssl.SSLSession) -> verify
+com.gopawpaw.droid.http.HttpHelper$2 -> com.gopawpaw.droid.b.g:
+    java.security.cert.X509Certificate[] getAcceptedIssuers() -> getAcceptedIssuers
+    void checkClientTrusted(java.security.cert.X509Certificate[],java.lang.String) -> checkClientTrusted
+    void checkServerTrusted(java.security.cert.X509Certificate[],java.lang.String) -> checkServerTrusted
+com.gopawpaw.droid.http.HttpListener -> com.gopawpaw.droid.b.h:
+    void httpResponse(com.gopawpaw.droid.http.HttpResponse) -> a
+com.gopawpaw.droid.http.HttpRequest -> com.gopawpaw.droid.b.i:
+    com.gopawpaw.droid.http.HttpListener httpListener -> a
+    int connectTimeout -> b
+    int readTimeout -> c
+    int requestMode -> d
+    int requestType -> e
+    java.lang.String requestMethod -> f
+    java.lang.String url -> g
+    java.lang.String paramData -> h
+    int urlId -> i
+    int connectionId -> j
+    com.gopawpaw.droid.http.HttpListener getHttpListener() -> a
+    int getRequestMode() -> b
+    int getRequestType() -> c
+    java.lang.String getUrl() -> d
+    java.lang.String getRequestMethod() -> e
+    java.lang.String getParamData() -> f
+    int getConnectTimeout() -> g
+    int getReadTimeout() -> h
+    int getUrlId() -> i
+    void setUrlId$13462e() -> j
+    int getConnectionId() -> k
+    void setConnectionId$13462e() -> l
+    boolean equals(java.lang.Object) -> equals
+com.gopawpaw.droid.http.HttpResponse -> com.gopawpaw.droid.b.j:
+    int responseCode -> a
+    java.lang.String responseMsg -> b
+    java.lang.String url -> c
+    java.lang.String contentType -> d
+    int contentLength -> e
+    java.io.InputStream inputStream -> f
+    com.gopawpaw.droid.http.HttpRequest httpRequest -> g
+    int getResponseCode() -> a
+    void setResponseCode(int) -> a
+    void setResponseMsg(java.lang.String) -> a
+    void setUrl(java.lang.String) -> b
+    java.lang.String getContentType() -> b
+    void setContentType(java.lang.String) -> c
+    int getContentLength() -> c
+    void setContentLength(int) -> b
+    java.io.InputStream getInputStream() -> d
+    void setInputStream(java.io.InputStream) -> a
+    com.gopawpaw.droid.http.HttpRequest getHttpRequest() -> e
+com.gopawpaw.droid.http.HttpThread -> com.gopawpaw.droid.b.k:
+    java.lang.String TAG -> a
+    com.gopawpaw.droid.http.HttpRequest httpRequest -> b
+    com.gopawpaw.droid.http.HttpResponse httpResponse -> c
+    com.gopawpaw.droid.http.HttpThreadListener mHttpThreadListener -> d
+    java.net.HttpURLConnection urlConnection -> e
+    void run() -> run
+    com.gopawpaw.droid.http.HttpThreadListener getHttpThreadListener() -> a
+com.gopawpaw.droid.http.HttpThreadListener -> com.gopawpaw.droid.b.l:
+    com.gopawpaw.droid.http.HttpRequest getHttpRequest() -> a
+    void finishHttpRequest(com.gopawpaw.droid.http.HttpRequest) -> a
+    void requestWait(com.gopawpaw.droid.http.HttpThread) -> a
+com.gopawpaw.droid.http.action.HttpActionBase -> com.gopawpaw.droid.b.a.a:
+    java.lang.String TAG -> a
+    android.app.Activity activity -> b
+    com.gopawpaw.droid.http.action.HttpActionListener httpActionListener -> c
+    java.lang.Class parserClass -> d
+    com.gopawpaw.droid.paser.ParserInterface mParser -> e
+    android.os.Handler mHandler -> f
+    void sendRequest$1ef468a(java.lang.Object) -> a
+    void httpResponse(com.gopawpaw.droid.http.HttpResponse) -> a
+    void actionResponse(int,java.lang.Object,int,int) -> a
+    java.lang.Object actionParse(byte[]) -> a
+    void showErrorMsg(java.lang.String) -> a
+com.gopawpaw.droid.http.action.HttpActionBase$1 -> com.gopawpaw.droid.b.a.b:
+    com.gopawpaw.droid.http.action.HttpActionBase this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+com.gopawpaw.droid.http.action.HttpActionDataCache -> com.gopawpaw.droid.b.a.c:
+    java.util.Map dataCacheMaps -> a
+    java.util.Map requestDataMaps -> b
+    com.gopawpaw.droid.struct.DataHashMap stateMaps -> c
+    int[] sizeTable -> d
+    int[] cacheIds -> e
+    java.util.Map getCache$992a3f6() -> a
+    int getCacheState$255f288() -> b
+    void saveToCache(int,int,java.lang.Object,java.lang.String,int) -> a
+    int dealUrlId(int) -> a
+com.gopawpaw.droid.http.action.HttpActionListener -> com.gopawpaw.droid.b.a.d:
+    void onHttpActionResponse(int,java.lang.Object,int,int) -> a
+com.gopawpaw.droid.log.AppLog -> com.gopawpaw.droid.c.a:
+    java.lang.String TAG -> p
+    int SAVE_MODE -> a
+    java.lang.String LOG_PRE -> b
+    boolean IS_SECURITY_LOG -> c
+    boolean IS_DEBUG -> d
+    int DEBUG_LEVEL -> e
+    boolean IS_LOG_POSITION -> f
+    boolean IS_SAVE_LOG_E -> g
+    boolean IS_SAVE_LOG_W -> h
+    boolean IS_SAVE_LOG_I -> i
+    boolean IS_SAVE_LOG_D -> j
+    boolean IS_SAVE_LOG_V -> k
+    java.lang.String LOG_DIR -> l
+    java.lang.String LOG_FILE_SUFFIX -> m
+    java.lang.String LOG_FILE_NAME -> n
+    java.text.SimpleDateFormat LOG_TIME_FORMAT -> q
+    java.text.SimpleDateFormat LOG_FILE_FORMAT -> o
+    void e(java.lang.String,java.lang.String) -> a
+    void i(java.lang.String,java.lang.String) -> b
+    void d(java.lang.String,java.lang.String) -> c
+    java.lang.String getPositionInfo() -> a
+    void saveLog(java.lang.String,java.lang.String,java.lang.String) -> a
+    java.io.File getLogFile(java.lang.String) -> a
+com.gopawpaw.droid.paser.JsonParser -> com.gopawpaw.droid.d.a:
+    java.lang.String TAG -> a
+    org.json.JSONObject parseData -> b
+    void actionParse(byte[]) -> a
+    int checkErrorCode$4cfcfd05(java.lang.Object) -> a
+    java.lang.Object getData() -> a
+com.gopawpaw.droid.paser.ParserInterface -> com.gopawpaw.droid.d.b:
+    void actionParse(byte[]) -> a
+    java.lang.Object getData() -> a
+    int checkErrorCode$4cfcfd05(java.lang.Object) -> a
+com.gopawpaw.droid.struct.DataHashMap -> com.gopawpaw.droid.e.a:
+com.gopawpaw.droid.utils.CommonUtils -> com.gopawpaw.droid.f.a:
+    java.lang.String TAG -> a
+    java.util.List activityList -> b
+    boolean isNetworkAvailable(android.content.Context) -> a
+    java.lang.String getVersionName$345a0d0(android.content.Context) -> d
+    java.lang.String getVersionName(android.content.Context) -> b
+    void remove(android.app.Activity) -> a
+    void add(android.app.Activity) -> b
+    void finishProgram() -> a
+    java.lang.String getIMEI(android.content.Context) -> c
+com.gopawpaw.droid.utils.FileUtil -> com.gopawpaw.droid.f.b:
+    java.lang.String TAG -> a
+    byte[] readStream(java.io.InputStream) -> a
+com.gopawpaw.droid.utils.SystemInfoUtils -> com.gopawpaw.droid.f.c:
+    android.os.StatFs statfs -> a
+    android.content.Context mContext -> b
+    java.util.HashMap logAndroidOsBuild() -> a
+com.gopawpaw.droid.utils.Tools -> com.gopawpaw.droid.f.d:
+    boolean isEmpty(java.lang.String) -> a
+    java.lang.Object getValuseFromJSONObject(org.json.JSONObject,java.lang.String[]) -> a
+com.tendcloud.tenddata.TCAgent -> com.tendcloud.tenddata.TCAgent:
+    int a -> a
+    int b -> b
+    long E -> i
+    int c -> c
+    int d -> d
+    int e -> e
+    java.lang.Long[][] f -> f
+    boolean g -> g
+    int j -> h
+    boolean J -> j
+    java.lang.String K -> k
+    boolean L -> l
+    android.content.Context M -> m
+    java.lang.String N -> n
+    java.lang.String O -> o
+    long P -> p
+    boolean Q -> q
+    int R -> r
+    void init(android.content.Context) -> init
+    java.lang.String a(android.os.Bundle,java.lang.String) -> a
+    void init(android.content.Context,java.lang.String,java.lang.String) -> init
+    void a() -> a
+    boolean b() -> b
+    android.content.Context c() -> c
+    java.lang.String d() -> d
+    java.lang.String getDeviceId(android.content.Context) -> getDeviceId
+    void onResume(android.app.Activity) -> onResume
+    void onPause(android.app.Activity) -> onPause
+    void onEvent(android.content.Context,java.lang.String) -> onEvent
+    void onEvent(android.content.Context,java.lang.String,java.lang.String) -> onEvent
+    void onEvent(android.content.Context,java.lang.String,java.lang.String,java.util.Map) -> onEvent
+    void onError(android.content.Context,java.lang.Throwable) -> onError
+    void a(int) -> a
+    void a(boolean) -> a
+    boolean e() -> e
+    void a(java.lang.String,long) -> a
+    void a(java.lang.String,java.lang.String) -> a
+    long b(java.lang.String,long) -> b
+    java.lang.String b(java.lang.String,java.lang.String) -> b
+    void b$1385ff() -> f
+    java.lang.String g() -> g
+    void c(long) -> a
+    long k() -> h
+    void f(long) -> b
+    com.tendcloud.tenddata.k o() -> i
+    com.tendcloud.tenddata.ae p() -> j
+    void a(android.os.Message) -> a
+    void setReportUncaughtExceptions(boolean) -> setReportUncaughtExceptions
+    void q() -> q
+    void a(java.lang.StringBuilder,java.lang.StackTraceElement[],java.lang.Throwable,int) -> a
+    void a(int,long) -> a
+    void a(java.io.Closeable) -> a
+    java.lang.String c(java.lang.String) -> a
+    int b$134621() -> k
+    boolean r() -> l
+    java.lang.String s() -> m
+    java.lang.String t() -> n
+    void a(java.lang.Throwable) -> a
+com.tendcloud.tenddata.a -> com.tendcloud.tenddata.a:
+    java.lang.String a -> a
+    long b -> b
+    int c -> c
+    int d -> d
+    int e -> e
+    int f -> f
+    int g -> g
+    java.util.List h -> h
+    java.util.List i -> i
+    int j -> j
+    int k -> k
+    int a() -> a
+    void a(com.tendcloud.tenddata.r) -> a
+    java.lang.String b() -> b
+com.tendcloud.tenddata.aa -> com.tendcloud.tenddata.b:
+    android.telephony.TelephonyManager c -> b
+    java.util.regex.Pattern f -> c
+    android.content.Context a -> a
+    void K() -> x
+    boolean a() -> a
+    boolean b() -> b
+    boolean c() -> c
+    org.apache.http.HttpHost d() -> d
+    java.lang.String e() -> e
+    java.lang.String d(java.lang.String) -> c
+    void b(java.lang.String,java.lang.String) -> a
+    java.lang.String f() -> y
+    java.lang.String h() -> z
+    java.lang.String i() -> f
+    java.lang.String j() -> g
+    java.lang.String a(java.lang.String,java.lang.String) -> b
+    java.lang.String k() -> h
+    java.lang.String m() -> i
+    java.lang.String n() -> j
+    java.lang.String p() -> k
+    com.tendcloud.tenddata.z q() -> l
+    boolean a(java.lang.String) -> a
+    com.tendcloud.tenddata.d r() -> m
+    java.lang.String s() -> n
+    java.lang.String t() -> o
+    java.lang.Long[][] u() -> p
+    long w() -> q
+    int x() -> r
+    java.lang.String B() -> s
+    java.lang.String C() -> t
+    java.lang.String D() -> u
+    java.lang.String b(java.lang.String) -> b
+    java.lang.String E() -> v
+    com.tendcloud.tenddata.o F() -> w
+    java.lang.String[] Q() -> A
+    int i(java.lang.String) -> d
+    int[] H() -> B
+    int J() -> C
+    java.lang.String a(android.database.Cursor,java.lang.String) -> a
+    java.lang.String j(java.lang.String) -> e
+    long k(java.lang.String) -> f
+    boolean c(java.lang.String) -> g
+com.tendcloud.tenddata.ab -> com.tendcloud.tenddata.ab:
+    long a -> a
+    int b -> b
+    java.lang.String c -> c
+    byte[] d -> d
+    java.lang.String e -> e
+    int a() -> a
+    void a(com.tendcloud.tenddata.r) -> a
+    java.lang.String b() -> b
+com.tendcloud.tenddata.ac -> com.tendcloud.tenddata.c:
+com.tendcloud.tenddata.ad -> com.tendcloud.tenddata.ad:
+    java.lang.String a -> a
+    long b -> b
+    int c -> c
+    java.lang.String d -> d
+    int a() -> a
+    void a(com.tendcloud.tenddata.r) -> a
+    java.lang.String b() -> b
+com.tendcloud.tenddata.ae -> com.tendcloud.tenddata.ae:
+    java.lang.String a -> a
+    java.lang.String b -> b
+    com.tendcloud.tenddata.d c -> c
+    java.lang.String d -> d
+    java.lang.String e -> e
+    java.lang.String f -> f
+    java.lang.String g -> g
+    java.lang.String h -> h
+    int i -> i
+    java.lang.String j -> j
+    int k -> k
+    java.lang.String l -> l
+    boolean m -> m
+    java.lang.String n -> n
+    java.lang.String o -> o
+    java.lang.String p -> p
+    java.lang.String q -> q
+    long r -> r
+    java.lang.String s -> s
+    java.lang.String t -> t
+    java.lang.String u -> u
+    int v -> v
+    int w -> w
+    int a() -> a
+    void a(com.tendcloud.tenddata.r) -> a
+    java.lang.String b() -> b
+com.tendcloud.tenddata.af -> com.tendcloud.tenddata.e:
+    android.app.Activity a -> a
+    void run() -> run
+com.tendcloud.tenddata.ag -> com.tendcloud.tenddata.f:
+    android.content.Context a -> a
+    java.lang.String b -> b
+    java.lang.String c -> c
+    void run() -> run
+com.tendcloud.tenddata.ah -> com.tendcloud.tenddata.h:
+    void run() -> run
+com.tendcloud.tenddata.ai -> com.tendcloud.tenddata.i:
+    long a(android.content.Context) -> a
+com.tendcloud.tenddata.aj -> com.tendcloud.tenddata.j:
+    android.app.Activity a -> a
+    void run() -> run
+com.tendcloud.tenddata.ak -> com.tendcloud.tenddata.l:
+    long a(android.telephony.gsm.GsmCellLocation) -> a
+com.tendcloud.tenddata.al -> com.tendcloud.tenddata.al:
+    java.lang.String a -> a
+    java.lang.String b -> b
+    int c -> c
+    long d -> d
+    java.util.Map e -> e
+    void a(com.tendcloud.tenddata.r) -> a
+    int a() -> a
+    java.lang.String b() -> b
+com.tendcloud.tenddata.am -> com.tendcloud.tenddata.n:
+    java.lang.String[] f -> a
+    void a(android.database.sqlite.SQLiteDatabase) -> a
+com.tendcloud.tenddata.an -> com.tendcloud.tenddata.s:
+    java.lang.String[] h -> a
+    void a(android.database.sqlite.SQLiteDatabase) -> a
+com.tendcloud.tenddata.ao -> com.tendcloud.tenddata.ao:
+    int a -> a
+    com.tendcloud.tenddata.a b -> b
+    com.tendcloud.tenddata.o c -> c
+    com.tendcloud.tenddata.ab d -> d
+    void a(com.tendcloud.tenddata.r) -> a
+    java.lang.String a() -> a
+com.tendcloud.tenddata.ap -> com.tendcloud.tenddata.t:
+    android.content.Context a -> a
+    java.lang.String b -> b
+    java.lang.String c -> c
+    java.util.Map d -> d
+    void run() -> run
+com.tendcloud.tenddata.aq -> com.tendcloud.tenddata.aq:
+    java.lang.String a -> a
+    java.lang.String b -> b
+    com.tendcloud.tenddata.k c -> c
+    com.tendcloud.tenddata.ae d -> d
+    java.util.List e -> e
+    long f -> f
+    long g -> g
+    long h -> h
+    java.lang.Long[][] i -> i
+    int a() -> a
+    void a(com.tendcloud.tenddata.r) -> a
+    java.lang.String b() -> b
+com.tendcloud.tenddata.ar -> com.tendcloud.tenddata.u:
+    android.content.Context a -> a
+    java.lang.Throwable b -> b
+    void run() -> run
+com.tendcloud.tenddata.b -> com.tendcloud.tenddata.v:
+    java.lang.String a -> a
+    java.lang.String b -> b
+    long c -> c
+    java.lang.String d -> d
+    java.lang.String e -> e
+    long f -> f
+    java.util.Map g -> g
+com.tendcloud.tenddata.c -> com.tendcloud.tenddata.y:
+    com.tendcloud.tenddata.c d -> a
+    android.os.Handler e -> b
+    android.os.HandlerThread f -> c
+    int g -> d
+    boolean h -> e
+    long i -> f
+    int j -> g
+    void a() -> d
+    com.tendcloud.tenddata.c b() -> a
+    android.os.Handler c() -> b
+    void run() -> run
+    void d() -> c
+    boolean f() -> e
+    void a(com.tendcloud.tenddata.aq) -> a
+com.tendcloud.tenddata.d -> com.tendcloud.tenddata.d:
+    double a -> a
+    double b -> b
+    int a() -> a
+    void a(com.tendcloud.tenddata.r) -> a
+    java.lang.String b() -> b
+com.tendcloud.tenddata.e -> com.tendcloud.tenddata.aa:
+    void handleMessage(android.os.Message) -> handleMessage
+com.tendcloud.tenddata.f -> com.tendcloud.tenddata.ac:
+    java.lang.String[] b -> a
+    void a(android.database.sqlite.SQLiteDatabase) -> a
+com.tendcloud.tenddata.g -> com.tendcloud.tenddata.g:
+    void a(com.tendcloud.tenddata.r) -> a
+com.tendcloud.tenddata.h -> com.tendcloud.tenddata.af:
+    java.lang.String[] b -> a
+    void a(android.database.sqlite.SQLiteDatabase) -> a
+com.tendcloud.tenddata.i -> com.tendcloud.tenddata.ag:
+    java.lang.Thread$UncaughtExceptionHandler a -> a
+com.tendcloud.tenddata.j -> com.tendcloud.tenddata.ah:
+com.tendcloud.tenddata.k -> com.tendcloud.tenddata.k:
+    java.lang.String a -> a
+    java.lang.String b -> b
+    java.lang.String c -> c
+    long d -> d
+    java.lang.String e -> e
+    java.lang.String f -> f
+    boolean g -> g
+    long h -> h
+    long i -> i
+    int a() -> a
+    void a(com.tendcloud.tenddata.r) -> a
+    java.lang.String b() -> b
+com.tendcloud.tenddata.l -> com.tendcloud.tenddata.ai:
+    java.lang.Class b -> b
+    java.lang.reflect.Method a -> a
+    boolean a() -> a
+com.tendcloud.tenddata.m -> com.tendcloud.tenddata.m:
+    java.util.concurrent.ExecutorService a -> a
+    void a(java.lang.Runnable) -> a
+com.tendcloud.tenddata.o -> com.tendcloud.tenddata.o:
+    java.lang.String a -> a
+    int b -> b
+    float c -> c
+    java.lang.String d -> d
+    java.lang.String e -> e
+    java.lang.String f -> f
+    int g -> g
+    int h -> h
+    int i -> i
+    int j -> j
+    int k -> k
+    int l -> l
+    int m -> m
+    float n -> n
+    float o -> o
+    int p -> p
+    java.lang.String q -> q
+    java.lang.String r -> r
+    java.lang.String s -> s
+    java.lang.String t -> t
+    java.lang.String u -> u
+    java.lang.String v -> v
+    java.lang.String w -> w
+    boolean x -> x
+    java.lang.String y -> y
+    java.lang.String z -> z
+    java.lang.String A -> A
+    java.lang.String B -> B
+    void a(com.tendcloud.tenddata.r) -> a
+    int a() -> a
+    java.lang.String b() -> b
+com.tendcloud.tenddata.p -> com.tendcloud.tenddata.p:
+    boolean a$53ef7092(java.lang.String,byte[]) -> a
+    boolean a(com.tendcloud.tenddata.aq) -> a
+com.tendcloud.tenddata.q -> com.tendcloud.tenddata.q:
+    java.lang.String a(com.tendcloud.tenddata.aq) -> a
+    java.lang.String a$7d011d0d(com.tendcloud.tenddata.ao) -> a
+com.tendcloud.tenddata.r -> com.tendcloud.tenddata.r:
+    byte[] a -> a
+    java.io.OutputStream b -> b
+    com.tendcloud.tenddata.r a(java.math.BigInteger) -> a
+    com.tendcloud.tenddata.r a(boolean) -> a
+    int b(boolean) -> b
+    com.tendcloud.tenddata.r a(java.lang.Boolean) -> a
+    com.tendcloud.tenddata.r a(byte) -> a
+    com.tendcloud.tenddata.r a(java.lang.Byte) -> a
+    com.tendcloud.tenddata.r a(byte[]) -> a
+    com.tendcloud.tenddata.r a(java.lang.Long[]) -> a
+    int b(byte[]) -> b
+    com.tendcloud.tenddata.r a(java.nio.ByteBuffer) -> a
+    com.tendcloud.tenddata.r a(double) -> a
+    int b(double) -> b
+    com.tendcloud.tenddata.r a(java.lang.Double) -> a
+    com.tendcloud.tenddata.r a(float) -> a
+    int b(float) -> b
+    com.tendcloud.tenddata.r a(java.lang.Float) -> a
+    com.tendcloud.tenddata.r a(int) -> a
+    com.tendcloud.tenddata.r a(java.lang.Integer) -> a
+    com.tendcloud.tenddata.r a(java.util.List) -> a
+    com.tendcloud.tenddata.r a(long) -> a
+    com.tendcloud.tenddata.r a(java.lang.Long) -> a
+    com.tendcloud.tenddata.r a(java.util.Map) -> a
+    com.tendcloud.tenddata.r a(com.tendcloud.tenddata.g) -> a
+    com.tendcloud.tenddata.r a(short) -> a
+    com.tendcloud.tenddata.r a(java.lang.Short) -> a
+    com.tendcloud.tenddata.r a(java.lang.String) -> a
+    com.tendcloud.tenddata.r b(int) -> b
+    int c(int) -> c
+    com.tendcloud.tenddata.r b(java.math.BigInteger) -> b
+    com.tendcloud.tenddata.r c(boolean) -> c
+    com.tendcloud.tenddata.r b(byte) -> b
+    com.tendcloud.tenddata.r c(byte[]) -> c
+    com.tendcloud.tenddata.r a(byte[],int,int) -> a
+    com.tendcloud.tenddata.r b(java.nio.ByteBuffer) -> b
+    com.tendcloud.tenddata.r c(double) -> c
+    com.tendcloud.tenddata.r a() -> a
+    com.tendcloud.tenddata.r c(float) -> c
+    com.tendcloud.tenddata.r d(int) -> d
+    com.tendcloud.tenddata.r b(long) -> b
+    int c(long) -> c
+    com.tendcloud.tenddata.r e(int) -> e
+    com.tendcloud.tenddata.r b() -> b
+    com.tendcloud.tenddata.r f(int) -> f
+    com.tendcloud.tenddata.r d(byte[]) -> d
+    com.tendcloud.tenddata.r b(byte[],int,int) -> b
+    com.tendcloud.tenddata.r b(short) -> b
+    com.tendcloud.tenddata.r b(java.lang.String) -> b
+    int c(java.lang.String) -> c
+    com.tendcloud.tenddata.r c() -> c
+com.tendcloud.tenddata.s -> com.tendcloud.tenddata.aj:
+    android.database.sqlite.SQLiteDatabase e -> a
+    int f -> b
+    void a(android.content.Context) -> a
+    void a() -> c
+    void b() -> a
+    long a(java.lang.String,long,long,int) -> a
+    void a(java.lang.String) -> a
+    void a(java.lang.String,int) -> a
+    void b(java.lang.String) -> b
+    java.util.List d() -> b
+    long a$6945f8a6(java.lang.String,java.lang.String,long,java.lang.String,long) -> a
+    long a(long) -> e
+    void a(long,long) -> a
+    void b(long) -> a
+    void c(java.lang.String) -> c
+    java.util.List a$5f01b0fe(java.lang.String) -> d
+    boolean a(java.lang.String,java.lang.String,java.lang.String,long,java.util.Map) -> a
+    byte[] a(java.util.Map) -> a
+    java.util.Map a(byte[]) -> a
+    void c(long) -> b
+    void d(java.lang.String) -> e
+    java.util.List b$5f01b0fe(java.lang.String) -> f
+    long a(java.util.List) -> a
+    long e(java.lang.String) -> g
+    long b(java.util.List) -> b
+    long a(java.lang.String,com.tendcloud.tenddata.ab,java.lang.StringBuffer) -> a
+    long a(long,java.lang.String) -> a
+    void d(long) -> c
+    java.util.List e(long) -> d
+com.tendcloud.tenddata.u -> com.tendcloud.tenddata.ak:
+com.tendcloud.tenddata.v -> com.tendcloud.tenddata.am:
+com.tendcloud.tenddata.w -> com.tendcloud.tenddata.w:
+com.tendcloud.tenddata.x -> com.tendcloud.tenddata.x:
+    java.lang.String a -> a
+    java.lang.String b -> b
+    java.lang.String c -> c
+    java.lang.String d -> d
+    java.lang.String e -> e
+    java.lang.String f -> f
+    java.lang.String g -> g
+com.tendcloud.tenddata.z -> com.tendcloud.tenddata.z:
+    java.lang.String a -> a
+    java.lang.String b -> b
+    java.lang.String c -> c
+    int d -> d
+    int e -> e
+im.device.appshare.AboutActivity -> im.device.appshare.AboutActivity:
+    void onCreate(android.os.Bundle) -> onCreate
+    void onResume() -> onResume
+    void onPause() -> onPause
+im.device.appshare.DeviceAppShareActivity -> im.device.appshare.DeviceAppShareActivity:
+    int MENU_1 -> b
+    int MENU_2 -> c
+    android.widget.EditText mETSearch -> d
+    android.widget.TextView mTvResult -> e
+    android.widget.ListView mListView -> f
+    im.device.appshare.adapter.AppsListAdapter mDeviceAppsAdapter -> g
+    java.util.List mListData -> h
+    com.gopawpaw.droid.http.action.HttpActionBase mAction -> i
+    java.lang.String mApkUrl -> j
+    im.device.appshare.SelectShareDialog mSelectShareDialog -> k
+    im.device.appshare.SelectOptionDialog mSelectOptionDialog -> l
+    android.text.TextWatcher mTextWatcher -> m
+    android.os.Handler mHandler -> n
+    android.os.Handler mUIHandler -> o
+    void onCreate(android.os.Bundle) -> onCreate
+    void onResume() -> onResume
+    void onPause() -> onPause
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+    boolean onItemLongClick(android.widget.AdapterView,android.view.View,int,long) -> onItemLongClick
+    void sendShareApk(java.lang.String,java.lang.String) -> b
+    void sendShareText(java.lang.String,java.lang.String,int) -> a
+    void onHttpActionResponse(int,java.lang.Object,int,int) -> a
+    void onMessageDialogBtn1Click(int) -> a
+    void onMessageDialogBtn2Click(int) -> b
+    void onMessageDialogCancel(int) -> c
+    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    boolean onMenuItemSelected(int,android.view.MenuItem) -> onMenuItemSelected
+    void onSelectShareItem(int,android.content.pm.PackageInfo) -> a
+    void onSelectOptionItem(int,android.content.pm.PackageInfo) -> b
+    java.util.Map getAppInfo(android.content.pm.PackageInfo) -> a
+    void access$0(im.device.appshare.DeviceAppShareActivity,java.lang.String) -> a
+    android.widget.TextView access$1(im.device.appshare.DeviceAppShareActivity) -> a
+    im.device.appshare.adapter.AppsListAdapter access$2(im.device.appshare.DeviceAppShareActivity) -> b
+    void access$3(im.device.appshare.DeviceAppShareActivity,int,java.lang.String,java.lang.String) -> a
+im.device.appshare.DeviceAppShareActivity$1 -> im.device.appshare.a:
+    im.device.appshare.DeviceAppShareActivity this$0 -> a
+    void afterTextChanged(android.text.Editable) -> afterTextChanged
+    void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
+    void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
+im.device.appshare.DeviceAppShareActivity$2 -> im.device.appshare.b:
+    im.device.appshare.DeviceAppShareActivity this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+im.device.appshare.DeviceAppShareActivity$3 -> im.device.appshare.c:
+    im.device.appshare.DeviceAppShareActivity this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+im.device.appshare.SelectOptionDialog -> im.device.appshare.d:
+    android.view.View contentView -> f
+    android.widget.Button mBtnOpen -> g
+    android.widget.Button mBtnManage -> h
+    android.widget.Button mBtnUninstall -> i
+    android.content.pm.PackageInfo data -> j
+    im.device.appshare.SelectOptionDialog$OnSelectOptionItem mOnSelectOptionItem -> k
+    android.view.View$OnClickListener mOnClickListener -> l
+    android.view.View createContentView() -> a
+    void setData(android.content.pm.PackageInfo) -> a
+    im.device.appshare.SelectOptionDialog$OnSelectOptionItem access$0(im.device.appshare.SelectOptionDialog) -> a
+    android.content.pm.PackageInfo access$1(im.device.appshare.SelectOptionDialog) -> b
+im.device.appshare.SelectOptionDialog$1 -> im.device.appshare.e:
+    im.device.appshare.SelectOptionDialog this$0 -> a
+    void onClick(android.view.View) -> onClick
+im.device.appshare.SelectOptionDialog$OnSelectOptionItem -> im.device.appshare.f:
+    void onSelectOptionItem(int,android.content.pm.PackageInfo) -> b
+im.device.appshare.SelectShareDialog -> im.device.appshare.g:
+    android.view.View contentView -> f
+    android.widget.Button mBtnShareApk -> g
+    android.widget.Button mBtnShareLink -> h
+    android.content.pm.PackageInfo data -> i
+    im.device.appshare.SelectShareDialog$OnSelectShareItem mOnSelectShareItem -> j
+    android.view.View$OnClickListener mOnClickListener -> k
+    android.view.View createContentView() -> a
+    void setData(android.content.pm.PackageInfo) -> a
+    im.device.appshare.SelectShareDialog$OnSelectShareItem access$0(im.device.appshare.SelectShareDialog) -> a
+    android.content.pm.PackageInfo access$1(im.device.appshare.SelectShareDialog) -> b
+im.device.appshare.SelectShareDialog$1 -> im.device.appshare.h:
+    im.device.appshare.SelectShareDialog this$0 -> a
+    void onClick(android.view.View) -> onClick
+im.device.appshare.SelectShareDialog$OnSelectShareItem -> im.device.appshare.i:
+    void onSelectShareItem(int,android.content.pm.PackageInfo) -> a
+im.device.appshare.adapter.AppsListAdapter -> im.device.appshare.a.a:
+    java.lang.String TAG -> a
+    android.view.LayoutInflater mLayoutInflater -> b
+    java.util.List mListData -> c
+    android.content.Context mContext -> d
+    void setData(java.util.List) -> a
+    int getCount() -> getCount
+    android.content.pm.PackageInfo getItem(int) -> a
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+    java.lang.Object getItem(int) -> getItem
+im.device.appshare.adapter.AppsListAdapter$ViewHolder -> im.device.appshare.a.b:
+    android.widget.ImageView icon -> a
+    android.widget.TextView appName -> b
+    android.widget.TextView appPackage -> c
+    android.widget.TextView versionName -> d
+    android.widget.TextView versionCode -> e
+    im.device.appshare.adapter.AppsListAdapter this$0 -> f
+im.device.appshare.utils.Tools -> im.device.appshare.b.a:
+    void searchInfoInThread$4e587d36(android.content.Context,java.util.List,java.lang.String,android.os.Handler) -> a
+    java.util.Map getDeviceInfo(android.content.Context) -> a
+im.device.appshare.utils.Tools$1 -> im.device.appshare.b.b:
+    android.content.Context val$context -> a
+    java.util.List val$list -> b
+    int val$infoType -> c
+    java.lang.String val$like -> d
+    int val$what -> e
+    android.os.Handler val$handler -> f
+    void run() -> run

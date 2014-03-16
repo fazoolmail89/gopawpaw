@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="channel_friend">Friend</string>
+    <string name="channel_device_im">device.im</string>
+    <string name="channel_baidu">Baidu Market</string>
+    <string name="channel_wandoujia">wandoujia.com</string>
+    <string name="channel_hiapk">hiapk.com</string>
+    <string name="channel_anzhi">anzhi.com</string>
+    <string name="channel_gfan">gfan.com</string>
+    
+</resources>
