@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color gray"
+    android:textColor="@color/gray"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color solid_red"
+    android:textColor="@color/solid_red"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="30dp" 
+    android:text="color solid_blue"
+    android:textColor="@color/solid_blue"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color solid_green"
+    android:textColor="@color/solid_green"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color solid_yellow"
+    android:textColor="@color/solid_yellow"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color colorSelection"
+    android:textColor="@color/colorSelection"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color white"
+    android:textColor="@color/white"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color backColor"
+    android:textColor="@color/backColor"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color light_gray"
+    android:textColor="@color/light_gray"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color deep_blue"
+    android:textColor="@color/deep_blue"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color divider_color"
+    android:textColor="@color/divider_color"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color light_blue"
+    android:textColor="@color/light_blue"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color tab_text_color"
+    android:textColor="@color/tab_text_color"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color window_background"
+    android:textColor="@color/window_background"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color grid_dark_background"
+    android:textColor="@color/grid_dark_background"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color bubble_dark_background"
+    android:textColor="@color/bubble_dark_background"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color delete_color_filter"
+    android:textColor="@color/delete_color_filter"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color appwidget_error_color"
+    android:textColor="@color/appwidget_error_color"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color snag_callout_color"
+    android:textColor="@color/snag_callout_color"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color gesture_color"
+    android:textColor="@color/gesture_color"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color uncertain_gesture_color"
+    android:textColor="@color/uncertain_gesture_color"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color col_pa01"
+    android:textColor="@color/col_pa01"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color col_pa02"
+    android:textColor="@color/col_pa02"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color col_pa03"
+    android:textColor="@color/col_pa03"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color col_pa04"
+    android:textColor="@color/col_pa04"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color col_pa05"
+    android:textColor="@color/col_pa05"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color col_pa06"
+    android:textColor="@color/col_pa06"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color col_pa07"
+    android:textColor="@color/col_pa07"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color transparent"
+    android:textColor="@color/transparent"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color black"
+    android:textColor="@color/black"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color red"
+    android:textColor="@color/red"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+ <TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="color lr_color_blue"
+    android:textColor="@color/lr_color_blue"
+    android:background="@drawable/table_content_none_01"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="drawable red"
+    android:background="@drawable/red"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="drawable blue"
+    android:background="@drawable/blue"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="drawable green"
+    android:background="@drawable/green"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="drawable yellow"
+    android:background="@drawable/yellow"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="drawable touming"
+    android:background="@drawable/touming"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="drawable translucent_background"
+    android:background="@drawable/translucent_background"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="drawable transparent_background"
+    android:background="@drawable/transparent_background"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="39dp" 
+    android:text="drawable half_translucent_background"
+    android:background="@drawable/half_translucent_background"
+    android:gravity="center_horizontal|center_vertical"
+    android:textSize="18sp"
+    />
+
+</LinearLayout>
+</ScrollView>
