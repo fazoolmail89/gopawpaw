@@ -411,11 +411,18 @@ public class DeviceAppShareActivity extends BaseActivity implements HttpActionLi
 	@Override
 	public void onHttpActionResponse(int state, Object data, String urlId,
 			int connectionId, Object obj) {
-		AppLog.d(TAG, "state="+state+" onHttpActionResponse="+data);
+		JSONObject json = null;
+		try {
+			String str = new String((byte[])data);
+			json = new JSONObject(str);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		AppLog.d(TAG, "state="+state+" onHttpActionResponse="+json);
 		Message msg = new Message();
 		msg.what = state;
 		msg.arg2 = connectionId;
-		msg.obj = data;
+		msg.obj = json;
 
 		mUIHandler.sendMessage(msg);
 	}
