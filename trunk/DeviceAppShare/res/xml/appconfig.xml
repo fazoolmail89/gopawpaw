@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <appconfig>
 	<!-- 是否是生产环境 -->
-	<IS_PRODUCT valuse="false"/>
+	<IS_PRODUCT valuse="true"/>
 	
 	<!-- 日志配置: debug(是否打开日志)；level(日志级别：v\d\i\w\e) -->
-	<LOG debug="true" level="v"/>
+	<LOG debug="false" level="v"/>
 	
 	<!-- sdcard根路径 -->
 	<SDCARD_ROOT valuse="sdcard_root"/>
