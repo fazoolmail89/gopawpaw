@@ -66,8 +66,8 @@ public class HttpAction implements HttpListener {
 	 * 
 	 * @param urlId
 	 */
-	public void sendRequest(String urlId,Object obj) {
-		sendRequest(urlId, 0, this, null, false,HttpRequest.REQUEST_METHOD_GET,obj);
+	public void sendRequest(String urlId,Object paramObj) {
+		sendRequest(urlId, 0, this, paramObj, false,HttpRequest.REQUEST_METHOD_GET,null);
 	}
 
 
