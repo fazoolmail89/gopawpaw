@@ -3,7 +3,7 @@
     <string name="hello">Hello World, DeviceAppsActivity!</string>
     <string name="app_name">App分享</string>
     
-    <string name="select_share_title">您将分享《%1s》</string>
+    <string name="select_share_title">您将对《%1s》进行：</string>
     <string name="select_share_apk">分享APK安装包</string>
     <string name="select_share_link">分享下载链接</string>
     
@@ -14,7 +14,7 @@
     
     
     <string name="about_content1">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
-        App分享 是一款能快速将本设备已安装应用提取出安装包分享给另一台Android设备的软件。界面简洁，使用简单，免费使用，无广告，是您首选的常用工具。
+        App分享 是一款能快速将本设备已安装应用提取出安装包分享给另一台Android设备的软件。界面简洁，使用简单，无费用，无广告，是您首选的常用装机必备工具。
         </string>
       <string name="about_content2">
         使用说明：\n\n &#160;&#160;&#160;&#160;
