@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World, DeviceAppsActivity!</string>
-    <string name="app_name">App分享</string>
+    <string name="app_name">平安App分享</string>
     
     <string name="select_share_title">您将对《%1s》进行：</string>
     <string name="select_share_apk">分享APK安装包</string>
@@ -35,4 +35,5 @@
         当前版本：%1s
         </string>
      <string name="check_version">检查新版本</string>
+     <string name="scanner">扫描蓝牙</string>
 </resources>
