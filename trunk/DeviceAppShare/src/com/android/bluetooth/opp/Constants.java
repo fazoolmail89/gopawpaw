@@ -245,7 +245,7 @@ public class Constants {
     public static final boolean VERBOSE = true;
 
     /** use TCP socket instead of Rfcomm Socket to develop */
-    public static final boolean USE_TCP_DEBUG = false;
+//    public static final boolean USE_TCP_DEBUG = false;
 
     /** use simple TCP server started from TestActivity */
     public static final boolean USE_TCP_SIMPLE_SERVER = false;

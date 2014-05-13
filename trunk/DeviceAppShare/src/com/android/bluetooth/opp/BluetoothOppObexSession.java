@@ -65,6 +65,10 @@ public interface BluetoothOppObexSession {
     int MSG_CONNECT_TIMEOUT = 4;
     
     int MSG_CONNECT_SUCCESS = 5;
+    
+    int MSG_TRANSFER_START = 6;
+    
+    int MSG_TRANSFER_PROGRESS = 7;
 
     int SESSION_TIMEOUT = 50000;
 

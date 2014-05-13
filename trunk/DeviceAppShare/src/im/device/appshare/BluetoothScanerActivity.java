@@ -25,7 +25,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.android.bluetooth.opp.BluetoothOppShareInfo;
 import com.gopawpaw.droidcore.activity.BaseActivity;
+import com.pingan.plugins.bluetooth.obexshare.BluetoothOppObexShare;
+import com.pingan.plugins.bluetooth.obexshare.OppObexShareCallback;
 import com.pingan.plugins.bluetooth.scanner.Scanner;
 import com.pingan.plugins.bluetooth.scanner.ScannerCallback;
 import com.pingan.plugins.bluetooth.share.BluetoothShare;
@@ -193,9 +196,57 @@ public class BluetoothScanerActivity extends BaseActivity implements
 		
 //		BluetoothOppManager b;
 //		sendBluetoothDevice(device);
-		BluetoothShare.Factory.create(this, device).shareFile("*/*", apkPath);
+//		BluetoothShare.Factory.create(this, device).shareFile("*/*", apkPath);
+	    mBluetoothOppObexShare = BluetoothOppObexShare.Factory.create(getApplicationContext(), device, mOppObexShareCallback).connect();
 	}
-	
+	private BluetoothOppObexShare mBluetoothOppObexShare;
+	private OppObexShareCallback mOppObexShareCallback = new OppObexShareCallback(){
+		
+		@Override
+		public void onConnect(int state) {
+			// TODO Auto-generated method stub
+			AppLog.i(TAG, "onConnect:"+state);
+			mBluetoothOppObexShare.shareFile("*/*", apkPath);
+		}
+
+		@Override
+		public void onDisconnect(int state) {
+			// TODO Auto-generated method stub
+			AppLog.i(TAG, "onDisconnect:"+state);
+		}
+		
+		@Override
+		public void onTransferStart(BluetoothOppShareInfo share, int size) {
+			// TODO Auto-generated method stub
+			AppLog.i(TAG, "onTransferStart:"+size);
+		}
+
+		@Override
+		public void onTransferProgress(BluetoothOppShareInfo share, int progress) {
+			// TODO Auto-generated method stub
+			AppLog.i(TAG, "onTransferProgress:"+progress);
+		}
+
+		@Override
+		public void onShareTimeout(BluetoothOppShareInfo share) {
+			// TODO Auto-generated method stub
+			AppLog.i(TAG, "onShareTimeout:"+share);
+		}
+
+		@Override
+		public void onShareFailed(BluetoothOppShareInfo share, int failReason) {
+			// TODO Auto-generated method stub
+			AppLog.i(TAG, "onDisconnect:"+failReason);
+		}
+
+		@Override
+		public void onShareSuccess(BluetoothOppShareInfo share) {
+			// TODO Auto-generated method stub
+			AppLog.i(TAG, "onShareSuccess:"+share);
+		}
+
+		
+	};
 	
 	private void sendDevicePickedIntent(BluetoothDevice device) {
 		String action = "android.bluetooth.devicepicker.action.DEVICE_SELECTED";//BluetoothDevicePicker.ACTION_DEVICE_SELECTED
