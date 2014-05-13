@@ -195,14 +195,23 @@ public class DeviceAppShareActivity extends BaseActivity implements HttpActionLi
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		// TODO Auto-generated method stub
 		PackageInfo pinfo = mDeviceAppsAdapter.getItem(arg2);
-		mSelectShareDialog.setData(pinfo);
-		if(!mSelectShareDialog.isShowing()){
-			mSelectShareDialog.show();
-		}
-		
+//		mSelectShareDialog.setData(pinfo);
+//		if(!mSelectShareDialog.isShowing()){
+//			mSelectShareDialog.show();
+//		}
+//		
 		Map<String,Object> map = getAppInfo(pinfo);
 		String label = map.get("应用名")+"："+pinfo.packageName;
-		TCAgent.onEvent(this, "应用分享",label,map);
+//		TCAgent.onEvent(this, "应用分享",label,map);
+		
+		String apkPath = pinfo.applicationInfo.sourceDir;
+		String appName = pinfo.applicationInfo.loadLabel(getPackageManager())
+		.toString();
+//		sendShareApk(appName, apkPath);
+		BluetoothScanerActivity.actionStart(this, appName, apkPath);
+		
+		TCAgent.onEvent(this, "应用分享-分享apk",label,map);
+		
 	}
 	
 	@Override

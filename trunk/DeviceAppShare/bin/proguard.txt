@@ -1,6 +1,0 @@
-# view AndroidManifest.xml #generated:20
--keep class im.device.appshare.AboutActivity { <init>(...); }
-
-# view AndroidManifest.xml #generated:11
--keep class im.device.appshare.DeviceAppShareActivity { <init>(...); }
-
