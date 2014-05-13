@@ -89,12 +89,13 @@ public class BluetoothOppSendFileInfo {
         mStatus = status;
     }
     
-    public static BluetoothOppSendFileInfo generateFileInfo(String filePath,String name,String contentType) {
-        String fileName = name;
+    public static BluetoothOppSendFileInfo generateFileInfo(String filePath,String contentType) {
+        String fileName = null;
         long length = 0;
         FileInputStream is = null;
         try {
         	File f = new File(filePath);
+        	fileName = f.getName();
         	length = f.length();
         	is = new FileInputStream(f);
 		} catch (Exception e) {
