@@ -30,32 +30,54 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.android.bluetooth.opp;
+package com.pingan.plugins.bluetooth.opp;
 
+import android.os.Handler;
 
 /**
- * This class stores information about a single OBEX share, e.g. one object
- * send/receive to a destination address.
+ * Interface for control the state of an OBEX Session.
  */
-public class BluetoothOppShareInfo {
-	
-	public String mFilePath;
-	
-    public String mName;
-    
-    public String mMimetype;
-    
-    public String mDestination;
+public interface BluetoothOppObexSession {
 
-    public int mStatus;
+    /**
+     * Message to notify when a transfer is completed For outbound share, it
+     * means one file has been sent. For inbounds share, it means one file has
+     * been received.
+     */
+    int MSG_SHARE_COMPLETE = 0;
 
-	public BluetoothOppShareInfo(String mFilePath, String mName,
-			String mMimetype, String mDestination, int mStatus) {
-		super();
-		this.mFilePath = mFilePath;
-		this.mName = mName;
-		this.mMimetype = mMimetype;
-		this.mDestination = mDestination;
-		this.mStatus = mStatus;
-	}
+    /**
+     * Message to notify when a session is completed For outbound share, it
+     * should be a consequence of session.stop() For inbounds share, it should
+     * be a consequence of remote disconnect
+     */
+    int MSG_SESSION_COMPLETE = 1;
+
+    /** Message to notify when a BluetoothOppObexSession get any error condition */
+    int MSG_SESSION_ERROR = 2;
+
+    /**
+     * Message to notify when a BluetoothOppObexSession is interrupted when
+     * waiting for remote
+     */
+    int MSG_SHARE_INTERRUPTED = 3;
+
+    int MSG_CONNECT_TIMEOUT = 4;
+    
+    int MSG_CONNECT_SUCCESS = 5;
+    
+    int MSG_TRANSFER_START = 6;
+    
+    int MSG_TRANSFER_PROGRESS = 7;
+
+    int SESSION_TIMEOUT = 50000;
+
+    void start(Handler sessionHandler, int numShares);
+
+    void stop();
+
+    void addShare(BluetoothOppShareInfo share);
+
+    void unblock();
+
 }

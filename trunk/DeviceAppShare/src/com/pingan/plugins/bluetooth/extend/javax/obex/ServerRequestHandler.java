@@ -30,7 +30,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-package javax.obex;
+package com.pingan.plugins.bluetooth.extend.javax.obex;
 
 /***
  * The <code>ServerRequestHandler</code> class defines an event listener that

@@ -30,47 +30,47 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-package javax.obex;
+package com.pingan.plugins.bluetooth.extend.javax.obex;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /***
- * This interface defines the methods needed by a parent that uses the
- * PrivateInputStream and PrivateOutputStream objects defined in this package.
+ * The <code>ObexTransport</code> interface defines the underlying transport
+ * connection which carries the OBEX protocol( such as TCP, RFCOMM device file
+ * exposed by Bluetooth or USB in kernel, RFCOMM socket emulated in Android
+ * platform, Irda). This interface provides an abstract layer to be used by the
+ * <code>ObexConnection</code>. Each kind of medium shall have its own
+ * implementation to wrap and follow the same interface.
+ * <P>
+ * See section 1.2.2 of IrDA Object Exchange Protocol specification.
+ * <P>
+ * Different kind of medium may have different construction - for example, the
+ * RFCOMM device file medium may be constructed from a file descriptor or simply
+ * a string while the TCP medium usually from a socket.
  * @hide
  */
-public interface BaseStream {
+public interface ObexTransport {
 
-    /***
-     * Verifies that this object is still open.
-     * @throws IOException if the object is closed
-     */
-    void ensureOpen() throws IOException;
+    void create() throws IOException;
 
-    /***
-     * Verifies that additional information may be sent. In other words, the
-     * operation is not done.
-     * @throws IOException if the operation is completed
-     */
-    void ensureNotDone() throws IOException;
+    void listen() throws IOException;
 
-    /***
-     * Continues the operation since there is no data to read.
-     * @param sendEmpty <code>true</code> if the operation should send an empty
-     *        packet or not send anything if there is no data to send
-     * @param inStream <code>true</code> if the stream is input stream or is
-     *        output stream
-     * @return <code>true</code> if the operation was completed;
-     *         <code>false</code> if no operation took place
-     * @throws IOException if an IO error occurs
-     */
-    boolean continueOperation(boolean sendEmpty, boolean inStream) throws IOException;
+    void close() throws IOException;
 
-    /***
-     * Called when the output or input stream is closed.
-     * @param inStream <code>true</code> if the input stream is closed;
-     *        <code>false</code> if the output stream is closed
-     * @throws IOException if an IO error occurs
-     */
-    void streamClosed(boolean inStream) throws IOException;
+    void connect() throws IOException;
+
+    void disconnect() throws IOException;
+
+    InputStream openInputStream() throws IOException;
+
+    OutputStream openOutputStream() throws IOException;
+
+    DataInputStream openDataInputStream() throws IOException;
+
+    DataOutputStream openDataOutputStream() throws IOException;
+
 }

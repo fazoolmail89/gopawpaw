@@ -30,7 +30,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-package javax.obex;
+package com.pingan.plugins.bluetooth.extend.javax.obex;
 
 /***
  * The <code>ResponseCodes</code> class contains the list of valid response

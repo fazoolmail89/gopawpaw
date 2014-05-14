@@ -1,15 +1,13 @@
 package com.pingan.plugins.bluetooth.obexshare;
 
-import java.util.HashMap;
-
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 
-import com.android.bluetooth.opp.BluetoothOppShareInfo;
-import com.android.bluetooth.opp.BluetoothOppTransfer;
-import com.android.bluetooth.opp.BluetoothOppTransfer.BluetoothOppTransferListener;
-import com.android.bluetooth.opp.BluetoothShare;
+import com.pingan.plugins.bluetooth.obexshare.OppObexShareCallback.StatusType;
+import com.pingan.plugins.bluetooth.opp.BluetoothOppShareInfo;
+import com.pingan.plugins.bluetooth.opp.BluetoothOppTransfer;
+import com.pingan.plugins.bluetooth.opp.BluetoothOppTransfer.BluetoothOppTransferListener;
 
 /**
  * 蓝牙OPP 对象传输分享接口
@@ -18,7 +16,7 @@ import com.android.bluetooth.opp.BluetoothShare;
  */
 public interface BluetoothOppObexShare {
 	
-	void shareFile(String mimetype,String filePath);
+	void shareFile(BluetoothOppShareInfo shareInfo);
 	
 	BluetoothOppObexShare connect();
 	
@@ -26,18 +24,11 @@ public interface BluetoothOppObexShare {
 	
 	public static class Factory {
 		
-		private static HashMap<String,BluetoothOppObexShare> mBluetoothOppObexShareMap = new HashMap<String,BluetoothOppObexShare>();
-		
 		public static BluetoothOppObexShare create(Context context,BluetoothDevice device,OppObexShareCallback callback) {
 			if(context == null || device == null){
 				return null;
 			}
-			BluetoothOppObexShare oppObexShare = mBluetoothOppObexShareMap.get(device.getAddress());
-			if(oppObexShare == null){
-				oppObexShare = new BluetoothOppObexShareImpl(context,device,callback);
-				mBluetoothOppObexShareMap.put(device.getAddress(), oppObexShare);
-			}
-			return oppObexShare;
+			return  new BluetoothOppObexShareImpl(context,device,callback);
 		}
 		
 		static class BluetoothOppObexShareImpl implements BluetoothOppObexShare,BluetoothOppTransferListener{
@@ -55,7 +46,6 @@ public interface BluetoothOppObexShare {
 			
 			@Override
 			public BluetoothOppObexShare connect() {
-				// TODO Auto-generated method stub
 				BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
 				adapter.cancelDiscovery();
 				if(btOppT == null){
@@ -68,7 +58,6 @@ public interface BluetoothOppObexShare {
 			
 			@Override
 			public void disconnect() {
-				mBluetoothOppObexShareMap.remove(device.getAddress());
 				if(btOppT != null){
 					btOppT.stop();
 					btOppT = null;
@@ -76,20 +65,18 @@ public interface BluetoothOppObexShare {
 			}
 			
 			@Override
-			public void shareFile(String mimetype,
-					String filePath) {
+			public void shareFile(BluetoothOppShareInfo shareInfo) {
 				if(btOppT == null){
 					connect();
 				}
-				final BluetoothOppShareInfo info = new BluetoothOppShareInfo(filePath,"平安地推安装包.apk",mimetype,device.getAddress(),BluetoothShare.STATUS_PENDING);
-				btOppT.addShare(info);
+				btOppT.addShare(shareInfo);
 			}
 			
 			@Override
 			public void onShareTimeout(BluetoothOppShareInfo share) {
 				// TODO Auto-generated method stub
 				if(callback != null){
-					callback.onShareTimeout(share);
+					callback.onOppObexShareStatus(StatusType.onShareTimeout, 0, share);
 				}
 			}
 
@@ -98,14 +85,14 @@ public interface BluetoothOppObexShare {
 					int failReason) {
 				// TODO Auto-generated method stub
 				if(callback != null){
-					callback.onShareFailed(share, failReason);
+					callback.onOppObexShareStatus(StatusType.onShareFailed, failReason, share);
 				}
 			}
 
 			@Override
 			public void onConnect(int state) {
 				if(callback != null){
-					callback.onConnect(state);
+					callback.onOppObexShareStatus(StatusType.onConnect, state, null);
 				}
 			}
 
@@ -113,7 +100,7 @@ public interface BluetoothOppObexShare {
 			public void onDisconnect(int state) {
 				disconnect();
 				if(callback != null){
-					callback.onDisconnect(state);
+					callback.onOppObexShareStatus(StatusType.onDisconnect, state, null);
 				}
 			}
 
@@ -121,7 +108,7 @@ public interface BluetoothOppObexShare {
 			public void onTransferStart(BluetoothOppShareInfo share, int size) {
 				// TODO Auto-generated method stub
 				if(callback != null){
-					callback.onTransferStart(share, size);
+					callback.onOppObexShareStatus(StatusType.onTransferStart, size, share);
 				}
 			}
 
@@ -130,7 +117,7 @@ public interface BluetoothOppObexShare {
 					int progress) {
 				// TODO Auto-generated method stub
 				if(callback != null){
-					callback.onTransferProgress(share, progress);
+					callback.onOppObexShareStatus(StatusType.onTransferProgress, progress, share);
 				}
 			}
 
@@ -138,7 +125,7 @@ public interface BluetoothOppObexShare {
 			public void onShareSuccess(BluetoothOppShareInfo share) {
 				// TODO Auto-generated method stub
 				if(callback != null){
-					callback.onShareSuccess(share);
+					callback.onOppObexShareStatus(StatusType.onShareSuccess, 0, share);
 				}
 			}
 

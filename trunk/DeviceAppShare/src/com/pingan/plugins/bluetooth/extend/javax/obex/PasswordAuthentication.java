@@ -30,47 +30,50 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-package javax.obex;
-
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+package com.pingan.plugins.bluetooth.extend.javax.obex;
 
 /***
- * The <code>ObexTransport</code> interface defines the underlying transport
- * connection which carries the OBEX protocol( such as TCP, RFCOMM device file
- * exposed by Bluetooth or USB in kernel, RFCOMM socket emulated in Android
- * platform, Irda). This interface provides an abstract layer to be used by the
- * <code>ObexConnection</code>. Each kind of medium shall have its own
- * implementation to wrap and follow the same interface.
- * <P>
- * See section 1.2.2 of IrDA Object Exchange Protocol specification.
- * <P>
- * Different kind of medium may have different construction - for example, the
- * RFCOMM device file medium may be constructed from a file descriptor or simply
- * a string while the TCP medium usually from a socket.
+ * This class holds user name and password combinations.
  * @hide
  */
-public interface ObexTransport {
+public final class PasswordAuthentication {
 
-    void create() throws IOException;
+    private byte[] mUserName;
 
-    void listen() throws IOException;
+    private final byte[] mPassword;
 
-    void close() throws IOException;
+    /***
+     * Creates a new <code>PasswordAuthentication</code> with the user name and
+     * password provided.
+     * @param userName the user name to include; this may be <code>null</code>
+     * @param password the password to include in the response
+     * @throws NullPointerException if <code>password</code> is
+     *         <code>null</code>
+     */
+    public PasswordAuthentication(final byte[] userName, final byte[] password) {
+        if (userName != null) {
+            mUserName = new byte[userName.length];
+            System.arraycopy(userName, 0, mUserName, 0, userName.length);
+        }
 
-    void connect() throws IOException;
+        mPassword = new byte[password.length];
+        System.arraycopy(password, 0, mPassword, 0, password.length);
+    }
 
-    void disconnect() throws IOException;
+    /***
+     * Retrieves the user name that was specified in the constructor. The user
+     * name may be <code>null</code>.
+     * @return the user name
+     */
+    public byte[] getUserName() {
+        return mUserName;
+    }
 
-    InputStream openInputStream() throws IOException;
-
-    OutputStream openOutputStream() throws IOException;
-
-    DataInputStream openDataInputStream() throws IOException;
-
-    DataOutputStream openDataOutputStream() throws IOException;
-
+    /***
+     * Retrieves the password.
+     * @return the password
+     */
+    public byte[] getPassword() {
+        return mPassword;
+    }
 }

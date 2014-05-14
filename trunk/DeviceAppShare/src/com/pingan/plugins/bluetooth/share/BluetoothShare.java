@@ -3,21 +3,7 @@
  */
 package com.pingan.plugins.bluetooth.share;
 
-import java.io.File;
-import java.util.List;
-
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.content.ComponentName;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
-
-import com.android.bluetooth.opp.BluetoothOppBatch;
-import com.android.bluetooth.opp.BluetoothOppShareInfo;
-import com.android.bluetooth.opp.BluetoothOppTransfer;
 
 /**
  * @author jinhua

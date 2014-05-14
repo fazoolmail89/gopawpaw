@@ -30,12 +30,10 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.android.bluetooth.opp;
+package com.pingan.plugins.bluetooth.opp;
 
 import java.io.IOException;
 import java.util.UUID;
-
-import javax.obex.ObexTransport;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -48,6 +46,7 @@ import android.os.Message;
 import android.os.Process;
 import android.util.Log;
 
+import com.pingan.plugins.bluetooth.extend.javax.obex.ObexTransport;
 import com.pingan.plugins.bluetooth.util.AndroidSDKTool;
 
 /**
@@ -144,7 +143,7 @@ public class BluetoothOppTransfer{
                     */
                     if (V) Log.v(TAG, "receive RFCOMM_ERROR msg");
                     mConnectThread = null;
-                    markBatchFailed(BluetoothShare.STATUS_CONNECTION_ERROR);
+                    markBatchFailed(BluetoothOppShareInfo.STATUS_CONNECTION_ERROR);
 //                    mBatch.mStatus = Constants.BATCH_STATUS_FAILED;
                     break;
                 case RFCOMM_CONNECTED:
@@ -186,8 +185,8 @@ public class BluetoothOppTransfer{
                     * For inbounds session, do nothing. If there is next file to receive,it
                     * will be notified through onShareAdded()
                     */
-                    BluetoothOppShareInfo info = (BluetoothOppShareInfo)msg.obj;
-                    if (V) Log.v(TAG, "receive MSG_SHARE_COMPLETE for info " + info.mFilePath);
+                	BluetoothOppShareInfo info = (BluetoothOppShareInfo)msg.obj;
+                    if (V) Log.v(TAG, "receive MSG_SHARE_COMPLETE for info " + info.getFilePath());
                     mSession.stop();
                     if(mBluetoothOppTransferListener != null){
                 		mBluetoothOppTransferListener.onShareSuccess(info);
@@ -199,7 +198,7 @@ public class BluetoothOppTransfer{
                     * Handle session completed status Set batch status to
                     * finished
                     */
-                    BluetoothOppShareInfo info1 = (BluetoothOppShareInfo)msg.obj;
+                	BluetoothOppShareInfo info1 = (BluetoothOppShareInfo)msg.obj;
                     if (V) Log.v(TAG, "receive MSG_SESSION_COMPLETE for batch ");
 //                    mBatch.mStatus = Constants.BATCH_STATUS_FINISHED;
                     /*
@@ -214,7 +213,7 @@ public class BluetoothOppTransfer{
                     BluetoothOppShareInfo info2 = (BluetoothOppShareInfo)msg.obj;
                     mSession.stop();
 //                    mBatch.mStatus = Constants.BATCH_STATUS_FAILED;
-                    markBatchFailed(info2.mStatus);
+                    markBatchFailed(info2.getStatus());
                     tickShareStatus(mCurrentShare);
                     break;
 
@@ -234,7 +233,7 @@ public class BluetoothOppTransfer{
                         if (V) Log.v(TAG, "mTransport closed ");
 //                        mBatch.mStatus = Constants.BATCH_STATUS_FAILED;
                         if (info3 != null) {
-                            markBatchFailed(info3.mStatus);
+                            markBatchFailed(info3.getStatus());
                         } else {
                             markBatchFailed();
                         }
@@ -277,7 +276,7 @@ public class BluetoothOppTransfer{
     }
 
     private void markBatchFailed() {
-        markBatchFailed(BluetoothShare.STATUS_UNKNOWN_ERROR);
+        markBatchFailed(BluetoothOppShareInfo.STATUS_UNKNOWN_ERROR);
     }
 
     /*
@@ -460,7 +459,7 @@ public class BluetoothOppTransfer{
     }
     
     public void addShare(BluetoothOppShareInfo info) {
-    	if (V) Log.v(TAG, "addShare info:"+info.mFilePath);
+    	if (V) Log.v(TAG, "addShare info:"+info.getStatus());
     	mSessionHandler.obtainMessage(ADD_SHARE, info).sendToTarget();
     }
 

@@ -1,6 +1,6 @@
 package com.pingan.plugins.bluetooth.obexshare;
 
-import com.android.bluetooth.opp.BluetoothOppShareInfo;
+import com.pingan.plugins.bluetooth.opp.BluetoothOppShareInfo;
 
 /**
  * OPP 对象分享回调接口
@@ -13,19 +13,15 @@ public interface OppObexShareCallback {
 	public static final int STATE_SUCCESS = 1;
 	public static final int STATE_TIME_OUT = 2;
 	
-	public void onConnect(int state);
+	enum StatusType{
+		onConnect,
+		onDisconnect,
+		onTransferStart,
+		onTransferProgress,
+		onShareTimeout,
+		onShareFailed,
+		onShareSuccess
+	}
 	
-	public void onDisconnect(int state);
-	
-	public void onTransferStart(BluetoothOppShareInfo share,int size);
-	
-	public void onTransferProgress(BluetoothOppShareInfo share,int progress);
-	
-	public void onShareTimeout(BluetoothOppShareInfo share);
-	
-	public void onShareFailed(BluetoothOppShareInfo share,int failReason);
-	
-	public void onShareSuccess(BluetoothOppShareInfo share);
-
-	
+	public void onOppObexShareStatus(StatusType type,int value,BluetoothOppShareInfo shareInfo);
 }
