@@ -74,7 +74,6 @@ public interface BluetoothOppObexShare {
 			
 			@Override
 			public void onShareTimeout(BluetoothOppShareInfo share) {
-				// TODO Auto-generated method stub
 				if(callback != null){
 					callback.onOppObexShareStatus(StatusType.onShareTimeout, 0, share);
 				}
@@ -83,7 +82,6 @@ public interface BluetoothOppObexShare {
 			@Override
 			public void onShareFailed(BluetoothOppShareInfo share,
 					int failReason) {
-				// TODO Auto-generated method stub
 				if(callback != null){
 					callback.onOppObexShareStatus(StatusType.onShareFailed, failReason, share);
 				}
@@ -106,7 +104,6 @@ public interface BluetoothOppObexShare {
 
 			@Override
 			public void onTransferStart(BluetoothOppShareInfo share, int size) {
-				// TODO Auto-generated method stub
 				if(callback != null){
 					callback.onOppObexShareStatus(StatusType.onTransferStart, size, share);
 				}
@@ -115,7 +112,6 @@ public interface BluetoothOppObexShare {
 			@Override
 			public void onTransferProgress(BluetoothOppShareInfo share,
 					int progress) {
-				// TODO Auto-generated method stub
 				if(callback != null){
 					callback.onOppObexShareStatus(StatusType.onTransferProgress, progress, share);
 				}
@@ -123,13 +119,10 @@ public interface BluetoothOppObexShare {
 
 			@Override
 			public void onShareSuccess(BluetoothOppShareInfo share) {
-				// TODO Auto-generated method stub
 				if(callback != null){
 					callback.onOppObexShareStatus(StatusType.onShareSuccess, 0, share);
 				}
 			}
-
-
 		}
 	}
 }

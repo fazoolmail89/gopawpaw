@@ -13,6 +13,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 
+/**
+ * 蓝牙扫描接口
+ * @author LiJinHua
+ * @modify 2014年5月14日 下午2:39:11
+ */
 public interface Scanner {
 
 	public void setCallback(ScannerCallback callback);

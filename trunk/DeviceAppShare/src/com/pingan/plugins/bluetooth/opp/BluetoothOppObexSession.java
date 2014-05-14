@@ -69,6 +69,8 @@ public interface BluetoothOppObexSession {
     int MSG_TRANSFER_START = 6;
     
     int MSG_TRANSFER_PROGRESS = 7;
+    
+    int MSG_ACCESS_FILE_FAIL = 8;
 
     int SESSION_TIMEOUT = 50000;
 
