@@ -162,7 +162,6 @@ public class BluetoothOppTransfer{
                 	break;
                 case BluetoothOppObexSession.MSG_CONNECT_SUCCESS:
                 	if (V) Log.v(TAG, " BluetoothOppObexSession.MSG_CONNECT_SUCCESS");
-//                	mSession.addShare(mCurrentShare);
                 	if(mBluetoothOppTransferListener != null){
                 		mBluetoothOppTransferListener.onConnect(BluetoothOppObexSession.MSG_CONNECT_SUCCESS);
                 	}
@@ -402,13 +401,13 @@ public class BluetoothOppTransfer{
                 return;
             }
             try {
-            	if (V) Log.v(TAG, "Rfcomm socket connection attempt took " +
+            	if (D) Log.d(TAG, "Rfcomm socket connection attempt took " +
             			(System.currentTimeMillis() - timestamp) + " ms");
                 btSocket.connect();
                 BluetoothOppRfcommTransport transport;
                 transport = new BluetoothOppRfcommTransport(btSocket);
 
-                if (V) Log.v(TAG, "Send transport message " + transport.toString());
+                if (D) Log.d(TAG, "Send transport message " + transport.toString());
 
                 mSessionHandler.obtainMessage(RFCOMM_CONNECTED, transport).sendToTarget();
             } catch (IOException e) {

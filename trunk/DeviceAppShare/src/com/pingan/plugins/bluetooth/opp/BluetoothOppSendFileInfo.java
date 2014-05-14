@@ -96,6 +96,7 @@ public class BluetoothOppSendFileInfo {
         try {
         	File f = new File(filePath);
         	if(TextUtils.isEmpty(fileName)){
+        		if (D) Log.d(TAG, "file name is empty " + filePath);
         		fileName = f.getName();
         	}
         	length = f.length();
