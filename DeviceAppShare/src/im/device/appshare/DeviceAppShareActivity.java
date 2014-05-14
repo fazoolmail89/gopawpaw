@@ -6,6 +6,8 @@ import im.device.appshare.utils.Tools;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,7 +92,8 @@ public class DeviceAppShareActivity extends BaseActivity implements HttpActionLi
 		mListView = (ListView) findViewById(R.id.list);
 
 		mListData = getAppsList();
-
+		Collections.sort(mListData, mAppComparator);
+		
 		mDeviceAppsAdapter = new AppsListAdapter(this, mListData);
 
 		mListView.setAdapter(mDeviceAppsAdapter);
@@ -584,8 +587,6 @@ public class DeviceAppShareActivity extends BaseActivity implements HttpActionLi
 		}
 	}
 	
-		
-		
 	
 	/**
 	 * 获取应用程序信息，以便统计
@@ -605,5 +606,37 @@ public class DeviceAppShareActivity extends BaseActivity implements HttpActionLi
 		
 		return map;
 	}
+	
+	private AppComparator mAppComparator = new AppComparator();
+	
+	class AppComparator implements Comparator<PackageInfo>{
 
+		@Override
+		public int compare(PackageInfo lhs, PackageInfo rhs) {
+			boolean isPinganObject1 = lhs.packageName.startsWith("com.pingan");
+			boolean isPinganObject2 = rhs.packageName.startsWith("com.pingan");
+			if(isPinganObject1 && !isPinganObject2){
+				return -1;
+			}else if(!isPinganObject1 && isPinganObject2){
+				return 1;
+			}else{
+				String appName1 = lhs.applicationInfo.loadLabel(getPackageManager())
+						.toString();
+				String appName2 = rhs.applicationInfo.loadLabel(getPackageManager())
+						.toString();
+				isPinganObject1 = appName1.contains("平安");
+				isPinganObject2 = appName2.contains("平安");
+				
+				if(isPinganObject1 && !isPinganObject2){
+					return -1;
+				}else if(!isPinganObject1 && isPinganObject2){
+					return 1;
+				}else{
+					return 0;
+				}
+			}
+			
+		}
+		
+	}
 }
