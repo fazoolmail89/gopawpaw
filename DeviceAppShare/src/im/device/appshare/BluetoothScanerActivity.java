@@ -23,15 +23,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.bluetooth.opp.BluetoothOppShareInfo;
 import com.gopawpaw.droidcore.activity.BaseActivity;
 import com.pingan.plugins.bluetooth.obexshare.BluetoothOppObexShare;
 import com.pingan.plugins.bluetooth.obexshare.OppObexShareCallback;
+import com.pingan.plugins.bluetooth.obexshare.OppObexShareCallback.StatusType;
+import com.pingan.plugins.bluetooth.opp.BluetoothOppShareInfo;
 import com.pingan.plugins.bluetooth.scanner.Scanner;
 import com.pingan.plugins.bluetooth.scanner.ScannerCallback;
-import com.pingan.plugins.bluetooth.share.BluetoothShare;
 
 /**
  * @author jinhua
@@ -50,14 +51,16 @@ public class BluetoothScanerActivity extends BaseActivity implements
 
 	private static final int HANDLER_WHAT_FOUND = 0;
 	private static final int HANDLER_WHAT_DISCOVERY_FINISHED = 1;
-
+	private static final int HANDLER_WHAT_ONOPPOBEXSHARESTATUS = 2;
+	
 	private String appName;
 	private String apkPath;
 	private LinearLayout llBluetooths;
 	private Button btnScanner;
-	
+	private TextView tvProgress;
 	private Scanner bluetoothScanner;
 	
+	private int mProgressTotal = 0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -66,13 +69,21 @@ public class BluetoothScanerActivity extends BaseActivity implements
 
 		llBluetooths = (LinearLayout) findViewById(R.id.ll_bluetooths);
 		btnScanner = (Button) findViewById(R.id.btn_scanner);
+		tvProgress  = (TextView) findViewById(R.id.tv_progress);
 		btnScanner.setOnClickListener(this);
 		appName = getIntent().getExtras().getString("appName");
 		apkPath = getIntent().getExtras().getString("apkPath");
 		
 		bluetoothScanner = Scanner.Factory.create(this);
 		bluetoothScanner.setCallback(this);
-		bluetoothScanner.startDiscovery();
+		if(!bluetoothScanner.startDiscovery()){
+			mHandler.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					bluetoothScanner.startDiscovery();
+				}
+			}, 2000);
+		}
 //		filterBluetoothScanner.addAction(BluetoothDevice.ACTION_FOUND);// 用BroadcastReceiver来取得搜索结果
 //		filterBluetoothScanner.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
 //		filterBluetoothScanner.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
@@ -110,6 +121,10 @@ public class BluetoothScanerActivity extends BaseActivity implements
 			case HANDLER_WHAT_DISCOVERY_FINISHED:
 				Toast.makeText(BluetoothScanerActivity.this, "扫描结束",
 						Toast.LENGTH_SHORT).show();
+				break;
+			case HANDLER_WHAT_ONOPPOBEXSHARESTATUS:
+				Object[] objs = (Object[]) msg.obj;
+				onOppObexShareStatusUI((OppObexShareCallback.StatusType)objs[0],msg.arg1,(BluetoothOppShareInfo)objs[1]);
 				break;
 			default:
 				break;
@@ -201,52 +216,47 @@ public class BluetoothScanerActivity extends BaseActivity implements
 	}
 	private BluetoothOppObexShare mBluetoothOppObexShare;
 	private OppObexShareCallback mOppObexShareCallback = new OppObexShareCallback(){
-		
-		@Override
-		public void onConnect(int state) {
-			// TODO Auto-generated method stub
-			AppLog.i(TAG, "onConnect:"+state);
-			mBluetoothOppObexShare.shareFile("*/*", apkPath);
-		}
 
 		@Override
-		public void onDisconnect(int state) {
-			// TODO Auto-generated method stub
-			AppLog.i(TAG, "onDisconnect:"+state);
+		public void onOppObexShareStatus(StatusType type, int value,
+				BluetoothOppShareInfo shareInfo) {
+			Message msg = new Message();
+			msg.what = HANDLER_WHAT_ONOPPOBEXSHARESTATUS;
+			msg.arg1 = value;
+			msg.obj = new Object[]{type,shareInfo};
+			mHandler.sendMessage(msg);
 		}
-		
-		@Override
-		public void onTransferStart(BluetoothOppShareInfo share, int size) {
-			// TODO Auto-generated method stub
-			AppLog.i(TAG, "onTransferStart:"+size);
-		}
-
-		@Override
-		public void onTransferProgress(BluetoothOppShareInfo share, int progress) {
-			// TODO Auto-generated method stub
-			AppLog.i(TAG, "onTransferProgress:"+progress);
-		}
-
-		@Override
-		public void onShareTimeout(BluetoothOppShareInfo share) {
-			// TODO Auto-generated method stub
-			AppLog.i(TAG, "onShareTimeout:"+share);
-		}
-
-		@Override
-		public void onShareFailed(BluetoothOppShareInfo share, int failReason) {
-			// TODO Auto-generated method stub
-			AppLog.i(TAG, "onDisconnect:"+failReason);
-		}
-
-		@Override
-		public void onShareSuccess(BluetoothOppShareInfo share) {
-			// TODO Auto-generated method stub
-			AppLog.i(TAG, "onShareSuccess:"+share);
-		}
-
-		
 	};
+	
+	private void onOppObexShareStatusUI(OppObexShareCallback.StatusType type, int value,
+			BluetoothOppShareInfo shareInfo){
+		if(type == StatusType.onConnect){
+			BluetoothOppShareInfo share = new BluetoothOppShareInfo(apkPath,"平安地推-"+appName+".apk");
+			mBluetoothOppObexShare.shareFile(share);
+			
+			Toast.makeText(BluetoothScanerActivity.this, "蓝牙连接建立成功！",
+					Toast.LENGTH_SHORT).show();
+		}else if(type == StatusType.onDisconnect){
+			Toast.makeText(BluetoothScanerActivity.this, "蓝牙连接断开",
+					Toast.LENGTH_SHORT).show();
+		}else if(type == StatusType.onShareFailed){
+			Toast.makeText(BluetoothScanerActivity.this, "分享失败",
+					Toast.LENGTH_SHORT).show();
+		}else if(type == StatusType.onShareSuccess){
+			Toast.makeText(BluetoothScanerActivity.this, "分享成功",
+					Toast.LENGTH_SHORT).show();
+		}else if(type == StatusType.onShareTimeout){
+			Toast.makeText(BluetoothScanerActivity.this, "分享超时",
+					Toast.LENGTH_SHORT).show();
+		}else if(type == StatusType.onTransferStart){
+			tvProgress.setVisibility(View.VISIBLE);
+			mProgressTotal = value/1024;
+		}else if(type == StatusType.onTransferProgress){
+			int p = value;
+			String progress = (p/1024)+"kb/"+mProgressTotal+"kb";
+			tvProgress.setText(String.format(getString(R.string.transfer_progress), progress));
+		}
+	}
 	
 	private void sendDevicePickedIntent(BluetoothDevice device) {
 		String action = "android.bluetooth.devicepicker.action.DEVICE_SELECTED";//BluetoothDevicePicker.ACTION_DEVICE_SELECTED

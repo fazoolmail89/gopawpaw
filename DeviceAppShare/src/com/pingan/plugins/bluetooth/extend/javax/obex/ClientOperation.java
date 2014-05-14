@@ -30,7 +30,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-package javax.obex;
+package com.pingan.plugins.bluetooth.extend.javax.obex;
 
 import java.io.IOException;
 import java.io.InputStream;

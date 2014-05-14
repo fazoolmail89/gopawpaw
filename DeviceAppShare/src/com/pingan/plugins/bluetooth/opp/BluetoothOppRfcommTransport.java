@@ -30,7 +30,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.android.bluetooth.opp;
+package com.pingan.plugins.bluetooth.opp;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -40,7 +40,7 @@ import java.io.OutputStream;
 
 import android.bluetooth.BluetoothSocket;
 
-import javax.obex.ObexTransport;
+import com.pingan.plugins.bluetooth.extend.javax.obex.ObexTransport;
 
 public class BluetoothOppRfcommTransport implements ObexTransport {
 

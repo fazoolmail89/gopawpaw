@@ -30,7 +30,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.android.bluetooth.opp;
+package com.pingan.plugins.bluetooth.opp;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -38,11 +38,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-import javax.obex.ClientOperation;
-import javax.obex.ClientSession;
-import javax.obex.HeaderSet;
-import javax.obex.ObexTransport;
-import javax.obex.ResponseCodes;
+import com.pingan.plugins.bluetooth.extend.javax.obex.ClientOperation;
+import com.pingan.plugins.bluetooth.extend.javax.obex.ClientSession;
+import com.pingan.plugins.bluetooth.extend.javax.obex.HeaderSet;
+import com.pingan.plugins.bluetooth.extend.javax.obex.ObexTransport;
+import com.pingan.plugins.bluetooth.extend.javax.obex.ResponseCodes;
 
 import android.content.Context;
 import android.os.Handler;
@@ -150,13 +150,13 @@ public class BluetoothOppObexClientSession implements BluetoothOppObexSession {
         }
         
         public void addShare(BluetoothOppShareInfo info) {
-        	if (V) Log.v(TAG, "ClientThread.addShare info:"+info.mFilePath);
+        	if (V) Log.v(TAG, "ClientThread.addShare info:"+info.getFilePath());
             mShares.add(info);
         }
         
         private BluetoothOppShareInfo nextShareInfo(){
         	for(BluetoothOppShareInfo shareInfo :mShares){
-        		if(shareInfo != null && shareInfo.mStatus == BluetoothShare.STATUS_PENDING){
+        		if(shareInfo != null && shareInfo.getStatus() == BluetoothOppShareInfo.STATUS_PENDING){
         			return shareInfo;
         		}
         	}
@@ -279,21 +279,21 @@ public class BluetoothOppObexClientSession implements BluetoothOppObexSession {
 
         private void doSend(BluetoothOppSendFileInfo sendInfo) {
 
-            int status = BluetoothShare.STATUS_SUCCESS;
+            int status = BluetoothOppShareInfo.STATUS_SUCCESS;
             
             /* connection is established too fast to get first mInfo */
             while (sendInfo == null) {
                 try {
                     Thread.sleep(50);
                 } catch (InterruptedException e) {
-                    status = BluetoothShare.STATUS_CANCELED;
+                    status = BluetoothOppShareInfo.STATUS_CANCELED;
                 }
             }
             if (!mConnected) {
                 // Obex connection error
-                status = BluetoothShare.STATUS_CONNECTION_ERROR;
+                status = BluetoothOppShareInfo.STATUS_CONNECTION_ERROR;
             }
-            if (status == BluetoothShare.STATUS_SUCCESS) {
+            if (status == BluetoothOppShareInfo.STATUS_SUCCESS) {
                 /* do real send */
                 if (sendInfo.mFileName != null) {
                     status = sendFile(sendInfo);
@@ -301,13 +301,13 @@ public class BluetoothOppObexClientSession implements BluetoothOppObexSession {
                     /* this is invalid request */
                     status = sendInfo.mStatus;
                 }
-                mCurrentShareInfo.mStatus = BluetoothShare.STATUS_SUCCESS;
+                mCurrentShareInfo.setStatus(BluetoothOppShareInfo.STATUS_SUCCESS);
                 mShares.remove(mCurrentShareInfo);
             } else {
 //                Constants.updateShareStatus(mContext1, mInfo.mId, status);
             }
 
-            if (status == BluetoothShare.STATUS_SUCCESS) {
+            if (status == BluetoothOppShareInfo.STATUS_SUCCESS) {
                 Message msg = Message.obtain(mCallback);
                 msg.what = BluetoothOppObexSession.MSG_SHARE_COMPLETE;
                 msg.obj = mCurrentShareInfo;
@@ -315,19 +315,19 @@ public class BluetoothOppObexClientSession implements BluetoothOppObexSession {
             } else {
                 Message msg = Message.obtain(mCallback);
                 msg.what = BluetoothOppObexSession.MSG_SESSION_ERROR;
-                mCurrentShareInfo.mStatus = status;
+                mCurrentShareInfo.setStatus(status);
                 msg.obj = mCurrentShareInfo;
                 msg.sendToTarget();
             }
         }
 
         private BluetoothOppSendFileInfo processShareInfo(BluetoothOppShareInfo info){
-        	return BluetoothOppSendFileInfo.generateFileInfo(info.mFilePath, info.mMimetype);
+        	return BluetoothOppSendFileInfo.generateFileInfo(info.getFilePath(), info.getMimetype(),info.getName());
         }
         private int sendFile(BluetoothOppSendFileInfo fileInfo) {
             boolean error = false;
             int responseCode = -1;
-            int status = BluetoothShare.STATUS_SUCCESS;
+            int status = BluetoothOppShareInfo.STATUS_SUCCESS;
 //            Uri contentUri = Uri.parse(BluetoothShare.CONTENT_URI + "/" + mInfo.mId);
 //            ContentValues updateValues;
             HeaderSet request;
@@ -335,7 +335,7 @@ public class BluetoothOppObexClientSession implements BluetoothOppObexSession {
             request.setHeader(HeaderSet.NAME, fileInfo.mFileName);
             request.setHeader(HeaderSet.TYPE, fileInfo.mMimetype);
             
-            applyRemoteDeviceQuirks(request, mCurrentShareInfo.mDestination, fileInfo.mFileName);
+            applyRemoteDeviceQuirks(request, mCurrentShareInfo.getDestination(), fileInfo.mFileName);
 
 //            Constants.updateShareStatus(mContext1, mInfo.mId, BluetoothShare.STATUS_RUNNING);
 
@@ -351,7 +351,7 @@ public class BluetoothOppObexClientSession implements BluetoothOppObexSession {
                     if (V) Log.v(TAG, "put headerset for " + fileInfo.mFileName);
                     putOperation = (ClientOperation)mCs.put(request);
                 } catch (IOException e) {
-                    status = BluetoothShare.STATUS_OBEX_DATA_ERROR;
+                    status = BluetoothOppShareInfo.STATUS_OBEX_DATA_ERROR;
 //                    Constants.updateShareStatus(mContext1, mInfo.mId, status);
 
                     Log.e(TAG, "Error when put HeaderSet ");
@@ -367,7 +367,7 @@ public class BluetoothOppObexClientSession implements BluetoothOppObexSession {
                         outputStream = putOperation.openOutputStream();
                         inputStream = putOperation.openInputStream();
                     } catch (IOException e) {
-                        status = BluetoothShare.STATUS_OBEX_DATA_ERROR;
+                        status = BluetoothOppShareInfo.STATUS_OBEX_DATA_ERROR;
 //                        Constants.updateShareStatus(mContext1, mInfo.mId, status);
                         Log.e(TAG, "Error when openOutputStream");
                         error = true;
@@ -468,17 +468,17 @@ public class BluetoothOppObexClientSession implements BluetoothOppObexSession {
                             || responseCode == ResponseCodes.OBEX_HTTP_NOT_ACCEPTABLE) {
                         Log.i(TAG, "Remote reject file " + fileInfo.mFileName + " length "
                                 + fileInfo.mLength);
-                        status = BluetoothShare.STATUS_FORBIDDEN;
+                        status = BluetoothOppShareInfo.STATUS_FORBIDDEN;
                     } else if (responseCode == ResponseCodes.OBEX_HTTP_UNSUPPORTED_TYPE) {
                         Log.i(TAG, "Remote reject file type " + fileInfo.mMimetype);
-                        status = BluetoothShare.STATUS_NOT_ACCEPTABLE;
+                        status = BluetoothOppShareInfo.STATUS_NOT_ACCEPTABLE;
                     } else if (!mInterrupted && position == fileInfo.mLength) {
                         Log.i(TAG, "SendFile finished send out file " + fileInfo.mFileName
                                 + " length " + fileInfo.mLength);
                         outputStream.close();
                     } else {
                         error = true;
-                        status = BluetoothShare.STATUS_CANCELED;
+                        status = BluetoothOppShareInfo.STATUS_CANCELED;
                         putOperation.abort();
                         /* interrupted */
                         Log.i(TAG, "SendFile interrupted when send out file " + fileInfo.mFileName
@@ -501,18 +501,18 @@ public class BluetoothOppObexClientSession implements BluetoothOppObexSession {
                             if (V) Log.v(TAG, "Get response code " + responseCode);
                             if (responseCode != ResponseCodes.OBEX_HTTP_OK) {
                                 Log.i(TAG, "Response error code is " + responseCode);
-                                status = BluetoothShare.STATUS_UNHANDLED_OBEX_CODE;
+                                status = BluetoothOppShareInfo.STATUS_UNHANDLED_OBEX_CODE;
                                 if (responseCode == ResponseCodes.OBEX_HTTP_UNSUPPORTED_TYPE) {
-                                    status = BluetoothShare.STATUS_NOT_ACCEPTABLE;
+                                    status = BluetoothOppShareInfo.STATUS_NOT_ACCEPTABLE;
                                 }
                                 if (responseCode == ResponseCodes.OBEX_HTTP_FORBIDDEN
                                         || responseCode == ResponseCodes.OBEX_HTTP_NOT_ACCEPTABLE) {
-                                    status = BluetoothShare.STATUS_FORBIDDEN;
+                                    status = BluetoothOppShareInfo.STATUS_FORBIDDEN;
                                 }
                             }
                         } else {
                             // responseCode is -1, which means connection error
-                            status = BluetoothShare.STATUS_CONNECTION_ERROR;
+                            status = BluetoothOppShareInfo.STATUS_CONNECTION_ERROR;
                         }
                     }
 
@@ -533,7 +533,7 @@ public class BluetoothOppObexClientSession implements BluetoothOppObexSession {
 
         private void handleSendException(String exception) {
             Log.e(TAG, "Error when sending file: " + exception);
-            int status = BluetoothShare.STATUS_OBEX_DATA_ERROR;
+            int status = BluetoothOppShareInfo.STATUS_OBEX_DATA_ERROR;
 //            Constants.updateShareStatus(mContext1, mInfo.mId, status);
             mCallback.removeMessages(BluetoothOppObexSession.MSG_CONNECT_TIMEOUT);
         }

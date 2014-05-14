@@ -30,12 +30,13 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.android.bluetooth.opp;
+package com.pingan.plugins.bluetooth.opp;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 /**
@@ -51,7 +52,7 @@ public class BluetoothOppSendFileInfo {
 
     /** Reusable SendFileInfo for error status. */
     static final BluetoothOppSendFileInfo SEND_FILE_INFO_ERROR = new BluetoothOppSendFileInfo(
-            null, null, 0, null, BluetoothShare.STATUS_FILE_ERROR);
+            null, null, 0, null, BluetoothOppShareInfo.STATUS_FILE_ERROR);
 
     /** readable media file name */
     public final String mFileName;
@@ -89,13 +90,14 @@ public class BluetoothOppSendFileInfo {
         mStatus = status;
     }
     
-    public static BluetoothOppSendFileInfo generateFileInfo(String filePath,String contentType) {
-        String fileName = null;
+    public static BluetoothOppSendFileInfo generateFileInfo(String filePath,String contentType,String fileName) {
         long length = 0;
         FileInputStream is = null;
         try {
         	File f = new File(filePath);
-        	fileName = f.getName();
+        	if(TextUtils.isEmpty(fileName)){
+        		fileName = f.getName();
+        	}
         	length = f.length();
         	is = new FileInputStream(f);
 		} catch (Exception e) {

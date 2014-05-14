@@ -30,7 +30,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.android.bluetooth.opp;
+package com.pingan.plugins.bluetooth.opp;
 
 import java.util.ArrayList;
 
@@ -98,14 +98,14 @@ public class BluetoothOppBatch {
         //TODO investigate if below code is redundant
         for (int i = mShares.size() - 1; i >= 0; i--) {
             BluetoothOppShareInfo info = mShares.get(i);
-            if (info.mStatus < 200) {
+            if (info.getStatus() < 200) {
 //                if (info.mDirection == BluetoothShare.DIRECTION_INBOUND && info.mFilename != null) {
 //                    new File(info.mFilename).delete();
 //                }
-                if (V) Log.v(TAG, "Cancel batch for info " + info.mFilePath);
+                if (V) Log.v(TAG, "Cancel batch for info " + info.getFilePath());
 
 //                Constants.updateShareStatus(mContext, info.mId, BluetoothShare.STATUS_CANCELED);
-                info.mStatus = BluetoothShare.STATUS_CANCELED;
+                info.setStatus(BluetoothOppShareInfo.STATUS_CANCELED);
             }
         }
         mShares.clear();
@@ -133,7 +133,7 @@ public class BluetoothOppBatch {
     public BluetoothOppShareInfo getPendingShare() {
         for (int i = 0; i < mShares.size(); i++) {
             BluetoothOppShareInfo share = mShares.get(i);
-            if (share.mStatus == BluetoothShare.STATUS_PENDING) {
+            if (share.getStatus() == BluetoothOppShareInfo.STATUS_PENDING) {
                 return share;
             }
         }
