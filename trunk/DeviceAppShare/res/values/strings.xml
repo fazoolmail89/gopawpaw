@@ -36,4 +36,5 @@
         </string>
      <string name="check_version">检查新版本</string>
      <string name="scanner">扫描蓝牙</string>
+     <string name="transfer_progress">传输进度：%1s</string>
 </resources>
