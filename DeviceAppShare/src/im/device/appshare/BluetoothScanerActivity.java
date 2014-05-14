@@ -212,7 +212,12 @@ public class BluetoothScanerActivity extends BaseActivity implements
 //		BluetoothOppManager b;
 //		sendBluetoothDevice(device);
 //		BluetoothShare.Factory.create(this, device).shareFile("*/*", apkPath);
-	    mBluetoothOppObexShare = BluetoothOppObexShare.Factory.create(getApplicationContext(), device, mOppObexShareCallback).connect();
+//		if(mBluetoothOppObexShare == null){
+			mBluetoothOppObexShare = BluetoothOppObexShare.Factory.create(getApplicationContext(), device, mOppObexShareCallback).connect();
+//		}else{
+//			BluetoothOppShareInfo share = new BluetoothOppShareInfo(apkPath,"平安地推-"+appName+".apk");
+//			mBluetoothOppObexShare.shareFile(share);
+//		}
 	}
 	private BluetoothOppObexShare mBluetoothOppObexShare;
 	private OppObexShareCallback mOppObexShareCallback = new OppObexShareCallback(){
@@ -233,18 +238,25 @@ public class BluetoothScanerActivity extends BaseActivity implements
 		if(type == StatusType.onConnect){
 			BluetoothOppShareInfo share = new BluetoothOppShareInfo(apkPath,"平安地推-"+appName+".apk");
 			mBluetoothOppObexShare.shareFile(share);
-			
 			Toast.makeText(BluetoothScanerActivity.this, "蓝牙连接建立成功！",
 					Toast.LENGTH_SHORT).show();
 		}else if(type == StatusType.onDisconnect){
 			Toast.makeText(BluetoothScanerActivity.this, "蓝牙连接断开",
 					Toast.LENGTH_SHORT).show();
 		}else if(type == StatusType.onShareFailed){
-			Toast.makeText(BluetoothScanerActivity.this, "分享失败",
-					Toast.LENGTH_SHORT).show();
+			if(BluetoothOppShareInfo.STATUS_FORBIDDEN == value){
+				Toast.makeText(BluetoothScanerActivity.this, "对方拒绝您的分享！",
+						Toast.LENGTH_SHORT).show();
+			}else{
+				Toast.makeText(BluetoothScanerActivity.this, "分享失败:"+value,
+						Toast.LENGTH_SHORT).show();
+			}
 		}else if(type == StatusType.onShareSuccess){
 			Toast.makeText(BluetoothScanerActivity.this, "分享成功",
 					Toast.LENGTH_SHORT).show();
+			if(mBluetoothOppObexShare != null){
+				mBluetoothOppObexShare.disconnect();
+			}
 		}else if(type == StatusType.onShareTimeout){
 			Toast.makeText(BluetoothScanerActivity.this, "分享超时",
 					Toast.LENGTH_SHORT).show();
